@@ -1,0 +1,233 @@
+package org.citadel.models;
+
+import org.citadel.common.validators.ValidatorLimitsBoard;
+import org.citadel.models.pieces.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+import static org.citadel.common.tools.Terminal.input;
+import static org.citadel.common.tools.Terminal.writeln;
+import static org.citadel.models.pieces.Color.BLACK;
+import static org.citadel.models.pieces.Color.WHITE;
+import static org.citadel.models.pieces.PiecesMapBuilder.*;
+
+public class Board extends SubjectBoard implements ObserverBoard {
+
+    private final Map<Color, List<Piece>> piecesMap;
+
+    private final Map<Color, List<Piece>> mapOfRemovedPieces;
+
+    private final Map<Color, List<Piece>> mapPassantPawns;
+
+    private List<Coordinate> movementsSelectedPiece;
+
+    private SelectablePiece selectablePiece;
+
+    private final Turn turn;
+
+    public Board() {
+        piecesMap = createPiecesMap(this);
+        turn = new Turn();
+        mapOfRemovedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+        movementsSelectedPiece = Collections.emptyList();
+        mapPassantPawns = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+    }
+
+    @Override
+    public void set(List<Coordinate> movementsSelectedPiece) {
+        this.movementsSelectedPiece = movementsSelectedPiece;
+    }
+
+    @Override
+    public void set(Piece passantPawns) {
+        assert passantPawns != null;
+        mapPassantPawns.get(currentPlayer()).add(passantPawns);
+    }
+
+    public List<Coordinate> getMovementsSelectedPiece() {
+        assert movementsSelectedPiece != null;
+        return List.copyOf(movementsSelectedPiece);
+    }
+
+    public void selectPiece(Coordinate coordinate) {
+        assert coordinate != null;
+        assert isWithinBoardLimits(coordinate);
+        assert !isBoxEmpty(coordinate);
+        getPiecesBy(currentPlayer())
+                .filter(piece -> piece.has(coordinate))
+                .findFirst()
+                .ifPresentOrElse(piece -> {
+                    piece.buildMovements();
+                    piece.notifiesMovementsToTheBoard();
+                    this.selectablePiece = piece;
+                }, () -> {
+                    assert false;
+                });
+    }
+
+    public void putSelectedPieceInThis(Coordinate coordinate) {
+        assert coordinate != null;
+        assert isWithinBoardLimits(coordinate);
+        selectablePiece.put(coordinate);
+    }
+
+    public boolean isThePawnPromoted() {
+        return selectablePiece.isThePawnPromoted();
+    }
+
+    public boolean isMovementValid(Coordinate coordinate) {
+        assert coordinate != null;
+        assert isWithinBoardLimits(coordinate);
+        return selectablePiece.isMovementValid(coordinate);
+    }
+
+    public void removeCurrentPlayerPiece(Coordinate coordinate) {
+        assert coordinate != null;
+        assert isWithinBoardLimits(coordinate);
+        remove(this::currentPlayer, coordinate);
+    }
+
+    public void removeRivalPlayerPiece(Coordinate coordinate) {
+        assert coordinate != null;
+        assert isWithinBoardLimits(coordinate);
+        remove(this::rivalPlayer, coordinate);
+    }
+
+    private void remove(Supplier<Color> color, Coordinate coordinate) {
+        assert coordinate != null;
+        assert isWithinBoardLimits(coordinate);
+        piecesMap.get(color.get()).removeIf(piece -> {
+            if (piece.has(coordinate)) {
+                return mapOfRemovedPieces.get(color.get()).add(piece);
+            }
+            return false;
+        });
+    }
+
+    public boolean isWithinBoardLimits(Coordinate coordinate) {
+        assert coordinate != null;
+        return ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
+    }
+
+    public boolean isPieceSelected(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(currentPlayer()).anyMatch(piece -> piece.has(coordinate));
+    }
+
+    public boolean isTheWhitePieceSelected(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(WHITE).anyMatch(piece -> piece.has(coordinate));
+    }
+
+    public boolean isTheBlackPieceSelected(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(BLACK).anyMatch(piece -> piece.has(coordinate));
+    }
+
+    @Override
+    public boolean isItEnemy(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(rivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+    }
+
+    @Override
+    public boolean someColor(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(currentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+    }
+
+    public boolean isJaque() {
+        return getPiecesBy(rivalPlayer()).anyMatch(this::isTheKingInValidMoves);
+    }
+
+    private boolean isTheKingInValidMoves(Piece piece) {
+        assert piece != null;
+        return movementsSelectedPiece.contains(piece.getCoordinate()) && piece.isKing();
+    }
+
+    public boolean isRook(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(currentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
+    }
+
+    private Stream<Piece> getPiecesBy(Color color) {
+        return piecesMap.get(color).stream();
+    }
+
+    public boolean isBoxEmpty(Coordinate coordinate) {
+        assert coordinate != null;
+        return piecesMap.values().stream()
+                .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
+    }
+
+    public Color currentPlayer() {
+        return turn.getColor();
+    }
+
+    public Color rivalPlayer() {
+        Turn clone = turn.clone();
+        clone.change();
+        return clone.getColor();
+    }
+
+    public void changeTurn() {
+        turn.change();
+    }
+
+    public boolean finished() {
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        Board board = new Board();
+        writeln("" + board.isBoxEmpty(new Coordinate(3, 1)));
+        do {
+            boolean isSelected;
+            do {
+                writeln("SELECCIONAR PIEZA DEL JUGADO " + board.currentPlayer());
+
+                writeln("INGRESE ROW: ");
+                int row = input(Integer.class);
+
+                writeln("INGRESE COLUMNA: ");
+                int column = input(Integer.class);
+
+                isSelected = board.isPieceSelected(new Coordinate(row, column));
+                writeln("" + isSelected);
+                System.out.println(board.getMovementsSelectedPiece());
+                if (isSelected) {
+                    board.selectPiece(new Coordinate(row, column));
+                }
+
+            } while (!isSelected);
+
+            board.changeTurn();
+
+            do {
+                writeln("MOVER PIEZA " + board.currentPlayer());
+
+                writeln("INGRESE ROW: ");
+                int row = input(Integer.class);
+
+                writeln("INGRESE COLUMNA: ");
+                int column = input(Integer.class);
+
+                Coordinate coordinate = new Coordinate(row, column);
+
+                if (board.isMovementValid(coordinate)) {
+                    board.putSelectedPieceInThis(coordinate);
+                    break;
+                }
+
+                writeln("Movimiento inválido. Inténtalo de nuevo.");
+            } while (true);
+
+        } while (true);
+    }
+}

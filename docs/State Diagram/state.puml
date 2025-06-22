@@ -1,0 +1,68 @@
+@startuml
+
+[*] --> Initial
+Initial --> InGame: start()
+
+
+state InGame {
+    [*] --> WhitePlays
+
+    state WhitePlays {
+        [*] --> SelectingPieceWhite
+        SelectingPieceWhite : entry: showMessage()
+        SelectingPieceWhite : do:    input coordinate
+        SelectingPieceWhite : exit:  select(origin: Coordinate)
+
+        SelectingPieceWhite --> WhitePieceSelectionOperationError : [Error]
+        SelectingPieceWhite --> MovingPieceWhite : SelectedPiece
+
+        WhitePieceSelectionOperationError --> SelectingPieceWhite
+
+        MovingPieceWhite --> WhitePieceMoveOperationError
+        WhitePieceMoveOperationError --> MovingPieceWhite
+
+        MovingPieceWhite --> EndWhite: piecePlaced
+
+        MovingPieceWhite: entry: showMessage()
+        MovingPieceWhite: do: input coordinate
+        MovingPieceWhite: exit: put(target: Coordinate)
+
+    }
+
+    WhitePlays --> Victory : [IsCheckmate?]
+    WhitePlays --> Draw : [isDraw?]
+    WhitePlays -right-> BlackPlays : changeTurn()
+
+     state BlackPlays {
+
+        [*] --> SelectingPieceBlack
+
+        SelectingPieceBlack : entry: showMessage()
+        SelectingPieceBlack : do:    input coordinate
+        SelectingPieceBlack : exit:  select(origin: Coordinate)
+
+        SelectingPieceBlack --> BlackPieceSelectionOperationError
+        BlackPieceSelectionOperationError --> SelectingPieceBlack
+
+        SelectingPieceBlack --> MovingPieceBlack : SelectedPiece
+
+        MovingPieceBlack: entry: showMessage()
+        MovingPieceBlack: do: input coordinate
+        MovingPieceBlack: exit: put(target: Coordinate)
+
+        MovingPieceBlack  -->  EndBlack: piecePlaced
+        MovingPieceBlack --> BlackPieceMoveOperationError
+        BlackPieceMoveOperationError --> MovingPieceBlack
+     }
+
+    BlackPlays --> Victory : [IsCheckmate?]
+    BlackPlays --> Draw : [isDraw?]
+    BlackPlays -left--> WhitePlays : changeTurn()
+}
+
+InGame --> Final
+Final ---up--> Initial : reboot
+Final --> End
+End --> [*]
+
+@enduml

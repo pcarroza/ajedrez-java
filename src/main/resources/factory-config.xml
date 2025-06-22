@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <factory  enabled="true">org.citadel.models.pieces.factories.ConcreteMovementCollectionFactory</factory>
+</configuration>

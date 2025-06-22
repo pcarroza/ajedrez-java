@@ -1,0 +1,210 @@
+@startuml
+
+interface models.pieces.SelectablePiece {
+~ void put(Coordinate)
+~ boolean isMovementValid(Coordinate)
+~ void notifyValidMovements()
+~ boolean isPawnAtPromotionRank()
+}
+
+class models.pieces.PiecesBuilder {
+}
+
+enum models.pieces.Color {
+}
+
+interface models.Observer {
+~ void initialize()
+~ void begin()
+~ void end()
+~ void exit()
+}
+
+class models.pieces.Coordinate {
+- int row
+- int column
++ <<Create>> Coordinate(int,int)
++ <<Create>> Coordinate(int)
++ <<Create>> Coordinate()
+}
+
+class models.Board {
+- Map<Color,List<Piece>> piecesMap
+- Map<Color,List<Piece>> mapOfRemovedPieces
+- SelectablePiece selectablePiece
+- Turn turn
+- boolean isPieceEndBoard
+- List<Coordinate> validCoordinates
+- {static} ClosedInterval<Integer> LIMITS
++ void select(Coordinate)
++ void put(Coordinate)
++ boolean isThePawnPromoted()
++ boolean isMovementValid(Coordinate)
++ void removeCurrentPlayerPiece(Coordinate)
++ void removeRivalPlayerPiece(Coordinate)
+- void removeBy(Supplier<Color>,Coordinate)
++ boolean isWithinBoardLimits(Coordinate)
++ boolean isPieceSelected(Coordinate)
++ boolean isTheWhitePieceSelected(Coordinate)
++ boolean isTheBlackPieceSelected(Coordinate)
++ boolean isEmpty(Coordinate)
++ boolean isItEnemy(Coordinate)
++ boolean isItTheSameColor(Coordinate)
++ boolean isJaque()
+- boolean isTheKingInValidMoves(Piece)
++ boolean isRook(Coordinate)
++ List<Coordinate> getValidMovements()
++ void setValidMovements(List<Coordinate>)
++ void addPassantPawn(Piece)
++ Color currentPlayer()
++ Color rivalPlayer()
++ void change()
++ boolean finished()
+}
+
+interface models.pieces.ObserverBoard {
+~ boolean isPieceEndBoardAt()
+~ void setPieceEndBoard()
+~ boolean isPieceEndBoardAt(Coordinate)
+~ boolean isItEnemy(Coordinate)
+~ boolean isEmpty(Coordinate)
+~ boolean isItTheSameColor(Coordinate)
+~ void setValidCoordinates(List<Coordinate>)
+~ List<Coordinate> getValidCoordinates()
+}
+
+class models.Game {
+- Board board
++ void put(Coordinate)
++ void select(Coordinate)
++ boolean isEmpty(Coordinate)
++ boolean isMovementValid(Coordinate)
++ void removeCurrentPlayerPiece(Coordinate)
++ void removeRivalPlayerPiece(Coordinate)
++ Color getCurrentPlayer()
++ Color getRivalPlayer()
++ void change()
++ boolean isTheWhitePieceSelected(Coordinate)
++ boolean isTheBlackPieceSelected(Coordinate)
++ void initialize()
++ void begin()
++ void end()
++ void exit()
+}
+
+interface models.pieces.SegregatedPiece {
+~ void put(Coordinate)
+~ boolean isMovementValid(Coordinate)
+~ boolean isPawnAtPromotionRank()
+~ boolean isNotMoved()
+~ Coordinate getCoordinate()
+~ Color getColor()
+~ boolean has(Coordinate)
+~ void notifyValidMovements()
+~ boolean isKing()
+~ boolean isRook()
+}
+
+
+abstract class models.pieces.Piece {
+# PieceMovementManager movementManager
+- Coordinate coordinate
+- Color color
+# void set(Coordinate)
++ Coordinate getCoordinate()
++ Color getColor()
++ int getRow()
++ int getColumn()
++ Coordinate displaced(Coordinate)
++ Coordinate displaced(Coordinate,int,int)
++ boolean has(Coordinate)
++ boolean isWhite()
++ boolean isBlack()
++ void notifyValidMovements()
++ {abstract}void put(Coordinate)
++ {abstract}boolean isMovementValid(Coordinate)
++ {abstract}boolean isKing()
+}
+
+class models.pieces.SubjectPiece {
+# ObserverBoard observerBoard
++ void subscribe(ObserverBoard)
++ boolean isItEnemy(Coordinate)
++ boolean isItTheSameColor(Coordinate)
++ boolean isEmpty(Coordinate)
+# void notify(List<Coordinate>)
+}
+
+class models.Turn {
+- int value
++ Color getColor()
++ void change()
++ Turn clone()
+}
+
+class models.SubjectBoard {
+- Observer observer
++ void subscribe(Observer)
++ void initialize()
++ void begin()
++ void end()
++ void exit()
+}
+
+package models.pieces.rulesOfMovements {
+}
+
+package models.pieces.rulesOfMovements.strategies {
+}
+
+package models.pieces.specialMoveRules {}
+
+models.pieces.Piece <|-- models.pieces.Bishop
+models.pieces.Piece <|-- models.pieces.Knight
+models.Cloneable <|.. models.pieces.Coordinate
+models.pieces.ObserverBoard <|.. models.Board
+models.Observer <|-- models.Game
+models.Game *--> models.Board
+models.Game ..> models.pieces.Coordinate
+models.Board ...> models.Turn
+models.Board ..> models.pieces.Color
+models.Board ..> models.pieces.Coordinate
+models.Board ..> models.pieces.PiecesBuilder
+models.Board --> models.pieces.SelectablePiece
+models.Board ..> models.pieces.SegregatedPiece
+models.Turn ..> models.pieces.Color
+models.pieces.ObserverBoard ..> models.pieces.Coordinate
+models.SubjectBoard <|-- models.Board
+models.SubjectBoard -left-> models.Observer
+models.pieces.SelectablePiece <|.. models.pieces.Piece
+models.pieces.SegregatedPiece <|.. models.pieces.Piece
+models.pieces.SubjectPiece --> models.pieces.ObserverBoard
+models.pieces.SubjectPiece <|-- models.pieces.Piece
+models.pieces.Piece <|-- models.pieces.Queen
+models.pieces.Piece <|-- models.pieces.Rook
+models.pieces.Piece <|-- models.pieces.Pawn
+models.pieces.Piece ..> models.pieces.Color
+models.pieces.Piece -right-> models.pieces.Coordinate
+models.Cloneable <|.. models.Turn
+models.pieces.Piece <|-- models.pieces.King
+models.pieces.Piece --> models.pieces.specialMoveRules
+models.pieces.PiecesBuilder ..> models.pieces.Pawn
+models.pieces.PiecesBuilder ..> models.pieces.Rook
+models.pieces.PiecesBuilder ..> models.pieces.King
+models.pieces.PiecesBuilder ..> models.pieces.Queen
+models.pieces.PiecesBuilder ..> models.pieces.Bishop
+models.pieces.PiecesBuilder ..> models.pieces.Knight
+models.pieces.PiecesBuilder ..> models.pieces.Coordinate
+models.pieces.Rook ..> models.pieces.Coordinate
+models.pieces.King ..> models.pieces.Coordinate
+models.pieces.Queen ..> models.pieces.Coordinate
+models.pieces.Bishop ..> models.pieces.Coordinate
+models.pieces.Knight ..> models.pieces.Coordinate
+models.pieces.Pawn ..> models.pieces.Coordinate
+models.pieces.Piece --> models.pieces.rulesOfMovements
+models.pieces.rulesOfMovements ..> models.pieces.Coordinate
+models.pieces.rulesOfMovements.strategies ..> models.pieces.Coordinate
+models.pieces.specialMoveRules ..> models.pieces.Coordinate
+
+@enduml
+

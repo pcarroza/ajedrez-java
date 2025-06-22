@@ -1,0 +1,185 @@
+@startuml
+
+interface models.pieces.SelectedPiece {
+}
+
+class models.pieces.PiecesBuilder {
+}
+
+enum models.pieces.Color {
+}
+
+interface models.Observer {
+}
+
+class models.pieces.Coordinate {
+}
+
+class models.Board {
+}
+
+interface models.pieces.ObserverBoard {
+}
+
+class models.Game {
+}
+
+abstract class models.pieces.Piece {
+}
+
+class models.pieces.SubjectPiece {
+}
+
+class models.Turn {
+}
+
+class models.SubjectBoard {
+}
+
+abstract class models.pieces.Piece {
+}
+
+interface  models.pieces.SelectedPiece {
+}
+
+class  models.pieces.Queen {
+}
+
+class  models.pieces.Rook {
+}
+
+class  models.pieces.SubjectPiece {
+}
+
+class  models.pieces.Bishop {
+}
+
+class  models.pieces.Knight {
+}
+
+class  models.pieces.Pawn {
+}
+
+class  models.pieces.King {
+}
+
+class  models.pieces.Coordinate {
+}
+
+abstract class models.pieces.rulesOfMovements.MoveRulesManager {
+}
+
+class models.pieces.rulesOfMovements.strategies.HorizontalMotionGeneratorStrategy {
+}
+
+class models.pieces.rulesOfMovements.strategies.FacadeMotionGeneratorStrategy {
+}
+
+abstract class  models.pieces.rulesOfMovements.strategies.MotionGeneratorStrategy {
+}
+
+class  models.pieces.rulesOfMovements.strategies.InverseMotionGeneratorStrategy {
+}
+
+class  models.pieces.rulesOfMovements.strategies.DiagonalMotionGeneratorStrategy {
+}
+
+class  models.pieces.rulesOfMovements.strategies.VerticalMotionGeneratorStrategy {
+}
+
+class models.pieces.rulesOfMovements.FacadeMotionManager {
+}
+
+class models.pieces.rulesOfMovements.QueenMoveRulesManager {
+}
+
+class models.pieces.rulesOfMovements.KingMoveRulesManager {
+}
+
+class models.pieces.rulesOfMovements.PawnMoveRulesManager {
+}
+
+class models.pieces.rulesOfMovements.KnightMoveRulesManager {
+}
+
+class models.pieces.rulesOfMovements.BishopMoveRulesManager {
+}
+
+class  models.pieces.rulesOfMovements.RookMoveRulesManager {
+}
+
+models.pieces.Piece <|-- models.pieces.Bishop
+models.pieces.Piece <|-- models.pieces.Knight
+models.Cloneable <|.. models.pieces.Coordinate
+models.pieces.ObserverBoard <|.. models.Board
+models.Observer <|-- models.Game
+models.Game *--> models.Board
+models.Game ..> models.pieces.Coordinate
+models.Board ...> models.Turn
+models.Board ..> models.pieces.Color
+models.Board ..> models.pieces.Coordinate
+models.Board --> models.pieces.PiecesBuilder
+models.Board --> models.pieces.SelectedPiece
+models.Board ..> models.pieces.Piece
+models.Turn ..> models.pieces.Color
+models.SubjectBoard <|-- models.Board
+models.SubjectBoard -left-> models.Observer
+models.pieces.SelectedPiece <|.. models.pieces.Piece
+models.pieces.SubjectPiece ..> models.pieces.ObserverBoard
+models.pieces.SubjectPiece <|-- models.pieces.Piece
+models.pieces.Piece <|-- models.pieces.Queen
+models.pieces.Piece <|-- models.pieces.Rook
+models.pieces.Piece <|-- models.pieces.Pawn
+models.pieces.Piece ..> models.pieces.Color
+models.pieces.Piece -right-> models.pieces.Coordinate
+models.Cloneable <|.. models.Turn
+models.pieces.Piece <|-- models.pieces.King
+
+models.pieces.PiecesBuilder ..> models.pieces.Pawn
+models.pieces.PiecesBuilder ..> models.pieces.Rook
+models.pieces.PiecesBuilder ..> models.pieces.King
+models.pieces.PiecesBuilder ..> models.pieces.Queen
+models.pieces.PiecesBuilder ..> models.pieces.Bishop
+models.pieces.PiecesBuilder ..> models.pieces.Knight
+
+models.pieces.Rook ..> models.pieces.Coordinate
+models.pieces.King ..> models.pieces.Coordinate
+models.pieces.Queen ..> models.pieces.Coordinate
+models.pieces.Bishop ..> models.pieces.Coordinate
+models.pieces.Knight ..> models.pieces.Coordinate
+models.pieces.Pawn ..> models.pieces.Coordinate
+
+models.pieces.rulesOfMovements.FacadeMotionManager -->  models.pieces.rulesOfMovements.MoveRulesManager
+
+models.pieces.rulesOfMovements.strategies.MotionGeneratorStrategy <|--  models.pieces.rulesOfMovements.strategies.HorizontalMotionGeneratorStrategy
+models.pieces.rulesOfMovements.strategies.MotionGeneratorStrategy <|--  models.pieces.rulesOfMovements.strategies.InverseMotionGeneratorStrategy
+models.pieces.rulesOfMovements.strategies.MotionGeneratorStrategy <|--  models.pieces.rulesOfMovements.strategies.DiagonalMotionGeneratorStrategy
+models.pieces.rulesOfMovements.strategies.MotionGeneratorStrategy <|--  models.pieces.rulesOfMovements.strategies.VerticalMotionGeneratorStrategy
+
+models.pieces.rulesOfMovements.MoveRulesManager <|--  models.pieces.rulesOfMovements.BishopMoveRulesManager
+models.pieces.rulesOfMovements.MoveRulesManager <|--  models.pieces.rulesOfMovements.KnightMoveRulesManager
+models.pieces.rulesOfMovements.MoveRulesManager <|--  models.pieces.rulesOfMovements.QueenMoveRulesManager
+models.pieces.rulesOfMovements.MoveRulesManager <|--  models.pieces.rulesOfMovements.PawnMoveRulesManager
+models.pieces.rulesOfMovements.MoveRulesManager <|--  models.pieces.rulesOfMovements.KingMoveRulesManager
+models.pieces.rulesOfMovements.MoveRulesManager <|--  models.pieces.rulesOfMovements.RookMoveRulesManager
+
+models.pieces.Piece <|--  models.pieces.King
+models.pieces.Piece <|--  models.pieces.Queen
+models.pieces.Piece <|--  models.pieces.Rook
+models.pieces.Piece <|--  models.pieces.Bishop
+models.pieces.Piece <|--  models.pieces.Knight
+models.pieces.Piece <|--  models.pieces.Pawn
+
+models.pieces.King -->  models.pieces.rulesOfMovements.FacadeMotionManager
+models.pieces.Queen -->  models.pieces.rulesOfMovements.FacadeMotionManager
+models.pieces.Rook -->  models.pieces.rulesOfMovements.FacadeMotionManager
+models.pieces.Bishop -->  models.pieces.rulesOfMovements.FacadeMotionManager
+models.pieces.Knight -->  models.pieces.rulesOfMovements.FacadeMotionManager
+models.pieces.Pawn -->  models.pieces.rulesOfMovements.FacadeMotionManager
+
+models.pieces.rulesOfMovements.BishopMoveRulesManager  -->  models.pieces.rulesOfMovements.strategies.FacadeMotionGeneratorStrategy
+models.pieces.rulesOfMovements.QueenMoveRulesManager -->  models.pieces.rulesOfMovements.strategies.FacadeMotionGeneratorStrategy
+models.pieces.rulesOfMovements.RookMoveRulesManager -->  models.pieces.rulesOfMovements.strategies.FacadeMotionGeneratorStrategy
+models.pieces.rulesOfMovements.strategies.FacadeMotionGeneratorStrategy -->  models.pieces.rulesOfMovements.strategies.MotionGeneratorStrategy
+
+@enduml

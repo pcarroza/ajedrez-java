@@ -1,0 +1,30 @@
+@startuml
+
+
+package "views" {
+    package "config" {}
+    package "graphics" {}
+    package "console" {}
+}
+
+package "controllers" {
+    package "local" {
+        package "logic" {}
+        package "errors" {}
+    }
+    package "remote" {}
+}
+
+package "models" {
+    package "pieces" {
+        package "pieceMovementRuler" {
+            package "strategies" {}
+        }
+    }
+}
+
+views ----> controllers
+views ..> models
+controllers ----> models
+
+@enduml
