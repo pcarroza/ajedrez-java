@@ -28,7 +28,7 @@ public class King extends Piece {
         if (isNotMoved()) {
             close();
         }
-        super.put(target);
+        super.put(target.copy());
     }
 
     @Override
