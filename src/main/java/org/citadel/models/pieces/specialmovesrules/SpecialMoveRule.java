@@ -21,7 +21,7 @@ public class SpecialMoveRule {
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return true;
+        return movements.contains(target);
     }
 
     public List<Coordinate> getMovements() {
