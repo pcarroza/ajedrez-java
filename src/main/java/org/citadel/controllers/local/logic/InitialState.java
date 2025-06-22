@@ -1,5 +1,5 @@
 package org.citadel.controllers.local.logic;
 
-public class InitialState {
+public class InitialState extends State {
 
 }
