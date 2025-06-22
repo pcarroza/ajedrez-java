@@ -37,7 +37,7 @@ public class Pawn extends Piece {
         if (isThePawnPromoted(target)) {
             changeToPromoted();
         }
-        super.put(target.clone());
+        super.put(target.copy());
     }
 
     public boolean isInitialState() {
