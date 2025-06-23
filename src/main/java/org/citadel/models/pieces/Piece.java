@@ -20,7 +20,7 @@ public abstract class Piece extends SubjectPiece implements SelectablePiece {
     }
 
     public void put(Coordinate target) {
-        set(target.clone());
+        set(target.copy());
     }
 
     public Coordinate getCoordinate() {

@@ -12,11 +12,11 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void put(Coordinate coordinate) {
+    public void put(Coordinate target) {
         if (isNotMoved()) {
             close();
         }
-        super.put(coordinate);
+        super.put(target.copy());
     }
 
     @Override
