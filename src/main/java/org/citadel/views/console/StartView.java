@@ -5,6 +5,7 @@ import org.citadel.controllers.StartController;
 public class StartView {
 
     public void interact(StartController startController) {
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
+        int players = 1;
+        startController.start(players);
     }
 }

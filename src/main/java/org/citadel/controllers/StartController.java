@@ -1,5 +1,6 @@
 package org.citadel.controllers;
 
-public class StartController {
+public interface StartController {
 
+    void start(int players);
 }
