@@ -19,13 +19,13 @@ public class Rook extends Piece {
         super.put(target.copy());
     }
 
+    private void close() {
+        isMoved = !isMoved;
+    }
+
     @Override
     public boolean isNotMoved() {
         return !isMoved;
-    }
-
-    private void close() {
-        isMoved = !isMoved;
     }
 
     @Override
