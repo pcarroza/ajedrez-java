@@ -24,11 +24,14 @@ public class ConsoleView {
     }
 
     public void visit(StartController startController) {
+        startView.interact(startController);
     }
 
     public void visit(PlacementController placementController) {
+        boardView.interact(placementController);
     }
 
     public void visit(ContinueController continueController) {
+        continueView.interact(continueController);
     }
 }
