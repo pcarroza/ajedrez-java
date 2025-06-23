@@ -1,11 +1,12 @@
 package org.citadel.views.console;
 
+import org.citadel.View;
 import org.citadel.controllers.ContinueController;
 import org.citadel.controllers.OperationController;
 import org.citadel.controllers.PlacementController;
 import org.citadel.controllers.StartController;
 
-public class ConsoleView {
+public class ConsoleView implements View {
 
     private StartView startView;
 
@@ -19,8 +20,9 @@ public class ConsoleView {
         continueView = new ContinueView();
     }
 
-    public void interact(OperationController operationController) {
-        operationController.accept(this);
+    @Override
+    public void interact() {
+        throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
 
     public void visit(StartController startController) {
