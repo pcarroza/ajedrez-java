@@ -9,13 +9,13 @@ public class ConsoleView {
 
     private StartView startView;
 
-    private BoardView boardView;
+    private GameView gameView;
 
     private ContinueView continueView;
 
     public ConsoleView() {
         startView = new StartView();
-        boardView = new BoardView();
+        gameView = new GameView();
         continueView = new ContinueView();
     }
 
@@ -28,7 +28,7 @@ public class ConsoleView {
     }
 
     public void visit(PlacementController placementController) {
-        boardView.interact(placementController);
+        gameView.interact(placementController);
     }
 
     public void visit(ContinueController continueController) {
