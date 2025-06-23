@@ -2,7 +2,6 @@ package org.citadel.views.console;
 
 import org.citadel.View;
 import org.citadel.controllers.ContinueController;
-import org.citadel.controllers.OperationController;
 import org.citadel.controllers.PlacementController;
 import org.citadel.controllers.StartController;
 
