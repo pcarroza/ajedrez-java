@@ -20,7 +20,7 @@ public abstract class Chess {
     public void run() {
         OperationController controller;
         do {
-            controller = this.logic.getController();
+            controller = logic.getController();
             if (controller != null) {
                 view.interact(controller);
             }
