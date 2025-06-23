@@ -14,7 +14,7 @@ public class LocalStartController extends LocalOperationController {
     }
 
     @Override
-    public void visit(OperationControllerVisitor operationControllerVisitor) {
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+    public void accept(OperationControllerVisitor operationControllerVisitor) {
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
 }
