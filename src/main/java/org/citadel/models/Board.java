@@ -170,7 +170,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
     }
 
     public Color rivalPlayer() {
-        Turn clone = turn.clone();
+        Turn clone = turn.copy();
         clone.change();
         return clone.getColor();
     }

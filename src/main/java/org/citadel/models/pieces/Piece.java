@@ -44,7 +44,7 @@ public abstract class Piece extends SubjectPiece implements SelectablePiece {
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return moveRulesManager.isMovementValid(target.clone());
+        return moveRulesManager.isMovementValid(target.copy());
     }
 
     public void buildMovements() {
