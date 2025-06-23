@@ -4,7 +4,7 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
 
-public class LocalSelectController extends LocalController {
+public class LocalSelectController extends LocalPlacementController {
 
     public LocalSelectController(Game game) {
         super(game);
