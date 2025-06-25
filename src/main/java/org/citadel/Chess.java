@@ -4,9 +4,9 @@ import org.citadel.controllers.OperationController;
 
 public abstract class Chess {
 
-    private Logic logic;
+    private final Logic logic;
 
-    private View view;
+    private final View view;
 
     Chess() {
         this.logic = getLogic();

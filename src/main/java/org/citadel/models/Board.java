@@ -70,6 +70,14 @@ public class Board extends SubjectBoard implements ObserverBoard {
                 });
     }
 
+    public boolean isSelectedPiece() {
+        return selectablePiece != null;
+    }
+
+    public void closeSelectedPiece() {
+        selectablePiece = null;
+    }
+
     public void putSelectedPieceInThis(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
