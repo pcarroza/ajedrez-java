@@ -1,9 +1,10 @@
 package org.citadel.controllers.local;
 
 import org.citadel.controllers.OperationControllerVisitor;
+import org.citadel.controllers.StartController;
 import org.citadel.models.Game;
 
-public class LocalStartController extends LocalOperationController {
+public abstract class LocalStartController extends LocalOperationController implements StartController {
 
     public LocalStartController(Game game) {
         super(game);
