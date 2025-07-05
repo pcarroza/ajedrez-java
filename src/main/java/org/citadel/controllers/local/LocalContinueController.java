@@ -1,9 +1,10 @@
 package org.citadel.controllers.local;
 
+import org.citadel.controllers.ContinueController;
 import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.models.Game;
 
-public class LocalContinueController extends LocalOperationController {
+public class LocalContinueController extends LocalOperationController implements ContinueController {
 
     public LocalContinueController(Game game) {
         super(game);

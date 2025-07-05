@@ -1,8 +1,5 @@
 package org.citadel.controllers.local;
 
-import java.util.ArrayList;
-
-import org.citadel.controllers.StartController;
 import org.citadel.models.Game;
 
 public class LocalOperationControllerBuilder {
@@ -13,11 +10,34 @@ public class LocalOperationControllerBuilder {
 
     private LocalContinueController localContinueController;
 
+    private Game game;
+
     public LocalOperationControllerBuilder(Game game) {
-        localStartController = new LocalStartController(game);
-            
+        this.game = game;
     }
 
+    public void build() {
+        localStartController = new LocalStartController(game, this);
+        builders = new LocalPlacementControllerBuilder[game.getNumberPlayers()];
+        localContinueController = new LocalContinueController(game);
+    }
 
+    public void build(int numberPlayers) {
+        for (int i = 0; i < game.getNumberPlayers(); i++) {
+            if (i < numberPlayers) {
+                builders[i] = new LocalUserPlacementControllerBuilder(game);
+            } else {
+                builders[i] = new LocalRandomCoordinateControllerBuilder(game);
+            }
+            builders[i].buildPlacementController();
+        }
+    }
 
+    public LocalContinueController getContinueController() {
+        return localContinueController;
+    }
+
+    public LocalStartController getStartController() {
+        return localStartController;
+    }
 }

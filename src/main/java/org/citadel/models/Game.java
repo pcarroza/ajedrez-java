@@ -12,6 +12,10 @@ public class Game {
         board.subscribe(observer);
     }
 
+    public int getNumberPlayers() {
+        return 2;
+    }
+
     public void selectPiece(Coordinate coordinate) {
         board.selectPiece(coordinate);
     }
@@ -71,4 +75,6 @@ public class Game {
     public void exit() {
         board.exit();
     }
+
+   
 }
