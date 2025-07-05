@@ -1,5 +1,5 @@
 package org.citadel.controllers.local;
 
-public class LocalUserCoordinateController {
+public class LocalUserCoordinateController extends LocalCoordinateController {
 
 }

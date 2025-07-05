@@ -1,6 +1,9 @@
 package org.citadel.controllers;
 
+import org.citadel.controllers.local.LocalContinueController;
+
 public interface OperationControllerVisitor {
 
-    void visit(StartController startController);
+    void visit(LocalContinueController startController);
+
 }

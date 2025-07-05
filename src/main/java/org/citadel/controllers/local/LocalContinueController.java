@@ -11,6 +11,6 @@ public class LocalContinueController extends LocalOperationController {
 
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
-        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+        operationControllerVisitor.visit(this);
     }
 }

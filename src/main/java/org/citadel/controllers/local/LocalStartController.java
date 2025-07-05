@@ -6,12 +6,12 @@ import org.citadel.models.Game;
 
 public abstract class LocalStartController extends LocalOperationController implements StartController {
 
-    public LocalStartController(Game game) {
+    LocalStartController(Game game) {
         super(game);
     }
 
     public void start() {
-      // TODO document why this method is empty
+        // TODO document why this method is empty
     }
 
     @Override
