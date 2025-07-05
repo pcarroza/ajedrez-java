@@ -15,7 +15,7 @@ public class LocalStartController extends LocalOperationController implements St
 
     @Override
     public void start(int players) {
-        throw new UnsupportedOperationException("Unimplemented method 'start'");
+        localOperationControllerBuilder.build(players);
     }
 
     @Override

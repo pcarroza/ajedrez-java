@@ -9,7 +9,4 @@ public class LocalUserPlacementControllerBuilder extends LocalPlacementControlle
     public LocalUserPlacementControllerBuilder(Game game) {
         this.game = game;
     }
-
-
-    
 }
