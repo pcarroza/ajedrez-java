@@ -1,4 +1,4 @@
 package org.citadel.controllers.local;
 
-public class LocalUserCoordinateControllerBuilder {
+public class LocalUserCoordinateControllerBuilder extends LocalPlacementControllerBuilder {
 }

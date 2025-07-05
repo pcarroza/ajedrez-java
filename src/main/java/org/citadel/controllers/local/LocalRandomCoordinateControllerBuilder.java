@@ -1,5 +1,5 @@
 package org.citadel.controllers.local;
 
-public class LocalRandomCoordinateControllerBuilder {
+public class LocalRandomCoordinateControllerBuilder extends LocalPlacementControllerBuilder {
 
 }

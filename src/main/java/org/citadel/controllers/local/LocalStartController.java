@@ -4,14 +4,15 @@ import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.controllers.StartController;
 import org.citadel.models.Game;
 
-public abstract class LocalStartController extends LocalOperationController implements StartController {
+public class LocalStartController extends LocalOperationController implements StartController {
 
-    LocalStartController(Game game) {
+    public LocalStartController(Game game) {
         super(game);
     }
 
-    public void start() {
-        // TODO document why this method is empty
+    @Override
+    public void start(int players) {
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
     }
 
     @Override
