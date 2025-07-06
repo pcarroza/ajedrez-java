@@ -74,7 +74,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
         return selectablePiece != null;
     }
 
-    public void closeSelectedPiece() {
+    public void clearSelectedPiece() {
         selectablePiece = null;
     }
 

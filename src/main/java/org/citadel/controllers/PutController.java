@@ -1,5 +1,5 @@
 package org.citadel.controllers;
 
-public class PutController {
+public interface PutController {
 
 }

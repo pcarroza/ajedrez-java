@@ -7,13 +7,11 @@ public class Game {
 
     private final Board board;
 
+    public static final int NUMBER_PLAYERS = 2;
+
     public Game(Observer observer) {
         board = new Board();
         board.subscribe(observer);
-    }
-
-    public int getNumberPlayers() {
-        return 2;
     }
 
     public void selectPiece(Coordinate coordinate) {

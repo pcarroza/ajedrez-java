@@ -18,12 +18,12 @@ public class LocalOperationControllerBuilder {
 
     public void build() {
         localStartController = new LocalStartController(game, this);
-        builders = new LocalPlacementControllerBuilder[game.getNumberPlayers()];
+        builders = new LocalPlacementControllerBuilder[Game.NUMBER_PLAYERS];
         localContinueController = new LocalContinueController(game);
     }
 
     public void build(int numberPlayers) {
-        for (int i = 0; i < game.getNumberPlayers(); i++) {
+        for (int i = 0; i < Game.NUMBER_PLAYERS; i++) {
             if (i < numberPlayers) {
                 builders[i] = new LocalUserPlacementControllerBuilder(game);
             } else {
