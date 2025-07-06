@@ -80,6 +80,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public void putSelectedPieceInThis(Coordinate coordinate) {
         assert coordinate != null;
+        assert selectablePiece != null;
         assert isWithinBoardLimits(coordinate);
         selectablePiece.put(coordinate);
     }
