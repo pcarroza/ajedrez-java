@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class SpecialMoveRule {
 
-    private Piece piece;
+    protected Piece piece;
 
     protected List<Coordinate> movements;
 
