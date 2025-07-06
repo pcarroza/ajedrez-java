@@ -15,4 +15,3 @@ public class RookMoveRulesManager extends MoveRulesManager {
         possibleMoves.addAll(buildRookMovements(piece));
     }
 }
-
