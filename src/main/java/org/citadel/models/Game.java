@@ -38,6 +38,10 @@ public class Game {
         board.removeRivalPlayerPiece(coordinate);
     }
 
+    public int getIndexCurrentPlayer() {
+        return board.getIndexCurrentPlayer();
+    }
+
     public Color getCurrentPlayer() {
         return board.getCurrentPlayer();
     }

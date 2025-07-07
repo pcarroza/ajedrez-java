@@ -14,6 +14,10 @@ public class Turn {
         this.value = (value + 1) % (Color.values().length - 1);
     }
 
+    public int getIndexCurrentPlayer() {
+        return getColor().ordinal();
+    }
+
     public Turn copy() {
         Turn turn = new Turn();
         turn.value = value;

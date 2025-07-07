@@ -174,6 +174,10 @@ public class Board extends SubjectBoard implements ObserverBoard {
                 .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
     }
 
+    public int getIndexCurrentPlayer() {
+        return turn.getIndexCurrentPlayer();
+    }
+
     public Color getCurrentPlayer() {
         return turn.getColor();
     }
@@ -239,4 +243,4 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
         } while (true);
     }
-}
+

@@ -33,6 +33,10 @@ public class LocalOperationControllerBuilder {
         }
     }
 
+    public LocalPlacementController getPlacementController() {
+        return builders[game.getIndexCurrentPlayer()].getPlacementController();
+    }
+
     public LocalContinueController getContinueController() {
         return localContinueController;
     }
