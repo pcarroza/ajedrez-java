@@ -39,11 +39,11 @@ public class Game {
     }
 
     public Color getCurrentPlayer() {
-        return board.currentPlayer();
+        return board.getCurrentPlayer();
     }
 
     public Color getRivalPlayer() {
-        return board.rivalPlayer();
+        return board.getRivalPlayer();
     }
 
     public void change() {

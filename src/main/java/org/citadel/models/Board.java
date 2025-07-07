@@ -46,7 +46,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
     @Override
     public void set(Piece passantPawns) {
         assert passantPawns != null;
-        mapPassantPawns.get(currentPlayer()).add(passantPawns);
+        mapPassantPawns.get(getCurrentPlayer()).add(passantPawns);
     }
 
     public List<Coordinate> getMovementsSelectedPiece() {
@@ -58,7 +58,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
         assert !isBoxEmpty(coordinate);
-        getPiecesBy(currentPlayer())
+        getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.has(coordinate))
                 .findFirst()
                 .ifPresentOrElse(piece -> {
@@ -98,13 +98,13 @@ public class Board extends SubjectBoard implements ObserverBoard {
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        remove(this::currentPlayer, coordinate);
+        remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        remove(this::rivalPlayer, coordinate);
+        remove(this::getRivalPlayer, coordinate);
     }
 
     private void remove(Supplier<Color> color, Coordinate coordinate) {
@@ -125,7 +125,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public boolean isPieceSelected(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(currentPlayer()).anyMatch(piece -> piece.has(coordinate));
+        return getPiecesBy(getCurrentPlayer()).anyMatch(piece -> piece.has(coordinate));
     }
 
     public boolean isTheWhitePieceSelected(Coordinate coordinate) {
@@ -141,17 +141,17 @@ public class Board extends SubjectBoard implements ObserverBoard {
     @Override
     public boolean isItEnemy(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(rivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
     @Override
     public boolean someColor(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(currentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getCurrentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
     public boolean isJaque() {
-        return getPiecesBy(rivalPlayer()).anyMatch(this::isTheKingInValidMoves);
+        return getPiecesBy(getRivalPlayer()).anyMatch(this::isTheKingInValidMoves);
     }
 
     private boolean isTheKingInValidMoves(Piece piece) {
@@ -161,7 +161,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public boolean isRook(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(currentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
+        return getPiecesBy(getCurrentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
     }
 
     private Stream<Piece> getPiecesBy(Color color) {
@@ -174,11 +174,11 @@ public class Board extends SubjectBoard implements ObserverBoard {
                 .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
     }
 
-    public Color currentPlayer() {
+    public Color getCurrentPlayer() {
         return turn.getColor();
     }
 
-    public Color rivalPlayer() {
+    public Color getRivalPlayer() {
         Turn clone = turn.copy();
         clone.change();
         return clone.getColor();
@@ -199,7 +199,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
         do {
             boolean isSelected;
             do {
-                writeln("SELECCIONAR PIEZA DEL JUGADO " + board.currentPlayer());
+                writeln("SELECCIONAR PIEZA DEL JUGADO " + board.getCurrentPlayer());
 
                 writeln("INGRESE ROW: ");
                 int row = input(Integer.class);
@@ -219,7 +219,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
             board.changeTurn();
 
             do {
-                writeln("MOVER PIEZA " + board.currentPlayer());
+                writeln("MOVER PIEZA " + board.getCurrentPlayer());
 
                 writeln("INGRESE ROW: ");
                 int row = input(Integer.class);
