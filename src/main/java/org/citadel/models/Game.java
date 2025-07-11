@@ -77,6 +77,4 @@ public class Game {
     public void exit() {
         board.exit();
     }
-
-   
 }
