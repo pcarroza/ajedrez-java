@@ -2,9 +2,7 @@ package org.citadel;
 
 import org.citadel.controllers.OperationController;
 
-public class Logic {
+public interface Logic {
 
-    public OperationController getController() {
-        throw new UnsupportedOperationException("Unimplemented method 'getController'");
-    }
+    OperationController getController();
 }
