@@ -1,10 +1,10 @@
 package org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.utils;
 
-public class MovementGenerationControl {
+public class ControlFlag {
 
     private boolean shouldStop;
 
-    public MovementGenerationControl() {
+    public ControlFlag() {
         this.shouldStop = false;
     }
 
