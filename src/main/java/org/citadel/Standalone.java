@@ -14,4 +14,8 @@ public class Standalone extends Chess {
     public View getView() {
         return new ConsoleView();
     }
+
+    public static void main(String[] args) {
+        new Standalone().run();
+    }
 }
