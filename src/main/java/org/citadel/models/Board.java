@@ -26,7 +26,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     private List<Coordinate> movementsSelectedPiece;
 
-    private SelectablePiece selectablePiece;
+    private SelectedPiece selectedPiece;
 
     private final Turn turn;
 
@@ -63,36 +63,36 @@ public class Board extends SubjectBoard implements ObserverBoard {
                 .findFirst()
                 .ifPresentOrElse(piece -> {
                     piece.buildMovements();
-                    piece.notifiesMovementsToTheBoard();
-                    this.selectablePiece = piece;
+                    this.set(piece.getValidMovements());
+                    this.selectedPiece = piece;
                 }, () -> {
                     assert false;
                 });
     }
 
     public boolean isSelectedPiece() {
-        return selectablePiece != null;
+        return selectedPiece != null;
     }
 
     public void clearSelectedPiece() {
-        selectablePiece = null;
+        selectedPiece = null;
     }
 
     public void putSelectedPieceInThis(Coordinate coordinate) {
         assert coordinate != null;
-        assert selectablePiece != null;
+        assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
-        selectablePiece.put(coordinate);
+        selectedPiece.put(coordinate);
     }
 
     public boolean isThePawnPromoted() {
-        return selectablePiece.isThePawnPromoted();
+        return selectedPiece.isThePawnPromoted();
     }
 
     public boolean isMovementValid(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        return selectablePiece.isMovementValid(coordinate);
+        return selectedPiece.isMovementValid(coordinate);
     }
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
@@ -243,4 +243,4 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
         } while (true);
     }
-
+}
