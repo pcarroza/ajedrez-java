@@ -1,14 +1,18 @@
 package org.citadel.models.pieces;
 
+import java.util.List;
+
 import org.citadel.models.pieces.rulesofmovements.MoveRulesManager;
 
-public abstract class Piece extends SubjectPiece implements SelectablePiece {
+public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     protected MoveRulesManager moveRulesManager;
 
     private Coordinate coordinate;
 
     protected final Color color;
+
+    protected List<Coordinate> validMovements;
 
     protected Piece(Coordinate position, Color color) {
         this.coordinate = position;
@@ -20,11 +24,15 @@ public abstract class Piece extends SubjectPiece implements SelectablePiece {
     }
 
     public void put(Coordinate target) {
-        set(target.clone());
+        set(target.copy());
     }
 
     public Coordinate getCoordinate() {
         return coordinate;
+    }
+
+    public List<Coordinate> getValidMovements() {
+        return validMovements;
     }
 
     public Coordinate getDisplacedCoordinateBy(int displacement) {
@@ -44,15 +52,11 @@ public abstract class Piece extends SubjectPiece implements SelectablePiece {
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return moveRulesManager.isMovementValid(target.clone());
+        return moveRulesManager.isMovementValid(target.copy());
     }
 
     public void buildMovements() {
         moveRulesManager.buildMovements();
-    }
-
-    public void notifiesMovementsToTheBoard() {
-        notify(moveRulesManager.getMovements());
     }
 
     public boolean isThePawnPromoted() {

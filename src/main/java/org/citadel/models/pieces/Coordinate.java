@@ -63,6 +63,6 @@ public class Coordinate {
     }
 
     public String toString() {
-        return "Coordinate(" + row + ", " + column + ")";
+        return "Coordinate(" + getRow() + ", " + getColumn() + ")";
     }
 }

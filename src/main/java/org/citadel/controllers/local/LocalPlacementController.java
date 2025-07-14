@@ -1,8 +1,10 @@
 package org.citadel.controllers.local;
 
-public class LocalPlacementController {
+import org.citadel.models.Game;
 
-    public LocalPlacementController() {}
+public abstract class LocalPlacementController extends LocalOperationController {
 
-    public void colocate() {}
+    LocalPlacementController(Game game) {
+        super(game);
+    }
 }

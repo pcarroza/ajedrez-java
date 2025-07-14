@@ -7,6 +7,8 @@ public class Game {
 
     private final Board board;
 
+    public static final int NUMBER_PLAYERS = 2;
+
     public Game(Observer observer) {
         board = new Board();
         board.subscribe(observer);
@@ -36,12 +38,16 @@ public class Game {
         board.removeRivalPlayerPiece(coordinate);
     }
 
+    public int getIndexCurrentPlayer() {
+        return board.getIndexCurrentPlayer();
+    }
+
     public Color getCurrentPlayer() {
-        return board.currentPlayer();
+        return board.getCurrentPlayer();
     }
 
     public Color getRivalPlayer() {
-        return board.rivalPlayer();
+        return board.getRivalPlayer();
     }
 
     public void change() {

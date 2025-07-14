@@ -26,16 +26,16 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     private List<Coordinate> movementsSelectedPiece;
 
-    private SelectablePiece selectablePiece;
+    private SelectedPiece selectedPiece;
 
     private final Turn turn;
 
     public Board() {
         piecesMap = createPiecesMap(this);
-        turn = new Turn();
         mapOfRemovedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
-        movementsSelectedPiece = Collections.emptyList();
         mapPassantPawns = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+        movementsSelectedPiece = Collections.emptyList();
+        turn = new Turn();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
     @Override
     public void set(Piece passantPawns) {
         assert passantPawns != null;
-        mapPassantPawns.get(currentPlayer()).add(passantPawns);
+        mapPassantPawns.get(getCurrentPlayer()).add(passantPawns);
     }
 
     public List<Coordinate> getMovementsSelectedPiece() {
@@ -58,49 +58,59 @@ public class Board extends SubjectBoard implements ObserverBoard {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
         assert !isBoxEmpty(coordinate);
-        getPiecesBy(currentPlayer())
+        getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.has(coordinate))
                 .findFirst()
                 .ifPresentOrElse(piece -> {
                     piece.buildMovements();
-                    piece.notifiesMovementsToTheBoard();
-                    this.selectablePiece = piece;
+                    this.set(piece.getValidMovements());
+                    this.selectedPiece = piece;
                 }, () -> {
                     assert false;
                 });
     }
 
+    public boolean isSelectedPiece() {
+        return selectedPiece != null;
+    }
+
+    public void clearSelectedPiece() {
+        selectedPiece = null;
+    }
+
     public void putSelectedPieceInThis(Coordinate coordinate) {
         assert coordinate != null;
+        assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
-        selectablePiece.put(coordinate);
+        selectedPiece.put(coordinate);
     }
 
     public boolean isThePawnPromoted() {
-        return selectablePiece.isThePawnPromoted();
+        return selectedPiece.isThePawnPromoted();
     }
 
     public boolean isMovementValid(Coordinate coordinate) {
         assert coordinate != null;
+        assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
-        return selectablePiece.isMovementValid(coordinate);
+        return selectedPiece.isMovementValid(coordinate);
     }
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
+        assert !isBoxEmpty(coordinate);
         assert isWithinBoardLimits(coordinate);
-        remove(this::currentPlayer, coordinate);
+        remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
+        assert !isBoxEmpty(coordinate);
         assert isWithinBoardLimits(coordinate);
-        remove(this::rivalPlayer, coordinate);
+        remove(this::getRivalPlayer, coordinate);
     }
 
     private void remove(Supplier<Color> color, Coordinate coordinate) {
-        assert coordinate != null;
-        assert isWithinBoardLimits(coordinate);
         piecesMap.get(color.get()).removeIf(piece -> {
             if (piece.has(coordinate)) {
                 return mapOfRemovedPieces.get(color.get()).add(piece);
@@ -116,7 +126,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public boolean isPieceSelected(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(currentPlayer()).anyMatch(piece -> piece.has(coordinate));
+        return getPiecesBy(getCurrentPlayer()).anyMatch(piece -> piece.has(coordinate));
     }
 
     public boolean isTheWhitePieceSelected(Coordinate coordinate) {
@@ -132,17 +142,17 @@ public class Board extends SubjectBoard implements ObserverBoard {
     @Override
     public boolean isItEnemy(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(rivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
     @Override
     public boolean someColor(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(currentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getCurrentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
     public boolean isJaque() {
-        return getPiecesBy(rivalPlayer()).anyMatch(this::isTheKingInValidMoves);
+        return getPiecesBy(getRivalPlayer()).anyMatch(this::isTheKingInValidMoves);
     }
 
     private boolean isTheKingInValidMoves(Piece piece) {
@@ -152,7 +162,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public boolean isRook(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(currentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
+        return getPiecesBy(getCurrentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
     }
 
     private Stream<Piece> getPiecesBy(Color color) {
@@ -165,12 +175,16 @@ public class Board extends SubjectBoard implements ObserverBoard {
                 .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
     }
 
-    public Color currentPlayer() {
+    public int getIndexCurrentPlayer() {
+        return turn.getIndexCurrentPlayer();
+    }
+
+    public Color getCurrentPlayer() {
         return turn.getColor();
     }
 
-    public Color rivalPlayer() {
-        Turn clone = turn.clone();
+    public Color getRivalPlayer() {
+        Turn clone = turn.copy();
         clone.change();
         return clone.getColor();
     }
@@ -190,7 +204,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
         do {
             boolean isSelected;
             do {
-                writeln("SELECCIONAR PIEZA DEL JUGADO " + board.currentPlayer());
+                writeln("SELECCIONAR PIEZA DEL JUGADO " + board.getCurrentPlayer());
 
                 writeln("INGRESE ROW: ");
                 int row = input(Integer.class);
@@ -210,7 +224,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
             board.changeTurn();
 
             do {
-                writeln("MOVER PIEZA " + board.currentPlayer());
+                writeln("MOVER PIEZA " + board.getCurrentPlayer());
 
                 writeln("INGRESE ROW: ");
                 int row = input(Integer.class);

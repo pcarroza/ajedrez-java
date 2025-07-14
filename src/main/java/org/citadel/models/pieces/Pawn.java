@@ -5,7 +5,6 @@ import org.citadel.models.pieces.specialmovesrules.SpecialMoveRule;
 import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRule;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createPawnMoveRulesManager;
@@ -17,8 +16,6 @@ public class Pawn extends Piece {
     private boolean isItPromoted = false;
 
     private final SpecialMoveRule specialMoveRule;
-
-    private List<Coordinate> concatMovements;
 
     public Pawn(Coordinate coordinate, Color color) {
         super(coordinate, color);
@@ -37,7 +34,7 @@ public class Pawn extends Piece {
         if (isThePawnPromoted(target)) {
             changeToPromoted();
         }
-        super.put(target.clone());
+        super.put(target.copy());
     }
 
     public boolean isInitialState() {
@@ -70,14 +67,9 @@ public class Pawn extends Piece {
     public void buildMovements() {
         super.buildMovements();
         specialMoveRule.buildMovements();
-        concatMovements = new ArrayList<>();
-        concatMovements.addAll(Stream
+        validMovements = new ArrayList<>();
+        validMovements.addAll(Stream
                 .concat(specialMoveRule.getMovements().stream(), moveRulesManager.getMovements().stream()).toList());
-    }
-
-    @Override
-    public void notifiesMovementsToTheBoard() {
-        notify(concatMovements);
     }
 
     @Override

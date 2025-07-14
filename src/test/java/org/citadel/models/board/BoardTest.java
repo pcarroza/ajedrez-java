@@ -1,9 +1,12 @@
-package org.citadel.models;
+package org.citadel.models.board;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+
+import org.citadel.models.Board;
+import org.citadel.models.pieces.Coordinate;
 
 public class BoardTest {
 
@@ -16,6 +19,7 @@ public class BoardTest {
 
     @Test
     public void selectPiece() {
+        assertFalse(board.isBoxEmpty(new Coordinate()));
     }
 
     @Test

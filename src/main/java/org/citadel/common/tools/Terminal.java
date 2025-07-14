@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Terminal {
 
+    private Terminal() {
+    }
+
     public static void writeln(String message) {
         System.out.println(message);
     }
@@ -43,7 +46,3 @@ public class Terminal {
         return value;
     }
 }
-
-
-
-

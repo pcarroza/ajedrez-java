@@ -1,22 +1,10 @@
 package org.citadel.views.console;
 
+import org.citadel.controllers.PlacementController;
+
 public class GameView {
 
-    private StartView startView;
-
-    private BoardView boardView;
-
-    private ContinueView continueView;
-
-    public GameView(BoardView boardView) {
-        startView = new StartView();
-        boardView = new BoardView();
-        continueView = new ContinueView();
-    }
-
-    public void interact() {
-    }
-
-    public void visit() {
+    public void interact(PlacementController placementController) {
+        throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
 }
