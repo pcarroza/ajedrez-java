@@ -32,10 +32,10 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public Board() {
         piecesMap = createPiecesMap(this);
-        turn = new Turn();
         mapOfRemovedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
-        movementsSelectedPiece = Collections.emptyList();
         mapPassantPawns = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+        movementsSelectedPiece = Collections.emptyList();
+        turn = new Turn();
     }
 
     @Override
