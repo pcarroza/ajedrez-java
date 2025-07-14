@@ -98,22 +98,22 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert isWithinBoardLimits(coordinate);
         assert !isBoxEmpty(coordinate);
+        assert isWithinBoardLimits(coordinate);
         remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert isWithinBoardLimits(coordinate);
         assert !isBoxEmpty(coordinate);
+        assert isWithinBoardLimits(coordinate);
         remove(this::getRivalPlayer, coordinate);
     }
 
     private void remove(Supplier<Color> color, Coordinate coordinate) {
         assert coordinate != null;
-        assert isWithinBoardLimits(coordinate);
         assert !isBoxEmpty(coordinate);
+        assert isWithinBoardLimits(coordinate);
         piecesMap.get(color.get()).removeIf(piece -> {
             if (piece.has(coordinate)) {
                 return mapOfRemovedPieces.get(color.get()).add(piece);
