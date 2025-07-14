@@ -111,9 +111,6 @@ public class Board extends SubjectBoard implements ObserverBoard {
     }
 
     private void remove(Supplier<Color> color, Coordinate coordinate) {
-        assert coordinate != null;
-        assert !isBoxEmpty(coordinate);
-        assert isWithinBoardLimits(coordinate);
         piecesMap.get(color.get()).removeIf(piece -> {
             if (piece.has(coordinate)) {
                 return mapOfRemovedPieces.get(color.get()).add(piece);
