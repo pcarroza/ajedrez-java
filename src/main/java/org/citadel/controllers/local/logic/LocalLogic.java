@@ -9,5 +9,4 @@ public class LocalLogic implements Logic {
     public OperationController getController() {
         throw new UnsupportedOperationException("Unimplemented method 'getController'");
     }
-
 }
