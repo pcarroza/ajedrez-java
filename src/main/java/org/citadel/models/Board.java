@@ -1,5 +1,5 @@
 package org.citadel.models;
- 
+
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.*;
 
@@ -99,6 +99,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
+        assert !isBoxEmpty(coordinate);
         remove(this::getCurrentPlayer, coordinate);
     }
 
