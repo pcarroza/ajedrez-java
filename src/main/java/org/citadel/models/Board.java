@@ -91,6 +91,7 @@ public class Board extends SubjectBoard implements ObserverBoard {
 
     public boolean isMovementValid(Coordinate coordinate) {
         assert coordinate != null;
+        assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
         return selectedPiece.isMovementValid(coordinate);
     }
