@@ -1,24 +1,24 @@
 package org.citadel.models.pieces;
 
-import org.citadel.models.pieces.specialmovesrules.SpecialMoveRule;
+import org.citadel.models.pieces.specialmovesrules.SpecialMoveRulesBuilder;
 import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMove;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createKingMoveRulesManager;
+import static org.citadel.models.pieces.rulesofmovements.MovementBuilderFacade.createKingMoveRulesBuilder;
 
 public class King extends Piece {
 
     private boolean isMoved = false;
 
-    private final SpecialMoveRule specialMoveRule;
+    private final SpecialMoveRulesBuilder specialMoveRulesBuilder;
 
 
     public King(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        moveRulesManager = createKingMoveRulesManager(this);
-        specialMoveRule = new SpecialRuleCastlingMove(this);
+        movementRuleBuilder = createKingMoveRulesBuilder(this);
+        specialMoveRulesBuilder = new SpecialRuleCastlingMove(this);
     }
 
     @Override
@@ -31,16 +31,16 @@ public class King extends Piece {
 
     @Override
     public boolean isMovementValid(Coordinate target) {
-        return super.isMovementValid(target) || specialMoveRule.isMovementValid(target);
+        return super.isMovementValid(target) || specialMoveRulesBuilder.isMovementValid(target);
     }
 
     @Override
     public void buildMovements() {
         super.buildMovements();
-        specialMoveRule.buildMovements();
+        specialMoveRulesBuilder.buildMovements();
         validMovements = new ArrayList<>();
         validMovements = Stream
-                .concat(specialMoveRule.getMovements().stream(), moveRulesManager.getMovements().stream()).toList();
+                .concat(specialMoveRulesBuilder.getMovements().stream(), movementRuleBuilder.getMovements().stream()).toList();
     }
 
     @Override

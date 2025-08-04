@@ -1,13 +1,13 @@
 package org.citadel.models.pieces;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
-import org.citadel.models.pieces.specialmovesrules.SpecialMoveRule;
-import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRule;
+import org.citadel.models.pieces.specialmovesrules.SpecialMoveRulesBuilder;
+import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRulesBuilder;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createPawnMoveRulesManager;
+import static org.citadel.models.pieces.rulesofmovements.MovementBuilderFacade.createPawnMoveRulesBuilder;
 
 public class Pawn extends Piece {
 
@@ -15,12 +15,12 @@ public class Pawn extends Piece {
 
     private boolean isItPromoted = false;
 
-    private final SpecialMoveRule specialMoveRule;
+    private final SpecialMoveRulesBuilder specialMoveRulesBuilder;
 
     public Pawn(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        moveRulesManager = createPawnMoveRulesManager(this);
-        specialMoveRule = new SpecialStepMovementRule(this);
+        movementRuleBuilder = createPawnMoveRulesBuilder(this);
+        specialMoveRulesBuilder = new SpecialStepMovementRulesBuilder(this);
     }
 
     @Override
@@ -60,16 +60,16 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isMovementValid(Coordinate target) {
-        return super.isMovementValid(target) || specialMoveRule.isMovementValid(target);
+        return super.isMovementValid(target) || specialMoveRulesBuilder.isMovementValid(target);
     }
 
     @Override
     public void buildMovements() {
         super.buildMovements();
-        specialMoveRule.buildMovements();
+        specialMoveRulesBuilder.buildMovements();
         validMovements = new ArrayList<>();
         validMovements.addAll(Stream
-                .concat(specialMoveRule.getMovements().stream(), moveRulesManager.getMovements().stream()).toList());
+                .concat(specialMoveRulesBuilder.getMovements().stream(), movementRuleBuilder.getMovements().stream()).toList());
     }
 
     @Override

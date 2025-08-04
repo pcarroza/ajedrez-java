@@ -7,9 +7,9 @@ import org.citadel.models.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnightMoveRulesManager extends MoveRulesManager {
+public class KnightMovementRuleBuilder extends MovementRuleBuilder {
 
-    public KnightMoveRulesManager(Piece piece) {
+    public KnightMovementRuleBuilder(Piece piece) {
         super(piece);
     }
 

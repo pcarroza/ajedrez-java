@@ -1,11 +1,11 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createQueenMoveRulesManager;
+import static org.citadel.models.pieces.rulesofmovements.MovementBuilderFacade.createQueenMoveRulesBuilder;
 
 public class Queen extends Piece {
 
     public Queen(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        moveRulesManager = createQueenMoveRulesManager(this);
+        movementRuleBuilder = createQueenMoveRulesBuilder(this);
     }
 }

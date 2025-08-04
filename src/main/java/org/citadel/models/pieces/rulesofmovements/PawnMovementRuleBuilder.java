@@ -9,11 +9,11 @@ import org.citadel.models.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PawnMoveRulesManager extends MoveRulesManager {
+public class PawnMovementRuleBuilder extends MovementRuleBuilder {
 
     private Pawn pawn;
 
-    public PawnMoveRulesManager(Piece piece) {
+    public PawnMovementRuleBuilder(Piece piece) {
         set(piece);
     }
 

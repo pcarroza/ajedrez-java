@@ -4,9 +4,9 @@ import org.citadel.models.pieces.Piece;
 
 import static org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.BuilderMovementStrategy.buildRookMovements;
 
-public class RookMoveRulesManager extends MoveRulesManager {
+public class RookMovementRuleBuilder extends MovementRuleBuilder {
 
-    public RookMoveRulesManager(Piece piece) {
+    public RookMovementRuleBuilder(Piece piece) {
         super(piece);
     }
 

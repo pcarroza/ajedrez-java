@@ -1,6 +1,6 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createRookMoveRulesManager;
+import static org.citadel.models.pieces.rulesofmovements.MovementBuilderFacade.createRookMoveRulesBuilder;
 
 public class Rook extends Piece {
 
@@ -8,7 +8,7 @@ public class Rook extends Piece {
 
     public Rook(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        moveRulesManager = createRookMoveRulesManager(this);
+        movementRuleBuilder = createRookMoveRulesBuilder(this);
     }
 
     @Override
