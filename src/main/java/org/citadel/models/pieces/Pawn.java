@@ -47,7 +47,7 @@ public class Pawn extends Piece {
 
     private boolean inStep(Coordinate target) {
         final int doubleStep = 2;
-        return getDisplacedCoordinateBy(new Coordinate(doubleStep, 0)).equals(target);
+        return getDisplacedBy(new Coordinate(doubleStep, 0)).equals(target);
     }
 
     private boolean isThePawnPromoted(Coordinate coordinate) {

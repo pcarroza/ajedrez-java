@@ -44,14 +44,14 @@ public class PawnMoveRulesManager extends MoveRulesManager {
         final int singleStep = 1;
         final int doubleStep = 2;
         int maximumAdvance = pawn.isInitialState() ? doubleStep : singleStep;
-        Coordinate coordinateFirstBox = pawn.getDisplacedCoordinateBy(new Coordinate(color.getDirection()));
+        Coordinate coordinateFirstBox = pawn.getDisplacedBy(new Coordinate(color.getDirection()));
         if (pawn.isBoxOccupied(coordinateFirstBox)) {
             return List.of();
         }
         if (maximumAdvance == singleStep) {
             return List.of(coordinateFirstBox);
         }
-        Coordinate coordinateSecondBox = pawn.getDisplacedCoordinateBy(new Coordinate(doubleStep * color.getDirection()));
+        Coordinate coordinateSecondBox = pawn.getDisplacedBy(new Coordinate(doubleStep * color.getDirection()));
         if (pawn.isBoxOccupied(coordinateSecondBox)) {
             return List.of(coordinateFirstBox);
         }
@@ -59,7 +59,7 @@ public class PawnMoveRulesManager extends MoveRulesManager {
     }
 
     private void addCaptureMoveIfValid(Coordinate coordinate) {
-        Coordinate capturePosition = pawn.getDisplacedCoordinateBy(coordinate);
+        Coordinate capturePosition = pawn.getDisplacedBy(coordinate);
         if (pawn.isItEnemy(capturePosition)) {
             possibleMoves.add(capturePosition);
         }

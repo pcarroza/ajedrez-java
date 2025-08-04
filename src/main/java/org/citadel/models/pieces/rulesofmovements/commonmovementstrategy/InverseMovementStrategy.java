@@ -22,6 +22,6 @@ public class InverseMovementStrategy extends MovementStrategy {
     public Coordinate getDisplacedCoordinateBy(int step, Coordinate vector) {
         assert vector != null;
         assert step >= 1;
-        return piece.getDisplacedCoordinateBy(new Coordinate(step, step), vector);
+        return piece.getDisplacedBy(new Coordinate(step, step), vector);
     }
 }

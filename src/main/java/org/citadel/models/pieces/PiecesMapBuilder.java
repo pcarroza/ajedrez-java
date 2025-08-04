@@ -13,10 +13,10 @@ public class PiecesMapBuilder {
     private PiecesMapBuilder() {
     }
 
-    public static Map<Color, List<Piece>> createPiecesMap(ObserverBoard observerBoard) {
+    public static Map<Color, List<Piece>> createPiecesMap(BoardObserver boardObserver) {
         Map<Color, List<Piece>> piecesMap = Map.of(BLACK, createPiecesBlack(), WHITE, createPiecesWhite());
         for (List<Piece> pieces : piecesMap.values()) {
-            pieces.forEach(piece -> piece.subscribe(observerBoard));
+            pieces.forEach(piece -> piece.subscribe(boardObserver));
         }
         return piecesMap;
     }

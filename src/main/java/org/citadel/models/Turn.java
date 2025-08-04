@@ -6,8 +6,14 @@ public class Turn {
 
     private int value = 0;
 
-    public Color getColor() {
+    public Color getCurrentPlayer() {
         return Color.values()[value];
+    }
+
+    public Color getRivalPlayer() {
+        Turn clone = this.copy();
+        clone.change();
+        return clone.getCurrentPlayer();
     }
 
     public void change() {
@@ -15,7 +21,7 @@ public class Turn {
     }
 
     public int getIndexCurrentPlayer() {
-        return getColor().ordinal();
+        return getCurrentPlayer().ordinal();
     }
 
     public Turn copy() {

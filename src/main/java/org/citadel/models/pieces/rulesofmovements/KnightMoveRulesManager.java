@@ -19,14 +19,14 @@ public class KnightMoveRulesManager extends MoveRulesManager {
         final int simpleStep = 1;
         
         possibleMoves = new ArrayList<>(List.of(
-                piece.getDisplacedCoordinateBy(new Coordinate(doubleStep, -simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(doubleStep, simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(simpleStep, doubleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(-simpleStep, doubleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(-doubleStep, -simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(-simpleStep, -doubleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(simpleStep, -doubleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(simpleStep, doubleStep))));
+                piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
+                piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
+                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)),
+                piece.getDisplacedBy(new Coordinate(-simpleStep, doubleStep)),
+                piece.getDisplacedBy(new Coordinate(-doubleStep, -simpleStep)),
+                piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
+                piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
+                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep))));
 
         possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
         possibleMoves.removeIf(it -> piece.sameColor(it));

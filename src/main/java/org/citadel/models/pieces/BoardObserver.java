@@ -2,7 +2,7 @@ package org.citadel.models.pieces;
 
 import java.util.List;
 
-public interface ObserverBoard {
+public interface BoardObserver {
 
     void set(Piece piece);
 

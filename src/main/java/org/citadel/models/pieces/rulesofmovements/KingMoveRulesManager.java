@@ -18,14 +18,14 @@ public class KingMoveRulesManager extends MoveRulesManager {
         final int simpleStep = 1;
 
         possibleMoves = new ArrayList<>(List.of(
-                piece.getDisplacedCoordinateBy(new Coordinate(simpleStep, -simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(simpleStep, 0)),
-                piece.getDisplacedCoordinateBy(new Coordinate(simpleStep, simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(-simpleStep, 0)),
-                piece.getDisplacedCoordinateBy(new Coordinate(-simpleStep, -simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(-simpleStep, simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(0, -simpleStep)),
-                piece.getDisplacedCoordinateBy(new Coordinate(0, simpleStep))));
+                piece.getDisplacedBy(new Coordinate(simpleStep, -simpleStep)),
+                piece.getDisplacedBy(new Coordinate(simpleStep, 0)),
+                piece.getDisplacedBy(new Coordinate(simpleStep, simpleStep)),
+                piece.getDisplacedBy(new Coordinate(-simpleStep, 0)),
+                piece.getDisplacedBy(new Coordinate(-simpleStep, -simpleStep)),
+                piece.getDisplacedBy(new Coordinate(-simpleStep, simpleStep)),
+                piece.getDisplacedBy(new Coordinate(0, -simpleStep)),
+                piece.getDisplacedBy(new Coordinate(0, simpleStep))));
 
         possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
         possibleMoves.removeIf(it -> piece.sameColor(it));

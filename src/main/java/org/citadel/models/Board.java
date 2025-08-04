@@ -16,7 +16,7 @@ import static org.citadel.models.pieces.Color.BLACK;
 import static org.citadel.models.pieces.Color.WHITE;
 import static org.citadel.models.pieces.PiecesMapBuilder.*;
 
-public class Board extends SubjectBoard implements ObserverBoard {
+public class Board extends SubjectBoard implements BoardObserver {
 
     private final Map<Color, List<Piece>> piecesMap;
 
@@ -180,13 +180,11 @@ public class Board extends SubjectBoard implements ObserverBoard {
     }
 
     public Color getCurrentPlayer() {
-        return turn.getColor();
+        return turn.getCurrentPlayer();
     }
 
     public Color getRivalPlayer() {
-        Turn clone = turn.copy();
-        clone.change();
-        return clone.getColor();
+        return turn.getRivalPlayer();
     }
 
     public void changeTurn() {

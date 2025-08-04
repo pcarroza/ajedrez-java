@@ -10,7 +10,7 @@ public class LocalOperationControllerBuilder {
 
     private LocalContinueController localContinueController;
 
-    private Game game;
+    private final Game game;
 
     public LocalOperationControllerBuilder(Game game) {
         this.game = game;

@@ -2,25 +2,25 @@ package org.citadel.models.pieces;
 
 public abstract class SubjectPiece {
 
-    protected ObserverBoard observerBoard;
+    protected BoardObserver boardObserver;
 
-    public void subscribe(ObserverBoard observerBoard) {
-        this.observerBoard = observerBoard;
+    public void subscribe(BoardObserver boardObserver) {
+        this.boardObserver = boardObserver;
     }
 
     public boolean isItEnemy(Coordinate coordinate) {
-        return observerBoard.isItEnemy(coordinate);
+        return boardObserver.isItEnemy(coordinate);
     }
 
     public boolean sameColor(Coordinate coordinate) {
-        return observerBoard.someColor(coordinate);
+        return boardObserver.someColor(coordinate);
     }
 
     public boolean isBoxOccupied(Coordinate coordinate) {
-        return !observerBoard.isBoxEmpty(coordinate);
+        return !boardObserver.isBoxEmpty(coordinate);
     }
 
     public void addPassantPawn(Piece piece) {
-        observerBoard.set(piece);
+        boardObserver.set(piece);
     }
 }

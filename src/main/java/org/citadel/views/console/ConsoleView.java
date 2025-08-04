@@ -8,11 +8,11 @@ import org.citadel.controllers.StartController;
 
 public class ConsoleView implements View {
 
-    private StartView startView;
+    private final StartView startView;
 
-    private GameView gameView;
+    private final GameView gameView;
 
-    private ContinueView continueView;
+    private final ContinueView continueView;
 
     public ConsoleView() {
         startView = new StartView();

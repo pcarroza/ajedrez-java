@@ -22,6 +22,6 @@ public class VerticalMovementStrategy extends MovementStrategy {
     public Coordinate getDisplacedCoordinateBy(int step, Coordinate vector) {
         assert vector != null;
         assert step >= 1;
-        return piece.getDisplacedCoordinateBy(new Coordinate(step, 0), vector);
+        return piece.getDisplacedBy(new Coordinate(step, 0), vector);
     }
 }

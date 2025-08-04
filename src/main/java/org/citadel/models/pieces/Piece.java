@@ -35,15 +35,15 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return validMovements;
     }
 
-    public Coordinate getDisplacedCoordinateBy(int displacement) {
+    public Coordinate getDisplacedBy(int displacement) {
         return getCoordinate().getDisplacedBy(displacement);
     }
 
-    public Coordinate getDisplacedCoordinateBy(Coordinate displacement) {
+    public Coordinate getDisplacedBy(Coordinate displacement) {
         return getCoordinate().getDisplacedBy(displacement);
     }
 
-    public Coordinate getDisplacedCoordinateBy(Coordinate displacement, Coordinate vector) {
+    public Coordinate getDisplacedBy(Coordinate displacement, Coordinate vector) {
         return getCoordinate().getDisplacedBy(displacement, vector);
     }
 

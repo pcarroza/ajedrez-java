@@ -6,7 +6,7 @@ import org.citadel.models.Game;
 
 public class LocalStartController extends LocalOperationController implements StartController {
 
-    private LocalOperationControllerBuilder localOperationControllerBuilder;
+    private final LocalOperationControllerBuilder localOperationControllerBuilder;
 
     public LocalStartController(Game game, LocalOperationControllerBuilder builder) {
         super(game);

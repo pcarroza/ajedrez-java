@@ -49,7 +49,7 @@ public abstract class MovementStrategy {
 
     private boolean isWithinBoardLimits(int step) {
         assert step >= 1;
-        Coordinate desplacedCoordinate = piece.getDisplacedCoordinateBy(step);
+        Coordinate desplacedCoordinate = piece.getDisplacedBy(step);
         return ValidatorLimitsBoard.getInstance().isWithinLimits(desplacedCoordinate);
     }
 
