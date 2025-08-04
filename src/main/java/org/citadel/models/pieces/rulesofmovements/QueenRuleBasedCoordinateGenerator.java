@@ -4,9 +4,9 @@ import org.citadel.models.pieces.Piece;
 
 import static org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.BuilderMovementStrategy.buildQueenMovements;
 
-public class QueenMovementRuleBuilder extends MovementRuleBuilder {
+public class QueenRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerator {
 
-    public QueenMovementRuleBuilder(Piece piece) {
+    public QueenRuleBasedCoordinateGenerator(Piece piece) {
         super(piece);
     }
 

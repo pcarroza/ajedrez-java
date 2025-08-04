@@ -5,17 +5,17 @@ import org.citadel.models.pieces.Piece;
 
 import java.util.List;
 
-public abstract class MovementRuleBuilder {
+public abstract class RuleBasedCoordinateGenerator {
 
     protected Piece piece;
 
     protected List<Coordinate> possibleMoves;
 
-    MovementRuleBuilder(Piece piece) {
+    RuleBasedCoordinateGenerator(Piece piece) {
         this.piece = piece;
     }
 
-    MovementRuleBuilder() {
+    RuleBasedCoordinateGenerator() {
     }
 
     public void set(Piece piece) {

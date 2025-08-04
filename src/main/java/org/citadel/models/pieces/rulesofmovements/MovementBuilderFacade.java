@@ -7,27 +7,27 @@ public class MovementBuilderFacade {
     private MovementBuilderFacade() {
     }
 
-    public static MovementRuleBuilder createBishopMoveRulesBuilder(Piece piece) {
-        return new BishopMovementRuleBuilder(piece);
+    public static RuleBasedCoordinateGenerator createBishopMoveRulesBuilder(Piece piece) {
+        return new BishopRuleBasedCoordinateGenerator(piece);
     }
 
-    public static MovementRuleBuilder createKingMoveRulesBuilder(Piece piece) {
-        return new KingMovementRuleBuilder(piece);
+    public static RuleBasedCoordinateGenerator createKingMoveRulesBuilder(Piece piece) {
+        return new KingRuleBasedCoordinateGenerator(piece);
     }
 
-    public static MovementRuleBuilder createKnightMoveRulesBuilder(Piece piece) {
-        return new KnightMovementRuleBuilder(piece);
+    public static RuleBasedCoordinateGenerator createKnightMoveRulesBuilder(Piece piece) {
+        return new KnightRuleBasedCoordinateGenerator(piece);
     }
 
-    public static MovementRuleBuilder createQueenMoveRulesBuilder(Piece piece) {
-        return new QueenMovementRuleBuilder(piece);
+    public static RuleBasedCoordinateGenerator createQueenMoveRulesBuilder(Piece piece) {
+        return new QueenRuleBasedCoordinateGenerator(piece);
     }
 
-    public static MovementRuleBuilder createRookMoveRulesBuilder(Piece piece) {
-        return new RookMovementRuleBuilder(piece);
+    public static RuleBasedCoordinateGenerator createRookMoveRulesBuilder(Piece piece) {
+        return new RookRuleBasedCoordinateGenerator(piece);
     }
 
-    public static MovementRuleBuilder createPawnMoveRulesBuilder(Piece piece) {
-        return new PawnMovementRuleBuilder(piece);
+    public static RuleBasedCoordinateGenerator createPawnMoveRulesBuilder(Piece piece) {
+        return new PawnRuleBasedCoordinateGenerator(piece);
     }
 }

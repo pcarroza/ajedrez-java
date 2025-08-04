@@ -19,7 +19,7 @@ public class Pawn extends Piece {
 
     public Pawn(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        movementRuleBuilder = createPawnMoveRulesBuilder(this);
+        ruleBasedCoordinateGenerator = createPawnMoveRulesBuilder(this);
         specialMoveRulesBuilder = new SpecialStepMovementRulesBuilder(this);
     }
 
@@ -69,7 +69,7 @@ public class Pawn extends Piece {
         specialMoveRulesBuilder.buildMovements();
         validMovements = new ArrayList<>();
         validMovements.addAll(Stream
-                .concat(specialMoveRulesBuilder.getMovements().stream(), movementRuleBuilder.getMovements().stream()).toList());
+                .concat(specialMoveRulesBuilder.getMovements().stream(), ruleBasedCoordinateGenerator.getMovements().stream()).toList());
     }
 
     @Override

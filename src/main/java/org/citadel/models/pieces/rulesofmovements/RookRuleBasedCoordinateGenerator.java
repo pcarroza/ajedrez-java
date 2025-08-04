@@ -4,9 +4,9 @@ import org.citadel.models.pieces.Piece;
 
 import static org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.BuilderMovementStrategy.buildRookMovements;
 
-public class RookMovementRuleBuilder extends MovementRuleBuilder {
+public class RookRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerator {
 
-    public RookMovementRuleBuilder(Piece piece) {
+    public RookRuleBasedCoordinateGenerator(Piece piece) {
         super(piece);
     }
 

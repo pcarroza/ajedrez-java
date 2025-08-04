@@ -7,9 +7,9 @@ import org.citadel.models.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KingMovementRuleBuilder extends MovementRuleBuilder {
+public class KingRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerator {
 
-    public KingMovementRuleBuilder(Piece piece) {
+    public KingRuleBasedCoordinateGenerator(Piece piece) {
         super(piece);
     }
 

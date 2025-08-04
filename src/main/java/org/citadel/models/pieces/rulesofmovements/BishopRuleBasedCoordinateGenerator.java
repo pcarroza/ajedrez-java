@@ -4,9 +4,9 @@ import org.citadel.models.pieces.Piece;
 
 import static org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.BuilderMovementStrategy.buildBishopMovements;
 
-public class BishopMovementRuleBuilder extends MovementRuleBuilder {
+public class BishopRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerator {
 
-    public BishopMovementRuleBuilder(Piece piece) {
+    public BishopRuleBasedCoordinateGenerator(Piece piece) {
         super(piece);
     }
 
