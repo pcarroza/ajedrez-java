@@ -64,8 +64,8 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void buildMovements() {
-        super.buildMovements();
+    public void generateMovements() {
+        super.generateMovements();
         specialMoveRulesBuilder.buildMovements();
         validMovements = new ArrayList<>();
         validMovements.addAll(Stream

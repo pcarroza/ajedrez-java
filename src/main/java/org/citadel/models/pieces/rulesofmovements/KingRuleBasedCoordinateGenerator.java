@@ -14,7 +14,7 @@ public class KingRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerat
     }
 
     @Override
-    public void buildMovements() {
+    public void trigger() {
         final int simpleStep = 1;
 
         possibleMoves = new ArrayList<>(List.of(

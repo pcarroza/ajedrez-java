@@ -62,7 +62,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .filter(piece -> piece.has(coordinate))
                 .findFirst()
                 .ifPresentOrElse(piece -> {
-                    piece.buildMovements();
+                    piece.generateMovements();
                     this.set(piece.getValidMovements());
                     this.selectedPiece = piece;
                 }, () -> {

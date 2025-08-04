@@ -8,5 +8,5 @@ public interface SelectedPiece {
 
     boolean isThePawnPromoted();
 
-    void buildMovements();
+    void generateMovements();
 }
