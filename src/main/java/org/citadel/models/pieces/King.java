@@ -6,7 +6,7 @@ import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMove;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.citadel.models.pieces.rulesofmovements.MovementBuilderFacade.createKingMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesofmovements.RulerBasedCoordinateGeneratorFacade.createKingMoveRulesBuilder;
 
 public class King extends Piece {
 

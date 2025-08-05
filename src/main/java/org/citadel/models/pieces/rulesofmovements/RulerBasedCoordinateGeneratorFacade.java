@@ -2,9 +2,9 @@ package org.citadel.models.pieces.rulesofmovements;
 
 import org.citadel.models.pieces.Piece;
 
-public class MovementBuilderFacade {
+public class RulerBasedCoordinateGeneratorFacade {
 
-    private MovementBuilderFacade() {
+    private RulerBasedCoordinateGeneratorFacade() {
     }
 
     public static RuleBasedCoordinateGenerator createBishopMoveRulesBuilder(Piece piece) {

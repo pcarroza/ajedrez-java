@@ -7,7 +7,7 @@ import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRulesBuild
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.citadel.models.pieces.rulesofmovements.MovementBuilderFacade.createPawnMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesofmovements.RulerBasedCoordinateGeneratorFacade.createPawnMoveRulesBuilder;
 
 public class Pawn extends Piece {
 
