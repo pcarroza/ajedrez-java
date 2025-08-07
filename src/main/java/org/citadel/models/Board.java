@@ -171,8 +171,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public boolean isBoxEmpty(Coordinate coordinate) {
         assert coordinate != null;
-        return piecesMap.values().stream()
-                .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
+        return piecesMap.values().stream().noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
     }
 
     public int getIndexCurrentPlayer() {
