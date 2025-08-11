@@ -30,5 +30,5 @@ public abstract class RuleBasedCoordinateGenerator {
         return possibleMoves;
     }
 
-    public abstract void trigger();
+    public abstract void generate();
 }

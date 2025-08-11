@@ -11,7 +11,7 @@ public class RookRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerat
     }
 
     @Override
-    public void trigger() {
+    public void generate() {
         possibleMoves.addAll(buildRookMovements(piece));
     }
 }

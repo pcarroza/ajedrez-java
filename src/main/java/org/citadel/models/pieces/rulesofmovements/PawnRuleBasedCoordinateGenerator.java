@@ -23,7 +23,7 @@ public class PawnRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerat
     }
 
     @Override
-    public void trigger() {
+    public void generate() {
         Color color = getColor();
 
         assert color != Color.NONE;

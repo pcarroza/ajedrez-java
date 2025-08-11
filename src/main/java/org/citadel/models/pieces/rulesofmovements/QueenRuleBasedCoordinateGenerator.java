@@ -11,7 +11,7 @@ public class QueenRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenera
     }
 
     @Override
-    public void trigger() {
+    public void generate() {
         possibleMoves.addAll(buildQueenMovements(piece));
     }
 }

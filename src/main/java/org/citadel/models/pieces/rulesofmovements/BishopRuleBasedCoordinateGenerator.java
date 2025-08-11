@@ -11,7 +11,7 @@ public class BishopRuleBasedCoordinateGenerator extends RuleBasedCoordinateGener
     }
 
     @Override
-    public void trigger() {
+    public void generate() {
         possibleMoves.addAll(buildBishopMovements(piece));
     }
 }

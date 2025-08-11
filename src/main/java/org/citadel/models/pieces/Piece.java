@@ -56,7 +56,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     public void generateMovements() {
-        ruleBasedCoordinateGenerator.trigger();
+        ruleBasedCoordinateGenerator.generate();
     }
 
     public boolean isThePawnPromoted() {

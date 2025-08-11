@@ -14,7 +14,7 @@ public class KnightRuleBasedCoordinateGenerator extends RuleBasedCoordinateGener
     }
 
     @Override
-    public void trigger() {
+    public void generate() {
         final int doubleStep = 2;
         final int simpleStep = 1;
         
