@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.citadel.models.pieces.Pawn;
 
-public class SpecialStepMovementRulesBuilder extends SpecialMoveRulesBuilder {
+public class SpecialStepMovementRulesGenerator extends SpecialMovesRulesGenerator {
 
-    public SpecialStepMovementRulesBuilder(Pawn pawn) {
+    public SpecialStepMovementRulesGenerator(Pawn pawn) {
         super(pawn);
     }
 

@@ -1,8 +1,8 @@
 package org.citadel.models.pieces;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
-import org.citadel.models.pieces.specialmovesrules.SpecialMoveRulesBuilder;
-import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRulesBuilder;
+import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
+import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRulesGenerator;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -15,12 +15,12 @@ public class Pawn extends Piece {
 
     private boolean isItPromoted = false;
 
-    private final SpecialMoveRulesBuilder specialMoveRulesBuilder;
+    private final SpecialMovesRulesGenerator specialMovesRulesGenerator;
 
     public Pawn(Coordinate coordinate, Color color) {
         super(coordinate, color);
         ruleBasedCoordinateGenerator = createPawnMoveRulesBuilder(this);
-        specialMoveRulesBuilder = new SpecialStepMovementRulesBuilder(this);
+        specialMovesRulesGenerator = new SpecialStepMovementRulesGenerator(this);
     }
 
     @Override
@@ -60,16 +60,16 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isMovementValid(Coordinate target) {
-        return super.isMovementValid(target) || specialMoveRulesBuilder.isMovementValid(target);
+        return super.isMovementValid(target) || specialMovesRulesGenerator.isMovementValid(target);
     }
 
     @Override
     public void generateMovements() {
         super.generateMovements();
-        specialMoveRulesBuilder.buildMovements();
+        specialMovesRulesGenerator.buildMovements();
         validMovements = new ArrayList<>();
         validMovements.addAll(Stream
-                .concat(specialMoveRulesBuilder.getMovements().stream(), ruleBasedCoordinateGenerator.getMovements().stream()).toList());
+                .concat(specialMovesRulesGenerator.getMovements().stream(), ruleBasedCoordinateGenerator.getMovements().stream()).toList());
     }
 
     @Override

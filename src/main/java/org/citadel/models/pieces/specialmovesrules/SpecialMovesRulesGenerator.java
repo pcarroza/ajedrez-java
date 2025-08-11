@@ -5,13 +5,13 @@ import org.citadel.models.pieces.Piece;
 
 import java.util.List;
 
-public abstract class SpecialMoveRulesBuilder {
+public abstract class SpecialMovesRulesGenerator {
 
     protected Piece piece;
 
     protected List<Coordinate> movements;
 
-    SpecialMoveRulesBuilder(Piece piece) {
+    SpecialMovesRulesGenerator(Piece piece) {
         this.piece = piece;
     }
 

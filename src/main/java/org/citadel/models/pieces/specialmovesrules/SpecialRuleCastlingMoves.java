@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.citadel.models.pieces.King;
 
-public class SpecialRuleCastlingMove extends SpecialMoveRulesBuilder {
+public class SpecialRuleCastlingMoves extends SpecialMovesRulesGenerator {
 
-    public SpecialRuleCastlingMove(King king) {
+    public SpecialRuleCastlingMoves(King king) {
         super(king);
     }
 

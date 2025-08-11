@@ -1,7 +1,7 @@
 package org.citadel.models.pieces;
 
-import org.citadel.models.pieces.specialmovesrules.SpecialMoveRulesBuilder;
-import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMove;
+import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
+import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMoves;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -12,13 +12,13 @@ public class King extends Piece {
 
     private boolean isMoved = false;
 
-    private final SpecialMoveRulesBuilder specialMoveRulesBuilder;
+    private final SpecialMovesRulesGenerator specialMoveRulesBuilder;
 
 
     public King(Coordinate coordinate, Color color) {
         super(coordinate, color);
         ruleBasedCoordinateGenerator = createKingMoveRulesBuilder(this);
-        specialMoveRulesBuilder = new SpecialRuleCastlingMove(this);
+        specialMoveRulesBuilder = new SpecialRuleCastlingMoves(this);
     }
 
     @Override
