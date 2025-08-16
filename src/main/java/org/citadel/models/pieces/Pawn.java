@@ -2,7 +2,7 @@ package org.citadel.models.pieces;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
-import org.citadel.models.pieces.specialmovesrules.SpecialStepMovementRulesGenerator;
+import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -20,7 +20,7 @@ public class Pawn extends Piece {
     public Pawn(Coordinate coordinate, Color color) {
         super(coordinate, color);
         ruleBasedCoordinateGenerator = createPawnMoveRulesBuilder(this);
-        specialMovesRulesGenerator = new SpecialStepMovementRulesGenerator(this);
+        specialMovesRulesGenerator = new EnPassantPawnSpecialRuleGenerator(this);
     }
 
     @Override
