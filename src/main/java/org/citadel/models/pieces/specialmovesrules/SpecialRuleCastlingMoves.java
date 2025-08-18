@@ -11,7 +11,7 @@ public class SpecialRuleCastlingMoves extends SpecialMovesRulesGenerator {
     }
 
     @Override
-    public void buildMovements() {
+    public void generateMovements() {
         movements = new ArrayList<>();
     }
 }

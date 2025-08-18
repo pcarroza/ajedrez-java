@@ -11,7 +11,7 @@ public class EnPassantPawnSpecialRuleGenerator extends SpecialMovesRulesGenerato
     }
 
     @Override
-    public void buildMovements() {
+    public void generateMovements() {
         movements = new ArrayList<>();
     }
 }

@@ -1,6 +1,6 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesofmovements.RulerBasedCoordinateGeneratorFacade.createKnightMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createKnightMoveRulesBuilder;
 
 public class Knight extends Piece {
 

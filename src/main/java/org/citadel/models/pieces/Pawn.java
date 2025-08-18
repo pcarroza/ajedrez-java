@@ -7,7 +7,7 @@ import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGener
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.citadel.models.pieces.rulesofmovements.RulerBasedCoordinateGeneratorFacade.createPawnMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createPawnMoveRulesBuilder;
 
 public class Pawn extends Piece {
 
@@ -71,7 +71,7 @@ public class Pawn extends Piece {
     @Override
     public void generateMovements() {
         super.generateMovements();
-        specialGenerator.buildMovements();
+        specialGenerator.generateMovements();
         validMovements = new ArrayList<>();
         validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
     }

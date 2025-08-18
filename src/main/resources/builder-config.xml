@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <builder  enabled="true">org.citadel.models.pieces.rulesofmovements.RulerBasedCoordinateGeneratorFacade</builder>
+    <builder  enabled="true">org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade</builder>
 </configuration>

@@ -23,5 +23,5 @@ public abstract class SpecialMovesRulesGenerator {
         return movements;
     }
 
-    public abstract void buildMovements();
+    public abstract void generateMovements();
 }

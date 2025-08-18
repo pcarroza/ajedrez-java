@@ -6,7 +6,7 @@ import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMoves;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.citadel.models.pieces.rulesofmovements.RulerBasedCoordinateGeneratorFacade.createKingMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createKingMoveRulesBuilder;
 
 public class King extends Piece {
 
@@ -37,7 +37,7 @@ public class King extends Piece {
     @Override
     public void generateMovements() {
         super.generateMovements();
-        specialMoveRulesBuilder.buildMovements();
+        specialMoveRulesBuilder.generateMovements();
         validMovements = new ArrayList<>();
         validMovements = Stream
                 .concat(specialMoveRulesBuilder.getMovements().stream(), basedGenerator.getMovements().stream()).toList();
