@@ -15,6 +15,8 @@ public class Pawn extends Piece {
 
     private boolean isItPromoted = false;
 
+    private boolean vulnerablePawn = false;
+
     private final SpecialMovesRulesGenerator specialMovesRulesGenerator;
 
     public Pawn(Coordinate coordinate, Color color) {
@@ -29,7 +31,10 @@ public class Pawn extends Piece {
             close();
         }
         if (inStep(target)) {
+            vulnerablePawn = true;
             addPassantPawn(this);
+        } else {
+            vulnerablePawn = false;
         }
         if (isThePawnPromoted(target)) {
             changeToPromoted();
