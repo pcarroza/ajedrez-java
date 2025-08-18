@@ -74,4 +74,8 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     public boolean isRook() {
         return false;
     }
+
+    public boolean isVulnerablePawn() {
+        return false;
+    }
 }

@@ -82,6 +82,11 @@ public class Pawn extends Piece {
         return isItPromoted;
     }
 
+    @Override
+    public boolean isVulnerablePawn() {
+        return vulnerablePawn;
+    }
+
     public boolean isWhite() {
         return color == Color.WHITE;
     }
