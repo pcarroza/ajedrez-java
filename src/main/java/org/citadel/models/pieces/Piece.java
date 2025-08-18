@@ -2,11 +2,11 @@ package org.citadel.models.pieces;
 
 import java.util.List;
 
-import org.citadel.models.pieces.rulesofmovements.RuleBasedCoordinateGenerator;
+import org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenerator;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
-    protected RuleBasedCoordinateGenerator basedGenerator;
+    protected MovementRulesBaseGenerator basedGenerator;
 
     private Coordinate coordinate;
 

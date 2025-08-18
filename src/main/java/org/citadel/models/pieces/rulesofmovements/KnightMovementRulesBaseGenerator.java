@@ -7,9 +7,9 @@ import org.citadel.models.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnightRuleBasedCoordinateGenerator extends RuleBasedCoordinateGenerator {
+public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
-    public KnightRuleBasedCoordinateGenerator(Piece piece) {
+    public KnightMovementRulesBaseGenerator(Piece piece) {
         super(piece);
     }
 
