@@ -8,7 +8,7 @@ public class Rook extends Piece {
 
     public Rook(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        ruleBasedCoordinateGenerator = createRookMoveRulesBuilder(this);
+        basedGenerator = createRookMoveRulesBuilder(this);
     }
 
     @Override

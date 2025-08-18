@@ -6,6 +6,6 @@ public class Knight extends Piece {
 
     public Knight(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        ruleBasedCoordinateGenerator = createKnightMoveRulesBuilder(this);
+        basedGenerator = createKnightMoveRulesBuilder(this);
     }
 }

@@ -6,7 +6,7 @@ import org.citadel.models.pieces.rulesofmovements.RuleBasedCoordinateGenerator;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
-    protected RuleBasedCoordinateGenerator ruleBasedCoordinateGenerator;
+    protected RuleBasedCoordinateGenerator basedGenerator;
 
     private Coordinate coordinate;
 
@@ -52,11 +52,11 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return ruleBasedCoordinateGenerator.isMovementValid(target.copy());
+        return basedGenerator.isMovementValid(target.copy());
     }
 
     public void generateMovements() {
-        ruleBasedCoordinateGenerator.generate();
+        basedGenerator.generate();
     }
 
     public boolean isThePawnPromoted() {

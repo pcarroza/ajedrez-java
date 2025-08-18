@@ -17,7 +17,7 @@ public class King extends Piece {
 
     public King(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        ruleBasedCoordinateGenerator = createKingMoveRulesBuilder(this);
+        basedGenerator = createKingMoveRulesBuilder(this);
         specialMoveRulesBuilder = new SpecialRuleCastlingMoves(this);
     }
 
@@ -40,7 +40,7 @@ public class King extends Piece {
         specialMoveRulesBuilder.buildMovements();
         validMovements = new ArrayList<>();
         validMovements = Stream
-                .concat(specialMoveRulesBuilder.getMovements().stream(), ruleBasedCoordinateGenerator.getMovements().stream()).toList();
+                .concat(specialMoveRulesBuilder.getMovements().stream(), basedGenerator.getMovements().stream()).toList();
     }
 
     @Override

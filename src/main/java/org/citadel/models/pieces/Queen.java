@@ -6,6 +6,6 @@ public class Queen extends Piece {
 
     public Queen(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        ruleBasedCoordinateGenerator = createQueenMoveRulesBuilder(this);
+        basedGenerator = createQueenMoveRulesBuilder(this);
     }
 }

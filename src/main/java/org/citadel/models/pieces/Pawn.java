@@ -17,12 +17,12 @@ public class Pawn extends Piece {
 
     private boolean vulnerablePawn = false;
 
-    private final SpecialMovesRulesGenerator specialMovesRulesGenerator;
+    private final SpecialMovesRulesGenerator specialGenerator;
 
     public Pawn(Coordinate coordinate, Color color) {
         super(coordinate, color);
-        ruleBasedCoordinateGenerator = createPawnMoveRulesBuilder(this);
-        specialMovesRulesGenerator = new EnPassantPawnSpecialRuleGenerator(this);
+        basedGenerator = createPawnMoveRulesBuilder(this);
+        specialGenerator = new EnPassantPawnSpecialRuleGenerator(this);
     }
 
     @Override
@@ -65,16 +65,15 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isMovementValid(Coordinate target) {
-        return super.isMovementValid(target) || specialMovesRulesGenerator.isMovementValid(target);
+        return super.isMovementValid(target) || specialGenerator.isMovementValid(target);
     }
 
     @Override
     public void generateMovements() {
         super.generateMovements();
-        specialMovesRulesGenerator.buildMovements();
+        specialGenerator.buildMovements();
         validMovements = new ArrayList<>();
-        validMovements.addAll(Stream
-                .concat(specialMovesRulesGenerator.getMovements().stream(), ruleBasedCoordinateGenerator.getMovements().stream()).toList());
+        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
     }
 
     @Override
