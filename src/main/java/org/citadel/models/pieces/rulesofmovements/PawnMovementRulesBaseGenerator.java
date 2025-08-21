@@ -8,6 +8,7 @@ import org.citadel.models.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
@@ -25,18 +26,10 @@ public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
     @Override
     public void generate() {
         Color color = getColor();
-
         assert color != Color.NONE;
-
         possibleMoves = new ArrayList<>();
         possibleMoves.addAll(calculateForwardMoves(color));
-
-        final int leftDiagonalOffset = -1;
-        addCaptureMoveIfValid(new Coordinate(color.getDirection(), leftDiagonalOffset));
-
-        final int rightDiagonalOffset = 1;
-        addCaptureMoveIfValid(new Coordinate(color.getDirection(), rightDiagonalOffset));
-
+        possibleMoves.addAll(calculateDiagonalCaptureMoves(color));
         possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
     }
 
@@ -58,17 +51,20 @@ public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
         return List.of(coordinateFirstBox, coordinateSecondBox);
     }
 
-    private void addCaptureMoveIfValid(Coordinate coordinate) {
-        Coordinate capturePosition = pawn.getDisplacedBy(coordinate);
-        if (pawn.isItEnemy(capturePosition)) {
-            possibleMoves.add(capturePosition);
-        }
+    private List<Coordinate> calculateDiagonalCaptureMoves(Color color) {
+        final int leftDiagonalOffset = -1;
+        final int rightDiagonalOffset = 1;
+        return Stream.of(leftDiagonalOffset, rightDiagonalOffset)
+                .map(offset -> pawn.getDisplacedBy(new Coordinate(color.getDirection(), offset)))
+                .filter(pawn::isItEnemy)
+                .toList();
     }
 
     private Color getColor() {
         if (pawn.isWhite()) {
             return Color.WHITE;
-        } else if (pawn.isBlack()) {
+        }
+        if (pawn.isBlack()) {
             return Color.BLACK;
         }
         return Color.NONE;
