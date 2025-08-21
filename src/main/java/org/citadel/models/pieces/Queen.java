@@ -4,8 +4,8 @@ import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenera
 
 public class Queen extends Piece {
 
-    public Queen(Coordinate coordinate, Color color) {
-        super(coordinate, color);
+    public Queen(Coordinate coordinate, Player player) {
+        super(coordinate, player);
         basedGenerator = createQueenMoveRulesBuilder(this);
     }
 }

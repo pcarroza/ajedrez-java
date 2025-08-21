@@ -19,8 +19,8 @@ public class Pawn extends Piece {
 
     private final SpecialMovesRulesGenerator specialGenerator;
 
-    public Pawn(Coordinate coordinate, Color color) {
-        super(coordinate, color);
+    public Pawn(Coordinate coordinate, Player player) {
+        super(coordinate, player);
         basedGenerator = createPawnMoveRulesBuilder(this);
         specialGenerator = new EnPassantPawnSpecialRuleGenerator(this);
     }
@@ -87,10 +87,10 @@ public class Pawn extends Piece {
     }
 
     public boolean isWhite() {
-        return color == Color.WHITE;
+        return player == Player.WHITE;
     }
 
     public boolean isBlack() {
-        return color == Color.BLACK;
+        return player == Player.BLACK;
     }
 }

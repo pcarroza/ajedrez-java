@@ -15,8 +15,8 @@ public class King extends Piece {
     private final SpecialMovesRulesGenerator specialMoveRulesBuilder;
 
 
-    public King(Coordinate coordinate, Color color) {
-        super(coordinate, color);
+    public King(Coordinate coordinate, Player player) {
+        super(coordinate, player);
         basedGenerator = createKingMoveRulesBuilder(this);
         specialMoveRulesBuilder = new SpecialRuleCastlingMoves(this);
     }

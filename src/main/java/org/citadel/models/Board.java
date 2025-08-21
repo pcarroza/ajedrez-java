@@ -12,17 +12,17 @@ import java.util.stream.Stream;
 
 import static org.citadel.common.tools.Terminal.input;
 import static org.citadel.common.tools.Terminal.writeln;
-import static org.citadel.models.pieces.Color.BLACK;
-import static org.citadel.models.pieces.Color.WHITE;
+import static org.citadel.models.pieces.Player.BLACK;
+import static org.citadel.models.pieces.Player.WHITE;
 import static org.citadel.models.pieces.PiecesMapBuilder.*;
 
 public class Board extends SubjectBoard implements BoardObserver {
 
-    private final Map<Color, List<Piece>> piecesMap;
+    private final Map<Player, List<Piece>> piecesMap;
 
-    private final Map<Color, List<Piece>> mapOfRemovedPieces;
+    private final Map<Player, List<Piece>> mapOfRemovedPieces;
 
-    private final Map<Color, List<Piece>> mapPassantPawns;
+    private final Map<Player, List<Piece>> mapPassantPawns;
 
     private List<Coordinate> movementsSelectedPiece;
 
@@ -110,7 +110,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         remove(this::getRivalPlayer, coordinate);
     }
 
-    private void remove(Supplier<Color> color, Coordinate coordinate) {
+    private void remove(Supplier<Player> color, Coordinate coordinate) {
         piecesMap.get(color.get()).removeIf(piece -> {
             if (piece.has(coordinate)) {
                 return mapOfRemovedPieces.get(color.get()).add(piece);
@@ -165,8 +165,8 @@ public class Board extends SubjectBoard implements BoardObserver {
         return getPiecesBy(getCurrentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
     }
 
-    private Stream<Piece> getPiecesBy(Color color) {
-        return piecesMap.get(color).stream();
+    private Stream<Piece> getPiecesBy(Player player) {
+        return piecesMap.get(player).stream();
     }
 
     public boolean isBoxEmpty(Coordinate coordinate) {
@@ -178,11 +178,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         return turn.getIndexCurrentPlayer();
     }
 
-    public Color getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return turn.getCurrentPlayer();
     }
 
-    public Color getRivalPlayer() {
+    public Player getRivalPlayer() {
         return turn.getRivalPlayer();
     }
 

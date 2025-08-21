@@ -6,8 +6,8 @@ public class Rook extends Piece {
 
     private boolean isMoved = false;
 
-    public Rook(Coordinate coordinate, Color color) {
-        super(coordinate, color);
+    public Rook(Coordinate coordinate, Player player) {
+        super(coordinate, player);
         basedGenerator = createRookMoveRulesBuilder(this);
     }
 

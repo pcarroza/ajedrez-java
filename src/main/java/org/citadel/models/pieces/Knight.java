@@ -4,8 +4,8 @@ import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenera
 
 public class Knight extends Piece {
 
-    public Knight(Coordinate coordinate, Color color) {
-        super(coordinate, color);
+    public Knight(Coordinate coordinate, Player player) {
+        super(coordinate, player);
         basedGenerator = createKnightMoveRulesBuilder(this);
     }
 }

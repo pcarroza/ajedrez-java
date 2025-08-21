@@ -10,13 +10,13 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     private Coordinate coordinate;
 
-    protected final Color color;
+    protected final Player player;
 
     protected List<Coordinate> validMovements;
 
-    protected Piece(Coordinate position, Color color) {
+    protected Piece(Coordinate position, Player player) {
         this.coordinate = position;
-        this.color = color;
+        this.player = player;
     }
 
     protected void set(Coordinate coordinate) {

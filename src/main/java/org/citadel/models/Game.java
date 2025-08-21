@@ -1,6 +1,6 @@
 package org.citadel.models;
 
-import org.citadel.models.pieces.Color;
+import org.citadel.models.pieces.Player;
 import org.citadel.models.pieces.Coordinate;
 
 public class Game {
@@ -42,11 +42,11 @@ public class Game {
         return board.getIndexCurrentPlayer();
     }
 
-    public Color getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return board.getCurrentPlayer();
     }
 
-    public Color getRivalPlayer() {
+    public Player getRivalPlayer() {
         return board.getRivalPlayer();
     }
 

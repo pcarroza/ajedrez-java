@@ -4,8 +4,8 @@ import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenera
 
 public class Bishop extends Piece {
 
-    public Bishop(Coordinate coordinate, Color color) {
-        super(coordinate, color);
+    public Bishop(Coordinate coordinate, Player player) {
+        super(coordinate, player);
         basedGenerator = createBishopMoveRulesBuilder(this);
     }
 }

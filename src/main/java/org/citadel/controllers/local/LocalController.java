@@ -1,6 +1,6 @@
 package org.citadel.controllers.local;
 
-import org.citadel.models.pieces.Color;
+import org.citadel.models.pieces.Player;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.Game;
 
@@ -36,11 +36,11 @@ public class LocalController {
         game.removeRivalPlayerPiece(coordinate);
     }
 
-    public Color getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return game.getCurrentPlayer();
     }
 
-    public Color getRivalPlayer() {
+    public Player getRivalPlayer() {
         return game.getRivalPlayer();
     }
 

@@ -1,23 +1,23 @@
 package org.citadel.models;
 
-import org.citadel.models.pieces.Color;
+import org.citadel.models.pieces.Player;
 
 public class Turn {
 
     private int value = 0;
 
-    public Color getCurrentPlayer() {
-        return Color.values()[value];
+    public Player getCurrentPlayer() {
+        return Player.values()[value];
     }
 
-    public Color getRivalPlayer() {
+    public Player getRivalPlayer() {
         Turn clone = this.copy();
         clone.change();
         return clone.getCurrentPlayer();
     }
 
     public void change() {
-        this.value = (value + 1) % (Color.values().length - 1);
+        this.value = (value + 1) % (Player.values().length - 1);
     }
 
     public int getIndexCurrentPlayer() {
