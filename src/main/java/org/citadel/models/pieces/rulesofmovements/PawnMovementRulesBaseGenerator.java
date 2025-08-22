@@ -34,13 +34,13 @@ public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
     }
 
     private List<Coordinate> calculateForwardMoves(Player player) {
-        final int singleStep = 1;
-        final int doubleStep = 2;
-        int maximumAdvance = pawn.isInitialState() ? doubleStep : singleStep;
         Coordinate coordinateFirstBox = pawn.getDisplacedBy(new Coordinate(player.getPlayer()));
         if (pawn.isBoxOccupied(coordinateFirstBox)) {
             return List.of();
         }
+        final int singleStep = 1;
+        final int doubleStep = 2;
+        int maximumAdvance = pawn.isInitialState() ? doubleStep : singleStep;
         if (maximumAdvance == singleStep) {
             return List.of(coordinateFirstBox);
         }
