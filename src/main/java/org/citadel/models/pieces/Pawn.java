@@ -5,6 +5,7 @@ import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createPawnMoveRulesBuilder;
@@ -32,7 +33,7 @@ public class Pawn extends Piece {
         }
         if (inStep(target)) {
             vulnerablePawn = true;
-            addPassantPawn(this);
+            notifyPassingPawn(this);
         } else {
             vulnerablePawn = false;
         }
@@ -64,6 +65,13 @@ public class Pawn extends Piece {
     }
 
     @Override
+    public List<Coordinate> getValidMovements() {
+        validMovements.clear();
+        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
+        return validMovements;
+    }
+
+    @Override
     public boolean isMovementValid(Coordinate target) {
         return super.isMovementValid(target) || specialGenerator.isMovementValid(target);
     }
@@ -72,8 +80,6 @@ public class Pawn extends Piece {
     public void generateMovements() {
         super.generateMovements();
         specialGenerator.generateMovements();
-        validMovements = new ArrayList<>();
-        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
     }
 
     @Override

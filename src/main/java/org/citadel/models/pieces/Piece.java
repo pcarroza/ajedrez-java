@@ -1,5 +1,6 @@
 package org.citadel.models.pieces;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenerator;
@@ -17,6 +18,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     protected Piece(Coordinate position, Player player) {
         this.coordinate = position;
         this.player = player;
+        validMovements = new ArrayList<>();
     }
 
     protected void set(Coordinate coordinate) {
@@ -32,7 +34,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     public List<Coordinate> getValidMovements() {
-        return validMovements;
+        return basedGenerator.getMovements();
     }
 
     public Coordinate getDisplacedBy(int displacement) {

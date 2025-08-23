@@ -44,9 +44,9 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public void set(Piece passantPawns) {
-        assert passantPawns != null;
-        mapPassantPawns.get(getCurrentPlayer()).add(passantPawns);
+    public void set(Piece enPassantPawn) {
+        assert enPassantPawn != null;
+        mapPassantPawns.get(getCurrentPlayer()).add(enPassantPawn);
     }
 
     public List<Coordinate> getMovementsSelectedPiece() {

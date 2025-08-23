@@ -3,7 +3,7 @@ package org.citadel.models.pieces;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMoves;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createKingMoveRulesBuilder;
@@ -12,13 +12,13 @@ public class King extends Piece {
 
     private boolean isMoved = false;
 
-    private final SpecialMovesRulesGenerator specialMoveRulesBuilder;
+    private final SpecialMovesRulesGenerator specialGenerator;
 
 
     public King(Coordinate coordinate, Player player) {
         super(coordinate, player);
         basedGenerator = createKingMoveRulesBuilder(this);
-        specialMoveRulesBuilder = new SpecialRuleCastlingMoves(this);
+        specialGenerator = new SpecialRuleCastlingMoves(this);
     }
 
     @Override
@@ -31,16 +31,20 @@ public class King extends Piece {
 
     @Override
     public boolean isMovementValid(Coordinate target) {
-        return super.isMovementValid(target) || specialMoveRulesBuilder.isMovementValid(target);
+        return super.isMovementValid(target) || specialGenerator.isMovementValid(target);
+    }
+
+    @Override
+    public List<Coordinate> getValidMovements() {
+        validMovements.clear();
+        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
+        return validMovements;
     }
 
     @Override
     public void generateMovements() {
         super.generateMovements();
-        specialMoveRulesBuilder.generateMovements();
-        validMovements = new ArrayList<>();
-        validMovements = Stream
-                .concat(specialMoveRulesBuilder.getMovements().stream(), basedGenerator.getMovements().stream()).toList();
+        specialGenerator.generateMovements();
     }
 
     @Override

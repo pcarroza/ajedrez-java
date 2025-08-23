@@ -20,7 +20,7 @@ public abstract class SubjectPiece {
         return !boardObserver.isBoxEmpty(coordinate);
     }
 
-    public void addPassantPawn(Piece piece) {
+    public void notifyPassingPawn(Piece piece) {
         boardObserver.set(piece);
     }
 }
