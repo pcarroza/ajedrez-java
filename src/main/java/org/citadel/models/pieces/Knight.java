@@ -8,4 +8,9 @@ public class Knight extends Piece {
         super(coordinate, player);
         basedGenerator = createKnightMoveRulesBuilder(this);
     }
+
+    @Override
+    public void accept(PieceVisitor visitor) {
+        visitor.visit(this);
+    }
 }

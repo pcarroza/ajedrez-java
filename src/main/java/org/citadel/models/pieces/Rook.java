@@ -13,7 +13,7 @@ public class Rook extends Piece {
 
     @Override
     public void put(Coordinate target) {
-        if (isNotMoved()) {
+        if (!isMoved) {
             close();
         }
         super.put(target.copy());
@@ -24,12 +24,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean isNotMoved() {
-        return !isMoved;
-    }
-
-    @Override
-    public boolean isRook() {
-        return true;
+    public void accept(PieceVisitor visitor) {
+        visitor.visit(this);
     }
 }

@@ -14,7 +14,6 @@ public class King extends Piece {
 
     private final SpecialMovesRulesGenerator specialGenerator;
 
-
     public King(Coordinate coordinate, Player player) {
         super(coordinate, player);
         basedGenerator = createKingMoveRulesBuilder(this);
@@ -23,7 +22,7 @@ public class King extends Piece {
 
     @Override
     public void put(Coordinate target) {
-        if (isNotMoved()) {
+        if (!isMoved) {
             close();
         }
         super.put(target.copy());
@@ -37,7 +36,8 @@ public class King extends Piece {
     @Override
     public List<Coordinate> getValidMovements() {
         validMovements.clear();
-        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
+        validMovements.addAll(Stream
+                .concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
         return validMovements;
     }
 
@@ -47,17 +47,12 @@ public class King extends Piece {
         specialGenerator.generateMovements();
     }
 
-    @Override
-    public boolean isNotMoved() {
-        return !isMoved;
-    }
-
     private void close() {
         isMoved = true;
     }
 
     @Override
-    public boolean isKing() {
-        return true;
+    public void accept(PieceVisitor visitor) {
+        visitor.visit(this);
     }
 }

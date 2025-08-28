@@ -18,7 +18,7 @@ import static org.citadel.models.pieces.PiecesMapBuilder.*;
 
 public class Board extends SubjectBoard implements BoardObserver {
 
-    private final Map<Player, List<Piece>> pieces;
+    private final Map<Player, List<Piece>> piecesMap;
 
     private final Map<Player, List<Piece>> removedPieces;
 
@@ -31,7 +31,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     private final Turn turn;
 
     public Board() {
-        pieces = createPiecesMap(this);
+        piecesMap = createPiecesMap(this);
         removedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
         enPassantPawnsMap = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
         selectedPieceMovements = Collections.emptyList();
@@ -111,7 +111,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     private void remove(Supplier<Player> color, Coordinate coordinate) {
-        pieces.get(color.get()).removeIf(piece -> {
+        piecesMap.get(color.get()).removeIf(piece -> {
             if (piece.isAt(coordinate)) {
                 return removedPieces.get(color.get()).add(piece);
             }
@@ -157,21 +157,26 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     private boolean isTheKingInValidMoves(Piece piece) {
         assert piece != null;
-        return selectedPieceMovements.contains(piece.getCoordinate()) && piece.isKing();
+        return selectedPieceMovements.contains(piece.getCoordinate()) && PieceInspector.isKing(piece);
     }
 
     public boolean isRook(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(getCurrentPlayer()).filter(piece -> piece.isAt(coordinate)).anyMatch(Piece::isRook);
+        return getPiecesBy(getCurrentPlayer())
+                .filter(piece -> piece.isAt(coordinate))
+                .findFirst()
+                .map(PieceInspector::isRook)
+                .orElse(false);
     }
 
     private Stream<Piece> getPiecesBy(Player player) {
-        return pieces.get(player).stream();
+        return piecesMap.get(player).stream();
     }
 
     public boolean isSquareEmpty(Coordinate coordinate) {
         assert coordinate != null;
-        return pieces.values().stream().noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.isAt(coordinate)));
+        return piecesMap.values().stream()
+                .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.isAt(coordinate)));
     }
 
     public int getIndexCurrentPlayer() {

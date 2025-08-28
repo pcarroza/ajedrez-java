@@ -7,6 +7,8 @@ import org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenerator;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
+    public abstract void accept(PieceVisitor visitor);
+
     protected MovementRulesBaseGenerator basedGenerator;
 
     private Coordinate coordinate;
@@ -61,23 +63,5 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         basedGenerator.generate();
     }
 
-    public boolean isThePawnPromoted() {
-        return false;
-    }
-
-    public boolean isNotMoved() {
-        return true;
-    }
-
-    public boolean isKing() {
-        return false;
-    }
-
-    public boolean isRook() {
-        return false;
-    }
-
-    public boolean isVulnerablePawn() {
-        return false;
-    }
+    
 }

@@ -4,7 +4,6 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -67,7 +66,8 @@ public class Pawn extends Piece {
     @Override
     public List<Coordinate> getValidMovements() {
         validMovements.clear();
-        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
+        validMovements.addAll(Stream
+                .concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
         return validMovements;
     }
 
@@ -82,21 +82,16 @@ public class Pawn extends Piece {
         specialGenerator.generateMovements();
     }
 
-    @Override
-    public boolean isThePawnPromoted() {
-        return isItPromoted;
-    }
-
-    @Override
-    public boolean isVulnerablePawn() {
-        return vulnerablePawn;
-    }
-
     public boolean isWhite() {
         return player == Player.WHITE;
     }
 
     public boolean isBlack() {
         return player == Player.BLACK;
+    }
+
+    @Override
+    public void accept(PieceVisitor visitor) {
+        visitor.visit(this);
     }
 }

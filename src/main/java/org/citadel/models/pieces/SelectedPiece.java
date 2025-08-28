@@ -6,7 +6,5 @@ public interface SelectedPiece {
 
     boolean isMovementValid(Coordinate coordinate);
 
-    boolean isThePawnPromoted();
-
     void generateMovements();
 }
