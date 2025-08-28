@@ -42,6 +42,10 @@ public class Pawn extends Piece {
         super.put(target.copy());
     }
 
+    public boolean isPromoted() {
+        return isItPromoted;
+    }
+
     public boolean isInitialState() {
         return initialState;
     }

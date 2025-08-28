@@ -86,7 +86,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     public boolean isThePawnPromoted() {
-        return selectedPiece.isThePawnPromoted();
+        return PieceInspector.isPawnPromoted((Piece) selectedPiece);
     }
 
     public boolean isMovementValid(Coordinate coordinate) {

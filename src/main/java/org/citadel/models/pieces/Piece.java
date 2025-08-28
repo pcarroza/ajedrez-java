@@ -39,6 +39,14 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return basedGenerator.getMovements();
     }
 
+    public boolean isMovementValid(Coordinate target) {
+        return basedGenerator.isMovementValid(target.copy());
+    }
+
+    public void generateMovements() {
+        basedGenerator.generate();
+    }
+
     public Coordinate getDisplacedBy(int displacement) {
         return getCoordinate().getDisplacedBy(displacement);
     }
@@ -54,14 +62,4 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     public boolean isAt(Coordinate coordinate) {
         return getCoordinate().equals(coordinate);
     }
-
-    public boolean isMovementValid(Coordinate target) {
-        return basedGenerator.isMovementValid(target.copy());
-    }
-
-    public void generateMovements() {
-        basedGenerator.generate();
-    }
-
-    
 }
