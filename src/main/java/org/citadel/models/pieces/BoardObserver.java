@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BoardObserver {
 
-    void set(Piece piece);
+    void add(Piece piece);
 
     void set(List<Coordinate> coordinates);
 

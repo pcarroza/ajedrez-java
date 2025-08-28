@@ -21,6 +21,6 @@ public abstract class SubjectPiece {
     }
 
     public void notifyPassingPawn(Piece piece) {
-        boardObserver.set(piece);
+        boardObserver.add(piece);
     }
 }

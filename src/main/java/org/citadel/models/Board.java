@@ -18,40 +18,40 @@ import static org.citadel.models.pieces.PiecesMapBuilder.*;
 
 public class Board extends SubjectBoard implements BoardObserver {
 
-    private final Map<Player, List<Piece>> piecesMap;
+    private final Map<Player, List<Piece>> pieces;
 
-    private final Map<Player, List<Piece>> mapOfRemovedPieces;
+    private final Map<Player, List<Piece>> removedPieces;
 
-    private final Map<Player, List<Piece>> mapPassantPawns;
+    private final Map<Player, List<Piece>> enPassantPawnsMap;
 
-    private List<Coordinate> movementsSelectedPiece;
+    private List<Coordinate> selectedPieceMovements;
 
     private SelectedPiece selectedPiece;
 
     private final Turn turn;
 
     public Board() {
-        piecesMap = createPiecesMap(this);
-        mapOfRemovedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
-        mapPassantPawns = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
-        movementsSelectedPiece = Collections.emptyList();
+        pieces = createPiecesMap(this);
+        removedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+        enPassantPawnsMap = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+        selectedPieceMovements = Collections.emptyList();
         turn = new Turn();
     }
 
     @Override
     public void set(List<Coordinate> movementsSelectedPiece) {
-        this.movementsSelectedPiece = movementsSelectedPiece;
+        this.selectedPieceMovements = movementsSelectedPiece;
     }
 
     @Override
-    public void set(Piece enPassantPawn) {
+    public void add(Piece enPassantPawn) {
         assert enPassantPawn != null;
-        mapPassantPawns.get(getCurrentPlayer()).add(enPassantPawn);
+        enPassantPawnsMap.get(getCurrentPlayer()).add(enPassantPawn);
     }
 
-    public List<Coordinate> getMovementsSelectedPiece() {
-        assert movementsSelectedPiece != null;
-        return List.copyOf(movementsSelectedPiece);
+    public List<Coordinate> getSelectedPieceMovements() {
+        assert selectedPieceMovements != null;
+        return List.copyOf(selectedPieceMovements);
     }
 
     public void selectPiece(Coordinate coordinate) {
@@ -111,9 +111,9 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     private void remove(Supplier<Player> color, Coordinate coordinate) {
-        piecesMap.get(color.get()).removeIf(piece -> {
+        pieces.get(color.get()).removeIf(piece -> {
             if (piece.has(coordinate)) {
-                return mapOfRemovedPieces.get(color.get()).add(piece);
+                return removedPieces.get(color.get()).add(piece);
             }
             return false;
         });
@@ -157,7 +157,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     private boolean isTheKingInValidMoves(Piece piece) {
         assert piece != null;
-        return movementsSelectedPiece.contains(piece.getCoordinate()) && piece.isKing();
+        return selectedPieceMovements.contains(piece.getCoordinate()) && piece.isKing();
     }
 
     public boolean isRook(Coordinate coordinate) {
@@ -166,12 +166,12 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     private Stream<Piece> getPiecesBy(Player player) {
-        return piecesMap.get(player).stream();
+        return pieces.get(player).stream();
     }
 
     public boolean isBoxEmpty(Coordinate coordinate) {
         assert coordinate != null;
-        return piecesMap.values().stream().noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
+        return pieces.values().stream().noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
     }
 
     public int getIndexCurrentPlayer() {
@@ -211,7 +211,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
                 isSelected = board.isPieceSelected(new Coordinate(row, column));
                 writeln("" + isSelected);
-                System.out.println(board.getMovementsSelectedPiece());
+                System.out.println(board.getSelectedPieceMovements());
                 if (isSelected) {
                     board.selectPiece(new Coordinate(row, column));
                 }
