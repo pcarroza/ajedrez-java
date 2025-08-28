@@ -23,7 +23,7 @@ public class Game {
     }
 
     public boolean isBoxEmpty(Coordinate coordinate) {
-        return board.isBoxEmpty(coordinate);
+        return board.isSquareEmpty(coordinate);
     }
 
     public boolean isMovementValid(Coordinate coordinate) {

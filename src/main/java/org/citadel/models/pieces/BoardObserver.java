@@ -8,9 +8,9 @@ public interface BoardObserver {
 
     void set(List<Coordinate> coordinates);
 
-    boolean isItEnemy(Coordinate coordinate);
+    boolean isEnemy(Coordinate coordinate);
 
-    boolean isBoxEmpty(Coordinate coordinate);
+    boolean isSquareEmpty(Coordinate coordinate);
 
     boolean someColor(Coordinate coordinate);
 }

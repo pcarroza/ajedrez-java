@@ -57,9 +57,9 @@ public class Board extends SubjectBoard implements BoardObserver {
     public void selectPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        assert !isBoxEmpty(coordinate);
+        assert !isSquareEmpty(coordinate);
         getPiecesBy(getCurrentPlayer())
-                .filter(piece -> piece.has(coordinate))
+                .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
                 .ifPresentOrElse(piece -> {
                     piece.generateMovements();
@@ -98,21 +98,21 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert !isBoxEmpty(coordinate);
+        assert !isSquareEmpty(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert !isBoxEmpty(coordinate);
+        assert !isSquareEmpty(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getRivalPlayer, coordinate);
     }
 
     private void remove(Supplier<Player> color, Coordinate coordinate) {
         pieces.get(color.get()).removeIf(piece -> {
-            if (piece.has(coordinate)) {
+            if (piece.isAt(coordinate)) {
                 return removedPieces.get(color.get()).add(piece);
             }
             return false;
@@ -126,21 +126,21 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public boolean isPieceSelected(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(getCurrentPlayer()).anyMatch(piece -> piece.has(coordinate));
+        return getPiecesBy(getCurrentPlayer()).anyMatch(piece -> piece.isAt(coordinate));
     }
 
     public boolean isTheWhitePieceSelected(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(WHITE).anyMatch(piece -> piece.has(coordinate));
+        return getPiecesBy(WHITE).anyMatch(piece -> piece.isAt(coordinate));
     }
 
     public boolean isTheBlackPieceSelected(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(BLACK).anyMatch(piece -> piece.has(coordinate));
+        return getPiecesBy(BLACK).anyMatch(piece -> piece.isAt(coordinate));
     }
 
     @Override
-    public boolean isItEnemy(Coordinate coordinate) {
+    public boolean isEnemy(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
@@ -162,16 +162,16 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public boolean isRook(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(getCurrentPlayer()).filter(piece -> piece.has(coordinate)).anyMatch(Piece::isRook);
+        return getPiecesBy(getCurrentPlayer()).filter(piece -> piece.isAt(coordinate)).anyMatch(Piece::isRook);
     }
 
     private Stream<Piece> getPiecesBy(Player player) {
         return pieces.get(player).stream();
     }
 
-    public boolean isBoxEmpty(Coordinate coordinate) {
+    public boolean isSquareEmpty(Coordinate coordinate) {
         assert coordinate != null;
-        return pieces.values().stream().noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.has(coordinate)));
+        return pieces.values().stream().noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.isAt(coordinate)));
     }
 
     public int getIndexCurrentPlayer() {
@@ -197,7 +197,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     public static void main(String[] args) {
 
         Board board = new Board();
-        writeln("" + board.isBoxEmpty(new Coordinate(3, 1)));
+        writeln("" + board.isSquareEmpty(new Coordinate(3, 1)));
         do {
             boolean isSelected;
             do {

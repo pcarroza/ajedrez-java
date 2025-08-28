@@ -49,7 +49,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return getCoordinate().getDisplacedBy(displacement, vector);
     }
 
-    public boolean has(Coordinate coordinate) {
+    public boolean isAt(Coordinate coordinate) {
         return getCoordinate().equals(coordinate);
     }
 

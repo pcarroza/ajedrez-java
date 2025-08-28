@@ -9,7 +9,7 @@ public abstract class SubjectPiece {
     }
 
     public boolean isItEnemy(Coordinate coordinate) {
-        return boardObserver.isItEnemy(coordinate);
+        return boardObserver.isEnemy(coordinate);
     }
 
     public boolean sameColor(Coordinate coordinate) {
@@ -17,7 +17,7 @@ public abstract class SubjectPiece {
     }
 
     public boolean isBoxOccupied(Coordinate coordinate) {
-        return !boardObserver.isBoxEmpty(coordinate);
+        return !boardObserver.isSquareEmpty(coordinate);
     }
 
     public void notifyPassingPawn(Piece piece) {
