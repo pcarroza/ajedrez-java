@@ -70,19 +70,19 @@ public class Board extends SubjectBoard implements BoardObserver {
                 });
     }
 
+    public void moveTo(Coordinate coordinate) {
+        assert coordinate != null;
+        assert selectedPiece != null;
+        assert isWithinBoardLimits(coordinate);
+        selectedPiece.put(coordinate);
+    }
+
     public boolean isSelectedPiece() {
         return selectedPiece != null;
     }
 
     public void clearSelectedPiece() {
         selectedPiece = null;
-    }
-
-    public void putSelectedPieceInThis(Coordinate coordinate) {
-        assert coordinate != null;
-        assert selectedPiece != null;
-        assert isWithinBoardLimits(coordinate);
-        selectedPiece.put(coordinate);
     }
 
     public boolean isThePawnPromoted() {
@@ -237,7 +237,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 Coordinate coordinate = new Coordinate(row, column);
 
                 if (board.isMovementValid(coordinate)) {
-                    board.putSelectedPieceInThis(coordinate);
+                    board.moveTo(coordinate);
                     break;
                 }
 
