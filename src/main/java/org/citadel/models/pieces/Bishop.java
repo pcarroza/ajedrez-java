@@ -4,13 +4,13 @@ import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenera
 
 public class Bishop extends Piece {
 
-    @Override
-    public void accept(PieceVisitor visitor) {
-        visitor.visit(this);
-    }
-
     public Bishop(Coordinate coordinate, Player player) {
         super(coordinate, player);
         basedGenerator = createBishopMoveRulesBuilder(this);
+    }
+
+    @Override
+    public void accept(PieceVisitor visitor) {
+        visitor.visit(this);
     }
 }

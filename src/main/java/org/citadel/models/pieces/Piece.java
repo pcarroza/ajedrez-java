@@ -7,8 +7,6 @@ import org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenerator;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
-    public abstract void accept(PieceVisitor visitor);
-
     protected MovementRulesBaseGenerator basedGenerator;
 
     private Coordinate coordinate;
@@ -62,4 +60,6 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     public boolean isAt(Coordinate coordinate) {
         return getCoordinate().equals(coordinate);
     }
+
+    public abstract void accept(PieceVisitor visitor);
 }

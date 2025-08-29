@@ -46,6 +46,10 @@ public class Pawn extends Piece {
         return isItPromoted;
     }
 
+    public boolean isVulnerable() {
+        return vulnerablePawn;
+    }
+
     public boolean isInitialState() {
         return initialState;
     }

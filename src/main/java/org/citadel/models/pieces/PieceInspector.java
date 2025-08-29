@@ -25,4 +25,11 @@ public final class PieceInspector {
         piece.accept(visitor);
         return visitor.isPromoted();
     }
+
+    public static boolean isPawnVulnerable(Piece piece) {
+        assert piece != null;
+        PawnVulnerabilityVisitor visitor = new PawnVulnerabilityVisitor();
+        piece.accept(visitor);
+        return visitor.isVulnerable();
+    }
 }
