@@ -110,6 +110,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         remove(this::getRivalPlayer, coordinate);
     }
 
+    public boolean isWithinBoardLimits(Coordinate coordinate) {
+        assert coordinate != null;
+        return ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
+    }
+
     private void remove(Supplier<Player> color, Coordinate coordinate) {
         piecesMap.get(color.get()).removeIf(piece -> {
             if (piece.isAt(coordinate)) {
@@ -117,11 +122,6 @@ public class Board extends SubjectBoard implements BoardObserver {
             }
             return false;
         });
-    }
-
-    public boolean isWithinBoardLimits(Coordinate coordinate) {
-        assert coordinate != null;
-        return ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
     }
 
     public boolean isPieceSelected(Coordinate coordinate) {
