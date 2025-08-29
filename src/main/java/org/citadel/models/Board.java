@@ -39,8 +39,8 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public void set(List<Coordinate> movementsSelectedPiece) {
-        this.selectedPieceMovements = movementsSelectedPiece;
+    public void set(List<Coordinate> selectedPieceMovements) {
+        this.selectedPieceMovements = selectedPieceMovements;
     }
 
     @Override
