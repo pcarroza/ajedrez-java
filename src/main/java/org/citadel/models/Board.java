@@ -49,6 +49,12 @@ public class Board extends SubjectBoard implements BoardObserver {
         enPassantPawnsMap.get(getCurrentPlayer()).add(enPassantPawn);
     }
 
+    @Override
+    public void deletedEnPassantPawn(Piece piece) {
+        assert piece != null;
+        enPassantPawnsMap.get(getCurrentPlayer()).remove(piece);
+    }
+
     public List<Coordinate> getSelectedPieceMovements() {
         assert selectedPieceMovements != null;
         return List.copyOf(selectedPieceMovements);
@@ -246,4 +252,5 @@ public class Board extends SubjectBoard implements BoardObserver {
 
         } while (true);
     }
+
 }

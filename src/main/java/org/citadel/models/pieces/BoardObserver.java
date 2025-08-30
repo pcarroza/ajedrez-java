@@ -13,4 +13,6 @@ public interface BoardObserver {
     boolean isSquareEmpty(Coordinate coordinate);
 
     boolean someColor(Coordinate coordinate);
+
+    void deletedEnPassantPawn(Piece piece);
 }

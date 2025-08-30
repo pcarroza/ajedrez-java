@@ -20,7 +20,11 @@ public abstract class SubjectPiece {
         return !boardObserver.isSquareEmpty(coordinate);
     }
 
-    public void notifyPassingPawn(Piece piece) {
+    public void notifyEnPassantPawn(Piece piece) {
         boardObserver.add(piece);
+    }
+
+    public void notifyDeleteEnPassantPawn(Piece piece) {
+        boardObserver.deletedEnPassantPawn(piece);
     }
 }
