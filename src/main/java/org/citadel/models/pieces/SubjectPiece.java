@@ -12,12 +12,12 @@ public abstract class SubjectPiece {
         return boardObserver.isEnemy(coordinate);
     }
 
-    public boolean sameColor(Coordinate coordinate) {
-        return boardObserver.someColor(coordinate);
+    public boolean isPieceCurrentPlayer(Coordinate coordinate) {
+        return boardObserver.isPieceCurrentPlayer(coordinate);
     }
 
-    public boolean isBoxOccupied(Coordinate coordinate) {
-        return !boardObserver.isSquareEmpty(coordinate);
+    public boolean isSquareEmpty(Coordinate coordinate) {
+        return boardObserver.isSquareEmpty(coordinate);
     }
 
     public void notifyEnPassantPawn(Piece piece) {

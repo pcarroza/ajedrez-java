@@ -59,7 +59,7 @@ public abstract class MovementStrategy {
             controlFlag.stop();
             return true;
         }
-        if (piece.sameColor(coordinate)) {
+        if (piece.isPieceCurrentPlayer(coordinate)) {
             controlFlag.stop();
             return false;
         }

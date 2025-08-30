@@ -35,7 +35,7 @@ public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
     private List<Coordinate> calculateForwardMoves(Player player) {
         Coordinate coordinateFirstBox = pawn.getDisplacedBy(new Coordinate(player.getPlayer()));
-        if (pawn.isBoxOccupied(coordinateFirstBox)) {
+        if (pawn.isSquareEmpty(coordinateFirstBox)) {
             return List.of();
         }
         final int singleStep = 1;
@@ -45,7 +45,7 @@ public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
             return List.of(coordinateFirstBox);
         }
         Coordinate coordinateSecondBox = pawn.getDisplacedBy(new Coordinate(doubleStep * player.getPlayer()));
-        if (pawn.isBoxOccupied(coordinateSecondBox)) {
+        if (pawn.isSquareEmpty(coordinateSecondBox)) {
             return List.of(coordinateFirstBox);
         }
         return List.of(coordinateFirstBox, coordinateSecondBox);

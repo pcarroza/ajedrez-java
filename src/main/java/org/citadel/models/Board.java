@@ -152,7 +152,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public boolean someColor(Coordinate coordinate) {
+    public boolean isPieceCurrentPlayer(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getCurrentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
@@ -181,8 +181,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public boolean isSquareEmpty(Coordinate coordinate) {
         assert coordinate != null;
-        return piecesMap.values().stream()
-                .noneMatch(pieces -> pieces.stream().anyMatch(piece -> piece.isAt(coordinate)));
+        return piecesMap.values().stream().flatMap(List::stream).noneMatch(piece -> piece.isAt(coordinate));
     }
 
     public int getIndexCurrentPlayer() {
