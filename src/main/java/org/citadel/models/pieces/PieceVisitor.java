@@ -1,6 +1,7 @@
 package org.citadel.models.pieces;
 
 public interface PieceVisitor {
+
     void visit(King king);
 
     void visit(Queen queen);

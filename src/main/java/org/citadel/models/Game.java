@@ -19,7 +19,7 @@ public class Game {
     }
 
     public void putPiece(Coordinate coordinate) {
-        board.moveTo(coordinate);
+        board.putPiece(coordinate);
     }
 
     public boolean isBoxEmpty(Coordinate coordinate) {

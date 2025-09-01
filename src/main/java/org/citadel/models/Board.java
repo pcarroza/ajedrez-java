@@ -76,7 +76,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 });
     }
 
-    public void moveTo(Coordinate coordinate) {
+    public void putPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
@@ -242,7 +242,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 Coordinate coordinate = new Coordinate(row, column);
 
                 if (board.isMovementValid(coordinate)) {
-                    board.moveTo(coordinate);
+                    board.putPiece(coordinate);
                     break;
                 }
 
