@@ -52,7 +52,7 @@ public class King extends Piece {
     }
 
     @Override
-    public void accept(PieceVisitor visitor) {
-        visitor.visit(this);
+    public void accept(PieceVisitor pieceVisitor) {
+        pieceVisitor.visit(this);
     }
 }
