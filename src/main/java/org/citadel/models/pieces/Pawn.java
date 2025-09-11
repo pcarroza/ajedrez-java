@@ -11,6 +11,11 @@ import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenera
 
 public class Pawn extends Piece {
 
+    int SINGLE_STEP = 1;
+    int DOUBLE_STEP = 2;
+    int LEFT_DIAGONAL_OFFSET = -1;
+    int RIGHT_DIAGONAL_OFFSET = 1;
+
     private boolean initialState = true;
 
     private boolean isItPromoted = false;
@@ -89,6 +94,40 @@ public class Pawn extends Piece {
     public void generateMovements() {
         super.generateMovements();
         specialGenerator.generateMovements();
+    }
+
+    public boolean canAdvanceOne() {
+        return false;
+    }
+
+    public boolean canAdvanceTwo() {
+        return false;
+    }
+
+    public boolean canCaptureLeft() {
+        return false;
+    }
+
+    public boolean canCaptureRight() {
+        return false;
+    }
+
+    public Coordinate getForwardOne() {
+        int direction = SINGLE_STEP * player.getPlayer();
+        return getDisplacedBy(new Coordinate(direction, 0));
+    }
+
+    public Coordinate getForwardTwo() {
+        int direction = DOUBLE_STEP * player.getPlayer();
+        return  getDisplacedBy(new Coordinate(direction, 0));
+    }
+
+    public Coordinate getDiagonalLeft() {
+        return  getDisplacedBy(new Coordinate(2, 3));
+    }
+
+    public Coordinate getDiagonalRight() {
+        return  getDisplacedBy(new Coordinate(2, 3));
     }
 
     public boolean isWhite() {
