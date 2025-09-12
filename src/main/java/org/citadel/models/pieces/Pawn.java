@@ -75,8 +75,7 @@ public class Pawn extends Piece {
     @Override
     public List<Coordinate> getValidMovements() {
         validMovements.clear();
-        validMovements.addAll(Stream
-                .concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
+        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
         return validMovements;
     }
 
@@ -127,14 +126,6 @@ public class Pawn extends Piece {
     public Coordinate getDiagonalRight() {
         int RIGHT_DIAGONAL_OFFSET = 1;
         return  getDisplacedBy(new Coordinate(player.getPlayer(), RIGHT_DIAGONAL_OFFSET));
-    }
-
-    public boolean isWhite() {
-        return player == Player.WHITE;
-    }
-
-    public boolean isBlack() {
-        return player == Player.BLACK;
     }
 
     @Override
