@@ -10,7 +10,7 @@ public interface BoardObserver {
 
     boolean isEnemy(Coordinate coordinate);
 
-    boolean isSquareEmpty(Coordinate coordinate);
+    boolean isSquareOccupied(Coordinate coordinate);
 
     boolean isPieceCurrentPlayer(Coordinate coordinate);
 

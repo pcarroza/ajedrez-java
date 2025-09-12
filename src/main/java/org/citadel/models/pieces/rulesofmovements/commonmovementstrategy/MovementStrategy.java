@@ -55,7 +55,7 @@ public abstract class MovementStrategy {
 
     private boolean isPossibleMove(Coordinate coordinate) {
         assert coordinate != null;
-        if (piece.isItEnemy(coordinate)) {
+        if (piece.isEnemy(coordinate)) {
             controlFlag.stop();
             return true;
         }

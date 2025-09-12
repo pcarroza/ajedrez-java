@@ -63,7 +63,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     public void selectPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        assert !isSquareEmpty(coordinate);
+        assert !isSquareOccupied(coordinate);
         getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
@@ -104,14 +104,14 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert !isSquareEmpty(coordinate);
+        assert !isSquareOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert !isSquareEmpty(coordinate);
+        assert !isSquareOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getRivalPlayer, coordinate);
     }
@@ -179,7 +179,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return piecesMap.get(player).stream();
     }
 
-    public boolean isSquareEmpty(Coordinate coordinate) {
+    public boolean isSquareOccupied(Coordinate coordinate) {
         assert coordinate != null;
         return piecesMap.values().stream().flatMap(List::stream).noneMatch(piece -> piece.isAt(coordinate));
     }
@@ -207,7 +207,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     public static void main(String[] args) {
 
         Board board = new Board();
-        writeln("" + board.isSquareEmpty(new Coordinate(3, 1)));
+        writeln("" + board.isSquareOccupied(new Coordinate(3, 1)));
         do {
             boolean isSelected;
             do {

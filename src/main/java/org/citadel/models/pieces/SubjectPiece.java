@@ -8,7 +8,7 @@ public abstract class SubjectPiece {
         this.boardObserver = boardObserver;
     }
 
-    public boolean isItEnemy(Coordinate coordinate) {
+    public boolean isEnemy(Coordinate coordinate) {
         return boardObserver.isEnemy(coordinate);
     }
 
@@ -16,8 +16,8 @@ public abstract class SubjectPiece {
         return boardObserver.isPieceCurrentPlayer(coordinate);
     }
 
-    public boolean isSquareEmpty(Coordinate coordinate) {
-        return boardObserver.isSquareEmpty(coordinate);
+    public boolean isSquareOccupied(Coordinate coordinate) {
+        return boardObserver.isSquareOccupied(coordinate);
     }
 
     public void notifyEnPassantPawn(Piece piece) {

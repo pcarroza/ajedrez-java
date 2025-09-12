@@ -97,19 +97,19 @@ public class Pawn extends Piece {
     }
 
     public boolean canAdvanceOne() {
-        return false;
+        return !isSquareOccupied(getForwardOne());
     }
 
     public boolean canAdvanceTwo() {
-        return false;
+        return isInitialState() && !isSquareOccupied(getForwardOne()) && !isSquareOccupied(getForwardTwo());
     }
 
     public boolean canCaptureLeft() {
-        return false;
+        return isEnemy(getDiagonalLeft());
     }
 
     public boolean canCaptureRight() {
-        return false;
+        return isEnemy(getDiagonalRight());
     }
 
     public Coordinate getForwardOne() {

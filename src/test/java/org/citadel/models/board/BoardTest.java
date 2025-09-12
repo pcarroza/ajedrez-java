@@ -19,7 +19,7 @@ public class BoardTest {
 
     @Test
     public void selectPiece() {
-        assertFalse(board.isSquareEmpty(new Coordinate()));
+        assertFalse(board.isSquareOccupied(new Coordinate()));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class BoardTest {
     }
 
     @Test
-    public void isSquareEmpty() {
+    public void isSquareOccupied() {
     }
 
     @Test
