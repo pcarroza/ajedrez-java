@@ -123,11 +123,11 @@ public class Pawn extends Piece {
     }
 
     public Coordinate getDiagonalLeft() {
-        return  getDisplacedBy(new Coordinate(2, 3));
+        return  getDisplacedBy(new Coordinate(player.getPlayer(), LEFT_DIAGONAL_OFFSET));
     }
 
     public Coordinate getDiagonalRight() {
-        return  getDisplacedBy(new Coordinate(2, 3));
+        return  getDisplacedBy(new Coordinate(player.getPlayer(), RIGHT_DIAGONAL_OFFSET));
     }
 
     public boolean isWhite() {
