@@ -44,5 +44,5 @@ public abstract class MovementStrategy {
         generateRecursive(coordinates, vector, step + INCREASE);
     }
 
-    protected abstract Coordinate getDisplacedCoordinateBy(int step, Coordinate vector);
+    protected abstract Coordinate getDisplacedCoordinateBy(int increment, Coordinate vector);
 }

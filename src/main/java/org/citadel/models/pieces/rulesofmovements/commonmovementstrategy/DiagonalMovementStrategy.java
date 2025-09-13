@@ -19,9 +19,9 @@ public class DiagonalMovementStrategy extends MovementStrategy {
     }
 
     @Override
-    protected Coordinate getDisplacedCoordinateBy(int step, Coordinate vector) {
+    protected Coordinate getDisplacedCoordinateBy(int increment, Coordinate vector) {
         assert vector != null;
-        assert step >= 1;
-        return piece.getDisplacedBy(new Coordinate(step, step), vector);
+        assert increment >= 1;
+        return piece.getDisplacedBy(new Coordinate(increment, increment), vector);
     }
 }
