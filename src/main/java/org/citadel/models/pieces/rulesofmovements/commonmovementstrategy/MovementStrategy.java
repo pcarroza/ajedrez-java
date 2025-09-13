@@ -1,6 +1,5 @@
 package org.citadel.models.pieces.rulesofmovements.commonmovementstrategy;
 
-import org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.utils.ControlFlag;
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
@@ -15,12 +14,9 @@ public abstract class MovementStrategy {
 
     protected Piece piece;
 
-    private final ControlFlag controlFlag;
-
     protected MovementStrategy(Piece piece) {
         assert piece != null;
         this.piece = piece;
-        controlFlag = new ControlFlag();
     }
 
     protected abstract Stream<Coordinate> generate();
@@ -28,37 +24,35 @@ public abstract class MovementStrategy {
     protected Stream<Coordinate> generate(Coordinate vector) {
         assert vector != null;
         List<Coordinate> coordinates = new ArrayList<>();
-        final int step = 1;
-        generateRecursive(coordinates, vector, step);
-        controlFlag.reset();
+        generateRecursive(coordinates, vector, 1);
         return coordinates.stream();
     }
 
     private void generateRecursive(List<Coordinate> coordinates, Coordinate vector, int step) {
-        if (!isWithinBoardLimits(step) || !controlFlag.shouldContinue()) {
+        Coordinate potentialCoordinate = getDisplacedCoordinateBy(step, vector);
+
+        // --- Casos Base ---
+        // 1. Si está fuera del tablero, detenemos la recursión.
+        if (!ValidatorLimitsBoard.getInstance().isWithinLimits(potentialCoordinate)) {
             return;
         }
-        Coordinate coordinate = getDisplacedCoordinateBy(step, vector);
-        if (isPossibleMove(coordinate)) {
-            coordinates.add(coordinate);
-            controlFlag.stop();
+
+        // 2. Si es una pieza propia, bloquea el camino. Detenemos la recursión.
+        if (piece.isPieceCurrentPlayer(potentialCoordinate)) {
+            return;
         }
+
+        // 3. Si es una pieza enemiga, es un movimiento de captura. La añadimos y detenemos la recursión.
+        if (piece.isEnemy(potentialCoordinate)) {
+            coordinates.add(potentialCoordinate);
+            return;
+        }
+
+        // --- Paso Recursivo ---
+        // Si la casilla está vacía, la añadimos y continuamos con el siguiente paso.
+        coordinates.add(potentialCoordinate);
         generateRecursive(coordinates, vector, step + INCREASE);
     }
 
     protected abstract Coordinate getDisplacedCoordinateBy(int step, Coordinate vector);
-
-    private boolean isWithinBoardLimits(int step) {
-        assert step >= 1;
-        Coordinate desplacedCoordinate = piece.getDisplacedBy(step);
-        return ValidatorLimitsBoard.getInstance().isWithinLimits(desplacedCoordinate);
-    }
-
-    private boolean isPossibleMove(Coordinate coordinate) {
-        assert coordinate != null;
-        if (piece.isEnemy(coordinate)) {
-            return true;
-        }
-        return !piece.isPieceCurrentPlayer(coordinate);
-    }
 }

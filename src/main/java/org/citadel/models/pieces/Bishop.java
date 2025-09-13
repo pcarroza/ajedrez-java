@@ -9,8 +9,6 @@ public class Bishop extends Piece {
         basedGenerator = createBishopMoveRulesBuilder(this);
     }
 
-
-
     @Override
     public void accept(PieceVisitor pieceVisitor) {
         pieceVisitor.visit(this);
