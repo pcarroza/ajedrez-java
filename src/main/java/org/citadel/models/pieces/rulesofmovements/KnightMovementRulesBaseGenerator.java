@@ -4,7 +4,6 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
