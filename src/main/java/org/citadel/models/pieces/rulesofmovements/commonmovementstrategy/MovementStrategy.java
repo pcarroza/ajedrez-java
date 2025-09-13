@@ -41,6 +41,7 @@ public abstract class MovementStrategy {
         Coordinate coordinate = getDisplacedCoordinateBy(step, vector);
         if (isPossibleMove(coordinate)) {
             coordinates.add(coordinate);
+            controlFlag.stop();
         }
         generateRecursive(coordinates, vector, step + INCREASE);
     }
@@ -56,13 +57,8 @@ public abstract class MovementStrategy {
     private boolean isPossibleMove(Coordinate coordinate) {
         assert coordinate != null;
         if (piece.isEnemy(coordinate)) {
-            controlFlag.stop();
             return true;
         }
-        if (piece.isPieceCurrentPlayer(coordinate)) {
-            controlFlag.stop();
-            return false;
-        }
-        return true;
+        return !piece.isPieceCurrentPlayer(coordinate);
     }
 }
