@@ -29,28 +29,18 @@ public abstract class MovementStrategy {
     }
 
     private void generateRecursive(List<Coordinate> coordinates, Coordinate vector, int step) {
-        Coordinate potentialCoordinate = getDisplacedCoordinateBy(step, vector);
-
-        // --- Casos Base ---
-        // 1. Si está fuera del tablero, detenemos la recursión.
-        if (!ValidatorLimitsBoard.getInstance().isWithinLimits(potentialCoordinate)) {
+        Coordinate coordinate = getDisplacedCoordinateBy(step, vector);
+        if (!ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate)) {
             return;
         }
-
-        // 2. Si es una pieza propia, bloquea el camino. Detenemos la recursión.
-        if (piece.isPieceCurrentPlayer(potentialCoordinate)) {
+        if (piece.isPieceCurrentPlayer(coordinate)) {
             return;
         }
-
-        // 3. Si es una pieza enemiga, es un movimiento de captura. La añadimos y detenemos la recursión.
-        if (piece.isEnemy(potentialCoordinate)) {
-            coordinates.add(potentialCoordinate);
+        if (piece.isEnemy(coordinate)) {
+            coordinates.add(coordinate);
             return;
         }
-
-        // --- Paso Recursivo ---
-        // Si la casilla está vacía, la añadimos y continuamos con el siguiente paso.
-        coordinates.add(potentialCoordinate);
+        coordinates.add(coordinate);
         generateRecursive(coordinates, vector, step + INCREASE);
     }
 
