@@ -27,20 +27,20 @@ public class Coordinate {
         return this.column;
     }
 
-    public Coordinate getDisplacedBy(Coordinate coordinate, Coordinate vector) {
-        return getDisplacedBy(coordinate).scaleBy(vector);
+    public Coordinate getDisplacedBy(Coordinate increment, Coordinate vector) {
+        return getDisplacedBy(increment).scaleBy(vector);
     }
 
-    public Coordinate getDisplacedBy(Coordinate offset) {
-        return new Coordinate(getRow() + offset.getRow(), getColumn() + offset.getColumn());
+    public Coordinate getDisplacedBy(Coordinate increment) {
+        return new Coordinate(getRow() + increment.getRow(), getColumn() + increment.getColumn());
     }
 
-    public Coordinate getDisplacedBy(int displacement) {
-        return new Coordinate(getRow() + displacement, getColumn() + displacement);
+    public Coordinate getDisplacedBy(int increment) {
+        return new Coordinate(getRow() + increment, getColumn() + increment);
     }
 
-    public Coordinate scaleBy(Coordinate factor) {
-        return new Coordinate(getRow() * factor.getRow(), getColumn() * factor.getColumn());
+    public Coordinate scaleBy(Coordinate vector) {
+        return new Coordinate(getRow() * vector.getRow(), getColumn() * vector.getColumn());
     }
 
     public Coordinate copy() {
