@@ -17,8 +17,10 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
     public void generate() {
         final int doubleStep = 2;
         final int simpleStep = 1;
+
+        possibleMoves.clear();
         
-        possibleMoves = new ArrayList<>(List.of(
+        possibleMoves = List.of(
                 piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)),
@@ -26,7 +28,7 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
                 piece.getDisplacedBy(new Coordinate(-doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
-                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep))));
+                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)));
 
         possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
         possibleMoves.removeIf(it -> piece.isPieceCurrentPlayer(it));

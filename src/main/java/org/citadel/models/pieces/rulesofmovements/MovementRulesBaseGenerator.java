@@ -3,6 +3,7 @@ package org.citadel.models.pieces.rulesofmovements;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MovementRulesBaseGenerator {
@@ -12,6 +13,7 @@ public abstract class MovementRulesBaseGenerator {
     protected List<Coordinate> possibleMoves;
 
     MovementRulesBaseGenerator(Piece piece) {
+        possibleMoves = new ArrayList<>();
         this.piece = piece;
     }
 

@@ -12,6 +12,7 @@ public class BishopMovementRulesBaseGenerator extends MovementRulesBaseGenerator
 
     @Override
     public void generate() {
+        possibleMoves.clear();
         possibleMoves.addAll(buildBishopMovements(piece));
     }
 }

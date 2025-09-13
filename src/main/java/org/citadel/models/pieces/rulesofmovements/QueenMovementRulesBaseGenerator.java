@@ -12,6 +12,7 @@ public class QueenMovementRulesBaseGenerator extends MovementRulesBaseGenerator 
 
     @Override
     public void generate() {
+        possibleMoves.clear();
         possibleMoves.addAll(buildQueenMovements(piece));
     }
 }

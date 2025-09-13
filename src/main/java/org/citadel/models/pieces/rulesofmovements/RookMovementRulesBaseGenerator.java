@@ -12,6 +12,7 @@ public class RookMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
     @Override
     public void generate() {
+        possibleMoves.clear();
         possibleMoves.addAll(buildRookMovements(piece));
     }
 }

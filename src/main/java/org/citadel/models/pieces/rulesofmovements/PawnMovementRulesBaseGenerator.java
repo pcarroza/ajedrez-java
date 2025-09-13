@@ -4,8 +4,6 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Pawn;
 import org.citadel.models.pieces.Piece;
 
-import java.util.ArrayList;
-
 public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
     private Pawn pawn;
@@ -21,7 +19,7 @@ public class PawnMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
     @Override
     public void generate() {
-        possibleMoves = new ArrayList<>();
+        possibleMoves.clear();
 
         if (pawn.canAdvanceOne())
             possibleMoves.add(pawn.getForwardOne());
