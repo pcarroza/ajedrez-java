@@ -18,7 +18,7 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
         final int simpleStep = 1;
 
         possibleMoves.clear();
-        
+
         possibleMoves = List.of(
                 piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
