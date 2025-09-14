@@ -6,5 +6,5 @@ public interface OperationControllerVisitor {
 
     void visit(ContinueController continueController);
 
-    void visit(SelectController localSelectController);
+    void visit(SelectPieceController localSelectController);
 }
