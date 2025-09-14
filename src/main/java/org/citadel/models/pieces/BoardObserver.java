@@ -14,5 +14,5 @@ public interface BoardObserver {
 
     boolean isOwnPieceAt(Coordinate coordinate);
 
-    void deletedEnPassantPawn(Piece piece);
+    void remove(Piece piece);
 }

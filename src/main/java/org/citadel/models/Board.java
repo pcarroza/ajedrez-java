@@ -50,9 +50,9 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public void deletedEnPassantPawn(Piece piece) {
-        assert piece != null;
-        enPassantPawnsMap.get(getCurrentPlayer()).remove(piece);
+    public void remove(Piece enPassantPawn) {
+        assert enPassantPawn != null;
+        enPassantPawnsMap.get(getCurrentPlayer()).remove(enPassantPawn);
     }
 
     public List<Coordinate> getSelectedPieceMovements() {

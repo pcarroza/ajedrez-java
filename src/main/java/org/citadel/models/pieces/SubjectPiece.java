@@ -25,6 +25,6 @@ public abstract class SubjectPiece {
     }
 
     public void notifyDeleteEnPassantPawn(Piece piece) {
-        boardObserver.deletedEnPassantPawn(piece);
+        boardObserver.remove(piece);
     }
 }
