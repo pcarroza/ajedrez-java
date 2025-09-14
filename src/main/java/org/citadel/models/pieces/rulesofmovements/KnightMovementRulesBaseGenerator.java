@@ -30,6 +30,6 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)));
 
         possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
-        possibleMoves.removeIf(it -> piece.isPieceCurrentPlayer(it));
+        possibleMoves.removeIf(it -> piece.isOwnPieceAt(it));
     }
 }

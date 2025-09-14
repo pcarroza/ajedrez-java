@@ -12,7 +12,7 @@ public interface BoardObserver {
 
     boolean isSquareOccupied(Coordinate coordinate);
 
-    boolean isPieceCurrentPlayer(Coordinate coordinate);
+    boolean isOwnPieceAt(Coordinate coordinate);
 
     void deletedEnPassantPawn(Piece piece);
 }

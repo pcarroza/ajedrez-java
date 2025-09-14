@@ -12,8 +12,8 @@ public abstract class SubjectPiece {
         return boardObserver.isEnemy(coordinate);
     }
 
-    public boolean isPieceCurrentPlayer(Coordinate coordinate) {
-        return boardObserver.isPieceCurrentPlayer(coordinate);
+    public boolean isOwnPieceAt(Coordinate coordinate) {
+        return boardObserver.isOwnPieceAt(coordinate);
     }
 
     public boolean isSquareOccupied(Coordinate coordinate) {

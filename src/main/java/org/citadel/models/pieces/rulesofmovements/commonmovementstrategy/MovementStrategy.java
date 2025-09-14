@@ -33,7 +33,7 @@ public abstract class MovementStrategy {
         if (!ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate)) {
             return;
         }
-        if (piece.isPieceCurrentPlayer(coordinate)) {
+        if (piece.isOwnPieceAt(coordinate)) {
             return;
         }
         if (piece.isEnemy(coordinate)) {
