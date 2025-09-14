@@ -115,17 +115,17 @@ public class Pawn extends Piece {
     public Coordinate getForwardTwo() {
         int DOUBLE_STEP = 2;
         int direction = DOUBLE_STEP * player.getPlayer();
-        return  getDisplacedBy(new Coordinate(direction, 0));
+        return getDisplacedBy(new Coordinate(direction, 0));
     }
 
     public Coordinate getDiagonalLeft() {
         int LEFT_DIAGONAL_OFFSET = -1;
-        return  getDisplacedBy(new Coordinate(player.getPlayer(), LEFT_DIAGONAL_OFFSET));
+        return getDisplacedBy(new Coordinate(player.getPlayer(), LEFT_DIAGONAL_OFFSET));
     }
 
     public Coordinate getDiagonalRight() {
         int RIGHT_DIAGONAL_OFFSET = 1;
-        return  getDisplacedBy(new Coordinate(player.getPlayer(), RIGHT_DIAGONAL_OFFSET));
+        return getDisplacedBy(new Coordinate(player.getPlayer(), RIGHT_DIAGONAL_OFFSET));
     }
 
     @Override
