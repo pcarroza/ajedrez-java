@@ -65,4 +65,5 @@ public class Coordinate {
     public String toString() {
         return "Coordinate(" + getRow() + ", " + getColumn() + ")";
     }
+
 }
