@@ -4,6 +4,7 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
@@ -17,9 +18,7 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
         final int doubleStep = 2;
         final int simpleStep = 1;
 
-        possibleMoves.clear();
-
-        possibleMoves = List.of(
+        possibleMoves = new ArrayList<>(List.of(
                 piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)),
@@ -27,7 +26,8 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
                 piece.getDisplacedBy(new Coordinate(-doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
-                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)));
+                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep))
+        ));
 
         possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
         possibleMoves.removeIf(it -> piece.isOwnPieceAt(it));
