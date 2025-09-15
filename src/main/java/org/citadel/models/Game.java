@@ -22,7 +22,7 @@ public class Game {
         board.putPiece(coordinate);
     }
 
-    public boolean isBoxEmpty(Coordinate coordinate) {
+    public boolean isEmpty(Coordinate coordinate) {
         return board.isSquareOccupied(coordinate);
     }
 

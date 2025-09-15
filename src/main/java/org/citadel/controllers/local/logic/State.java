@@ -4,10 +4,10 @@ import org.citadel.controllers.local.LocalOperationControllerBuilder;
 
 public class State {
 
-    private LocalOperationControllerBuilder localOperationControllerBuilder;
+    private LocalOperationControllerBuilder builder;
 
     State(LocalOperationControllerBuilder builder) {
-        localOperationControllerBuilder = builder;
+        this.builder = builder;
     }
 
     State initialize() {

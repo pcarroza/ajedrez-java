@@ -1,6 +1,5 @@
 package org.citadel.views.console;
 
-import org.citadel.controllers.ContinueController;
 import org.citadel.controllers.PlacementController;
 import org.citadel.controllers.PutPieceController;
 import org.citadel.controllers.SelectPieceController;
@@ -23,8 +22,4 @@ public class GameView {
 
     public void visit(PutPieceController putPieceController) {
     }
-
-    public void visit(ContinueController continueController) {
-    }
-
 }

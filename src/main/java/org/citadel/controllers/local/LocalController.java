@@ -21,7 +21,7 @@ public class LocalController {
     }
 
     public boolean isEmpty(Coordinate coordinate) {
-        return game.isBoxEmpty(coordinate);
+        return game.isEmpty(coordinate);
     }
 
     public boolean isMovementValid(Coordinate coordinate) {

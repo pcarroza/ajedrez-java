@@ -5,8 +5,6 @@ import org.citadel.controllers.OperationController;
 
 public class LocalLogic implements Logic {
 
-
-
     @Override
     public OperationController getController() {
         throw new UnsupportedOperationException("Unimplemented method 'getController'");
