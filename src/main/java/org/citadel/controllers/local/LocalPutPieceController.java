@@ -5,9 +5,9 @@ import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
 
-public class LocalPutController extends LocalPlacementController {
+public class LocalPutPieceController extends LocalPlacementController {
 
-    public LocalPutController(Game game) {
+    public LocalPutPieceController(Game game) {
         super(game);
     }
 
@@ -23,4 +23,3 @@ public class LocalPutController extends LocalPlacementController {
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
 }
- 

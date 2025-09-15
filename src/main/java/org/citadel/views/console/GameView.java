@@ -17,10 +17,11 @@ public class GameView {
         boardView.interact(placementController);
     }
 
-    public void visit(SelectPieceController selectController) {
+    public void visit(SelectPieceController selectPieceController) {
+        
     }
 
-    public void visit(PutPieceController putController) {
+    public void visit(PutPieceController putPieceController) {
     }
 
     public void visit(ContinueController continueController) {

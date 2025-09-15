@@ -6,9 +6,9 @@ import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.controllers.SelectPieceController;
 
-public class LocalSelectController extends LocalPlacementController implements SelectPieceController {
+public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 
-    public LocalSelectController(Game game) {
+    public LocalSelectPieceController(Game game) {
         super(game);
     }
 
