@@ -17,8 +17,6 @@ public class KingMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
     public void generate() {
         final int simpleStep = 1;
 
-        possibleMoves.clear();
-
         possibleMoves = new ArrayList<>(List.of(
                 piece.getDisplacedBy(new Coordinate(simpleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, 0)),
