@@ -1,5 +1,5 @@
 package org.citadel.controllers;
 
-public interface PlacementController {
+public interface PlacementController extends OperationController {
 
 }

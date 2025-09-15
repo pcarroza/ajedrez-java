@@ -4,6 +4,7 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
+import org.citadel.views.console.ConsoleView;
 import org.citadel.controllers.SelectPieceController;
 
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
@@ -22,5 +23,10 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
         operationControllerVisitor.visit(this);
+    }
+
+    @Override
+    public void accept(ConsoleView gameView) {
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
 }

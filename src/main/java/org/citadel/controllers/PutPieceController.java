@@ -1,5 +1,5 @@
 package org.citadel.controllers;
 
-public interface PutPieceController {
+public interface PutPieceController extends PlacementController {
 
 }
