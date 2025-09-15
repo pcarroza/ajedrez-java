@@ -5,7 +5,8 @@ import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 
@@ -18,7 +19,7 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
         final int doubleStep = 2;
         final int simpleStep = 1;
 
-        possibleMoves = new ArrayList<>(List.of(
+        possibleMoves = Stream.of(
                 piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)),
@@ -27,9 +28,10 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
                 piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep))
-        ));
-
-        possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
-        possibleMoves.removeIf(it -> piece.isOwnPieceAt(it));
+        )
+                .filter(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it))
+                .filter(it -> !piece.isOwnPieceAt(it))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
+
