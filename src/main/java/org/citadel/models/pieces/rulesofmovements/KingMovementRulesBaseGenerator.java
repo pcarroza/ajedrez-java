@@ -26,7 +26,8 @@ public class KingMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
                 piece.getDisplacedBy(new Coordinate(-simpleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(-simpleStep, simpleStep)),
                 piece.getDisplacedBy(new Coordinate(0, -simpleStep)),
-                piece.getDisplacedBy(new Coordinate(0, simpleStep)))
+                piece.getDisplacedBy(new Coordinate(0, simpleStep))
+                )
                 .filter(it -> ValidatorLimitsBoard.getInstance().isWithinLimits(it))
                 .filter(it -> !piece.isOwnPieceAt(it))
                 .collect(Collectors.toCollection(ArrayList::new));
