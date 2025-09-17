@@ -7,7 +7,11 @@ import org.citadel.models.pieces.Coordinate;
 import org.citadel.views.console.ConsoleView;
 import org.citadel.controllers.SelectPieceController;
 
+import java.util.List;
+
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
+
+    private List<LocalSpecialMovementsController> localSpecialMovementsControllerList;
 
     public LocalSelectPieceController(Game game) {
         super(game);
@@ -26,7 +30,7 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     }
 
     @Override
-    public void accept(ConsoleView gameView) {
-        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+    public void accept(ConsoleView consoleView) {
+        consoleView.visit(this);
     }
 }

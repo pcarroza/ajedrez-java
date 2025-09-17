@@ -116,6 +116,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         remove(this::getRivalPlayer, coordinate);
     }
 
+    public boolean isSquareOccupied(Coordinate coordinate) {
+        assert coordinate != null;
+        return piecesMap.values().stream().flatMap(List::stream).noneMatch(piece -> piece.isAt(coordinate));
+    }
+
     public boolean isWithinBoardLimits(Coordinate coordinate) {
         assert coordinate != null;
         return ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
@@ -179,10 +184,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return piecesMap.get(player).stream();
     }
 
-    public boolean isSquareOccupied(Coordinate coordinate) {
-        assert coordinate != null;
-        return piecesMap.values().stream().flatMap(List::stream).noneMatch(piece -> piece.isAt(coordinate));
-    }
+
 
     public int getIndexCurrentPlayer() {
         return turn.getIndexCurrentPlayer();
