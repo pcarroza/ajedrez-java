@@ -1,7 +1,5 @@
 package org.citadel.models.pieces;
 
-import org.jetbrains.annotations.NotNull;
-
 public record Coordinate(int row, int column) {
 
     public Coordinate(int row) {

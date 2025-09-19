@@ -34,8 +34,8 @@ public class Pawn extends Piece {
             vulnerablePawn = true;
             notifyEnPassantPawn(this);
         } else {
-            notifyDeleteEnPassantPawn(this);
             vulnerablePawn = false;
+            notifyDeleteEnPassantPawn(this);
         }
         if (isThePawnPromoted(target)) {
             changeToPromoted();
