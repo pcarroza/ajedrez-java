@@ -31,10 +31,4 @@ public record Coordinate(int row, int column) {
     public Coordinate copy() {
         return new Coordinate(this.row(), this.column());
     }
-
-    @NotNull
-    @Override
-    public String toString() {
-        return "Coordinate(" + row + ", " + column + ")";
-    }
 }
