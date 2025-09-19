@@ -184,8 +184,6 @@ public class Board extends SubjectBoard implements BoardObserver {
         return piecesMap.get(player).stream();
     }
 
-
-
     public int getIndexCurrentPlayer() {
         return turn.getIndexCurrentPlayer();
     }

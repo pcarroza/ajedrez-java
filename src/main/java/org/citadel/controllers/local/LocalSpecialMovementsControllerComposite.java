@@ -1,4 +1,17 @@
 package org.citadel.controllers.local;
 
-public class LocalSpecialMovementsControllerComposite {
+import org.citadel.models.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LocalSpecialMovementsControllerComposite extends LocalSpecialMovementsControllerComponent{
+
+    private List<LocalSpecialMovementsControllerComponent> components;
+
+    LocalSpecialMovementsControllerComposite(Game game) {
+        components = new ArrayList<>();
+        components.add(new LocalCastlingMovesController(game));
+    }
 }
+

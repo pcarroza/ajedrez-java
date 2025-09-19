@@ -18,10 +18,10 @@ public class ValidatorLimitsBoard {
     private static final ClosedInterval<Integer> LIMITS = new ClosedInterval<>(1, MAX_LIMIT);
 
     public boolean isWithinLimits(Coordinate coordinate) {
-        return LIMITS.isIncluded(coordinate.getRow()) && LIMITS.isIncluded(coordinate.getColumn());
+        return LIMITS.isIncluded(coordinate.row()) && LIMITS.isIncluded(coordinate.column());
     }
 
     public boolean isPieceEndBoardAt(Coordinate coordinate) {
-        return LIMITS.isEqualToMin(coordinate.getRow()) || LIMITS.isEqualToMax(coordinate.getColumn());
+        return LIMITS.isEqualToMin(coordinate.row()) || LIMITS.isEqualToMax(coordinate.column());
     }
 }

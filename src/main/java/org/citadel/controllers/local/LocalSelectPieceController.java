@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 
-    private List<LocalSpecialMovementsController> localSpecialMovementsControllerList;
+    private List<LocalSpecialMovementsControllerComposite> composites;
 
     public LocalSelectPieceController(Game game) {
         super(game);

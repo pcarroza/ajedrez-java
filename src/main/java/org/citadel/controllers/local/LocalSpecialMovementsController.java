@@ -1,15 +1,7 @@
 package org.citadel.controllers.local;
 
-import org.citadel.controllers.OperationControllerVisitor;
-import org.citadel.models.Game;
+public class LocalSpecialMovementsController extends LocalSpecialMovementsControllerComponent {
 
-public class LocalSpecialMovementsController extends LocalPlacementController {
+    LocalSpecialMovementsController() {}
 
-    LocalSpecialMovementsController(Game game) {
-        super(game);
-    }
-
-    @Override
-    public void accept(OperationControllerVisitor operationControllerVisitor) {
-    }
 }
