@@ -12,6 +12,10 @@ public class LocalSpecialMovementsControllerComposite extends LocalSpecialMoveme
     LocalSpecialMovementsControllerComposite(Game game) {
         components = new ArrayList<>();
         components.add(new LocalCastlingMovesController(game));
+        components.add(new LocalEnPassantPawnController(game));
+        components.add(new LocalPromotionController(game));
     }
+
+
 }
 

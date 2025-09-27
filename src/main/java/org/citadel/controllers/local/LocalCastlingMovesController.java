@@ -6,5 +6,4 @@ public class LocalCastlingMovesController  extends LocalSpecialMovementsControll
 
     public LocalCastlingMovesController(Game game) {
     }
-
 }

@@ -8,7 +8,7 @@ import static org.citadel.common.constants.BoardConstants.MAX_LIMIT;
 import static org.citadel.models.pieces.Player.BLACK;
 import static org.citadel.models.pieces.Player.WHITE;
 
-public class PiecesMapBuilder {
+public class  PiecesMapBuilder {
 
     private PiecesMapBuilder() {
     }

@@ -31,7 +31,6 @@ public class KingFinderVisitor implements PieceVisitor {
     @Override
     public void visit(Knight knight) {
         // Does nothing
-
     }
 
     @Override
