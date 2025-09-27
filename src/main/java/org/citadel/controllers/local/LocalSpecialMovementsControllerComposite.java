@@ -5,7 +5,7 @@ import org.citadel.models.Game;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalSpecialMovementsControllerComposite extends LocalSpecialMovementsControllerComponent{
+public class LocalSpecialMovementsControllerComposite implements LocalSpecialMovementsControllerComponent {
 
     private List<LocalSpecialMovementsControllerComponent> components;
 
@@ -17,5 +17,9 @@ public class LocalSpecialMovementsControllerComposite extends LocalSpecialMoveme
     }
 
 
+    @Override
+    public void execute() {
+
+    }
 }
 

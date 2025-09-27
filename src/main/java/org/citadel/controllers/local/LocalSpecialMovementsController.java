@@ -1,7 +1,15 @@
 package org.citadel.controllers.local;
 
-public class LocalSpecialMovementsController extends LocalSpecialMovementsControllerComponent {
+import org.citadel.models.Game;
 
-    LocalSpecialMovementsController() {}
+public abstract class LocalSpecialMovementsController implements LocalSpecialMovementsControllerComponent {
+
+    private Game game;
+
+    LocalSpecialMovementsController(Game game) {
+        this.game = game;
+    }
+
+    public abstract  void execute();
 
 }

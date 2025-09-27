@@ -1,4 +1,7 @@
 package org.citadel.controllers.local;
 
-public class LocalSpecialMovementsControllerComponent {
+public interface LocalSpecialMovementsControllerComponent {
+
+    void execute();
+
 }
