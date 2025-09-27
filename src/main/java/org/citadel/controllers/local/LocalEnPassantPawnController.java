@@ -9,7 +9,7 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
     }
 
     @Override
-    public void execute() {
-
+    public boolean isApplicable() {
+        return false;
     }
 }

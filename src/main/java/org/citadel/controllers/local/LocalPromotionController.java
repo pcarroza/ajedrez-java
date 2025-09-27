@@ -9,7 +9,7 @@ public class LocalPromotionController extends LocalSpecialMovementsController {
     }
 
     @Override
-    public void execute() {
-
+    public boolean isApplicable() {
+        return false;
     }
 }

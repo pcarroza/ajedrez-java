@@ -4,12 +4,15 @@ import org.citadel.models.Game;
 
 public abstract class LocalSpecialMovementsController implements LocalSpecialMovementsControllerComponent {
 
-    private Game game;
+    protected Game game;
 
     LocalSpecialMovementsController(Game game) {
         this.game = game;
     }
 
-    public abstract  void execute();
+    public abstract boolean isApplicable();
 
+    public LocalSpecialMovementsController getSpecialMoveController() {
+        return this;
+    }
 }
