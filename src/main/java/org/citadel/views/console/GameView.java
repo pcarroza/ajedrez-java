@@ -4,8 +4,6 @@ import org.citadel.controllers.PlacementController;
 import org.citadel.controllers.PutPieceController;
 import org.citadel.controllers.SelectPieceController;
 
-import com.oracle.graal.compiler.enterprise.i;
-
 public class GameView {
 
     private final BoardView boardView;
@@ -18,17 +16,16 @@ public class GameView {
     }
 
     public void interact(PlacementController placementController) {
-        boardView.interact(placementController);
+        placementController.accept(null);
     }
 
     public void visit(SelectPieceController selectPieceController) {
         assert selectPieceController != null;
-        selectPieceController.select(null);
-        if (selectPieceController.hasSpecialMovements()) {
-            specialMovementsView.interact(selectPieceController);
-        }
+        boardView.interact(selectPieceController);
     }
 
     public void visit(PutPieceController putPieceController) {
+        assert putPieceController != null;
+        boardView.interact(putPieceController);
     }
 }
