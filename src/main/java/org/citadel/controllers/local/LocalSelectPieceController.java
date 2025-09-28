@@ -2,6 +2,7 @@ package org.citadel.controllers.local;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.OperationControllerVisitor;
+import org.citadel.controllers.PlacementControllerVisitor;
 import org.citadel.controllers.SelectPieceController;
 import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
@@ -36,6 +37,11 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
         operationControllerVisitor.visit(this);
+    }
+
+    @Override
+    public void accept(PlacementControllerVisitor placementControllerVisitor) {
+        placementControllerVisitor.visit(this);
     }
 
     @Override

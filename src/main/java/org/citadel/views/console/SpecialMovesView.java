@@ -8,4 +8,6 @@ public class SpecialMovesView {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
+
+    public void vist(EnPass)
 }
