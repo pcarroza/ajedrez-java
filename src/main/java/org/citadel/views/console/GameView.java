@@ -20,12 +20,14 @@ public class GameView {
     }
 
     public void visit(SelectPieceController selectPieceController) {
-        assert selectPieceController != null;
-        boardView.interact(selectPieceController);
+        selectPieceController.select(null);
+        if (selectPieceController.hasSpecialMovements()) {
+            specialMovementsView.interact(selectPieceController);
+        }
     }
 
     public void visit(PutPieceController putPieceController) {
         assert putPieceController != null;
-        boardView.interact(putPieceController);
+        boardView.write();
     }
 }
