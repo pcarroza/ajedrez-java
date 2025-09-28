@@ -24,7 +24,7 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     public void select(Coordinate coordinate) {
         assert coordinate != null;
         assert ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
-        this.hasSpecialMovements = factory.isApplicable();
+        hasSpecialMovements = factory.isApplicable();
         super.select(coordinate);
     }
 

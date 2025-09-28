@@ -2,7 +2,7 @@ package org.citadel.controllers.local;
 
 import org.citadel.models.Game;
 
-public abstract class LocalSpecialMovementsController implements LocalSpecialMovementsControllerComponent {
+public abstract class LocalSpecialMovementsController {
 
     protected Game game;
 
