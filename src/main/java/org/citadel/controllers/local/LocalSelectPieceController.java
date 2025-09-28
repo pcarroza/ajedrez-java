@@ -11,25 +11,25 @@ import java.util.List;
 
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 
-    private final LocalSpecialMovementsControllerComposite specialMovementsComposite;
+    private final LocalSpecialMovementsControllerFactory factory;
 
     private boolean hasSpecialMovements;
 
     public LocalSelectPieceController(Game game) {
         super(game);
-        this.specialMovementsComposite = new LocalSpecialMovementsControllerComposite(game);
+        this.factory = new LocalSpecialMovementsControllerFactory(game);
     }
 
     @Override
     public void select(Coordinate coordinate) {
         assert coordinate != null;
         assert ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
-        this.hasSpecialMovements = specialMovementsComposite.isApplicable();
+        this.hasSpecialMovements = factory.isApplicable();
         super.select(coordinate);
     }
 
     public List<LocalSpecialMovementsController> getSpecialMoveControllers() {
-        return specialMovementsComposite.getApplicableControllers();
+        return factory.getApplicableControllers();
     }
 
     public boolean hasSpecialMovements() {
