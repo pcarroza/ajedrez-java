@@ -2,18 +2,16 @@ package org.citadel.controllers.local;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.OperationControllerVisitor;
+import org.citadel.controllers.SelectPieceController;
 import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.views.console.ConsoleView;
-import org.citadel.controllers.SelectPieceController;
 
 import java.util.List;
 
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 
     private final LocalSpecialMovementsControllerFactory factory;
-
-    private boolean hasSpecialMovements;
 
     public LocalSelectPieceController(Game game) {
         super(game);
@@ -24,7 +22,6 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     public void select(Coordinate coordinate) {
         assert coordinate != null;
         assert ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
-        hasSpecialMovements = factory.isApplicable();
         super.select(coordinate);
     }
 
@@ -33,7 +30,7 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     }
 
     public boolean hasSpecialMovements() {
-        return hasSpecialMovements;
+        return factory.isApplicable();
     }
 
     @Override
