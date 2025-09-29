@@ -4,8 +4,8 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.controllers.PlacementControllerVisitor;
 import org.citadel.controllers.SelectPieceController;
-import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.Game;
 
 import java.util.List;
 
