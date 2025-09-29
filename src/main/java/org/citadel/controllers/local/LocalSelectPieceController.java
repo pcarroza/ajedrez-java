@@ -6,7 +6,6 @@ import org.citadel.controllers.PlacementControllerVisitor;
 import org.citadel.controllers.SelectPieceController;
 import org.citadel.models.Game;
 import org.citadel.models.pieces.Coordinate;
-import org.citadel.views.console.ConsoleView;
 
 import java.util.List;
 
@@ -26,7 +25,8 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
         super.select(coordinate);
     }
 
-    public List<LocalSpecialMovementsController> getSpecialMoveControllers() {
+    @Override
+    public List<LocalSpecialMovementsController> getSpecialMovements() {
         return factory.getApplicableControllers();
     }
 
@@ -44,8 +44,4 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
         placementControllerVisitor.visit(this);
     }
 
-    @Override
-    public void accept(ConsoleView consoleView) {
-        consoleView.visit(this);
-    }
 }
