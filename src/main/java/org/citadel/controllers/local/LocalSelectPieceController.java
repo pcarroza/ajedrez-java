@@ -15,7 +15,7 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
 
     public LocalSelectPieceController(Game game) {
         super(game);
-        this.factory = new LocalSpecialMovementsControllerFactory(game);
+        factory = new LocalSpecialMovementsControllerFactory(game);
     }
 
     @Override
@@ -43,5 +43,4 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     public void accept(PlacementControllerVisitor placementControllerVisitor) {
         placementControllerVisitor.visit(this);
     }
-
 }
