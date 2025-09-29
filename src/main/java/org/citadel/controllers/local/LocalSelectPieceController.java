@@ -18,6 +18,10 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
         factory = new LocalSpecialMovementsControllerFactory(game);
     }
 
+    public boolean hasSpecialMovements() {
+        return factory.isApplicable();
+    }
+
     @Override
     public void select(Coordinate coordinate) {
         assert coordinate != null;
@@ -28,10 +32,6 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     @Override
     public List<LocalSpecialMovementsController> getSpecialMovements() {
         return factory.getApplicableControllers();
-    }
-
-    public boolean hasSpecialMovements() {
-        return factory.isApplicable();
     }
 
     @Override
