@@ -20,8 +20,10 @@ public class SpecialMovesView implements SpecialMovementsControllerVisitor {
         this.putPieceController = putPieceController;
     }
 
-    public void interact(List<SpecialMovementsController> specialMovementsControllers) {
-        specialMovementsControllers.forEach((controller) -> controller.accept(this));
+    public void interact(List<? extends SpecialMovementsController> specialMovementsControllers) {
+        for (SpecialMovementsController specialController : specialMovementsControllers) {
+            specialController.accept(this);
+        }
     }
 
     @Override
