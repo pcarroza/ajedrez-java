@@ -24,7 +24,7 @@ public class GameView implements PlacementControllerVisitor {
     public void visit(SelectPieceController selectPieceController) {
         selectPieceController.select(new Coordinate());
         if (selectPieceController.hasSpecialMovements()) {
-            specialMovesView.interact(selectPieceController);
+            specialMovesView.interact(selectPieceController.getSpecialMovements());
         }
     }
 
