@@ -7,8 +7,9 @@ import org.citadel.controllers.EnPassantPawnController;
 import org.citadel.controllers.PromotionController;
 import org.citadel.controllers.PutPieceController;
 import org.citadel.controllers.SpecialMovementsController;
+import org.citadel.controllers.SpecialMovementsControllerVisitor;
 
-public class SpecialMovesView {
+public class SpecialMovesView implements SpecialMovementsControllerVisitor {
 
     private PutPieceController putPieceController;
 
@@ -23,12 +24,18 @@ public class SpecialMovesView {
         specialMovementsControllers.forEach((controller) -> controller.accept(this));
     }
 
-    public void vist(EnPassantPawnController enPassantPawnController) {
+    @Override
+    public void visit(EnPassantPawnController enPassantPawnController) {
+        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
 
+    @Override
     public void visit(CastlingMovesController castlingMovesController) {
+        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
 
+    @Override
     public void visit(PromotionController promotionController) {
+        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
 }
