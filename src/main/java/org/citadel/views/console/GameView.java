@@ -28,11 +28,16 @@ public class GameView implements PlacementControllerVisitor {
         selectPieceController.select(new Coordinate());
         if (selectPieceController.hasSpecialMovements()) {
             specialMovesView.interact(selectPieceController.getSpecialMovements());
+            target = new Coordinate();
         }
     }
 
     public void visit(PutPieceController putPieceController) {
         assert putPieceController != null;
+        if (target != null) {
+            putPieceController.put(target);
+        }
+        putPieceController.put(new Coordinate());
         boardView.write();
     }
 }
