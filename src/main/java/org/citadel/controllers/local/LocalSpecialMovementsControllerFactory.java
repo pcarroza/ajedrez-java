@@ -15,7 +15,7 @@ public class LocalSpecialMovementsControllerFactory {
         specialControllers = new ArrayList<>();
         specialControllers.add(new LocalCastlingMovesController(game));
         specialControllers.add(new LocalEnPassantPawnController(game));
-        specialControllers.add(new LocalPromotionController(game));
+        specialControllers.add(new LocalPromotionPawnController(game));
         applicableControllers = new ArrayList<>();
     }
 

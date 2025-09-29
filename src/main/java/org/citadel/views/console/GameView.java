@@ -12,9 +12,12 @@ public class GameView implements PlacementControllerVisitor {
 
     private final SpecialMovesView specialMovesView;
 
+    private Coordinate target;
+
     public GameView() {
         this.boardView = new BoardView();
         this.specialMovesView = new SpecialMovesView();
+        this.target = null;
     }
 
     public void interact(PlacementController placementController) {

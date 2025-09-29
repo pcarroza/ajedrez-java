@@ -6,5 +6,5 @@ public interface SpecialMovementsControllerVisitor {
 
     void visit(EnPassantPawnController enPassantPawnController);
 
-    void visit(PromotionController promotionController);
+    void visit(PromotionPawnController promotionController);
 }
