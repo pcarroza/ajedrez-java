@@ -25,3 +25,4 @@ public class VerticalMovementStrategy extends MovementStrategy {
         return piece.getDisplacedBy(new Coordinate(increment, 0), vector);
     }
 }
+ 

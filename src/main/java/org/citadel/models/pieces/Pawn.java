@@ -75,7 +75,8 @@ public class Pawn extends Piece {
     @Override
     public List<Coordinate> getValidMovements() {
         validMovements.clear();
-        validMovements.addAll(Stream.concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
+        validMovements.addAll(Stream
+                .concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
         return validMovements;
     }
 
@@ -107,25 +108,25 @@ public class Pawn extends Piece {
     }
 
     public Coordinate getForwardOne() {
-        int SINGLE_STEP = 1;
-        int direction = SINGLE_STEP * player.getPlayer();
+        int singleStep = 1;
+        int direction = singleStep * player.getPlayer();
         return getDisplacedBy(new Coordinate(direction, 0));
     }
 
     public Coordinate getForwardTwo() {
-        int DOUBLE_STEP = 2;
-        int direction = DOUBLE_STEP * player.getPlayer();
+        int doubleStep = 2;
+        int direction = doubleStep * player.getPlayer();
         return getDisplacedBy(new Coordinate(direction, 0));
     }
 
     public Coordinate getDiagonalLeft() {
-        int LEFT_DIAGONAL_OFFSET = -1;
-        return getDisplacedBy(new Coordinate(player.getPlayer(), LEFT_DIAGONAL_OFFSET));
+        int leftDiagonalOffset = -1;
+        return getDisplacedBy(new Coordinate(player.getPlayer(), leftDiagonalOffset));
     }
 
     public Coordinate getDiagonalRight() {
-        int RIGHT_DIAGONAL_OFFSET = 1;
-        return getDisplacedBy(new Coordinate(player.getPlayer(), RIGHT_DIAGONAL_OFFSET));
+        int rightDiagonalOffset = 1;
+        return getDisplacedBy(new Coordinate(player.getPlayer(), rightDiagonalOffset));
     }
 
     @Override

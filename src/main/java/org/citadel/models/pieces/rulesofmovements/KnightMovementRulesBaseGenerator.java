@@ -27,11 +27,9 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
                 piece.getDisplacedBy(new Coordinate(-doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
-                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep))
-        )
+                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)))
                 .filter(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it))
                 .filter(it -> !piece.isOwnPieceAt(it))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }
-
