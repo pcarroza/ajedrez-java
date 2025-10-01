@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createKingMoveRulesBuilder;
 
-public class King extends Piece {
+public class  King extends Piece {
 
     private boolean isMoved = false;
 
