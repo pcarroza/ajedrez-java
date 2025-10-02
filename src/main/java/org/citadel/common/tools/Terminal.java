@@ -45,4 +45,14 @@ public class Terminal {
         } while (!ok);
         return value;
     }
+
+    public static int readInt(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'readInt'");
+    }
+
+    public static String readString(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'readString'");
+    }
 }
