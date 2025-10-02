@@ -28,7 +28,6 @@ public class GameView implements PlacementControllerVisitor {
         selectPieceController.select(new Coordinate());
         if (selectPieceController.hasSpecialMovements()) {
             specialMovesView.interact(selectPieceController.getSpecialMovements());
-            target = new Coordinate();
         }
     }
 
@@ -41,3 +40,4 @@ public class GameView implements PlacementControllerVisitor {
         boardView.write();
     }
 }
+ 
