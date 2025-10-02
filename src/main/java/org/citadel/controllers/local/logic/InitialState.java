@@ -2,16 +2,24 @@ package org.citadel.controllers.local.logic;
 
 import org.citadel.controllers.local.LocalOperationController;
 import org.citadel.controllers.local.LocalOperationControllerBuilder;
+import org.citadel.controllers.local.LocalStartController;
 
 public class InitialState extends State {
 
-    InitialState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
-        super(builder);
+    private final LocalStartController localStartController;
+
+    public InitialState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
+        super(statesBuilder);
+        localStartController = builder.getStartController();
+    }
+
+    @Override
+    State begin() {
+        return statesBuilder.getInGameState();
     }
 
     @Override
     LocalOperationController getController() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getController'");
+        return localStartController;
     }
 }

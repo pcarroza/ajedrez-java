@@ -5,13 +5,20 @@ import org.citadel.controllers.local.LocalOperationControllerBuilder;
 
 public class InGameState extends State {
 
-    InGameState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
-        super(builder);
+    private final LocalOperationControllerBuilder builder;
+
+    public InGameState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
+        super(statesBuilder);
+        this.builder = builder;
+    }
+
+    @Override
+    State end() {
+        return statesBuilder.getEndState();
     }
 
     @Override
     LocalOperationController getController() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getController'");
+        return builder.getPlacementController();
     }
 }

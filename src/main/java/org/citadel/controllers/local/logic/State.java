@@ -1,14 +1,13 @@
 package org.citadel.controllers.local.logic;
 
 import org.citadel.controllers.local.LocalOperationController;
-import org.citadel.controllers.local.LocalOperationControllerBuilder;
 
 public abstract class State {
 
-    private LocalOperationControllerBuilder builder;
+    protected StatesBuilder statesBuilder;
 
-    State(LocalOperationControllerBuilder builder) {
-        this.builder = builder;
+    protected State(StatesBuilder statesBuilder) {
+        this.statesBuilder = statesBuilder;
     }
 
     State initialize() {
