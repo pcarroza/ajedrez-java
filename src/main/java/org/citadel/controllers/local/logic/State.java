@@ -1,8 +1,9 @@
 package org.citadel.controllers.local.logic;
 
+import org.citadel.controllers.local.LocalOperationController;
 import org.citadel.controllers.local.LocalOperationControllerBuilder;
 
-public class State {
+public abstract class State {
 
     private LocalOperationControllerBuilder builder;
 
@@ -20,7 +21,7 @@ public class State {
         return null;
     }
 
-    State end () {
+    State end() {
         assert false;
         return null;
     }
@@ -29,4 +30,6 @@ public class State {
         assert false;
         return null;
     }
+
+    abstract LocalOperationController getController();
 }

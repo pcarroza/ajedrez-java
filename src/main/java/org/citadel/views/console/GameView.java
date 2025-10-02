@@ -40,4 +40,13 @@ public class GameView implements PlacementControllerVisitor {
         boardView.write();
     }
 }
- 
+
+
+
+
+
+
+
+
+
+
