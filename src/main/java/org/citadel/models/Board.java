@@ -60,6 +60,19 @@ public class Board extends SubjectBoard implements BoardObserver {
         return List.copyOf(selectedPieceMovements);
     }
 
+    public String getPieceChar(Coordinate coordinate) {
+        return piecesMap.values().stream()
+                .flatMap(List::stream)
+                .filter(piece -> piece.isAt(coordinate))
+                .findFirst()
+                .map(piece -> {
+                    PieceCharVisitor visitor = new PieceCharVisitor();
+                    piece.accept(visitor);
+                    return visitor.getPieceChar();
+                })
+                .orElse(" ");
+    }
+
     public void selectPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);

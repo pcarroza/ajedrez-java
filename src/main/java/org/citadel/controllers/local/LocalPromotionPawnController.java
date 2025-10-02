@@ -16,7 +16,17 @@ public class LocalPromotionPawnController extends LocalSpecialMovementsControlle
     }
 
     @Override
+    public String getName() {
+        return "Promoción de Peón";
+    }
+
+    @Override
     public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
         specialMovementsControllerVisitor.visit(this);
+    }
+
+    @Override
+    public void promote(String pieceType) {
+        // TODO: Implementar lógica
     }
 }

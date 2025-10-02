@@ -1,20 +1,18 @@
 package org.citadel.views.console;
 
-import org.citadel.controllers.CoordinateControllerVisitor;
-import org.citadel.controllers.RandomCoordinateController;
-import org.citadel.controllers.UserCoordinateController;
+import org.citadel.common.tools.Terminal;
+import org.citadel.models.pieces.Coordinate;
 
-public class PlacementCoordinateView implements CoordinateControllerVisitor {
+public class PlacementCoordinateView {
 
-    @Override
-    public void visit(UserCoordinateController userCoordinateController) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+    public Coordinate getCoordinate(String message) {
+        Terminal.writeln("Introduce la coordenada para " + message);
+        int row = Terminal.readInt("Fila (0-7): ");
+        int column = Terminal.readInt("Columna (0-7): ");
+        return new Coordinate(row, column);
     }
 
-    @Override
-    public void visit(RandomCoordinateController randomCoordinateController) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+    public void showError(String message) {
+        Terminal.writeln("Error: " + message);
     }
 }

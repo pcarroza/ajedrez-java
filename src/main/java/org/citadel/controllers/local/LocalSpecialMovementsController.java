@@ -18,5 +18,7 @@ public abstract class LocalSpecialMovementsController implements SpecialMovement
 
     public abstract boolean isApplicable();
 
+    public abstract String getName();
+
     public abstract void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor);
 }

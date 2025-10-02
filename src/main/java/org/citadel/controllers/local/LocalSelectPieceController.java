@@ -9,6 +9,8 @@ import org.citadel.models.Game;
 
 import java.util.List;
 
+import org.citadel.models.pieces.Player;
+
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 
     private final LocalSpecialMovementsControllerFactory factory;
@@ -42,5 +44,18 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     @Override
     public void accept(PlacementControllerVisitor placementControllerVisitor) {
         placementControllerVisitor.visit(this);
+    }
+
+    @Override
+    public boolean isSelectPiece(Coordinate coordinate) {
+        if (super.getCurrentPlayer() == Player.WHITE) {
+            return super.isTheWhitePieceSelected(coordinate);
+        }
+        return super.isTheBlackPieceSelected(coordinate);
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return super.getCurrentPlayer();
     }
 }

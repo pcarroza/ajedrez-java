@@ -29,4 +29,9 @@ public class LocalPutPieceController extends LocalPlacementController implements
     public void accept(OperationControllerVisitor operationControllerVisitor) {
         operationControllerVisitor.visit(this);
     }
+
+    @Override
+    public boolean isMovementValid(Coordinate coordinate) {
+        return super.isMovementValid(coordinate);
+    }
 }

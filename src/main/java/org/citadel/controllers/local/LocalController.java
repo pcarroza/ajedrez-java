@@ -71,4 +71,8 @@ public class LocalController {
     public void exit() {
         game.exit();
     }
+    
+    public String getPieceChar(Coordinate coordinate) {
+        return game.getPieceChar(coordinate);
+    }
 }

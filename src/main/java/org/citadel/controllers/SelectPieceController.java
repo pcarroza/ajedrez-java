@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.citadel.controllers.local.LocalSpecialMovementsController;
 import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.pieces.Player;
 
 public interface SelectPieceController extends PlacementController {
 
@@ -12,4 +13,8 @@ public interface SelectPieceController extends PlacementController {
     List<LocalSpecialMovementsController> getSpecialMovements();
 
     void select(Coordinate coordinate);
+
+    boolean isSelectPiece(Coordinate coordinate);
+
+    Player getCurrentPlayer();
 }

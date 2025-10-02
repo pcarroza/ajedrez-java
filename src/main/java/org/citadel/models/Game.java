@@ -77,4 +77,8 @@ public class Game {
     public void exit() {
         board.exit();
     }
+
+    public String getPieceChar(Coordinate coordinate) {
+        return board.getPieceChar(coordinate);
+    }
 }

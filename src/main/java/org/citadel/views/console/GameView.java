@@ -9,44 +9,55 @@ import org.citadel.models.pieces.Coordinate;
 public class GameView implements PlacementControllerVisitor {
 
     private final BoardView boardView;
-
     private final SpecialMovesView specialMovesView;
-
-    private Coordinate target;
+    private final PlacementCoordinateView placementCoordinateView;
 
     public GameView() {
         this.boardView = new BoardView();
         this.specialMovesView = new SpecialMovesView();
-        this.target = null;
+        this.placementCoordinateView = new PlacementCoordinateView();
     }
 
+    @Override
     public void interact(PlacementController placementController) {
         placementController.accept(this);
     }
 
+    @Override
     public void visit(SelectPieceController selectPieceController) {
-        selectPieceController.select(new Coordinate());
+        boardView.write(selectPieceController.getCurrentPlayer());
+        boardView.write(selectPieceController);
+
+        Coordinate origin;
+        boolean isSelectPiece;
+        do {
+            origin = placementCoordinateView.getCoordinate("seleccionar una pieza");
+            isSelectPiece = selectPieceController.isSelectPiece(origin);
+            if (!isSelectPiece) {
+                placementCoordinateView.showError("No hay una pieza en esa coordenada");
+            }
+        } while (!isSelectPiece);
+
+        selectPieceController.select(origin);
+
         if (selectPieceController.hasSpecialMovements()) {
             specialMovesView.interact(selectPieceController.getSpecialMovements());
         }
     }
 
+    @Override
     public void visit(PutPieceController putPieceController) {
-        assert putPieceController != null;
-        if (target != null) {
-            putPieceController.put(target);
-        }
-        putPieceController.put(new Coordinate());
-        boardView.write();
+        Coordinate target;
+        boolean isMovementValid;
+        do {
+            target = placementCoordinateView.getCoordinate("mover la pieza seleccionada");
+            isMovementValid = putPieceController.isMovementValid(target);
+            if (!isMovementValid) {
+                placementCoordinateView.showError("Movimiento inválido");
+            }
+        } while (!isMovementValid);
+
+        putPieceController.put(target);
+        boardView.write(putPieceController);
     }
 }
-
-
-
-
-
-
-
-
-
-

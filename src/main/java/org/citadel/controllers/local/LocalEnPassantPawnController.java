@@ -16,7 +16,17 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
     }
 
     @Override
+    public String getName() {
+        return "Captura al paso";
+    }
+
+    @Override
     public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
         specialMovementsControllerVisitor.visit(this);
+    }
+
+    @Override
+    public void capture() {
+        // TODO: Implementar lógica
     }
 }
