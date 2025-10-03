@@ -1,11 +1,11 @@
 package org.citadel.views.console;
 
+import org.citadel.views.console.commands.game.ExitCommand;
+import org.citadel.views.console.commands.game.LoadGameCommand;
+import org.citadel.views.console.commands.game.NewGameCommand;
+import org.citadel.views.console.commands.game.SaveGameCommand;
+import org.citadel.views.console.commands.game.ShowHistoryCommand;
 import org.citadel.controllers.MenuController;
-import org.citadel.views.console.commands.NewGameCommand;
-import org.citadel.views.console.commands.LoadGameCommand;
-import org.citadel.views.console.commands.SaveGameCommand;
-import org.citadel.views.console.commands.ShowHistoryCommand;
-import org.citadel.views.console.commands.ExitCommand;
 
 public class MainMenuView extends Menu {
 
