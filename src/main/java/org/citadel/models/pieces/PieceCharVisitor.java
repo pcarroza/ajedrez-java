@@ -37,4 +37,10 @@ public class PieceCharVisitor implements PieceVisitor {
     public void visit(Pawn pawn) {
         pieceChar = PieceChar.PAWN.getValue();
     }
+
+    public static String getChar(Piece piece) {
+        PieceCharVisitor visitor = new PieceCharVisitor();
+        piece.accept(visitor);
+        return visitor.getPieceChar();
+    }
 }

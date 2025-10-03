@@ -65,11 +65,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
-                .map(piece -> {
-                    PieceCharVisitor visitor = new PieceCharVisitor();
-                    piece.accept(visitor);
-                    return visitor.getPieceChar();
-                })
+                .map(PieceCharVisitor::getChar)
                 .orElse(" ");
     }
 
