@@ -14,6 +14,10 @@ public class Game {
         board.subscribe(observer);
     }
 
+    public String getPieceChar(Coordinate coordinate) {
+        return board.getPieceChar(coordinate);
+    }
+
     public void selectPiece(Coordinate coordinate) {
         board.selectPiece(coordinate);
     }
@@ -76,9 +80,5 @@ public class Game {
 
     public void exit() {
         board.exit();
-    }
-
-    public String getPieceChar(Coordinate coordinate) {
-        return board.getPieceChar(coordinate);
     }
 }
