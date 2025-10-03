@@ -4,6 +4,8 @@ import org.citadel.controllers.local.LocalOperationControllerBuilder;
 
 public class StatesBuilder {
 
+    private final MenuState menuState;
+
     private final InitialState initialState;
 
     private final InGameState inGameState;
@@ -13,14 +15,19 @@ public class StatesBuilder {
     private final ExitState exitState;
 
     public StatesBuilder(LocalOperationControllerBuilder builder) {
+        menuState = new MenuState(this, builder);
         initialState = new InitialState(this, builder);
         inGameState = new InGameState(this, builder);
         finalState = new EndState(this, builder);
         exitState = new ExitState(this);
     }
 
-    InitialState getInitialState() {
-        return initialState;
+    MenuState getMenuState() {
+        return menuState;
+    }
+
+    State getInitialState() {
+        return menuState;
     }
 
     InGameState getInGameState() {

@@ -6,6 +6,8 @@ public class LocalOperationControllerBuilder {
 
     private LocalStartController localStartController;
 
+    private LocalMenuController localMenuController;
+
     private LocalPlacementControllerBuilder[] builders;
 
     private LocalContinueController localContinueController;
@@ -18,6 +20,7 @@ public class LocalOperationControllerBuilder {
 
     public void build() {
         localStartController = new LocalStartController(game, this);
+        localMenuController = new LocalMenuController(game);
         builders = new LocalPlacementControllerBuilder[Game.NUMBER_PLAYERS];
         localContinueController = new LocalContinueController(game);
     }
@@ -43,5 +46,9 @@ public class LocalOperationControllerBuilder {
 
     public LocalStartController getStartController() {
         return localStartController;
+    }
+
+    public LocalMenuController getMenuController() {
+        return localMenuController;
     }
 }

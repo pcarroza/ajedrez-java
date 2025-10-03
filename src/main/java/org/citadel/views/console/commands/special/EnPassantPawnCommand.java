@@ -1,7 +1,8 @@
-package org.citadel.views.console.commands;
+package org.citadel.views.console.commands.special;
 
 import org.citadel.common.tools.Terminal;
 import org.citadel.controllers.EnPassantPawnController;
+import org.citadel.views.console.commands.Command;
 
 public class EnPassantPawnCommand extends Command {
     private final EnPassantPawnController controller;

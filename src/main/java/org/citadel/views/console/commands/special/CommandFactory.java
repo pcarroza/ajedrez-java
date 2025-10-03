@@ -1,9 +1,10 @@
-package org.citadel.views.console.commands;
+package org.citadel.views.console.commands.special;
 
 import org.citadel.controllers.CastlingMovesController;
 import org.citadel.controllers.EnPassantPawnController;
 import org.citadel.controllers.PromotionPawnController;
 import org.citadel.controllers.SpecialMovementsControllerVisitor;
+import org.citadel.views.console.commands.Command;
 
 public class CommandFactory implements SpecialMovementsControllerVisitor {
 

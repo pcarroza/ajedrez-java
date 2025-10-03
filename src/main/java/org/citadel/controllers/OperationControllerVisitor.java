@@ -7,4 +7,6 @@ public interface OperationControllerVisitor {
     void visit(ContinueController continueController);
 
     void visit(PlacementController placementController);
+
+    void visit(MenuController menuController);
 }
