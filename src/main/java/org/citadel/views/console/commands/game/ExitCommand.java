@@ -1,4 +1,4 @@
-package org.citadel.views.console.commands;
+package org.citadel.views.console.commands.game;
 
 import org.citadel.controllers.MenuController;
 
