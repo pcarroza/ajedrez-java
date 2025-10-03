@@ -1,4 +1,4 @@
-package org.citadel.controllers;
+package org.citadel.controllers.local.logic;
 
 public enum GameState {
     INITIAL,

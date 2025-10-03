@@ -1,12 +1,12 @@
 package org.citadel;
 
-import org.citadel.controllers.local.logic.LocalLogic;
+import org.citadel.controllers.GameController;
 import org.citadel.views.console.ConsoleView;
 
 public class Standalone extends Chess {
 
     @Override
-    public Logic getLogic() {
+    public GameController getGameController() {
         return new LocalLogic();
     }
 

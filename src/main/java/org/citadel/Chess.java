@@ -1,29 +1,24 @@
 package org.citadel;
 
-import org.citadel.controllers.OperationController;
+import org.citadel.controllers.GameController;
+import org.citadel.controllers.local.logic.GameState;
 
 public abstract class Chess {
 
-    private final Logic logic;
-
-    private final View view;
+    private final GameController logic;
 
     Chess() {
-        this.logic = getLogic();
+        this.logic = getGameController();
         this.view = getView();
     }
 
-    public abstract Logic getLogic();
+    public abstract GameController getGameController();
 
     public abstract View getView();
 
     public void run() {
-        OperationController controller;
         do {
-            controller = logic.getController();
-            if (controller != null) {
-                view.interact(controller);
-            }
-        } while (controller != null);
+            view.interact(logic);
+        } while (logic.getGameState() != GameState.EXIT);
     }
 }

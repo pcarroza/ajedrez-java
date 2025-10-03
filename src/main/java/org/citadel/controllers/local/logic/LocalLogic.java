@@ -1,44 +1,37 @@
 package org.citadel.controllers.local.logic;
 
-import org.citadel.Logic;
+import org.citadel.controllers.GameController;
 import org.citadel.controllers.OperationController;
+import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.controllers.local.LocalOperationControllerBuilder;
 import org.citadel.models.Game;
-import org.citadel.models.Observer;
 
-public class LocalLogic implements Logic, Observer {
+import java.util.HashMap;
+import java.util.Map;
 
-    private State actualState;
+public class LocalLogic implements GameController {
+
+    private final Game game;
+
+    private final Map<GameState, OperationController> controllers;
 
     public LocalLogic() {
-        Game game = new Game(this);
+        game = new Game(null);
+        controllers = new HashMap<>();
         LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
-        builder.build();
-        actualState = new StatesBuilder(builder).getInitialState();
+        controllers.put(GameState.INITIAL, builder.getStartController());
+        controllers.put(GameState.IN_GAME, builder.getPlacementController());
+        controllers.put(GameState.MENU, builder.getMenuController());
+        controllers.put(GameState.EXIT, builder.getContinueController());
     }
 
     @Override
-    public void initialize() {
-        actualState = actualState.initialize();
+    public GameState getGameState() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getGameState'");
     }
 
-    @Override
-    public void begin() {
-        actualState = actualState.begin();
-    }
-
-    @Override
-    public void end() {
-        actualState = actualState.end();
-    }
-
-    @Override
-    public void exit() {
-        actualState = actualState.exit();
-    }
-
-    @Override
-    public OperationController getController() {
-        return actualState.getController();
+    public void accept(OperationControllerVisitor visitor) {
+        controllers.get(getGameState()).accept(visitor);
     }
 }
