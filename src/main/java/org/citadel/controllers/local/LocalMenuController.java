@@ -4,17 +4,15 @@ import org.citadel.controllers.MenuController;
 import org.citadel.controllers.OperationControllerVisitor;
 import org.citadel.models.Game;
 
-public class LocalMenuController implements MenuController {
-
-    private final Game game;
+public class LocalMenuController extends LocalOperationController implements MenuController {
 
     public LocalMenuController(Game game) {
-        this.game = game;
+        super(game);
     }
 
     @Override
     public void startNewGame() {
-        game.initialize();
+        this.initialize();
     }
 
     @Override
@@ -37,7 +35,7 @@ public class LocalMenuController implements MenuController {
 
     @Override
     public void exitGame() {
-        game.exit();
+        this.exit();
     }
 
     @Override

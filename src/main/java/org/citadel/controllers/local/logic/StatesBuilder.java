@@ -6,8 +6,6 @@ public class StatesBuilder {
 
     private final MenuState menuState;
 
-    private final InitialState initialState;
-
     private final InGameState inGameState;
 
     private final EndState finalState;
@@ -16,17 +14,12 @@ public class StatesBuilder {
 
     public StatesBuilder(LocalOperationControllerBuilder builder) {
         menuState = new MenuState(this, builder);
-        initialState = new InitialState(this, builder);
         inGameState = new InGameState(this, builder);
         finalState = new EndState(this, builder);
         exitState = new ExitState(this);
     }
 
     MenuState getMenuState() {
-        return menuState;
-    }
-
-    State getInitialState() {
         return menuState;
     }
 

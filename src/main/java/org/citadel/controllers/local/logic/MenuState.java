@@ -1,17 +1,21 @@
 package org.citadel.controllers.local.logic;
 
 import org.citadel.controllers.OperationController;
+import org.citadel.controllers.local.LocalOperationController;
 import org.citadel.controllers.local.LocalOperationControllerBuilder;
 
 public class MenuState extends State {
 
-    public MenuState(StatesBuilder statesBuilder, LocalOperationControllerBuilder controllerBuilder) {
-        super(statesBuilder, controllerBuilder);
+    private final LocalOperationControllerBuilder builder;
+
+    public MenuState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
+        super(statesBuilder);
+        this.builder = builder;
     }
 
     @Override
-    public OperationController getController() {
-        return controllerBuilder.getMenuController();
+    public LocalOperationController getController() {
+        return builder.getMenuController();
     }
 
     @Override
