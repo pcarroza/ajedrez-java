@@ -1,5 +1,6 @@
 package org.citadel.controllers.local.logic;
 
+import org.citadel.controllers.GameState;
 import org.citadel.controllers.local.LocalOperationController;
 
 public abstract class State {
@@ -30,5 +31,5 @@ public abstract class State {
         return null;
     }
 
-    abstract LocalOperationController getController();
+    abstract GameState getGameState();
 }

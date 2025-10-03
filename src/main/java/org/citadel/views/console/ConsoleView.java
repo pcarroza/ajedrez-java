@@ -26,6 +26,10 @@ public class ConsoleView implements View {
         operationController.accept(this);
     }
 
+    public void visit(MenuController menuController) {
+        new MainMenuView(menuController).execute();
+    }
+
     public void visit(StartController startController) {
         startView.interact(startController);
     }
@@ -36,9 +40,5 @@ public class ConsoleView implements View {
 
     public void visit(ContinueController continueController) {
         continueView.interact(continueController);
-    }
-
-    public void visit(MenuController menuController) {
-        new MainMenuView(menuController).execute();
     }
 }
