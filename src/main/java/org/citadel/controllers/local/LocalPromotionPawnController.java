@@ -16,12 +16,12 @@ public class LocalPromotionPawnController extends LocalSpecialMovementsControlle
     }
 
     @Override
-    public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
-        specialMovementsControllerVisitor.visit(this);
+    public void promote(String pieceType) {
+        // TODO: Implementar lógica
     }
 
     @Override
-    public void promote(String pieceType) {
-        // TODO: Implementar lógica
+    public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
+        specialMovementsControllerVisitor.visit(this);
     }
 }

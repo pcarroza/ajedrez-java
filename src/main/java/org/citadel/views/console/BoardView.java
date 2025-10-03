@@ -24,3 +24,6 @@ public class BoardView {
         Terminal.writeln("Turno de: " + player);
     }
 }
+
+
+

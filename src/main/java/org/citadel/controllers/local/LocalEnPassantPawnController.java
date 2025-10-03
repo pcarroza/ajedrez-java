@@ -16,12 +16,12 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
     }
 
     @Override
-    public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
-        specialMovementsControllerVisitor.visit(this);
+    public void capture() {
+        // TODO: Implementar lógica
     }
 
     @Override
-    public void capture() {
-        // TODO: Implementar lógica
+    public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
+        specialMovementsControllerVisitor.visit(this);
     }
 }

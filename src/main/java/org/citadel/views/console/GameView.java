@@ -9,7 +9,9 @@ import org.citadel.models.pieces.Coordinate;
 public class GameView implements PlacementControllerVisitor {
 
     private final BoardView boardView;
+
     private final SpecialMovesView specialMovesView;
+
     private final PlacementCoordinateView placementCoordinateView;
 
     public GameView() {
@@ -61,3 +63,4 @@ public class GameView implements PlacementControllerVisitor {
         boardView.write(putPieceController);
     }
 }
+

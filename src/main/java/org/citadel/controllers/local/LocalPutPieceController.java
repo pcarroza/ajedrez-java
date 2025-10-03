@@ -21,6 +21,11 @@ public class LocalPutPieceController extends LocalPlacementController implements
     }
 
     @Override
+    public boolean isMovementValid(Coordinate coordinate) {
+        return super.isMovementValid(coordinate);
+    }
+
+    @Override
     public void accept(PlacementControllerVisitor placementControllerVisitor) {
         placementControllerVisitor.visit(this);
     }
@@ -28,10 +33,5 @@ public class LocalPutPieceController extends LocalPlacementController implements
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
         operationControllerVisitor.visit(this);
-    }
-
-    @Override
-    public boolean isMovementValid(Coordinate coordinate) {
-        return super.isMovementValid(coordinate);
     }
 }

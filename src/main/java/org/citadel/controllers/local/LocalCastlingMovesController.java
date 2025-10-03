@@ -21,11 +21,6 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
     }
 
     @Override
-    public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
-        specialMovementsControllerVisitor.visit(this);
-    }
-
-    @Override
     public List<Coordinate> getAvailableRooks() {
         return Collections.emptyList(); // TODO: Implementar lógica
     }
@@ -33,5 +28,10 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
     @Override
     public void castle(Coordinate rookCoordinate) {
         // TODO: Implementar lógica
+    }
+
+    @Override
+    public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
+        specialMovementsControllerVisitor.visit(this);
     }
 }
