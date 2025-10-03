@@ -21,11 +21,6 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
     }
 
     @Override
-    public String getName() {
-        return "Enroque";
-    }
-
-    @Override
     public void accept(SpecialMovementsControllerVisitor specialMovementsControllerVisitor) {
         specialMovementsControllerVisitor.visit(this);
     }

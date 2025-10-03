@@ -1,6 +1,6 @@
-package org.citadel.views.console;
+package org.citadel.models.pieces;
 
-public enum PieceView {
+public enum PieceChar {
     PAWN("P"),
     ROOK("T"),
     KNIGHT("C"),
@@ -10,7 +10,7 @@ public enum PieceView {
 
     private final String value;
 
-    PieceView(String value) {
+    PieceChar(String value) {
         this.value = value;
     }
 

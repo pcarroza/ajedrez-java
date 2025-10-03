@@ -1,7 +1,5 @@
 package org.citadel.models.pieces;
 
-import org.citadel.views.console.PieceView;
-
 public class PieceCharVisitor implements PieceVisitor {
 
     private String pieceChar;
@@ -12,31 +10,31 @@ public class PieceCharVisitor implements PieceVisitor {
 
     @Override
     public void visit(King king) {
-        pieceChar = PieceView.KING.getValue();
+        pieceChar = PieceChar.KING.getValue();
     }
 
     @Override
     public void visit(Queen queen) {
-        pieceChar = PieceView.QUEEN.getValue();
+        pieceChar = PieceChar.QUEEN.getValue();
     }
 
     @Override
     public void visit(Rook rook) {
-        pieceChar = PieceView.ROOK.getValue();
+        pieceChar = PieceChar.ROOK.getValue();
     }
 
     @Override
     public void visit(Bishop bishop) {
-        pieceChar = PieceView.BISHOP.getValue();
+        pieceChar = PieceChar.BISHOP.getValue();
     }
 
     @Override
     public void visit(Knight knight) {
-        pieceChar = PieceView.KNIGHT.getValue();
+        pieceChar = PieceChar.KNIGHT.getValue();
     }
 
     @Override
     public void visit(Pawn pawn) {
-        pieceChar = PieceView.PAWN.getValue();
+        pieceChar = PieceChar.PAWN.getValue();
     }
 }
