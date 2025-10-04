@@ -11,7 +11,7 @@ public abstract class Menu {
     protected List<Command> commands;
 
     public Menu() {
-        this.commands = new ArrayList<Command>();
+        commands = new ArrayList<Command>();
     }
 
     protected abstract void setCommands();

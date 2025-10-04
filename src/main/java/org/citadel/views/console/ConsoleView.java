@@ -11,13 +11,10 @@ public class ConsoleView implements View {
 
     private final StartView startView;
 
-    private final GameView gameView;
-
     private final ContinueView continueView;
 
     public ConsoleView() {
         startView = new StartView();
-        gameView = new GameView();
         continueView = new ContinueView();
     }
 
