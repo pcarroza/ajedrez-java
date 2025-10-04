@@ -1,7 +1,7 @@
-package org.citadel.views.console;
+package org.citadel.views.console.menus;
 
 import org.citadel.common.tools.Terminal;
-import org.citadel.views.console.commands.Command;
+import org.citadel.views.console.menus.commands.Command;
 
 import java.util.ArrayList;
 import java.util.List;

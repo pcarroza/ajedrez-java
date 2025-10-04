@@ -5,6 +5,7 @@ import org.citadel.controllers.ContinueController;
 import org.citadel.controllers.GameController;
 import org.citadel.controllers.OperationController;
 import org.citadel.controllers.StartController;
+import org.citadel.views.console.menus.GameMenuView;
 
 public class ConsoleView implements View {
 
@@ -29,8 +30,8 @@ public class ConsoleView implements View {
         startView.interact(startController);
     }
 
-    public void visit(GameController menuController) {
-        new GameMenuView(menuController).execute();
+    public void visit(GameController gameController) {
+        new GameMenuView(gameController).execute();
     }
 
     public void visit(ContinueController continueController) {

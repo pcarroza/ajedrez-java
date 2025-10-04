@@ -1,4 +1,4 @@
-package org.citadel.views.console.commands;
+package org.citadel.views.console.menus.commands;
 
 public abstract class Command {
 

@@ -1,6 +1,7 @@
 package org.citadel.views.console;
 
 import org.citadel.controllers.local.LocalSpecialMovementsController;
+import org.citadel.views.console.menus.SpecialMovesMenu;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package org.citadel.views.console.commands.special;
+package org.citadel.views.console.menus.commands.special;
 
-import org.citadel.views.console.commands.Command;
+import org.citadel.views.console.menus.commands.Command;
 
 public class NullCommand extends Command {
 

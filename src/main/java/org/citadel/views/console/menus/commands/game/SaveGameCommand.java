@@ -1,7 +1,7 @@
-package org.citadel.views.console.commands.game;
+package org.citadel.views.console.menus.commands.game;
 
 import org.citadel.controllers.GameController;
-import org.citadel.views.console.commands.Command;
+import org.citadel.views.console.menus.commands.Command;
 
 public class SaveGameCommand extends Command {
 

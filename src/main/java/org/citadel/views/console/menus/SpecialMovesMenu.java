@@ -1,8 +1,8 @@
-package org.citadel.views.console;
+package org.citadel.views.console.menus;
 
 import org.citadel.controllers.local.LocalSpecialMovementsController;
-import org.citadel.views.console.commands.special.CommandFactory;
-import org.citadel.views.console.commands.special.NullCommand;
+import org.citadel.views.console.menus.commands.special.CommandFactory;
+import org.citadel.views.console.menus.commands.special.NullCommand;
 
 import java.util.List;
 
