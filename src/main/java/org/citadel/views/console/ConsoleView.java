@@ -3,9 +3,7 @@ package org.citadel.views.console;
 import org.citadel.View;
 import org.citadel.controllers.ContinueController;
 import org.citadel.controllers.GameController;
-import org.citadel.controllers.MenuController;
 import org.citadel.controllers.OperationController;
-import org.citadel.controllers.PlacementController;
 import org.citadel.controllers.StartController;
 
 public class ConsoleView implements View {
@@ -22,29 +20,20 @@ public class ConsoleView implements View {
         continueView = new ContinueView();
     }
 
-    public void interact(GameController gameController) {
-        gameController.accept(this);
-    }
-
     @Override
     public void interact(OperationController operationController) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
+        operationController.accept(this);
     }
 
     public void visit(StartController startController) {
         startView.interact(startController);
     }
 
-    public void visit(PlacementController placementController) {
-        gameView.interact(placementController);
+    public void visit(GameController menuController) {
+        new GameMenuView(menuController).execute();
     }
 
     public void visit(ContinueController continueController) {
         continueView.interact(continueController);
-    }
-
-    public void visit(MenuController menuController) {
-        new MainMenuView(menuController).execute();
     }
 }
