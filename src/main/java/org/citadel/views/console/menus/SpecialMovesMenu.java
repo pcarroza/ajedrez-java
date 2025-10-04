@@ -8,9 +8,9 @@ import java.util.List;
 
 public class SpecialMovesMenu extends Menu {
 
-    private final List<SpecialMovementsController> controllers;
+    private final List<? extends SpecialMovementsController> controllers;
 
-    public SpecialMovesMenu(List<SpecialMovementsController> controllers) {
+    public SpecialMovesMenu(List<? extends SpecialMovementsController> controllers) {
         super();
         this.controllers = controllers;
         setCommands();

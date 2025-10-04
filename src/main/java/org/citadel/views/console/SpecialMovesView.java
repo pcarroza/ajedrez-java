@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SpecialMovesView {
 
-    public void interact(List<SpecialMovementsController> controllers) {
+    public void interact(List<? extends SpecialMovementsController> controllers) {
         assert controllers != null;
         new SpecialMovesMenu(controllers).execute();
     }
