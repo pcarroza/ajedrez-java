@@ -12,6 +12,7 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
 
     @Override
     public boolean isApplicable() {
+        // TODO: Implementar lógica
         return false;
     }
 

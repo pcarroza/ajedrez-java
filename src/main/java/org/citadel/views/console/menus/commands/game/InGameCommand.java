@@ -7,9 +7,9 @@ public class InGameCommand extends Command {
 
     private final GameController gameController;
 
-    public InGameCommand(String title, GameController menuController) {
+    public InGameCommand(String title, GameController gameController) {
         super(title);
-        this.gameController = menuController;
+        this.gameController = gameController;
     }
 
     @Override

@@ -37,16 +37,6 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     }
 
     @Override
-    public void accept(OperationControllerVisitor operationControllerVisitor) {
-        operationControllerVisitor.visit(this);
-    }
-
-    @Override
-    public void accept(PlacementControllerVisitor placementControllerVisitor) {
-        placementControllerVisitor.visit(this);
-    }
-
-    @Override
     public boolean isSelectPiece(Coordinate coordinate) {
         if (super.getCurrentPlayer() == Player.WHITE) {
             return super.isTheWhitePieceSelected(coordinate);
@@ -58,4 +48,16 @@ public class LocalSelectPieceController extends LocalPlacementController impleme
     public Player getCurrentPlayer() {
         return super.getCurrentPlayer();
     }
+
+    @Override
+    public void accept(PlacementControllerVisitor placementControllerVisitor) {
+        placementControllerVisitor.visit(this);
+    }
+
+    @Override
+    public void accept(OperationControllerVisitor operationControllerVisitor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+    }
+
 }
