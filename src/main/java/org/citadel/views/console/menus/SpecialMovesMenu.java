@@ -13,7 +13,7 @@ public class SpecialMovesMenu extends Menu {
     public SpecialMovesMenu(List<SpecialMovementsController> controllers) {
         super();
         this.controllers = controllers;
-        this.setCommands();
+        setCommands();
     }
 
     @Override
@@ -21,8 +21,8 @@ public class SpecialMovesMenu extends Menu {
         CommandFactory commandFactory = new CommandFactory();
         for (SpecialMovementsController controller : controllers) {
             controller.accept(commandFactory);
-            this.commands.add(commandFactory.getCommand());
+            commands.add(commandFactory.getCommand());
         }
-        this.commands.add(new NullCommand());
+        commands.add(new NullCommand());
     }
 }
