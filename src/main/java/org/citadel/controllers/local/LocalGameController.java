@@ -1,12 +1,13 @@
 package org.citadel.controllers.local;
 
-import org.citadel.controllers.MenuController;
+import org.citadel.controllers.GameController;
 import org.citadel.controllers.OperationControllerVisitor;
+import org.citadel.controllers.local.logic.GameState;
 import org.citadel.models.Game;
 
-public class LocalMenuController extends LocalOperationController implements MenuController {
+public class LocalGameController extends LocalOperationController implements GameController {
 
-    public LocalMenuController(Game game) {
+    public LocalGameController(Game game) {
         super(game);
     }
 
@@ -41,5 +42,11 @@ public class LocalMenuController extends LocalOperationController implements Men
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
         // Aún no tenemos un visitor para este controlador
+    }
+
+    @Override
+    public GameState getGameState() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getGameState'");
     }
 }

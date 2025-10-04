@@ -1,19 +1,19 @@
 package org.citadel.views.console.commands.game;
 
-import org.citadel.controllers.MenuController;
+import org.citadel.controllers.GameController;
 import org.citadel.views.console.commands.Command;
 
 public class LoadGameCommand extends Command {
 
-    private final MenuController menuController;
+    private final GameController gameController;
 
-    public LoadGameCommand(String title, MenuController menuController) {
+    public LoadGameCommand(String title, GameController menuController) {
         super(title);
-        this.menuController = menuController;
+        this.gameController = menuController;
     }
 
     @Override
     public void execute() {
-        menuController.loadGame();
+        gameController.loadGame();
     }
 }

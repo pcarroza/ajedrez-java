@@ -21,7 +21,7 @@ public class LocalLogic implements GameController {
         LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
         controllers.put(GameState.INITIAL, builder.getStartController());
         controllers.put(GameState.IN_GAME, builder.getPlacementController());
-        controllers.put(GameState.MENU, builder.getMenuController());
+        controllers.put(GameState.MENU, builder.getGameController());
         controllers.put(GameState.EXIT, builder.getContinueController());
     }
 
@@ -33,5 +33,35 @@ public class LocalLogic implements GameController {
 
     public void accept(OperationControllerVisitor visitor) {
         controllers.get(getGameState()).accept(visitor);
+    }
+
+    @Override
+    public void startNewGame() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'startNewGame'");
+    }
+
+    @Override
+    public void loadGame() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loadGame'");
+    }
+
+    @Override
+    public void saveGame() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'saveGame'");
+    }
+
+    @Override
+    public void showHistory() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showHistory'");
+    }
+
+    @Override
+    public void exitGame() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'exitGame'");
     }
 }

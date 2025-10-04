@@ -1,19 +1,19 @@
 package org.citadel.views.console.commands.game;
 
-import org.citadel.controllers.MenuController;
+import org.citadel.controllers.GameController;
 import org.citadel.views.console.commands.Command;
 
 public class ShowHistoryCommand extends Command {
 
-    private final MenuController menuController;
+    private final GameController gameController;
 
-    public ShowHistoryCommand(String title, MenuController menuController) {
+    public ShowHistoryCommand(String title, GameController menuController) {
         super(title);
-        this.menuController = menuController;
+        this.gameController = menuController;
     }
 
     @Override
     public void execute() {
-        menuController.showHistory();
+        gameController.showHistory();
     }
 }
