@@ -1,14 +1,13 @@
-package org.citadel.views.console.menus.commands.game;
+package org.citadel.views.console.commands.game;
 
 import org.citadel.controllers.GameController;
-import org.citadel.views.console.menus.commands.Command;
+import org.citadel.views.console.commands.Command;
 
-public class LoadGameCommand extends Command {
+public class LoadGameCommand implements Command {
 
     private final GameController gameController;
 
-    public LoadGameCommand(String title, GameController menuController) {
-        super(title);
+    public LoadGameCommand(GameController menuController) {
         this.gameController = menuController;
     }
 

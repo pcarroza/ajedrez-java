@@ -1,24 +1,29 @@
-package org.citadel.views.console.menus;
-
 import org.citadel.common.tools.Terminal;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class Menu extends MenuComponent {
+public class Menu implements MenuComponent {
 
-    protected List<MenuComponent> components;
+    private final String title;
+
+    private final List<MenuComponent> components = new ArrayList<>();
 
     public Menu(String title) {
-        super(title);
-        components = new ArrayList<>();
+        this.title = title;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 
     public void add(MenuComponent menuComponent) {
         components.add(menuComponent);
     }
 
+    @Override
     public void execute() {
         List<MenuComponent> activeComponents = getActiveComponents();
         if (activeComponents.isEmpty()) {
@@ -28,6 +33,11 @@ public abstract class Menu extends MenuComponent {
         write(activeComponents);
         int option = getOption(activeComponents.size());
         activeComponents.get(option).execute();
+    }
+
+    @Override
+    public boolean isActive() {
+        return !getActiveComponents().isEmpty();
     }
 
     private List<MenuComponent> getActiveComponents() {

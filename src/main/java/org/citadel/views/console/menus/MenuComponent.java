@@ -1,20 +1,9 @@
 package org.citadel.views.console.menus;
 
-public abstract class MenuComponent {
+public interface MenuComponent {
+    String getTitle();
 
-    protected String title;
+    void execute();
 
-    public MenuComponent(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public abstract void execute();
-
-    public boolean isActive() {
-        return true;
-    }
+    boolean isActive();
 }

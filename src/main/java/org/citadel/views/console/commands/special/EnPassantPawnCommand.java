@@ -1,14 +1,13 @@
-package org.citadel.views.console.menus.commands.special;
+package org.citadel.views.console.commands.special;
 
 import org.citadel.common.tools.Terminal;
 import org.citadel.controllers.EnPassantPawnController;
-import org.citadel.views.console.menus.commands.Command;
+import org.citadel.views.console.commands.Command;
 
-public class EnPassantPawnCommand extends Command {
+public class EnPassantPawnCommand implements Command {
     private final EnPassantPawnController controller;
 
     public EnPassantPawnCommand(EnPassantPawnController controller) {
-        super("Captura al Paso");
         this.controller = controller;
     }
 

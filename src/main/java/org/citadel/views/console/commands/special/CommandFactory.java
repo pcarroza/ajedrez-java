@@ -1,31 +1,31 @@
-package org.citadel.views.console.menus.commands.special;
+package org.citadel.views.console.commands.special;
 
 import org.citadel.controllers.CastlingMovesController;
 import org.citadel.controllers.EnPassantPawnController;
 import org.citadel.controllers.PromotionPawnController;
 import org.citadel.controllers.SpecialMovementsControllerVisitor;
-import org.citadel.views.console.menus.commands.Command;
+import org.citadel.views.console.menus.MenuItem;
 
 public class CommandFactory implements SpecialMovementsControllerVisitor {
 
-    private Command command;
+    private MenuItem menuItem;
 
-    public Command getCommand() {
-        return command;
+    public MenuItem getMenuItem() {
+        return menuItem;
     }
 
     @Override
     public void visit(CastlingMovesController controller) {
-        command = new CastlingMoveCommand(controller);
+        menuItem = new MenuItem("Enroque", new CastlingMoveCommand(controller));
     }
 
     @Override
     public void visit(EnPassantPawnController controller) {
-        command = new EnPassantPawnCommand(controller);
+        menuItem = new MenuItem("Captura al Paso", new EnPassantPawnCommand(controller));
     }
 
     @Override
     public void visit(PromotionPawnController controller) {
-        command = new PromotionPawnCommand(controller);
+        menuItem = new MenuItem("Promoción de Peón", new PromotionPawnCommand(controller));
     }
 }

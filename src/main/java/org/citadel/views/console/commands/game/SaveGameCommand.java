@@ -1,14 +1,13 @@
-package org.citadel.views.console.menus.commands.game;
+package org.citadel.views.console.commands.game;
 
 import org.citadel.controllers.GameController;
-import org.citadel.views.console.menus.commands.Command;
+import org.citadel.views.console.commands.Command;
 
-public class SaveGameCommand extends Command {
+public class SaveGameCommand implements Command {
 
     private final GameController gameController;
 
-    public SaveGameCommand(String title, GameController menuController) {
-        super(title);
+    public SaveGameCommand(GameController menuController) {
         this.gameController = menuController;
     }
 

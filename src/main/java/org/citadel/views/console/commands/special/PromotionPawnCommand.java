@@ -1,14 +1,13 @@
-package org.citadel.views.console.menus.commands.special;
+package org.citadel.views.console.commands.special;
 
 import org.citadel.common.tools.Terminal;
 import org.citadel.controllers.PromotionPawnController;
-import org.citadel.views.console.menus.commands.Command;
+import org.citadel.views.console.commands.Command;
 
-public class PromotionPawnCommand extends Command {
+public class PromotionPawnCommand implements Command {
     private final PromotionPawnController controller;
 
     public PromotionPawnCommand(PromotionPawnController controller) {
-        super("Promoción de Peón");
         this.controller = controller;
     }
 

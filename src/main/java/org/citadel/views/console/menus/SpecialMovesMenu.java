@@ -1,8 +1,8 @@
 package org.citadel.views.console.menus;
 
 import org.citadel.controllers.SpecialMovementsController;
-import org.citadel.views.console.menus.commands.special.CommandFactory;
-import org.citadel.views.console.menus.commands.special.NullCommand;
+import org.citadel.views.console.commands.special.CommandFactory;
+import org.citadel.views.console.commands.special.NullCommand;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ public class SpecialMovesMenu extends Menu {
         CommandFactory commandFactory = new CommandFactory();
         for (SpecialMovementsController controller : controllers) {
             controller.accept(commandFactory);
-            this.add(commandFactory.getCommand());
+            this.add(commandFactory.getMenuItem());
         }
-        this.add(new NullCommand());
+        this.add(new MenuItem("Ninguno", new NullCommand()));
     }
 }
