@@ -9,19 +9,18 @@ import org.citadel.views.console.menus.commands.game.ShowHistoryCommand;
 
 public class GameMenuView extends Menu {
 
-    private final GameController gameController;
-
     public GameMenuView(GameController gameController) {
-        this.gameController = gameController;
-        this.setCommands();
+        super("MENÚ PRINCIPAL");
+        this.add(new InGameCommand("INICIAR PARTIDA", gameController));
+        this.add(new LoadGameCommand("CARGAR PARTIDA", gameController));
+        this.add(new SaveGameCommand("GUARDAR PARTIDA", gameController));
+        this.add(new ShowHistoryCommand("HISTORIAL DE PARTIDAS", gameController));
+        this.add(new ExitCommand("SALIR DEL JUEGO", gameController));
     }
 
     @Override
-    protected void setCommands() {
-        commands.add(new InGameCommand("[1] INICIAR PARTIDA", gameController));
-        commands.add(new LoadGameCommand("[2] CARGAR PARTIDA", gameController));
-        commands.add(new SaveGameCommand("[3] GUARDAR PARTIDA", gameController));
-        commands.add(new ShowHistoryCommand("[4] HISTORIAL DE PARTIDAS", gameController));
-        commands.add(new ExitCommand("[5] SALIR DEL JUEGO", gameController));
+    public boolean isActive() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isActive'");
     }
 }

@@ -1,8 +1,8 @@
-package org.citadel.models.pieces.rulesofmovements;
+package org.citadel.models.pieces.rulesOfMovements;
+
+import static org.citadel.models.pieces.rulesOfMovements.strategies.BuilderMovementStrategy.buildRookMovements;
 
 import org.citadel.models.pieces.Piece;
-
-import static org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.BuilderMovementStrategy.buildRookMovements;
 
 public class RookMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 

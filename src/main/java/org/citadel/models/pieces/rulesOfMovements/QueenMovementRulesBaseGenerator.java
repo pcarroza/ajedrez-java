@@ -1,8 +1,8 @@
-package org.citadel.models.pieces.rulesofmovements;
+package org.citadel.models.pieces.rulesOfMovements;
+
+import static org.citadel.models.pieces.rulesOfMovements.strategies.BuilderMovementStrategy.buildQueenMovements;
 
 import org.citadel.models.pieces.Piece;
-
-import static org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.BuilderMovementStrategy.buildQueenMovements;
 
 public class QueenMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
 

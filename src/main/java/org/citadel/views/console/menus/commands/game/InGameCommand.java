@@ -16,4 +16,9 @@ public class InGameCommand extends Command {
     public void execute() {
         gameController.startNewGame();
     }
+
+    @Override
+    public boolean isActive() {
+        return !gameController.isGameInProgress();
+    }
 }

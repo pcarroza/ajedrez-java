@@ -1,6 +1,6 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createRookMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createRookMoveRulesBuilder;
 
 public class Rook extends Piece {
 

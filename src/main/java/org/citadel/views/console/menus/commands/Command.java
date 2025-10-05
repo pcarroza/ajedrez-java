@@ -1,15 +1,11 @@
 package org.citadel.views.console.menus.commands;
 
-public abstract class Command {
+import org.citadel.views.console.menus.MenuComponent;
 
-    private final String title;
+public abstract class Command extends MenuComponent {
 
     protected Command(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
+        super(title);
     }
 
     public abstract void execute();

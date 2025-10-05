@@ -4,10 +4,10 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
 
+import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createPawnMoveRulesBuilder;
+
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createPawnMoveRulesBuilder;
 
 public class Pawn extends Piece {
 

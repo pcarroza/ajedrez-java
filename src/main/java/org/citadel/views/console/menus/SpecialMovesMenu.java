@@ -8,21 +8,13 @@ import java.util.List;
 
 public class SpecialMovesMenu extends Menu {
 
-    private final List<? extends SpecialMovementsController> controllers;
-
     public SpecialMovesMenu(List<? extends SpecialMovementsController> controllers) {
-        super();
-        this.controllers = controllers;
-        setCommands();
-    }
-
-    @Override
-    protected void setCommands() {
+        super("MOVIMIENTOS ESPECIALES");
         CommandFactory commandFactory = new CommandFactory();
         for (SpecialMovementsController controller : controllers) {
             controller.accept(commandFactory);
-            commands.add(commandFactory.getCommand());
+            this.add(commandFactory.getCommand());
         }
-        commands.add(new NullCommand());
+        this.add(new NullCommand());
     }
 }

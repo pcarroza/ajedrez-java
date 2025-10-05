@@ -3,10 +3,10 @@ package org.citadel.models.pieces;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMoves;
 
+import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createKingMoveRulesBuilder;
+
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createKingMoveRulesBuilder;
 
 public class  King extends Piece {
 

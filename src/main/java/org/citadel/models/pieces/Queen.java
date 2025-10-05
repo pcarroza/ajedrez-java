@@ -1,6 +1,6 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createQueenMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createQueenMoveRulesBuilder;
 
 public class Queen extends Piece {
 

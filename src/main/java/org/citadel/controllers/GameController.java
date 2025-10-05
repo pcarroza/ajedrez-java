@@ -14,4 +14,6 @@ public interface GameController extends OperationController {
     void showHistory();
 
     void exitGame();
+
+    boolean isGameInProgress();
 }

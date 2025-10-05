@@ -1,6 +1,6 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGeneratorFacade.createBishopMoveRulesBuilder;
+import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createBishopMoveRulesBuilder;
 
 public class Bishop extends Piece {
 

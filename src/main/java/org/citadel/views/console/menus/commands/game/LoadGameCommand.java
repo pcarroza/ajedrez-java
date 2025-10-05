@@ -16,4 +16,9 @@ public class LoadGameCommand extends Command {
     public void execute() {
         gameController.loadGame();
     }
+
+    @Override
+    public boolean isActive() {
+        return !gameController.isGameInProgress();
+    }
 }

@@ -1,4 +1,4 @@
-package org.citadel.models.pieces.rulesofmovements;
+package org.citadel.models.pieces.rulesOfMovements;
 
 import org.citadel.models.pieces.Piece;
 

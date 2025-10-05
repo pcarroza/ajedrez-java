@@ -3,7 +3,7 @@ package org.citadel.models.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.citadel.models.pieces.rulesofmovements.MovementRulesBaseGenerator;
+import org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGenerator;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 

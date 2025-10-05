@@ -16,3 +16,4 @@ public class ConsoleView implements View {
         new GameMenuView(gameController).execute();
     }
 }
+ 

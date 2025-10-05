@@ -1,40 +1,55 @@
 package org.citadel.views.console.menus;
 
 import org.citadel.common.tools.Terminal;
-import org.citadel.views.console.menus.commands.Command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public abstract class Menu {
+public abstract class Menu extends MenuComponent {
 
-    protected List<Command> commands;
+    protected List<MenuComponent> components;
 
-    public Menu() {
-        commands = new ArrayList<Command>();
+    public Menu(String title) {
+        super(title);
+        components = new ArrayList<>();
     }
 
-    protected abstract void setCommands();
+    public void add(MenuComponent menuComponent) {
+        components.add(menuComponent);
+    }
 
     public void execute() {
-        this.write();
-        int option = this.getOption();
-        commands.get(option).execute();
+        List<MenuComponent> activeComponents = getActiveComponents();
+        if (activeComponents.isEmpty()) {
+            Terminal.writeln("No hay opciones disponibles.");
+            return;
+        }
+        write(activeComponents);
+        int option = getOption(activeComponents.size());
+        activeComponents.get(option).execute();
     }
 
-    private void write() {
-        Terminal.writeln("");
+    private List<MenuComponent> getActiveComponents() {
+        return components.stream()
+                .filter(MenuComponent::isActive)
+                .collect(Collectors.toList());
+    }
+
+    private void write(List<MenuComponent> activeComponents) {
+        Terminal.writeln("\n---------------------");
+        Terminal.writeln(this.getTitle());
         Terminal.writeln("---------------------");
-        for (int i = 0; i < commands.size(); i++) {
-            Terminal.writeln((i + 1) + ". " + commands.get(i).getTitle());
+        for (int i = 0; i < activeComponents.size(); i++) {
+            Terminal.writeln((i + 1) + ". " + activeComponents.get(i).getTitle());
         }
     }
 
-    private int getOption() {
+    private int getOption(int max) {
         int option;
         do {
             option = Terminal.readInt("Opción");
-        } while (option < 1 || option > commands.size());
+        } while (option < 1 || option > max);
         return option - 1;
     }
 }

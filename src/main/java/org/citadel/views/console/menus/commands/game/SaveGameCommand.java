@@ -16,4 +16,9 @@ public class SaveGameCommand extends Command {
     public void execute() {
         gameController.saveGame();
     }
+
+    @Override
+    public boolean isActive() {
+        return gameController.isGameInProgress();
+    }
 }
