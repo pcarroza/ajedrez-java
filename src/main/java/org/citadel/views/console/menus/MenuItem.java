@@ -5,6 +5,7 @@ import org.citadel.views.console.commands.Command;
 public class MenuItem implements MenuComponent {
 
     private final String title;
+
     private final Command command;
 
     public MenuItem(String title, Command command) {
