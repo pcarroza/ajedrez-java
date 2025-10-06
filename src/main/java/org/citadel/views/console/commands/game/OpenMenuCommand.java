@@ -17,6 +17,6 @@ public class OpenMenuCommand implements Command {
 
     @Override
     public void execute() {
-        context.setCurrentMenu(menu);
+        context.navigateTo(menu);
     }
 }

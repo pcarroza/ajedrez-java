@@ -1,18 +1,35 @@
 package org.citadel.views.console.menus;
 
+import java.util.Stack;
+
 public class MenuContext {
 
-    private Menu currentMenu;
+    private final Stack<Menu> menuStack = new Stack<>();
 
-    public void execute() {
-        currentMenu.execute();
+    public MenuContext(Menu initialMenu) {
+        this.menuStack.push(initialMenu);
     }
 
-    public void setCurrentMenu(Menu currentMenu) {
-        this.currentMenu = currentMenu;
+    public void execute() {
+        if (!menuStack.isEmpty()) {
+            getCurrentMenu().execute();
+        }
     }
 
     public Menu getCurrentMenu() {
-        return currentMenu;
+        if (menuStack.isEmpty()) {
+            return null;
+        }
+        return menuStack.peek();
+    }
+
+    public void navigateTo(Menu menu) {
+        this.menuStack.push(menu);
+    }
+
+    public void back() {
+        if (menuStack.size() > 1) { // Solo hacer pop si no es el menú raíz
+            this.menuStack.pop();
+        }
     }
 }

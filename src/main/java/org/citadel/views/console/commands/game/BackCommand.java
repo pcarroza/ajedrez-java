@@ -16,12 +16,6 @@ public class BackCommand implements Command {
 
     @Override
     public void execute() {
-        Menu current = menuContext.getCurrentMenu();
-        if (current != null && current.getParent() != null) {
-            menuContext.setCurrentMenu(current.getParent());
-            Terminal.writeln("⬅️ Volviendo a " + current.getParent().getTitle());
-        } else {
-            Terminal.writeln("⚠️ Ya estás en el menú principal.");
-        }
+        context.back();
     }
 }

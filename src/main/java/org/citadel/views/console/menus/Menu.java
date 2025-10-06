@@ -12,8 +12,6 @@ public class Menu implements MenuComponent {
 
     private List<MenuComponent> activeComponents = null;
 
-    private Menu parent;
-
     public Menu(String title) {
         this.title = title;
     }
@@ -61,13 +59,5 @@ public class Menu implements MenuComponent {
             option = Terminal.readInt("Opción: ");
         } while (option < 1 || option > max);
         return option - 1;
-    }
-
-    public Menu getParent() {
-        return parent;
-    }
-
-    public void setParent(Menu parent) {
-        this.parent = parent;
     }
 }
