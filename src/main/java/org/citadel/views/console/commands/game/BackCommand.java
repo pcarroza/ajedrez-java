@@ -7,18 +7,18 @@ import org.citadel.views.console.menus.MenuContext;
 
 public class BackCommand implements Command {
 
-    private final MenuContext context;
+    private final MenuContext menuContext;
 
-    public BackCommand(MenuContext context) {
+    public BackCommand(MenuContext menuContext) {
         super();
-        this.context = context;
+        this.menuContext = menuContext;
     }
 
     @Override
     public void execute() {
-        Menu current = context.getCurrentMenu();
+        Menu current = menuContext.getCurrentMenu();
         if (current != null && current.getParent() != null) {
-            context.setCurrentMenu(current.getParent());
+            menuContext.setCurrentMenu(current.getParent());
             Terminal.writeln("⬅️ Volviendo a " + current.getParent().getTitle());
         } else {
             Terminal.writeln("⚠️ Ya estás en el menú principal.");
