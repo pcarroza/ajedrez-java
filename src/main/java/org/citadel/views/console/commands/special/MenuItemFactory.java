@@ -16,16 +16,16 @@ public class MenuItemFactory implements SpecialMovementsControllerVisitor {
 
     @Override
     public void visit(CastlingMovesController controller) {
-        menuItem = new MenuItem("[1] ENROQUE", new CastlingMoveCommand(controller));
+        menuItem = new MenuItem("ENROQUE", new CastlingMoveCommand(controller));
     }
 
     @Override
     public void visit(EnPassantPawnController controller) {
-        menuItem = new MenuItem("[2] CAPTURA AL PASO", new EnPassantPawnCommand(controller));
+        menuItem = new MenuItem("CAPTURA AL PASO", new EnPassantPawnCommand(controller));
     }
 
     @Override
     public void visit(PromotionPawnController controller) {
-        menuItem = new MenuItem("[3] PROMOCIÓN DE PEÓN", new PromotionPawnCommand(controller));
+        menuItem = new MenuItem("PROMOCIÓN DE PEÓN", new PromotionPawnCommand(controller));
     }
 }
