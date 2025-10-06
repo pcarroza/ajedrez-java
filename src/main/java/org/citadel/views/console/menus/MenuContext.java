@@ -1,6 +1,7 @@
 package org.citadel.views.console.menus;
 
 public class MenuContext {
+
     private Menu currentMenu;
 
     public MenuContext(Menu initialMenu) {

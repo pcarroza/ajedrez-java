@@ -15,7 +15,7 @@ public class GameMenuView extends Menu {
         add(new MenuItem("INICIAR NUEVA PARTIDA", new InGameCommand(gameController)));
         add(new MenuItem("CARGAR PARTIDA", new LoadGameCommand(gameController)));
         add(new MenuItem("GUARDAR PARTIDA", new SaveGameCommand(gameController)));
-        add(new MenuItem("HISTORIAL...", new OpenMenuCommand(context, historyMenu))); // <- Abre el submenú
+        add(new MenuItem("HISTORIAL", new OpenMenuCommand(context, historyMenu))); // <- Abre el submenú
         add(new MenuItem("SALIR DE LA PARTIDA", new ExitCommand(gameController)));
     }
 }
