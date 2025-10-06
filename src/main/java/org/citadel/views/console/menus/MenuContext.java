@@ -28,7 +28,7 @@ public class MenuContext {
     }
 
     public void back() {
-        if (menuStack.size() > 1) { // Solo hacer pop si no es el menú raíz
+        if (menuStack.size() > 1) {
             this.menuStack.pop();
         }
     }

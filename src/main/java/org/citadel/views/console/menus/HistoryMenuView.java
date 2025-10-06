@@ -9,7 +9,6 @@ public class HistoryMenuView extends Menu {
 
     public HistoryMenuView(GameController gameController, MenuContext context) {
         super("MENÚ PRINCIPAL");
-        setParent(this);
         add(new MenuItem("HISTORIAL DE PARTIDAS", new ShowHistoryCommand(gameController)));
         add(new MenuItem("HISTORIAL DE JUGADAS", new GameHistoryCommand(gameController)));
         add(new MenuItem("VOLVER", new BackCommand(context)));
