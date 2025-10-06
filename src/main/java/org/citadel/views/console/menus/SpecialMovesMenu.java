@@ -8,13 +8,13 @@ import java.util.List;
 
 public class SpecialMovesMenu extends Menu {
 
-    public SpecialMovesMenu(List<? extends SpecialMovementsController> controllers) {
+    public SpecialMovesMenu(List<? extends SpecialMovementsController> controllers, MenuContext context) {
         super("MOVIMIENTOS ESPECIALES");
         MenuItemFactory menuItemFactory = new MenuItemFactory();
         for (SpecialMovementsController controller : controllers) {
             controller.accept(menuItemFactory);
-            this.add(menuItemFactory.getMenuItem());
+            add(menuItemFactory.getMenuItem());
         }
-        this.add(new MenuItem("VOLVER ATRÁS", new BackCommand(null)));
+        add(new MenuItem("VOLVER ATRÁS", new BackCommand(context)));
     }
 }
