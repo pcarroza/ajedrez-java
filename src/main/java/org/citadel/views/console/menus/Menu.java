@@ -3,13 +3,16 @@ package org.citadel.views.console.menus;
 import org.citadel.common.tools.Terminal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Menu implements MenuComponent {
 
     private final String title;
 
     private final List<MenuComponent> components = new ArrayList<>();
+
+    private Menu parent;
+
+    private List<MenuComponent> activeComponents = null;
 
     public Menu(String title) {
         this.title = title;
@@ -26,9 +29,9 @@ public class Menu implements MenuComponent {
 
     @Override
     public void execute() {
-        List<MenuComponent> activeComponents = getActiveComponents();
+        activeComponents = getActiveComponents();
         if (!activeComponents.isEmpty()) {
-            write(activeComponents);
+            write();
             int option = getOption(activeComponents.size());
             activeComponents.get(option).execute();
         }
@@ -43,7 +46,7 @@ public class Menu implements MenuComponent {
         return components.stream().filter(MenuComponent::isActive).toList();
     }
 
-    private void write(List<MenuComponent> activeComponents) {
+    public void write() {
         Terminal.writeln("\n---------------------");
         Terminal.writeln(this.getTitle());
         Terminal.writeln("---------------------");
@@ -55,8 +58,16 @@ public class Menu implements MenuComponent {
     private int getOption(int max) {
         int option;
         do {
-            option = Terminal.readInt("Opción");
+            option = Terminal.readInt("Opción: ");
         } while (option < 1 || option > max);
         return option - 1;
+    }
+
+    public Menu getParent() {
+        return parent;
+    }
+
+    public void setParent(Menu parent) {
+        this.parent = parent;
     }
 }
