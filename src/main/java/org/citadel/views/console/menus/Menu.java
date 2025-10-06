@@ -30,6 +30,7 @@ public class Menu implements MenuComponent {
         if (!activeComponents.isEmpty()) {
             write(activeComponents);
             int option = getOption(activeComponents.size());
+            activeComponents.get(option).execute();
         }
     }
 
@@ -39,9 +40,7 @@ public class Menu implements MenuComponent {
     }
 
     private List<MenuComponent> getActiveComponents() {
-        return components.stream()
-                .filter(MenuComponent::isActive)
-                .collect(Collectors.toList());
+        return components.stream().filter(MenuComponent::isActive).toList();
     }
 
     private void write(List<MenuComponent> activeComponents) {
