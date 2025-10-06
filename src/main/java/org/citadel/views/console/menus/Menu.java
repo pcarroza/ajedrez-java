@@ -48,7 +48,7 @@ public class Menu implements MenuComponent {
         Terminal.writeln(this.getTitle());
         Terminal.writeln("---------------------");
         for (int i = 0; i < activeComponents.size(); i++) {
-            Terminal.writeln((i + 1) + ". " + activeComponents.get(i).getTitle());
+            Terminal.writeln("[" + (i + 1) + "]" + activeComponents.get(i).getTitle());
         }
     }
 
