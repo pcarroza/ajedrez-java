@@ -1,5 +1,6 @@
-import org.citadel.common.tools.Terminal;
+package org.citadel.views.console.menus;
 
+import org.citadel.common.tools.Terminal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

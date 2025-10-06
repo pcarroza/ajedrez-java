@@ -1,5 +1,6 @@
+package org.citadel.views.console.menus;
+
 import org.citadel.controllers.GameController;
-import org.citadel.models.Game;
 import org.citadel.views.console.commands.game.ExitCommand;
 import org.citadel.views.console.commands.game.GameHistoryCommand;
 import org.citadel.views.console.commands.game.InGameCommand;

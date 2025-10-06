@@ -6,7 +6,7 @@ import org.citadel.controllers.PromotionPawnController;
 import org.citadel.controllers.SpecialMovementsControllerVisitor;
 import org.citadel.views.console.menus.MenuItem;
 
-public class CommandFactory implements SpecialMovementsControllerVisitor {
+public class MenuItemFactory implements SpecialMovementsControllerVisitor {
 
     private MenuItem menuItem;
 
