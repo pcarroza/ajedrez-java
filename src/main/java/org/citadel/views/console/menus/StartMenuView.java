@@ -1,10 +1,15 @@
 package org.citadel.views.console.menus;
 
+import org.citadel.controllers.GameController;
+import org.citadel.views.console.commands.game.ExitCommand;
+import org.citadel.views.console.commands.game.InGameCommand;
+
 public class StartMenuView extends Menu {
 
-    StartMenuView() {
+    StartMenuView(GameController gameController) {
         super("MENÚ DE INICIO");
-        // Aquí puedes agregar los comandos específicos para el menú de inicio si los tienes
-        // Ejemplo: this.add(new SomeStartCommand());
+        this.add(new MenuItem("[1] INICIAR PARTIDA", new InGameCommand(gameController)));
+        this.add(new MenuItem("[5] SALIR DEL JUEGO", new ExitCommand(gameController)));
+
     }
 }
