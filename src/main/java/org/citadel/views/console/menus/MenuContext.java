@@ -6,7 +6,11 @@ public class MenuContext {
 
     private final Stack<Menu> menuStack = new Stack<>();
 
-    public MenuContext(Menu initialMenu) {
+    public MenuContext() {
+    }
+
+    public void start(Menu initialMenu) {
+        this.menuStack.clear();
         this.menuStack.push(initialMenu);
     }
 

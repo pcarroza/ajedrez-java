@@ -15,11 +15,11 @@ public class ConsoleView implements View {
     }
 
     public void visit(GameController gameController) {
-        MenuContext context = new MenuContext();
-        Menu gameMenuView = new GameMenuView(gameController, context);
-        context.setCurrentMenu(gameMenuView);
+        MenuContext menuContext = new MenuContext();
+        Menu gameMenuView = new GameMenuView(gameController, menuContext);
+        menuContext.start(gameMenuView);
         while (true) {
-            context.execute();
+            menuContext.execute();
         }
     }
 }
