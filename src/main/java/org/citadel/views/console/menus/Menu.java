@@ -26,13 +26,10 @@ public class Menu implements MenuComponent {
     @Override
     public void execute() {
         List<MenuComponent> activeComponents = getActiveComponents();
-        if (activeComponents.isEmpty()) {
-            Terminal.writeln("No hay opciones disponibles.");
-            return;
+        if (!activeComponents.isEmpty()) {
+            write(activeComponents);
+            int option = getOption(activeComponents.size());
         }
-        write(activeComponents);
-        int option = getOption(activeComponents.size());
-        activeComponents.get(option).execute();
     }
 
     @Override

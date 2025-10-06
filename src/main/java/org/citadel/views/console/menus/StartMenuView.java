@@ -10,6 +10,5 @@ public class StartMenuView extends Menu {
         super("MENÚ DE INICIO");
         this.add(new MenuItem("[1] INICIAR PARTIDA", new InGameCommand(gameController)));
         this.add(new MenuItem("[5] SALIR DEL JUEGO", new ExitCommand(gameController)));
-
     }
 }
