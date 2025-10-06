@@ -10,9 +10,9 @@ public class Menu implements MenuComponent {
 
     private final List<MenuComponent> components = new ArrayList<>();
 
-    private Menu parent;
-
     private List<MenuComponent> activeComponents = null;
+
+    private Menu parent;
 
     public Menu(String title) {
         this.title = title;
