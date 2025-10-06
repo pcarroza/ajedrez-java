@@ -11,11 +11,11 @@ public class GameMenuView extends Menu {
         historyMenu.setParent(this);
         historyMenu.add(new MenuItem("HISTORIAL DE PARTIDAS", new ShowHistoryCommand(gameController)));
         historyMenu.add(new MenuItem("HISTORIAL DE JUGADAS", new GameHistoryCommand(gameController)));
-        historyMenu.add(new MenuItem("VOLVER", new BackCommand(context))); // <- El comando para volver
+        historyMenu.add(new MenuItem("VOLVER", new BackCommand(context)));
         add(new MenuItem("INICIAR NUEVA PARTIDA", new InGameCommand(gameController)));
         add(new MenuItem("CARGAR PARTIDA", new LoadGameCommand(gameController)));
         add(new MenuItem("GUARDAR PARTIDA", new SaveGameCommand(gameController)));
-        add(new MenuItem("HISTORIAL", new OpenMenuCommand(context, historyMenu))); // <- Abre el submenú
+        add(new MenuItem("HISTORIAL", new OpenMenuCommand(context, historyMenu)));
         add(new MenuItem("SALIR DE LA PARTIDA", new ExitCommand(gameController)));
     }
 }
