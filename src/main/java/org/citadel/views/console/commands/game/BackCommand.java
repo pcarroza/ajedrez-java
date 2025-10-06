@@ -1,8 +1,6 @@
 package org.citadel.views.console.commands.game;
 
-import org.citadel.common.tools.Terminal;
 import org.citadel.views.console.commands.Command;
-import org.citadel.views.console.menus.Menu;
 import org.citadel.views.console.menus.MenuContext;
 
 public class BackCommand implements Command {
@@ -16,6 +14,6 @@ public class BackCommand implements Command {
 
     @Override
     public void execute() {
-        context.back();
+        menuContext.back();
     }
 }
