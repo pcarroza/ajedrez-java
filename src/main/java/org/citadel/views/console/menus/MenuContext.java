@@ -5,6 +5,8 @@ import java.util.Stack;
 public class MenuContext {
 
     private final Stack<Menu> menuStack = new Stack<>();
+    
+    private boolean exit = false;
 
     public MenuContext() {
     }
@@ -35,5 +37,13 @@ public class MenuContext {
         if (menuStack.size() > 1) {
             this.menuStack.pop();
         }
+    }
+
+    public boolean isExited() {
+        return exit;
+    }
+
+    public void exit() {
+        this.exit = true;
     }
 }
