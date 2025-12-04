@@ -1,6 +1,6 @@
 package org.citadel.models.pieces.rulesofmovements.commonmovementstrategy;
 
-import org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.utils.MovementGenerationControl;
+import org.citadel.models.pieces.rulesofmovements.commonmovementstrategy.utils.ControlFlag;
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
@@ -15,12 +15,12 @@ public abstract class MovementStrategy {
 
     protected Piece piece;
 
-    private final MovementGenerationControl movementControl;
+    private final ControlFlag controlFlag;
 
     protected MovementStrategy(Piece piece) {
         assert piece != null;
         this.piece = piece;
-        movementControl = new MovementGenerationControl();
+        controlFlag = new ControlFlag();
     }
 
     protected abstract Stream<Coordinate> generate();
@@ -30,12 +30,12 @@ public abstract class MovementStrategy {
         List<Coordinate> coordinates = new ArrayList<>();
         final int step = 1;
         generateRecursive(coordinates, vector, step);
-        movementControl.reset();
+        controlFlag.reset();
         return coordinates.stream();
     }
 
     private void generateRecursive(List<Coordinate> coordinates, Coordinate vector, int step) {
-        if (!isWithinBoardLimits(step) || !movementControl.shouldContinue()) {
+        if (!isWithinBoardLimits(step) || !controlFlag.shouldContinue()) {
             return;
         }
         Coordinate coordinate = getDisplacedCoordinateBy(step, vector);
@@ -56,11 +56,11 @@ public abstract class MovementStrategy {
     private boolean isPossibleMove(Coordinate coordinate) {
         assert coordinate != null;
         if (piece.isItEnemy(coordinate)) {
-            movementControl.stop();
+            controlFlag.stop();
             return true;
         }
         if (piece.sameColor(coordinate)) {
-            movementControl.stop();
+            controlFlag.stop();
             return false;
         }
         return true;

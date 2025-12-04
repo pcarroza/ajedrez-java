@@ -1,6 +1,6 @@
 package org.citadel.models.pieces;
 
-public interface SelectablePiece {
+public interface SelectedPiece {
 
     void put(Coordinate coordinate);
 
@@ -9,6 +9,4 @@ public interface SelectablePiece {
     boolean isThePawnPromoted();
 
     void buildMovements();
-
-    void notifiesMovementsToTheBoard();
 }

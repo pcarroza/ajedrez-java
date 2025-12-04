@@ -4,7 +4,6 @@ import org.citadel.models.pieces.specialmovesrules.SpecialMoveRule;
 import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMove;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createKingMoveRulesManager;
@@ -15,7 +14,6 @@ public class King extends Piece {
 
     private final SpecialMoveRule specialMoveRule;
 
-    private List<Coordinate> concatMovements;
 
     public King(Coordinate coordinate, Color color) {
         super(coordinate, color);
@@ -28,7 +26,7 @@ public class King extends Piece {
         if (isNotMoved()) {
             close();
         }
-        super.put(target);
+        super.put(target.copy());
     }
 
     @Override
@@ -40,14 +38,9 @@ public class King extends Piece {
     public void buildMovements() {
         super.buildMovements();
         specialMoveRule.buildMovements();
-        concatMovements = new ArrayList<>();
-        concatMovements = Stream
+        validMovements = new ArrayList<>();
+        validMovements = Stream
                 .concat(specialMoveRule.getMovements().stream(), moveRulesManager.getMovements().stream()).toList();
-    }
-
-    @Override
-    public void notifiesMovementsToTheBoard() {
-        notify(concatMovements);
     }
 
     @Override

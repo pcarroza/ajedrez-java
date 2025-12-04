@@ -2,7 +2,7 @@ package org.citadel.models;
 
 import org.citadel.models.pieces.Color;
 
-public class Turn implements Cloneable {
+public class Turn {
 
     private int value = 0;
 
@@ -14,12 +14,13 @@ public class Turn implements Cloneable {
         this.value = (value + 1) % (Color.values().length - 1);
     }
 
-    @Override
-    public Turn clone() {
-        try {
-            return (Turn) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public int getIndexCurrentPlayer() {
+        return getColor().ordinal();
+    }
+
+    public Turn copy() {
+        Turn turn = new Turn();
+        turn.value = value;
+        return turn;
     }
 }

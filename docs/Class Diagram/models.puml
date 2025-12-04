@@ -92,20 +92,6 @@ class models.Game {
 + void exit()
 }
 
-interface models.pieces.SegregatedPiece {
-~ void put(Coordinate)
-~ boolean isMovementValid(Coordinate)
-~ boolean isPawnAtPromotionRank()
-~ boolean isNotMoved()
-~ Coordinate getCoordinate()
-~ Color getColor()
-~ boolean has(Coordinate)
-~ void notifyValidMovements()
-~ boolean isKing()
-~ boolean isRook()
-}
-
-
 abstract class models.pieces.Piece {
 # PieceMovementManager movementManager
 - Coordinate coordinate
@@ -161,31 +147,27 @@ package models.pieces.specialMoveRules {}
 
 models.pieces.Piece <|-- models.pieces.Bishop
 models.pieces.Piece <|-- models.pieces.Knight
-models.Cloneable <|.. models.pieces.Coordinate
 models.pieces.ObserverBoard <|.. models.Board
 models.Observer <|-- models.Game
 models.Game *--> models.Board
 models.Game ..> models.pieces.Coordinate
-models.Board ...> models.Turn
+models.Board ..> models.Turn
 models.Board ..> models.pieces.Color
 models.Board ..> models.pieces.Coordinate
 models.Board ..> models.pieces.PiecesBuilder
 models.Board --> models.pieces.SelectablePiece
-models.Board ..> models.pieces.SegregatedPiece
 models.Turn ..> models.pieces.Color
 models.pieces.ObserverBoard ..> models.pieces.Coordinate
 models.SubjectBoard <|-- models.Board
-models.SubjectBoard -left-> models.Observer
+models.SubjectBoard --> models.Observer
 models.pieces.SelectablePiece <|.. models.pieces.Piece
-models.pieces.SegregatedPiece <|.. models.pieces.Piece
 models.pieces.SubjectPiece --> models.pieces.ObserverBoard
 models.pieces.SubjectPiece <|-- models.pieces.Piece
 models.pieces.Piece <|-- models.pieces.Queen
 models.pieces.Piece <|-- models.pieces.Rook
 models.pieces.Piece <|-- models.pieces.Pawn
 models.pieces.Piece ..> models.pieces.Color
-models.pieces.Piece -right-> models.pieces.Coordinate
-models.Cloneable <|.. models.Turn
+models.pieces.Piece --> models.pieces.Coordinate
 models.pieces.Piece <|-- models.pieces.King
 models.pieces.Piece --> models.pieces.specialMoveRules
 models.pieces.PiecesBuilder ..> models.pieces.Pawn

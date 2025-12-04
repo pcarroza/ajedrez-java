@@ -2,7 +2,7 @@ package org.citadel.models.pieces;
 
 import static org.citadel.models.pieces.rulesofmovements.FacadeMotionManager.createBishopMoveRulesManager;
 
-public class  Bishop extends Piece {
+public class Bishop extends Piece {
 
     public Bishop(Coordinate coordinate, Color color) {
         super(coordinate, color);

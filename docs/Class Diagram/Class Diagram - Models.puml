@@ -110,7 +110,6 @@ class  models.pieces.rulesOfMovements.RookMoveRulesManager {
 
 models.pieces.Piece <|-- models.pieces.Bishop
 models.pieces.Piece <|-- models.pieces.Knight
-models.Cloneable <|.. models.pieces.Coordinate
 models.pieces.ObserverBoard <|.. models.Board
 models.Observer <|-- models.Game
 models.Game *--> models.Board
@@ -132,7 +131,6 @@ models.pieces.Piece <|-- models.pieces.Rook
 models.pieces.Piece <|-- models.pieces.Pawn
 models.pieces.Piece ..> models.pieces.Color
 models.pieces.Piece -right-> models.pieces.Coordinate
-models.Cloneable <|.. models.Turn
 models.pieces.Piece <|-- models.pieces.King
 
 models.pieces.PiecesBuilder ..> models.pieces.Pawn

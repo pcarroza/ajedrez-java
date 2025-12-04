@@ -1,7 +1,5 @@
 package org.citadel.models.pieces;
 
-import java.util.List;
-
 public abstract class SubjectPiece {
 
     protected ObserverBoard observerBoard;
@@ -24,9 +22,5 @@ public abstract class SubjectPiece {
 
     public void addPassantPawn(Piece piece) {
         observerBoard.set(piece);
-    }
-
-    protected void notify(List<Coordinate> coordinates) {
-        observerBoard.set(coordinates);
     }
 }
