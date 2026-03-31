@@ -1,7 +1,7 @@
 package org.citadel.controllers.local;
 
-import org.citadel.models.pieces.Player;
 import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.pieces.enums.Player;
 import org.citadel.models.Game;
 
 public class LocalController {

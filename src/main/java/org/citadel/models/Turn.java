@@ -1,6 +1,6 @@
 package org.citadel.models;
 
-import org.citadel.models.pieces.Player;
+import org.citadel.models.pieces.enums.Player;
 
 public class Turn {
 

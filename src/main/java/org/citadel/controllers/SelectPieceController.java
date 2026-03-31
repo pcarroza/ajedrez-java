@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.citadel.controllers.local.LocalSpecialMovementsController;
 import org.citadel.models.pieces.Coordinate;
-import org.citadel.models.pieces.Player;
+import org.citadel.models.pieces.enums.Player;
 
 public interface SelectPieceController extends PlacementController {
 

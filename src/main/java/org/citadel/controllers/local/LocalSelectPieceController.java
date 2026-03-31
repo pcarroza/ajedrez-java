@@ -9,7 +9,7 @@ import org.citadel.models.Game;
 
 import java.util.List;
 
-import org.citadel.models.pieces.Player;
+import org.citadel.models.pieces.enums.Player;
 
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 

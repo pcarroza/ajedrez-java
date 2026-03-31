@@ -2,6 +2,7 @@ package org.citadel.models;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.*;
+import org.citadel.models.pieces.enums.Player;
 import org.citadel.models.pieces.visitors.PieceInspector;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.stream.Stream;
 
 import static org.citadel.common.tools.Terminal.input;
 import static org.citadel.common.tools.Terminal.writeln;
-import static org.citadel.models.pieces.Player.BLACK;
-import static org.citadel.models.pieces.Player.WHITE;
+import static org.citadel.models.pieces.enums.Player.BLACK;
+import static org.citadel.models.pieces.enums.Player.WHITE;
 import static org.citadel.models.pieces.PiecesMapBuilder.*;
 
 public class Board extends SubjectBoard implements BoardObserver {

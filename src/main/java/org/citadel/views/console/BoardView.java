@@ -3,7 +3,7 @@ package org.citadel.views.console;
 import org.citadel.common.tools.Terminal;
 import org.citadel.controllers.PlacementController;
 import org.citadel.models.pieces.Coordinate;
-import org.citadel.models.pieces.Player;
+import org.citadel.models.pieces.enums.Player;
 
 public class BoardView {
 
