@@ -10,7 +10,7 @@ public abstract class LocalPlacementController extends LocalOperationController 
     }
 
     @Override
-    public String getPieceChar(Coordinate coordinate) {
-        return super.getPieceChar(coordinate);
+    public String getPieceSimbol(Coordinate coordinate) {
+        return super.getPieceSimbol(coordinate);
     }
 }

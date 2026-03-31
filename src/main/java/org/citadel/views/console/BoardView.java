@@ -12,7 +12,7 @@ public class BoardView {
         for (int i = 7; i >= 0; i--) {
             Terminal.write((i + 1) + " ");
             for (int j = 0; j < 8; j++) {
-                String pieceChar = controller.getPieceChar(new Coordinate(i, j));
+                String pieceChar = controller.getPieceSimbol(new Coordinate(i, j));
                 Terminal.write(pieceChar + " ");
             }
             Terminal.writeln("" + (i + 1));

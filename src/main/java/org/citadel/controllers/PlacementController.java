@@ -6,6 +6,6 @@ public interface PlacementController extends OperationController {
 
     void accept(PlacementControllerVisitor placementControllerVisitor);
 
-    String getPieceChar(Coordinate coordinate);
+    String getPieceSimbol(Coordinate coordinate);
 }
 

@@ -14,7 +14,7 @@ public class Game {
         board.subscribe(observer);
     }
 
-    public String getPieceChar(Coordinate coordinate) {
+    public String getPieceSimbol(Coordinate coordinate) {
         return board.getPieceChar(coordinate);
     }
 
@@ -54,7 +54,7 @@ public class Game {
         return board.getRivalPlayer();
     }
 
-    public void change() {
+    public void switchTurn() {
         board.changeTurn();
     }
 

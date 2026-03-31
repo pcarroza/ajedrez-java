@@ -12,6 +12,10 @@ public class LocalController {
         this.game = game;
     }
 
+    public String getPieceSimbol(Coordinate coordinate) {
+        return game.getPieceSimbol(coordinate);
+    }
+
     public void put(Coordinate coordinate) {
         game.putPiece(coordinate);
     }
@@ -44,8 +48,8 @@ public class LocalController {
         return game.getRivalPlayer();
     }
 
-    public void change() {
-        game.change();
+    public void switchTurn() {
+        game.switchTurn();
     }
 
     public boolean isTheWhitePieceSelected(Coordinate coordinate) {
@@ -70,9 +74,5 @@ public class LocalController {
 
     public void exit() {
         game.exit();
-    }
-    
-    public String getPieceChar(Coordinate coordinate) {
-        return game.getPieceChar(coordinate);
     }
 }
