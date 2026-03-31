@@ -4,12 +4,9 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
-import org.citadel.models.modules.game.pieces.Rook;
-import org.citadel.models.modules.game.pieces.Knight;
-import org.citadel.models.modules.game.pieces.Bishop;
-import org.citadel.models.modules.game.pieces.Queen;
 import org.citadel.models.modules.game.pieces.SelectedPiece;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.enums.PromotionType;
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 
 import java.util.ArrayList;
@@ -151,24 +148,9 @@ public class Board extends SubjectBoard implements BoardObserver {
         assert PieceInspector.isPawn((Piece) selectedPiece);
         Coordinate coordinate = ((Piece) selectedPiece).getCoordinate();
         Player player = getCurrentPlayer();
-        Piece newPiece;
-        switch (pieceType.toUpperCase()) {
-            case "T":
-                newPiece = new Rook(coordinate, player);
-                break;
-            case "C":
-                newPiece = new Knight(coordinate, player);
-                break;
-            case "B":
-                newPiece = new Bishop(coordinate, player);
-                break;
-            case "Q":
-            default:
-                newPiece = new Queen(coordinate, player);
-                break;
-        }
-        piecesMap.get(player).remove((Piece) selectedPiece);
+        Piece newPiece = PromotionType.fromString(pieceType).create(coordinate, player);
         newPiece.subscribe(this);
+        piecesMap.get(player).remove((Piece) selectedPiece);
         piecesMap.get(player).add(newPiece);
         selectedPiece = newPiece;
     }
