@@ -31,7 +31,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         set(target.copy());
     }
 
-    public List<Coordinate> getValidMovements() {
+    public List<Coordinate> getMovements() {
         return validMovements;
     }
 

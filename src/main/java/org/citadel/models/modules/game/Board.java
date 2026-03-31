@@ -83,7 +83,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .findFirst()
                 .ifPresentOrElse(piece -> {
                     piece.generateMovements();
-                    set(piece.getValidMovements());
+                    set(piece.getMovements());
                     selectedPiece = piece;
                 }, () -> {
                     assert false;
