@@ -1,6 +1,6 @@
 package org.citadel.controllers.modules.game;
 
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 import java.util.List;
 

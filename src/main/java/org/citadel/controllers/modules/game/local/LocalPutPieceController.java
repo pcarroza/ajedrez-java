@@ -4,8 +4,8 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.modules.game.OperationControllerVisitor;
 import org.citadel.controllers.modules.game.PlacementControllerVisitor;
 import org.citadel.controllers.modules.game.PutPieceController;
-import org.citadel.models.Game;
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.Game;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class LocalPutPieceController extends LocalPlacementController implements PutPieceController {
 

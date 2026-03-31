@@ -1,6 +1,6 @@
 package org.citadel.controllers.modules.game.local;
 
-import org.citadel.models.Game;
+import org.citadel.models.modules.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;

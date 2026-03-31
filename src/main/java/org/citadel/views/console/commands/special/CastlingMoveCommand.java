@@ -1,6 +1,6 @@
 package org.citadel.views.console.commands.special;
 
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.views.console.commands.Command;
 import org.citadel.common.tools.Terminal;
 import org.citadel.controllers.modules.game.CastlingMovesController;

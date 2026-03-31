@@ -2,9 +2,9 @@ package org.citadel.controllers.modules.game.local;
 
 import org.citadel.controllers.modules.game.CastlingMovesController;
 import org.citadel.controllers.modules.game.SpecialMovementsControllerVisitor;
-import org.citadel.models.Game;
+import org.citadel.models.modules.game.Game;
 
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 import java.util.Collections;
 import java.util.List;

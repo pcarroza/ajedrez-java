@@ -1,6 +1,6 @@
 package org.citadel.common.validators;
 
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 import static org.citadel.common.constants.BoardConstants.MAX_LIMIT;
 

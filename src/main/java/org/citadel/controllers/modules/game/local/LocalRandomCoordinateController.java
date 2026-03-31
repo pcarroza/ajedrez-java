@@ -1,6 +1,6 @@
 package org.citadel.controllers.modules.game.local;
 
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class LocalRandomCoordinateController extends LocalCoordinateController {
 

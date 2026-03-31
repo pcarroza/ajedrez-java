@@ -2,8 +2,8 @@ package org.citadel.views.console;
 
 import org.citadel.common.tools.Terminal;
 import org.citadel.controllers.modules.game.PlacementController;
-import org.citadel.models.pieces.Coordinate;
-import org.citadel.models.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.enums.Player;
 
 public class BoardView {
 

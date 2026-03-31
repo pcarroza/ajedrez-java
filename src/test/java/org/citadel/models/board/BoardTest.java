@@ -1,12 +1,12 @@
 package org.citadel.models.board;
 
-import org.citadel.models.Board;
+import org.citadel.models.modules.game.Board;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class BoardTest {
 

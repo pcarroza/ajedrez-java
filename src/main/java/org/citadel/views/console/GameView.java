@@ -4,7 +4,7 @@ import org.citadel.controllers.modules.game.PlacementController;
 import org.citadel.controllers.modules.game.PlacementControllerVisitor;
 import org.citadel.controllers.modules.game.PutPieceController;
 import org.citadel.controllers.modules.game.SelectPieceController;
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class GameView implements PlacementControllerVisitor {
 

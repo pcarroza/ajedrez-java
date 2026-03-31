@@ -1,7 +1,7 @@
 package org.citadel.views.console;
 
 import org.citadel.common.tools.Terminal;
-import org.citadel.models.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class PlacementCoordinateView {
 

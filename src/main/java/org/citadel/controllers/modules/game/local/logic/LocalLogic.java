@@ -4,7 +4,7 @@ import org.citadel.controllers.modules.game.local.LocalOperationControllerBuilde
 import org.citadel.controllers.modules.game.GameController;
 import org.citadel.controllers.modules.game.OperationController;
 import org.citadel.controllers.modules.game.OperationControllerVisitor;
-import org.citadel.models.Game;
+import org.citadel.models.modules.game.Game;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -4,12 +4,12 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.modules.game.OperationControllerVisitor;
 import org.citadel.controllers.modules.game.PlacementControllerVisitor;
 import org.citadel.controllers.modules.game.SelectPieceController;
-import org.citadel.models.pieces.Coordinate;
-import org.citadel.models.Game;
+import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.Game;
 
 import java.util.List;
 
-import org.citadel.models.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.enums.Player;
 
 public class LocalSelectPieceController extends LocalPlacementController implements SelectPieceController {
 

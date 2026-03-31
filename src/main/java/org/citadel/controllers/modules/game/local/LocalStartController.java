@@ -2,7 +2,7 @@ package org.citadel.controllers.modules.game.local;
 
 import org.citadel.controllers.modules.game.OperationControllerVisitor;
 import org.citadel.controllers.modules.game.StartController;
-import org.citadel.models.Game;
+import org.citadel.models.modules.game.Game;
 
 public class LocalStartController extends LocalOperationController implements StartController {
 
