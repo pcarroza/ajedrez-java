@@ -132,5 +132,4 @@ public class Pawn extends Piece {
     public void accept(PieceVisitor pieceVisitor) {
         pieceVisitor.visit(this);
     }
-
 }

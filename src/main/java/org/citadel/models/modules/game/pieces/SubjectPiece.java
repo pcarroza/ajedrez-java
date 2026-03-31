@@ -12,8 +12,8 @@ public abstract class SubjectPiece {
         return boardObserver.isEnemy(coordinate);
     }
 
-    public boolean isSameColorPieceAt(Coordinate coordinate) {
-        return boardObserver.isOwnPieceAt(coordinate);
+    public boolean isPieceSamePlayerAt(Coordinate coordinate) {
+        return boardObserver.isPieceSamePlayerAt(coordinate);
     }
 
     public boolean isRookAvailableForCastling(Coordinate coordinate) {

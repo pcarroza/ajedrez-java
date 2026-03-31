@@ -37,7 +37,7 @@ public class KnightRuler extends MovementRuler {
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)))
                 .filter(it -> ValidatorLimitsBoard.getInstance().isWithinLimits(it))
-                .filter(it -> !piece.isSameColorPieceAt(it))
+                .filter(it -> !piece.isPieceSamePlayerAt(it))
                 .collect(Collectors.toList());
     }
 }

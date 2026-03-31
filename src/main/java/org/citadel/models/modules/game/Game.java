@@ -109,4 +109,12 @@ public class Game {
     public void exit() {
         board.exit();
     }
+
+    public boolean isThePawnPromoted() {
+        return board.isThePawnPromoted();
+    }
+
+    public void promotePawn(String pieceType) {
+        board.promotePawn(pieceType);
+    }
 }

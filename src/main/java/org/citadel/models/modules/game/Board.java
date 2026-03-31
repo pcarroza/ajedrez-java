@@ -218,7 +218,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public boolean isOwnPieceAt(Coordinate coordinate) {
+    public boolean isPieceSamePlayerAt(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getCurrentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }

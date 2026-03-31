@@ -12,11 +12,11 @@ public interface BoardObserver {
 
     boolean isRookAvailableForCastling(Coordinate coordinate);
 
+    boolean isVulnerablePawnAt(Coordinate coordinate);
+
     boolean isSquareOccupied(Coordinate coordinate);
 
-    boolean isOwnPieceAt(Coordinate coordinate);
-
-    boolean isVulnerablePawnAt(Coordinate coordinate);
+    boolean isPieceSamePlayerAt(Coordinate coordinate);
 
     void remove(Piece piece);
 }

@@ -12,12 +12,13 @@ public class LocalPromotionPawnController extends LocalSpecialMovementsControlle
 
     @Override
     public boolean isApplicable() {
-        return false;
+        return game.isPawnSelected() && game.isThePawnPromoted();
     }
 
     @Override
     public void promote(String pieceType) {
-        // TODO: Implementar lógica
+        game.promotePawn(pieceType);
+        game.switchTurn();
     }
 
     @Override

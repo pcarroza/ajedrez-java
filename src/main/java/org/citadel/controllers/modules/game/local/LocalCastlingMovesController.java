@@ -6,7 +6,7 @@ import org.citadel.models.modules.game.Game;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocalCastlingMovesController extends LocalSpecialMovementsController implements CastlingMovesController {
@@ -17,17 +17,28 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
 
     @Override
     public boolean isApplicable() {
-        return false;
+        return game.isKingSelected() && !getAvailableRooks().isEmpty();
     }
 
     @Override
     public List<Coordinate> getAvailableRooks() {
-        return Collections.emptyList();
+        List<Coordinate> rooks = new ArrayList<>();
+        if (!game.isKingSelected()) {
+            return rooks;
+        }
+        return rooks;
     }
 
     @Override
     public void castle(Coordinate rookCoordinate) {
-        // TODO: Implementar lógica
+        Coordinate kingOldCoord = game.getSelectedPieceCoordinate();
+        int row = kingOldCoord.row();
+        int kingNewCol = (rookCoordinate.column() == 1) ? 2 : 7;
+        int rookNewCol = (rookCoordinate.column() == 1) ? 3 : 6;
+
+        game.movePiece(rookCoordinate, new Coordinate(row, rookNewCol));
+        game.putPiece(new Coordinate(row, kingNewCol));
+        game.switchTurn();
     }
 
     @Override
