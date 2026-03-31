@@ -2,6 +2,7 @@ package org.citadel.models.pieces;
 
 import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getKnightMoveRulesBuilder;
 
+import org.citadel.models.pieces.enums.Player;
 import org.citadel.models.pieces.visitors.PieceVisitor;
 
 public class Knight extends Piece {

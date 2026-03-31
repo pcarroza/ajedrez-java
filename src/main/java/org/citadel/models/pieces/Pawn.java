@@ -3,11 +3,11 @@ package org.citadel.models.pieces;
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.visitors.PieceVisitor;
+import org.citadel.models.pieces.enums.Player;
 import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
 
 import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getPawnMoveRulesBuilder;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 public class Pawn extends Piece {
@@ -82,7 +82,8 @@ public class Pawn extends Piece {
     public void generateMovements() {
         specialGenerator.generateMovements();
         this.validMovements = Stream
-                .concat(specialGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream()).toList();
+                .concat(specialGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+                .toList();
     }
 
     public boolean canAdvanceOne() {

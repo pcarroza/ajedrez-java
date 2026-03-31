@@ -1,5 +1,6 @@
 package org.citadel.models.pieces;
 
+import org.citadel.models.pieces.enums.Player;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMoves;
 import org.citadel.models.pieces.visitors.PieceVisitor;
@@ -32,7 +33,8 @@ public class King extends Piece {
     public void generateMovements() {
         specialGenerator.generateMovements();
         this.validMovements = Stream
-                .concat(specialGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream()).toList();
+                .concat(specialGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+                .toList();
     }
 
     private void close() {

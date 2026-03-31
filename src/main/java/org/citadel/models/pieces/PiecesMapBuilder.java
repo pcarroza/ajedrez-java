@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.citadel.common.constants.BoardConstants.MAX_LIMIT;
-import static org.citadel.models.pieces.Player.BLACK;
-import static org.citadel.models.pieces.Player.WHITE;
+import org.citadel.models.pieces.enums.Player;
 
-public class  PiecesMapBuilder {
+import static org.citadel.common.constants.BoardConstants.MAX_LIMIT;
+import static org.citadel.models.pieces.enums.Player.BLACK;
+import static org.citadel.models.pieces.enums.Player.WHITE;
+
+public class PiecesMapBuilder {
 
     private PiecesMapBuilder() {
     }

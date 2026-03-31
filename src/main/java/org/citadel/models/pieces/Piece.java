@@ -3,6 +3,7 @@ package org.citadel.models.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.citadel.models.pieces.enums.Player;
 import org.citadel.models.pieces.rules.MovementBaseGenerator;
 import org.citadel.models.pieces.visitors.PieceVisitor;
 

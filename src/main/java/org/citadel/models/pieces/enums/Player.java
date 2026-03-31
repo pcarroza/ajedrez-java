@@ -1,4 +1,4 @@
-package org.citadel.models.pieces;
+package org.citadel.models.pieces.enums;
 
 public enum Player {
     BLACK(-1),
