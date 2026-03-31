@@ -19,6 +19,11 @@ public class Terminal {
         System.out.print(message);
     }
 
+    public static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static <T> T input(Class<T> type) {
         assert type != null;
         Scanner scanner = new Scanner(System.in);

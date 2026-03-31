@@ -15,7 +15,9 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import static org.citadel.common.tools.Terminal.clear;
 import static org.citadel.common.tools.Terminal.input;
+import static org.citadel.common.tools.Terminal.write;
 import static org.citadel.common.tools.Terminal.writeln;
 import static org.citadel.models.modules.game.pieces.PiecesMapBuilder.createPiecesMap;
 import static org.citadel.models.modules.game.pieces.enums.Player.BLACK;
@@ -218,52 +220,111 @@ public class Board extends SubjectBoard implements BoardObserver {
         return true;
     }
 
-    public static void main(String[] args) {
-
-        Board board = new Board();
-        writeln("" + board.isSquareOccupied(new Coordinate(3, 1)));
-        do {
-            boolean isSelected;
-            do {
-                writeln("SELECCIONAR PIEZA DEL JUGADO " + board.getCurrentPlayer());
-
-                writeln("INGRESE ROW: ");
-                int row = input(Integer.class);
-
-                writeln("INGRESE COLUMNA: ");
-                int column = input(Integer.class);
-
-                isSelected = board.isPieceSelected(new Coordinate(row, column));
-                writeln("" + isSelected);
-                System.out.println(board.getSelectedPieceMovements());
-                if (isSelected) {
-                    board.selectPiece(new Coordinate(row, column));
-                }
-
-            } while (!isSelected);
-
-            board.switchTurn();
-
-            do {
-                writeln("MOVER PIEZA " + board.getCurrentPlayer());
-
-                writeln("INGRESE ROW: ");
-                int row = input(Integer.class);
-
-                writeln("INGRESE COLUMNA: ");
-                int column = input(Integer.class);
-
-                Coordinate coordinate = new Coordinate(row, column);
-
-                if (board.isMovementValid(coordinate)) {
-                    board.putPiece(coordinate);
-                    break;
-                }
-
-                writeln("Movimiento inválido. Inténtalo de nuevo.");
-            } while (true);
-
-        } while (true);
+    public void printBoard() {
+        writeln("\n    a b c d e f g h");
+        writeln("  +-----------------+");
+        for (int row = 8; row >= 1; row--) {
+            write(row + " | ");
+            for (int col = 1; col <= 8; col++) {
+                write(getPieceSymbol(new Coordinate(row, col)) + " ");
+            }
+            writeln("| " + row);
+        }
+        writeln("  +-----------------+");
+        writeln("    a b c d e f g h\n");
     }
 
+    public static void main(String[] args) {
+        Board board = new Board();
+        writeln("--- INICIO DE PARTIDA DE AJEDREZ ---");
+
+        do {
+            clear();
+            board.printBoard();
+            // --- FASE 1: SELECCIÓN DE ORIGEN ---
+            Coordinate origin = null;
+            boolean canSelect = false;
+            do {
+                writeln("\nTURNO DE: " + board.getCurrentPlayer());
+                writeln("Seleccione la pieza que desea mover:");
+
+                int row = getValidInput("Fila (1-8): ");
+                int colmun = getValidInput("Columna (1-8): ");
+                origin = new Coordinate(row, colmun);
+
+                if (!board.isWithinBoardLimits(origin)) {
+                    writeln("Error: Coordenada fuera de los límites del tablero.");
+                } else if (!board.isSquareOccupied(origin)) {
+                    writeln("Error: No hay ninguna pieza en esa posición.");
+                } else if (!board.isPieceSelected(origin)) {
+                    writeln("Error: Esa pieza no te pertenece.");
+                } else {
+                    board.selectPiece(origin);
+                    if (board.getSelectedPieceMovements().isEmpty()) {
+                        writeln("Error: La pieza seleccionada no tiene movimientos legales.");
+                    } else {
+                        canSelect = true;
+                        writeln("Pieza seleccionada: " + board.getPieceSymbol(origin));
+                        writeln("Movimientos posibles: " + board.getSelectedPieceMovements());
+                    }
+                }
+            } while (!canSelect);
+
+            // --- FASE 2 Y 3: SELECCIÓN DE DESTINO Y EJECUCIÓN ---
+            boolean moveExecuted = false;
+            do {
+                writeln("\nIndique el destino para " + board.getPieceSymbol(origin) + " en " + origin
+                        + " (0 para cancelar selección):");
+                int row = input(Integer.class);
+                if (row == 0) {
+                    board.resetSelectedPiece();
+                    break;
+                }
+                write("Columna (1-8): ");
+                int col = input(Integer.class);
+                Coordinate target = new Coordinate(row, col);
+
+                if (board.isMovementValid(target)) {
+                    if (board.isEnemy(target)) {
+                        writeln("¡Captura! Has comido la pieza " + board.getPieceSymbol(target));
+                        board.removeRivalPlayerPiece(target);
+                    }
+
+                    board.putPiece(target);
+                    moveExecuted = true;
+                    writeln("Movimiento completado a " + target);
+
+                    if (board.isThePawnPromoted()) {
+                        writeln("¡PROMOCIÓN! El peón ha alcanzado el final.");
+                    }
+                } else {
+                    writeln("Error: Movimiento no permitido. Intente otro destino.");
+                }
+            } while (!moveExecuted);
+
+            if (!moveExecuted)
+                continue; // Si canceló selección, vuelve arriba
+
+            // --- FASE 4: EVALUACIÓN POST-JUGADA ---
+            if (board.isJaque()) {
+                writeln("¡ATENCIÓN! El Rey del jugador " + board.getRivalPlayer() + " está en JAQUE.");
+            }
+
+            board.switchTurn();
+            board.resetSelectedPiece();
+
+        } while (!board.finished());
+    }
+
+    private static int getValidInput(String message) {
+        int val;
+        do {
+            write(message);
+            val = input(Integer.class);
+            if (val < 1 || val > 8) {
+                writeln("Valor inválido. Por favor, introduzca un número entre 1 y 8.");
+            }
+        } while (val < 1 || val > 8);
+        return val;
+    }
 }
