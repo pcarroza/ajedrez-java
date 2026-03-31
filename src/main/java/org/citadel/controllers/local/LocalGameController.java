@@ -49,4 +49,10 @@ public class LocalGameController extends LocalOperationController implements Gam
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getGameState'");
     }
+
+    @Override
+    public boolean isGameInProgress() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isGameInProgress'");
+    }
 }

@@ -15,6 +15,8 @@ public class SpecialMovesMenu extends Menu {
             controller.accept(menuItemFactory);
             add(menuItemFactory.getMenuItem());
         }
-        add(new MenuItem("VOLVER ATRÁS", new BackCommand(context)));
+        if (context != null) {
+            add(new MenuItem("VOLVER ATRÁS", new BackCommand(context)));
+        }
     }
 }

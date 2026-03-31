@@ -1,4 +1,6 @@
-package org.citadel.models.pieces;
+package org.citadel.models.pieces.visitors;
+
+import org.citadel.models.pieces.Piece;
 
 public final class PieceInspector {
 
@@ -31,5 +33,12 @@ public final class PieceInspector {
         PawnVulnerabilityVisitor visitor = new PawnVulnerabilityVisitor();
         piece.accept(visitor);
         return visitor.isVulnerable();
+    }
+
+    public static String getChar(Piece piece) {
+        assert piece != null;
+        PieceCharVisitor visitor = new PieceCharVisitor();
+        piece.accept(visitor);
+        return visitor.getPieceChar();
     }
 }

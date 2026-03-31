@@ -12,7 +12,7 @@ public abstract class SubjectPiece {
         return boardObserver.isEnemy(coordinate);
     }
 
-    public boolean isOwnPieceAt(Coordinate coordinate) {
+    public boolean isSameColorPieceAt(Coordinate coordinate) {
         return boardObserver.isOwnPieceAt(coordinate);
     }
 

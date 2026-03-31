@@ -9,6 +9,6 @@ public class SpecialMovesView {
 
     public void interact(List<? extends SpecialMovementsController> controllers) {
         assert controllers != null;
-        new SpecialMovesMenu(controllers).execute();
+        new SpecialMovesMenu(controllers, null).execute();
     }
 }

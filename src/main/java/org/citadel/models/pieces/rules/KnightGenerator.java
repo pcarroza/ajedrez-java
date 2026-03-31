@@ -1,25 +1,33 @@
-package org.citadel.models.pieces.rulesOfMovements;
+package org.citadel.models.pieces.rules;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator {
+public class KnightGenerator extends MovementBaseGenerator {
 
-    public KnightMovementRulesBaseGenerator(Piece piece) {
-        super(piece);
+    private static KnightGenerator instance;
+
+    private KnightGenerator() {
+    }
+
+    public static KnightGenerator getInstance() {
+        if (instance == null) {
+            instance = new KnightGenerator();
+        }
+        return instance;
     }
 
     @Override
-    public void generate() {
+    public List<Coordinate> generate(Piece piece) {
         final int doubleStep = 2;
         final int simpleStep = 1;
 
-        possibleMoves = Stream.of(
+        return Stream.of(
                 piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)),
@@ -29,7 +37,7 @@ public class KnightMovementRulesBaseGenerator extends MovementRulesBaseGenerator
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)))
                 .filter(it -> ValidatorLimitsBoard.getInstance().isWithinLimits(it))
-                .filter(it -> !piece.isOwnPieceAt(it))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .filter(it -> !piece.isSameColorPieceAt(it))
+                .collect(Collectors.toList());
     }
 }

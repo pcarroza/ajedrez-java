@@ -1,6 +1,8 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createRookMoveRulesBuilder;
+import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getRookMoveRulesBuilder;
+
+import org.citadel.models.pieces.visitors.PieceVisitor;
 
 public class Rook extends Piece {
 
@@ -8,7 +10,7 @@ public class Rook extends Piece {
 
     public Rook(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        basedGenerator = createRookMoveRulesBuilder(this);
+        movementBaseGenerator = getRookMoveRulesBuilder();
     }
 
     @Override

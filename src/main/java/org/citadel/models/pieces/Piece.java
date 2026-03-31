@@ -3,11 +3,12 @@ package org.citadel.models.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGenerator;
+import org.citadel.models.pieces.rules.MovementBaseGenerator;
+import org.citadel.models.pieces.visitors.PieceVisitor;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
-    protected MovementRulesBaseGenerator basedGenerator;
+    protected MovementBaseGenerator movementBaseGenerator;
 
     private Coordinate coordinate;
 
@@ -34,15 +35,15 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     public List<Coordinate> getValidMovements() {
-        return basedGenerator.getMovements();
+        return validMovements;
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return basedGenerator.isMovementValid(target.copy());
+        return validMovements.contains(target.copy());
     }
 
     public void generateMovements() {
-        basedGenerator.generate();
+        this.validMovements = movementBaseGenerator.generate(this);
     }
 
     public Coordinate getDisplacedBy(int displacement) {

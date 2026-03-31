@@ -1,12 +1,14 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createKnightMoveRulesBuilder;
+import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getKnightMoveRulesBuilder;
+
+import org.citadel.models.pieces.visitors.PieceVisitor;
 
 public class Knight extends Piece {
 
     public Knight(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        basedGenerator = createKnightMoveRulesBuilder(this);
+        movementBaseGenerator = getKnightMoveRulesBuilder();
     }
 
     @Override

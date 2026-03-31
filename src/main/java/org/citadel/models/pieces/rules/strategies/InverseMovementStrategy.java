@@ -1,4 +1,4 @@
-package org.citadel.models.pieces.rulesOfMovements.strategies;
+package org.citadel.models.pieces.rules.strategies;
 
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;

@@ -1,4 +1,4 @@
-package org.citadel.models.pieces.rulesOfMovements.strategies;
+package org.citadel.models.pieces.rules.strategies;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.Coordinate;
@@ -24,16 +24,16 @@ public abstract class MovementStrategy {
     protected Stream<Coordinate> generate(Coordinate vector) {
         assert vector != null;
         List<Coordinate> coordinates = new ArrayList<>();
-        generateRecursive(coordinates, vector, 1);
+        generateCoordinateRecursive(coordinates, vector, 1);
         return coordinates.stream();
     }
 
-    private void generateRecursive(List<Coordinate> coordinates, Coordinate vector, int step) {
+    private void generateCoordinateRecursive(List<Coordinate> coordinates, Coordinate vector, int step) {
         Coordinate coordinate = getDisplacedCoordinateBy(step, vector);
         if (!ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate)) {
             return;
         }
-        if (piece.isOwnPieceAt(coordinate)) {
+        if (piece.isSameColorPieceAt(coordinate)) {
             return;
         }
         if (piece.isEnemy(coordinate)) {
@@ -41,7 +41,7 @@ public abstract class MovementStrategy {
             return;
         }
         coordinates.add(coordinate);
-        generateRecursive(coordinates, vector, step + INCREASE);
+        generateCoordinateRecursive(coordinates, vector, step + INCREASE);
     }
 
     protected abstract Coordinate getDisplacedCoordinateBy(int increment, Coordinate vector);

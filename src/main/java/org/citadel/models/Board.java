@@ -2,6 +2,7 @@ package org.citadel.models;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.*;
+import org.citadel.models.pieces.visitors.PieceInspector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,14 +66,14 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
-                .map(PieceCharVisitor::getChar)
+                .map(PieceInspector::getChar)
                 .orElse(" ");
     }
 
     public void selectPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        assert !isSquareOccupied(coordinate);
+        assert isSquareOccupied(coordinate);
         getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
@@ -113,21 +114,21 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert !isSquareOccupied(coordinate);
+        assert isSquareOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert !isSquareOccupied(coordinate);
+        assert isSquareOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getRivalPlayer, coordinate);
     }
 
     public boolean isSquareOccupied(Coordinate coordinate) {
         assert coordinate != null;
-        return piecesMap.values().stream().flatMap(List::stream).noneMatch(piece -> piece.isAt(coordinate));
+        return piecesMap.values().stream().flatMap(List::stream).anyMatch(piece -> piece.isAt(coordinate));
     }
 
     public boolean isWithinBoardLimits(Coordinate coordinate) {

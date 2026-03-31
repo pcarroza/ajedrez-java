@@ -2,9 +2,10 @@ package org.citadel.models.pieces;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
+import org.citadel.models.pieces.visitors.PieceVisitor;
 import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
 
-import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createPawnMoveRulesBuilder;
+import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getPawnMoveRulesBuilder;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -21,7 +22,7 @@ public class Pawn extends Piece {
 
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        basedGenerator = createPawnMoveRulesBuilder(this);
+        movementBaseGenerator = getPawnMoveRulesBuilder();
         specialGenerator = new EnPassantPawnSpecialRuleGenerator(this);
     }
 
@@ -73,22 +74,15 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public List<Coordinate> getValidMovements() {
-        validMovements.clear();
-        validMovements.addAll(Stream
-                .concat(specialGenerator.getMovements().stream(), basedGenerator.getMovements().stream()).toList());
-        return validMovements;
-    }
-
-    @Override
     public boolean isMovementValid(Coordinate target) {
-        return super.isMovementValid(target) || specialGenerator.isMovementValid(target);
+        return validMovements.contains(target.copy());
     }
 
     @Override
     public void generateMovements() {
-        super.generateMovements();
         specialGenerator.generateMovements();
+        this.validMovements = Stream
+                .concat(specialGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream()).toList();
     }
 
     public boolean canAdvanceOne() {

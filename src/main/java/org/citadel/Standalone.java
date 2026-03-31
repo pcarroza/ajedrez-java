@@ -1,6 +1,7 @@
 package org.citadel;
 
 import org.citadel.controllers.GameController;
+import org.citadel.controllers.local.logic.LocalLogic;
 import org.citadel.views.console.ConsoleView;
 
 public class Standalone extends Chess {

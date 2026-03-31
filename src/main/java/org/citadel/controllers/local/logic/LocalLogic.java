@@ -15,20 +15,23 @@ public class LocalLogic implements GameController {
 
     private final Map<GameState, OperationController> controllers;
 
+    private GameState gameState;
+
     public LocalLogic() {
         game = new Game(null);
         controllers = new HashMap<>();
         LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
+        builder.build();
         controllers.put(GameState.INITIAL, builder.getStartController());
         controllers.put(GameState.IN_GAME, builder.getPlacementController());
         controllers.put(GameState.MENU, builder.getGameController());
         controllers.put(GameState.EXIT, builder.getContinueController());
+        gameState = GameState.INITIAL;
     }
 
     @Override
     public GameState getGameState() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGameState'");
+        return gameState;
     }
 
     public void accept(OperationControllerVisitor visitor) {
@@ -37,31 +40,31 @@ public class LocalLogic implements GameController {
 
     @Override
     public void startNewGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'startNewGame'");
+        gameState = GameState.IN_GAME;
     }
 
     @Override
     public void loadGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadGame'");
+        // ...
     }
 
     @Override
     public void saveGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveGame'");
+        // ...
     }
 
     @Override
     public void showHistory() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showHistory'");
+        // ...
     }
 
     @Override
     public void exitGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exitGame'");
+        gameState = GameState.EXIT;
+    }
+
+    @Override
+    public boolean isGameInProgress() {
+        return gameState == GameState.IN_GAME;
     }
 }

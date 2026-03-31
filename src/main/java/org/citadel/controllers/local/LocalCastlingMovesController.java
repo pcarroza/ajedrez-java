@@ -22,7 +22,7 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
 
     @Override
     public List<Coordinate> getAvailableRooks() {
-        return Collections.emptyList(); // TODO: Implementar lógica
+        return Collections.emptyList();
     }
 
     @Override

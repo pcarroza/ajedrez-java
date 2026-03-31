@@ -1,12 +1,14 @@
 package org.citadel.models.pieces;
 
-import static org.citadel.models.pieces.rulesOfMovements.MovementRulesBaseGeneratorFacade.createBishopMoveRulesBuilder;
+import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getBishopMoveRulesBuilder;
+
+import org.citadel.models.pieces.visitors.PieceVisitor;
 
 public class Bishop extends Piece {
 
     public Bishop(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        basedGenerator = createBishopMoveRulesBuilder(this);
+        movementBaseGenerator = getBishopMoveRulesBuilder();
     }
 
     @Override
