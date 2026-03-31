@@ -1,9 +1,9 @@
 package org.citadel.views.console;
 
-import org.citadel.controllers.PlacementControllerVisitor;
-import org.citadel.controllers.SelectPieceController;
-import org.citadel.controllers.PlacementController;
-import org.citadel.controllers.PutPieceController;
+import org.citadel.controllers.modules.game.PlacementController;
+import org.citadel.controllers.modules.game.PlacementControllerVisitor;
+import org.citadel.controllers.modules.game.PutPieceController;
+import org.citadel.controllers.modules.game.SelectPieceController;
 import org.citadel.models.pieces.Coordinate;
 
 public class GameView implements PlacementControllerVisitor {

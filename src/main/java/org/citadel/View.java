@@ -1,7 +1,7 @@
 package org.citadel;
 
-import org.citadel.controllers.OperationController;
-import org.citadel.controllers.OperationControllerVisitor;
+import org.citadel.controllers.modules.game.OperationController;
+import org.citadel.controllers.modules.game.OperationControllerVisitor;
 
 public interface View extends OperationControllerVisitor {
 

@@ -1,6 +1,6 @@
 package org.citadel.views.console.menus;
 
-import org.citadel.controllers.GameController;
+import org.citadel.controllers.modules.game.GameController;
 import org.citadel.views.console.commands.game.BackCommand;
 import org.citadel.views.console.commands.game.GameHistoryCommand;
 import org.citadel.views.console.commands.game.ShowHistoryCommand;

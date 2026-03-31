@@ -1,9 +1,9 @@
 package org.citadel.views.console.commands.special;
 
-import org.citadel.controllers.CastlingMovesController;
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.views.console.commands.Command;
 import org.citadel.common.tools.Terminal;
+import org.citadel.controllers.modules.game.CastlingMovesController;
 
 import java.util.List;
 

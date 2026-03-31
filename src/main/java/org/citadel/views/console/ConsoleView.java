@@ -1,8 +1,12 @@
 package org.citadel.views.console;
 
 import org.citadel.View;
-import org.citadel.controllers.OperationController;
-import org.citadel.controllers.local.*;
+import org.citadel.controllers.modules.game.OperationController;
+import org.citadel.controllers.modules.game.local.LocalContinueController;
+import org.citadel.controllers.modules.game.local.LocalGameController;
+import org.citadel.controllers.modules.game.local.LocalPutPieceController;
+import org.citadel.controllers.modules.game.local.LocalSelectPieceController;
+import org.citadel.controllers.modules.game.local.LocalStartController;
 import org.citadel.views.console.menus.MenuContext;
 import org.citadel.views.console.menus.StartMenuView;
 import org.citadel.views.console.menus.Menu;

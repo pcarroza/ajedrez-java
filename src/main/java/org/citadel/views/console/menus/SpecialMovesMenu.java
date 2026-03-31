@@ -1,6 +1,6 @@
 package org.citadel.views.console.menus;
 
-import org.citadel.controllers.SpecialMovementsController;
+import org.citadel.controllers.modules.game.SpecialMovementsController;
 import org.citadel.views.console.commands.game.BackCommand;
 import org.citadel.views.console.commands.special.MenuItemFactory;
 

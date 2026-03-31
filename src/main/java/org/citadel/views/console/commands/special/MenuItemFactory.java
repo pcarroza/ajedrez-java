@@ -1,9 +1,9 @@
 package org.citadel.views.console.commands.special;
 
-import org.citadel.controllers.CastlingMovesController;
-import org.citadel.controllers.EnPassantPawnController;
-import org.citadel.controllers.PromotionPawnController;
-import org.citadel.controllers.SpecialMovementsControllerVisitor;
+import org.citadel.controllers.modules.game.CastlingMovesController;
+import org.citadel.controllers.modules.game.EnPassantPawnController;
+import org.citadel.controllers.modules.game.PromotionPawnController;
+import org.citadel.controllers.modules.game.SpecialMovementsControllerVisitor;
 import org.citadel.views.console.menus.MenuItem;
 
 public class MenuItemFactory implements SpecialMovementsControllerVisitor {

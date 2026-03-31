@@ -1,6 +1,6 @@
 package org.citadel.views.console.commands.game;
 
-import org.citadel.controllers.GameController;
+import org.citadel.controllers.modules.game.GameController;
 import org.citadel.views.console.commands.Command;
 
 public class GameHistoryCommand implements Command {

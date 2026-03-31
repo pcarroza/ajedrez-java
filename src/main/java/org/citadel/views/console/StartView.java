@@ -1,6 +1,6 @@
 package org.citadel.views.console;
 
-import org.citadel.controllers.StartController;
+import org.citadel.controllers.modules.game.StartController;
 
 public class StartView {
 

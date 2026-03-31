@@ -1,7 +1,7 @@
 package org.citadel.views.console.commands.special;
 
 import org.citadel.common.tools.Terminal;
-import org.citadel.controllers.PromotionPawnController;
+import org.citadel.controllers.modules.game.PromotionPawnController;
 import org.citadel.views.console.commands.Command;
 
 public class PromotionPawnCommand implements Command {

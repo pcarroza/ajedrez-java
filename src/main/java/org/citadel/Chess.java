@@ -1,7 +1,7 @@
 package org.citadel;
 
-import org.citadel.controllers.GameController;
-import org.citadel.controllers.local.logic.GameState;
+import org.citadel.controllers.modules.game.GameController;
+import org.citadel.controllers.modules.game.local.logic.GameState;
 
 public abstract class Chess {
 
