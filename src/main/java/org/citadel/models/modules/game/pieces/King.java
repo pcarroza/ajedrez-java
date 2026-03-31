@@ -1,8 +1,8 @@
 package org.citadel.models.modules.game.pieces;
 
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.special.SpecialMovesRulesGenerator;
-import org.citadel.models.modules.game.pieces.special.SpecialRuleCastlingMoves;
+import org.citadel.models.modules.game.pieces.special.SpecialMovesRuler;
+import org.citadel.models.modules.game.pieces.special.CastlingMoveRuler;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getKingMoveRulesBuilder;
@@ -17,12 +17,12 @@ public class King extends Piece {
         return isMoved;
     }
 
-    private final SpecialMovesRulesGenerator specialGenerator;
+    private final SpecialMovesRuler specialMovesRuler;
 
     public King(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getKingMoveRulesBuilder();
-        specialGenerator = new SpecialRuleCastlingMoves(this);
+        specialMovesRuler = new CastlingMoveRuler(this);
     }
 
     @Override
@@ -35,9 +35,9 @@ public class King extends Piece {
 
     @Override
     public void generateMovements() {
-        specialGenerator.generateMovements();
+        specialMovesRuler.generateMovements();
         this.validMovements = Stream
-                .concat(specialGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+                .concat(specialMovesRuler.getMovements().stream(), movementBaseGenerator.generate(this).stream())
                 .toList();
     }
 

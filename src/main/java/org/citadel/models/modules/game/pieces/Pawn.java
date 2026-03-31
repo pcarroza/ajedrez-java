@@ -1,10 +1,10 @@
 package org.citadel.models.modules.game.pieces;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
-import org.citadel.models.modules.game.pieces.special.SpecialMovesRulesGenerator;
+import org.citadel.models.modules.game.pieces.special.SpecialMovesRuler;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.special.EnPassantPawnSpecialRuleGenerator;
+import org.citadel.models.modules.game.pieces.special.EnPassantPawnSpecialRuler;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
@@ -18,12 +18,12 @@ public class Pawn extends Piece {
 
     private boolean vulnerablePawn = false;
 
-    private final SpecialMovesRulesGenerator specialGenerator;
+    private final SpecialMovesRuler specialGenerator;
 
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getPawnMoveRulesBuilder();
-        specialGenerator = new EnPassantPawnSpecialRuleGenerator(this);
+        specialGenerator = new EnPassantPawnSpecialRuler(this);
     }
 
     public Player getPlayer() {

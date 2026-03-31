@@ -63,6 +63,6 @@ public final class PieceInspector {
         assert piece != null;
         PieceCharVisitor visitor = new PieceCharVisitor();
         piece.accept(visitor);
-        return visitor.getPieceChar();
+        return visitor.getSimbol();
     }
 }

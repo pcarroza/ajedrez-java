@@ -32,21 +32,26 @@ public class EnPassantTargetVisitor implements PieceVisitor {
 
     @Override
     public void visit(King king) {
+        // Does nothing
     }
 
     @Override
     public void visit(Queen queen) {
+        // Does nothing
     }
 
     @Override
     public void visit(Rook rook) {
+        // Does nothing
     }
 
     @Override
     public void visit(Bishop bishop) {
+        // Does nothing
     }
 
     @Override
     public void visit(Knight knight) {
+        // Does nothing
     }
 }

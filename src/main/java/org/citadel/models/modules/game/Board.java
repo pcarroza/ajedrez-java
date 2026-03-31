@@ -150,6 +150,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         Player player = getCurrentPlayer();
         Piece newPiece = PromotionType.fromString(pieceType).create(coordinate, player);
         newPiece.subscribe(this);
+        removeCurrentPlayerPiece(coordinate);
         piecesMap.get(player).remove((Piece) selectedPiece);
         piecesMap.get(player).add(newPiece);
         selectedPiece = newPiece;
@@ -348,13 +349,13 @@ public class Board extends SubjectBoard implements BoardObserver {
                             board.removeRivalPlayerPiece(rivalPawnCoord);
                         }
                     } else if (board.isKingSelected()) {
-                        Coordinate oldCoord = board.getSelectedPieceCoordinate();
-                        if (Math.abs(oldCoord.column() - target.column()) > 1) {
-                            int rookOldCol = (target.column() < oldCoord.column()) ? 1 : 8;
-                            int rookNewCol = (target.column() < oldCoord.column()) ? target.column() + 1
+                        Coordinate oldCoordinate = board.getSelectedPieceCoordinate();
+                        if (Math.abs(oldCoordinate.column() - target.column()) > 1) {
+                            int rookOldColumn = (target.column() < oldCoordinate.column()) ? 1 : 8;
+                            int rookNewColumn = (target.column() < oldCoordinate.column()) ? target.column() + 1
                                     : target.column() - 1;
                             int row1 = target.row();
-                            board.movePiece(new Coordinate(row1, rookOldCol), new Coordinate(row1, rookNewCol));
+                            board.movePiece(new Coordinate(row1, rookOldColumn), new Coordinate(row1, rookNewColumn));
                             writeln("¡Enroque!");
                         }
                     }

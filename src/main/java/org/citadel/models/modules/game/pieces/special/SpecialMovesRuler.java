@@ -5,13 +5,13 @@ import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public abstract class SpecialMovesRulesGenerator {
+public abstract class SpecialMovesRuler {
 
     protected Piece piece;
 
     protected List<Coordinate> movements;
 
-    SpecialMovesRulesGenerator(Piece piece) {
+    SpecialMovesRuler(Piece piece) {
         this.piece = piece;
     }
 

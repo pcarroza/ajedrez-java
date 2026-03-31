@@ -10,39 +10,39 @@ import org.citadel.models.modules.game.pieces.Rook;
 
 public class PieceCharVisitor implements PieceVisitor {
 
-    private String pieceChar;
+    private String simbol;
 
-    public String getPieceChar() {
-        return pieceChar;
+    public String getSimbol() {
+        return simbol;
     }
 
     @Override
     public void visit(King king) {
-        pieceChar = PieceSimbol.KING.getValue();
+        simbol = PieceSimbol.KING.getValue();
     }
 
     @Override
     public void visit(Queen queen) {
-        pieceChar = PieceSimbol.QUEEN.getValue();
+        simbol = PieceSimbol.QUEEN.getValue();
     }
 
     @Override
     public void visit(Rook rook) {
-        pieceChar = PieceSimbol.ROOK.getValue();
+        simbol = PieceSimbol.ROOK.getValue();
     }
 
     @Override
     public void visit(Bishop bishop) {
-        pieceChar = PieceSimbol.BISHOP.getValue();
+        simbol = PieceSimbol.BISHOP.getValue();
     }
 
     @Override
     public void visit(Knight knight) {
-        pieceChar = PieceSimbol.KNIGHT.getValue();
+        simbol = PieceSimbol.KNIGHT.getValue();
     }
 
     @Override
     public void visit(Pawn pawn) {
-        pieceChar = PieceSimbol.PAWN.getValue();
+        simbol = PieceSimbol.PAWN.getValue();
     }
 }
