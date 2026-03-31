@@ -7,16 +7,16 @@ import org.citadel.models.pieces.Piece;
 
 import java.util.List;
 
-public class QueenGenerator extends MovementBaseGenerator {
+public class QueenRuler extends MovementRuler {
 
-    private static QueenGenerator instance;
+    private static QueenRuler instance;
 
-    private QueenGenerator() {
+    private QueenRuler() {
     }
 
-    public static QueenGenerator getInstance() {
+    public static QueenRuler getInstance() {
         if (instance == null) {
-            instance = new QueenGenerator();
+            instance = new QueenRuler();
         }
         return instance;
     }

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.citadel.models.pieces.enums.Player;
-import org.citadel.models.pieces.rules.MovementBaseGenerator;
+import org.citadel.models.pieces.rules.MovementRuler;
 import org.citadel.models.pieces.visitors.PieceVisitor;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
-    protected MovementBaseGenerator movementBaseGenerator;
+    protected MovementRuler movementBaseGenerator;
 
     private Coordinate coordinate;
 
@@ -29,10 +29,6 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     public void put(Coordinate target) {
         set(target.copy());
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
     }
 
     public List<Coordinate> getValidMovements() {
@@ -61,6 +57,10 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     public boolean isAt(Coordinate coordinate) {
         return getCoordinate().equals(coordinate);
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
     public abstract void accept(PieceVisitor visitor);

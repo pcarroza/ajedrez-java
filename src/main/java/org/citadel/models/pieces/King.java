@@ -1,11 +1,11 @@
 package org.citadel.models.pieces;
 
 import org.citadel.models.pieces.enums.Player;
-import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
-import org.citadel.models.pieces.specialmovesrules.SpecialRuleCastlingMoves;
+import org.citadel.models.pieces.special.SpecialMovesRulesGenerator;
+import org.citadel.models.pieces.special.SpecialRuleCastlingMoves;
 import org.citadel.models.pieces.visitors.PieceVisitor;
 
-import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getKingMoveRulesBuilder;
+import static org.citadel.models.pieces.rules.MovementRulerFacade.getKingMoveRulesBuilder;
 
 import java.util.stream.Stream;
 

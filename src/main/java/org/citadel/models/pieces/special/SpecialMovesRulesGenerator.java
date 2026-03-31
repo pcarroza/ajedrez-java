@@ -1,4 +1,4 @@
-package org.citadel.models.pieces.specialmovesrules;
+package org.citadel.models.pieces.special;
 
 import org.citadel.models.pieces.Coordinate;
 import org.citadel.models.pieces.Piece;

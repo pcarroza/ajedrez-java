@@ -7,16 +7,16 @@ import org.citadel.models.pieces.Piece;
 
 import java.util.List;
 
-public class BishopGenerator extends MovementBaseGenerator {
+public class BishopRuler extends MovementRuler {
 
-    private static BishopGenerator instance;
+    private static BishopRuler instance;
 
-    private BishopGenerator() {
+    private BishopRuler() {
     }
 
-    public static BishopGenerator getInstance() {
+    public static BishopRuler getInstance() {
         if (instance == null) {
-            instance = new BishopGenerator();
+            instance = new BishopRuler();
         }
         return instance;
     }

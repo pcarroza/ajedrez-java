@@ -1,4 +1,4 @@
-package org.citadel.models.pieces.specialmovesrules;
+package org.citadel.models.pieces.special;
 
 import java.util.ArrayList;
 

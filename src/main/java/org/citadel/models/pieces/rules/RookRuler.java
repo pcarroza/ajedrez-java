@@ -7,16 +7,16 @@ import org.citadel.models.pieces.Piece;
 
 import java.util.List;
 
-public class RookGenerator extends MovementBaseGenerator {
+public class RookRuler extends MovementRuler {
 
-    private static RookGenerator instance;
+    private static RookRuler instance;
 
-    private RookGenerator() {
+    private RookRuler() {
     }
 
-    public static RookGenerator getInstance() {
+    public static RookRuler getInstance() {
         if (instance == null) {
-            instance = new RookGenerator();
+            instance = new RookRuler();
         }
         return instance;
     }

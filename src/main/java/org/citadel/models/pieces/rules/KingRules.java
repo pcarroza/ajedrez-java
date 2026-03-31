@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class KingGenerator extends MovementBaseGenerator {
+public class KingRules extends MovementRuler {
 
-    private static KingGenerator instance;
+    private static KingRules instance;
 
-    private KingGenerator() {
+    private KingRules() {
     }
 
-    public static KingGenerator getInstance() {
+    public static KingRules getInstance() {
         if (instance == null) {
-            instance = new KingGenerator();
+            instance = new KingRules();
         }
         return instance;
     }

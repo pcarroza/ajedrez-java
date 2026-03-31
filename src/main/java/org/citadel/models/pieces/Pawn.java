@@ -1,12 +1,12 @@
 package org.citadel.models.pieces;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
-import org.citadel.models.pieces.specialmovesrules.SpecialMovesRulesGenerator;
+import org.citadel.models.pieces.special.SpecialMovesRulesGenerator;
 import org.citadel.models.pieces.visitors.PieceVisitor;
 import org.citadel.models.pieces.enums.Player;
-import org.citadel.models.pieces.specialmovesrules.EnPassantPawnSpecialRuleGenerator;
+import org.citadel.models.pieces.special.EnPassantPawnSpecialRuleGenerator;
 
-import static org.citadel.models.pieces.rules.MovementBaseGeneratorFacade.getPawnMoveRulesBuilder;
+import static org.citadel.models.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
 import java.util.stream.Stream;
 
