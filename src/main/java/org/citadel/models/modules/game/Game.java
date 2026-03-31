@@ -26,8 +26,36 @@ public class Game {
         board.putPiece(coordinate);
     }
 
-    public boolean isEmpty(Coordinate coordinate) {
+    public boolean isKingSelected() {
+        return board.isKingSelected();
+    }
+
+    public boolean isPawnSelected() {
+        return board.isPawnSelected();
+    }
+
+    public java.util.List<Coordinate> getSelectedPieceEnPassantDiagonals() {
+        return board.getSelectedPieceEnPassantDiagonals();
+    }
+
+    public Coordinate getSelectedPieceCoordinate() {
+        return board.getSelectedPieceCoordinate();
+    }
+
+    public void movePiece(Coordinate origin, Coordinate target) {
+        board.movePiece(origin, target);
+    }
+
+    public boolean isVulnerablePawnAt(Coordinate coordinate) {
+        return board.isVulnerablePawnAt(coordinate);
+    }
+
+    public boolean isSquareOccupied(Coordinate coordinate) {
         return board.isSquareOccupied(coordinate);
+    }
+
+    public boolean isEmpty(Coordinate coordinate) {
+        return !board.isSquareOccupied(coordinate);
     }
 
     public boolean isMovementValid(Coordinate coordinate) {

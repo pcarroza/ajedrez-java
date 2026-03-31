@@ -44,7 +44,7 @@ public class PiecesMapBuilder {
         pieces.add(new Knight(new Coordinate(rowForPiecesByColor, 2), player));
         pieces.add(new Bishop(new Coordinate(rowForPiecesByColor, 3), player));
         pieces.add(new King(new Coordinate(rowForPiecesByColor, 4), player));
-        pieces.add(new Queen(new Coordinate(rowForPiecesByColor, 3), player));
+        pieces.add(new Queen(new Coordinate(rowForPiecesByColor, 5), player));
         pieces.add(new Bishop(new Coordinate(rowForPiecesByColor, 6), player));
         pieces.add(new Knight(new Coordinate(rowForPiecesByColor, 7), player));
         pieces.add(new Rook(new Coordinate(rowForPiecesByColor, 8), player));

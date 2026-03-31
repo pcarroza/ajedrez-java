@@ -13,6 +13,10 @@ public class King extends Piece {
 
     private boolean isMoved = false;
 
+    public boolean isMoved() {
+        return isMoved;
+    }
+
     private final SpecialMovesRulesGenerator specialGenerator;
 
     public King(Coordinate coordinate, Player player) {

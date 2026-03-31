@@ -9,6 +9,10 @@ public class Rook extends Piece {
 
     private boolean isMoved = false;
 
+    public boolean isMoved() {
+        return isMoved;
+    }
+
     public Rook(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getRookMoveRulesBuilder();

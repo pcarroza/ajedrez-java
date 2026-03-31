@@ -17,6 +17,21 @@ public class LocalController {
     }
 
     public void put(Coordinate coordinate) {
+        if (game.isPawnSelected() && game.isEmpty(coordinate)
+                && game.getSelectedPieceEnPassantDiagonals().contains(coordinate)) {
+            Coordinate rivalPawnCoord = new Coordinate(game.getSelectedPieceCoordinate().row(), coordinate.column());
+            if (game.isVulnerablePawnAt(rivalPawnCoord)) {
+                game.removeRivalPlayerPiece(rivalPawnCoord);
+            }
+        } else if (game.isKingSelected()) {
+            Coordinate oldCoord = game.getSelectedPieceCoordinate();
+            if (Math.abs(oldCoord.column() - coordinate.column()) > 1) {
+                int rookOldCol = (coordinate.column() < oldCoord.column()) ? 1 : 8;
+                int rookNewCol = (coordinate.column() < oldCoord.column()) ? coordinate.column() + 1 : coordinate.column() - 1;
+                int row = coordinate.row();
+                game.movePiece(new Coordinate(row, rookOldCol), new Coordinate(row, rookNewCol));
+            }
+        }
         game.putPiece(coordinate);
     }
 

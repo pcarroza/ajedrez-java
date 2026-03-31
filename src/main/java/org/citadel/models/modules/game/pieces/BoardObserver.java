@@ -10,9 +10,13 @@ public interface BoardObserver {
 
     boolean isEnemy(Coordinate coordinate);
 
+    boolean isRookAvailableForCastling(Coordinate coordinate);
+
     boolean isSquareOccupied(Coordinate coordinate);
 
     boolean isOwnPieceAt(Coordinate coordinate);
+
+    boolean isVulnerablePawnAt(Coordinate coordinate);
 
     void remove(Piece piece);
 }

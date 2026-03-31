@@ -4,6 +4,10 @@ import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
+import org.citadel.models.modules.game.pieces.Rook;
+import org.citadel.models.modules.game.pieces.Knight;
+import org.citadel.models.modules.game.pieces.Bishop;
+import org.citadel.models.modules.game.pieces.Queen;
 import org.citadel.models.modules.game.pieces.SelectedPiece;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
@@ -99,6 +103,37 @@ public class Board extends SubjectBoard implements BoardObserver {
         selectedPiece.put(coordinate);
     }
 
+    public boolean isKingSelected() {
+        return selectedPiece != null && PieceInspector.isKing((Piece) selectedPiece);
+    }
+
+    public boolean isPawnSelected() {
+        return selectedPiece != null && PieceInspector.isPawn((Piece) selectedPiece);
+    }
+
+    public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
+        assert selectedPiece != null;
+        return PieceInspector.getEnPassantDiagonals((Piece) selectedPiece);
+    }
+
+    public Coordinate getSelectedPieceCoordinate() {
+        assert selectedPiece != null;
+        return selectedPiece.getCoordinate();
+    }
+
+    public void movePiece(Coordinate origin, Coordinate target) {
+        assert origin != null;
+        assert target != null;
+        assert isWithinBoardLimits(origin);
+        assert isWithinBoardLimits(target);
+        assert isSquareOccupied(origin);
+        piecesMap.values().stream()
+                .flatMap(List::stream)
+                .filter(piece -> piece.isAt(origin))
+                .findFirst()
+                .ifPresent(piece -> piece.put(target));
+    }
+
     public boolean isSelectedPiece() {
         return selectedPiece != null;
     }
@@ -109,6 +144,33 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public boolean isThePawnPromoted() {
         return PieceInspector.isPawnPromoted((Piece) selectedPiece);
+    }
+
+    public void promotePawn(String pieceType) {
+        assert selectedPiece != null;
+        assert PieceInspector.isPawn((Piece) selectedPiece);
+        Coordinate coordinate = ((Piece) selectedPiece).getCoordinate();
+        Player player = getCurrentPlayer();
+        Piece newPiece;
+        switch (pieceType.toUpperCase()) {
+            case "T":
+                newPiece = new Rook(coordinate, player);
+                break;
+            case "C":
+                newPiece = new Knight(coordinate, player);
+                break;
+            case "B":
+                newPiece = new Bishop(coordinate, player);
+                break;
+            case "Q":
+            default:
+                newPiece = new Queen(coordinate, player);
+                break;
+        }
+        piecesMap.get(player).remove((Piece) selectedPiece);
+        newPiece.subscribe(this);
+        piecesMap.get(player).add(newPiece);
+        selectedPiece = newPiece;
     }
 
     public boolean isMovementValid(Coordinate coordinate) {
@@ -178,6 +240,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         return getPiecesBy(getCurrentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
+    @Override
+    public boolean isVulnerablePawnAt(Coordinate coordinate) {
+        return enPassantPawnsMap.get(getRivalPlayer()).stream().anyMatch(p -> p.isAt(coordinate));
+    }
+
     public boolean isJaque() {
         return getPiecesBy(getRivalPlayer()).anyMatch(this::isTheKingInValidMoves);
     }
@@ -187,12 +254,13 @@ public class Board extends SubjectBoard implements BoardObserver {
         return selectedPieceMovements.contains(piece.getCoordinate()) && PieceInspector.isKing(piece);
     }
 
-    public boolean isRook(Coordinate coordinate) {
+    @Override
+    public boolean isRookAvailableForCastling(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
-                .map(PieceInspector::isRook)
+                .map(PieceInspector::isRookAvailableForCastling)
                 .orElse(false);
     }
 
@@ -214,10 +282,11 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void switchTurn() {
         turn.switchTurn();
+        enPassantPawnsMap.get(getCurrentPlayer()).clear();
     }
 
     public boolean finished() {
-        return true;
+        return false;
     }
 
     public void printBoard() {
@@ -246,11 +315,11 @@ public class Board extends SubjectBoard implements BoardObserver {
             boolean canSelect = false;
             do {
                 writeln("\nTURNO DE: " + board.getCurrentPlayer());
-                writeln("Seleccione la pieza que desea mover:");
+                writeln("Seleccione la pieza que desea mover (ej: a2):");
 
+                int col = getValidColumnInput("Columna (a-h): ");
                 int row = getValidInput("Fila (1-8): ");
-                int colmun = getValidInput("Columna (1-8): ");
-                origin = new Coordinate(row, colmun);
+                origin = new Coordinate(row, col);
 
                 if (!board.isWithinBoardLimits(origin)) {
                     writeln("Error: Coordenada fuera de los límites del tablero.");
@@ -274,20 +343,38 @@ public class Board extends SubjectBoard implements BoardObserver {
             boolean moveExecuted = false;
             do {
                 writeln("\nIndique el destino para " + board.getPieceSymbol(origin) + " en " + origin
-                        + " (0 para cancelar selección):");
+                        + " (o '0' en fila para cancelar):");
+                int col = getValidColumnInput("Columna destino (a-h): ");
+                write("Fila destino (1-8): ");
                 int row = input(Integer.class);
                 if (row == 0) {
                     board.resetSelectedPiece();
                     break;
                 }
-                write("Columna (1-8): ");
-                int col = input(Integer.class);
                 Coordinate target = new Coordinate(row, col);
 
                 if (board.isMovementValid(target)) {
                     if (board.isEnemy(target)) {
                         writeln("¡Captura! Has comido la pieza " + board.getPieceSymbol(target));
                         board.removeRivalPlayerPiece(target);
+                    } else if (board.isPawnSelected() && !board.isSquareOccupied(target)
+                            && board.getSelectedPieceEnPassantDiagonals().contains(target)) {
+                        Coordinate rivalPawnCoord = new Coordinate(board.getSelectedPieceCoordinate().row(),
+                                target.column());
+                        if (board.isVulnerablePawnAt(rivalPawnCoord)) {
+                            writeln("¡Captura al paso!");
+                            board.removeRivalPlayerPiece(rivalPawnCoord);
+                        }
+                    } else if (board.isKingSelected()) {
+                        Coordinate oldCoord = board.getSelectedPieceCoordinate();
+                        if (Math.abs(oldCoord.column() - target.column()) > 1) {
+                            int rookOldCol = (target.column() < oldCoord.column()) ? 1 : 8;
+                            int rookNewCol = (target.column() < oldCoord.column()) ? target.column() + 1
+                                    : target.column() - 1;
+                            int row1 = target.row();
+                            board.movePiece(new Coordinate(row1, rookOldCol), new Coordinate(row1, rookNewCol));
+                            writeln("¡Enroque!");
+                        }
                     }
 
                     board.putPiece(target);
@@ -296,6 +383,9 @@ public class Board extends SubjectBoard implements BoardObserver {
 
                     if (board.isThePawnPromoted()) {
                         writeln("¡PROMOCIÓN! El peón ha alcanzado el final.");
+                        String pieceType = getValidPromotionInput(
+                                "Elija pieza (Q: Reina, T: Torre, B: Alfil, C: Caballo): ");
+                        board.promotePawn(pieceType);
                     }
                 } else {
                     writeln("Error: Movimiento no permitido. Intente otro destino.");
@@ -326,5 +416,37 @@ public class Board extends SubjectBoard implements BoardObserver {
             }
         } while (val < 1 || val > 8);
         return val;
+    }
+
+    private static int getValidColumnInput(String message) {
+        int col = -1;
+        do {
+            write(message);
+            String inputStr = input(String.class).trim().toLowerCase();
+            if (inputStr.length() == 1) {
+                char c = inputStr.charAt(0);
+                if (c >= 'a' && c <= 'h') {
+                    col = c - 'a' + 1;
+                } else if (c >= '1' && c <= '8') {
+                    col = c - '1' + 1;
+                }
+            }
+            if (col == -1) {
+                writeln("Valor inválido. Use letras de 'a' a 'h' o números del 1 al 8.");
+            }
+        } while (col == -1);
+        return col;
+    }
+
+    private static String getValidPromotionInput(String message) {
+        String inputStr;
+        do {
+            write(message);
+            inputStr = input(String.class).trim().toUpperCase();
+            if (inputStr.matches("[QTBC]")) {
+                return inputStr;
+            }
+            writeln("Opción inválida. Use Q, T, B o C.");
+        } while (true);
     }
 }

@@ -26,6 +26,10 @@ public class Pawn extends Piece {
         specialGenerator = new EnPassantPawnSpecialRuleGenerator(this);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     @Override
     public void put(Coordinate target) {
         if (isInitialState()) {
@@ -128,4 +132,5 @@ public class Pawn extends Piece {
     public void accept(PieceVisitor pieceVisitor) {
         pieceVisitor.visit(this);
     }
+
 }

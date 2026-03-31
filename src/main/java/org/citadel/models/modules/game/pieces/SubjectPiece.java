@@ -16,8 +16,16 @@ public abstract class SubjectPiece {
         return boardObserver.isOwnPieceAt(coordinate);
     }
 
+    public boolean isRookAvailableForCastling(Coordinate coordinate) {
+        return boardObserver.isRookAvailableForCastling(coordinate);
+    }
+
     public boolean isSquareOccupied(Coordinate coordinate) {
         return boardObserver.isSquareOccupied(coordinate);
+    }
+
+    public boolean isVulnerablePawnAt(Coordinate coordinate) {
+        return boardObserver.isVulnerablePawnAt(coordinate);
     }
 
     public void notifyEnPassantPawn(Piece piece) {
