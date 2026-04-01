@@ -4,37 +4,35 @@ import java.util.ArrayList;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.King;
+import org.citadel.models.modules.game.pieces.enums.CastlingSide;
 
 public class CastlingMoveRuler extends SpecialMovesRuler {
 
+    private final King king;
+
     public CastlingMoveRuler(King king) {
         super(king);
+        this.king = king;
     }
 
     @Override
     public void generateMovements() {
         movements = new ArrayList<>();
-        King king = (King) piece;
 
-        if (king.isMoved()) {
+        if (king.isMoved())
             return;
-        }
 
         int row = king.getCoordinate().row();
 
-        // Enroque Corto (hacia columna 8)
-        if (piece.isRookAvailableForCastling(new Coordinate(row, 8))
-                && !piece.isSquareOccupied(new Coordinate(row, 5))
-                && !piece.isSquareOccupied(new Coordinate(row, 6))
-                && !piece.isSquareOccupied(new Coordinate(row, 7))) {
-            movements.add(new Coordinate(row, 7));
+        for (CastlingSide side : CastlingSide.values()) {
+            if (isCastlingAvailable(row, side)) {
+                movements.add(new Coordinate(row, side.kingTargetColumn));
+            }
         }
+    }
 
-        // Enroque Largo (hacia columna 1)
-        if (piece.isRookAvailableForCastling(new Coordinate(row, 1))
-                && !piece.isSquareOccupied(new Coordinate(row, 2))
-                && !piece.isSquareOccupied(new Coordinate(row, 3))) {
-            movements.add(new Coordinate(row, 2));
-        }
+    private boolean isCastlingAvailable(int row, CastlingSide side) {
+        Coordinate target = new Coordinate(row, side.rookColumn);
+        return king.isRookAvailableForCastling(target) && side.areSquaresClear(row, king);
     }
 }
