@@ -1,58 +1,40 @@
 package org.citadel.controllers.modules.game.local;
 
-import org.citadel.controllers.modules.game.local.logic.GameState;
-import org.citadel.controllers.modules.game.GameController;
-import org.citadel.controllers.modules.game.OperationControllerVisitor;
-import org.citadel.models.modules.game.Game;
+import org.citadel.models.modules.game.Board;
+import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.views.console.BoardView;
 
-public class LocalGameController extends LocalOperationController implements GameController {
+public class LocalGameController {
 
-    public LocalGameController(Game game) {
-        super(game);
+    private final Board board;
+
+    private final BoardView boardView;
+
+    private final LocalInputController inputController;
+
+    private final LocalMoveController moveController;
+
+    public LocalGameController(Board board, BoardView boardView, LocalInputController inputController, LocalMoveController moveController) {
+        this.board = board;
+        this.boardView = boardView;
+        this.inputController = inputController;
+        this.moveController = moveController;
     }
 
-    @Override
-    public void startNewGame() {
-        this.initialize();
+    public void start() {
+
     }
 
-    @Override
-    public void loadGame() {
-        // Lógica para cargar un juego (pendiente)
-        System.out.println("Funcionalidad no implementada");
+    private Coordinate selectPiece() {
+        return null;
     }
 
-    @Override
-    public void saveGame() {
-        // Lógica para guardar un juego (pendiente)
-        System.out.println("Funcionalidad no implementada");
+    private boolean selectDestinationAndMove(Coordinate origin) {
+        return false;
     }
 
-    @Override
-    public void showHistory() {
-        // Lógica para mostrar el historial (pendiente)
-        System.out.println("Funcionalidad no implementada");
+    private void handlePostMove() {
+
     }
 
-    @Override
-    public void exitGame() {
-        this.exit();
-    }
-
-    @Override
-    public void accept(OperationControllerVisitor operationControllerVisitor) {
-        // Aún no tenemos un visitor para este controlador
-    }
-
-    @Override
-    public GameState getGameState() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGameState'");
-    }
-
-    @Override
-    public boolean isGameInProgress() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isGameInProgress'");
-    }
 }

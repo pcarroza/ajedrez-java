@@ -56,7 +56,7 @@ public final class PieceInspector {
         assert piece != null;
         PawnVulnerabilityVisitor visitor = new PawnVulnerabilityVisitor();
         piece.accept(visitor);
-        return visitor.isVulnerable();
+        return visitor.isPawnVulnerable();
     }
 
     public static String getPieceSymbol(Piece piece) {

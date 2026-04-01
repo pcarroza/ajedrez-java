@@ -1,7 +1,5 @@
 package org.citadel.controllers.modules.game.local;
 
-import java.util.List;
-
 import org.citadel.controllers.modules.game.EnPassantPawnController;
 import org.citadel.controllers.modules.game.SpecialMovementsControllerVisitor;
 import org.citadel.models.modules.game.Game;

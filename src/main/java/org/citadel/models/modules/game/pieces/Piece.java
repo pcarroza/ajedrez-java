@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.rules.MovementRuler;
+import org.citadel.models.modules.game.pieces.rules.MovementRuleGenerator;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
-    protected MovementRuler movementBaseGenerator;
+    protected MovementRuleGenerator movementBaseGenerator;
 
     private Coordinate coordinate;
 

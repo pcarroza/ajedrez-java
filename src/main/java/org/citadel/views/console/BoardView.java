@@ -1,29 +1,60 @@
 package org.citadel.views.console;
 
-import org.citadel.common.tools.Terminal;
-import org.citadel.controllers.modules.game.PlacementController;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.Board;
+
+import java.util.List;
+
+import static org.citadel.common.tools.Terminal.*;
 
 public class BoardView {
 
-    public void write(PlacementController controller) {
-        Terminal.writeln("  a b c d e f g h");
-        for (int i = 7; i >= 0; i--) {
-            Terminal.write((i + 1) + " ");
-            for (int j = 0; j < 8; j++) {
-                String pieceChar = controller.getPieceSimbol(new Coordinate(i, j));
-                Terminal.write(pieceChar + " ");
-            }
-            Terminal.writeln("" + (i + 1));
-        }
-        Terminal.writeln("  a b c d e f g h");
+    private final Board board;
+
+    public BoardView(Board board) {
+        this.board = board;
     }
 
-    public void write(Player player) {
-        Terminal.writeln("Turno de: " + player);
+    public void render() {
+        clear();
+        board.printBoard();
+    }
+
+    public void showTurn(Player player) {
+        writeln("\nTURNO DE: " + player);
+    }
+
+    public void showSelectedPiece(String symbol, List<Coordinate> moves) {
+        writeln("Pieza seleccionada: " + symbol);
+        writeln("Movimientos posibles: " + moves);
+    }
+
+    public void showPromotion() {
+        writeln("¡PROMOCIÓN! El peón ha alcanzado el final.");
+    }
+
+    public void showCheck(Player rivalPlayer) {
+        writeln("¡ATENCIÓN! El Rey del jugador " + rivalPlayer + " está en JAQUE.");
+    }
+
+    public void showCapture(String symbol) {
+        writeln("¡Captura! Has comido la pieza " + symbol);
+    }
+
+    public void showEnPassant() {
+        writeln("¡Captura al paso!");
+    }
+
+    public void showCastling() {
+        writeln("¡Enroque!");
+    }
+
+    public void showMoveCompleted(Coordinate target) {
+        writeln("Movimiento completado a " + target);
+    }
+
+    public void showError(String message) {
+        writeln("Error: " + message);
     }
 }
-
-
-

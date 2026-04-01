@@ -7,16 +7,16 @@ import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public class BishopRuler extends MovementRuler {
+public class BishopRulerGenerator extends MovementRuleGenerator {
 
-    private static BishopRuler instance;
+    private static BishopRulerGenerator instance;
 
-    private BishopRuler() {
+    private BishopRulerGenerator() {
     }
 
-    public static BishopRuler getInstance() {
+    public static BishopRulerGenerator getInstance() {
         if (instance == null) {
-            instance = new BishopRuler();
+            instance = new BishopRulerGenerator();
         }
         return instance;
     }

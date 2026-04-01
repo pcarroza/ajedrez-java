@@ -2,7 +2,6 @@ package org.citadel;
 
 import org.citadel.controllers.modules.game.local.logic.LocalLogic;
 import org.citadel.controllers.modules.game.GameController;
-import org.citadel.views.console.ConsoleView;
 
 public class Standalone extends Chess {
 
@@ -13,7 +12,7 @@ public class Standalone extends Chess {
 
     @Override
     public View getView() {
-        return new ConsoleView();
+        return null;
     }
 
     public static void main(String[] args) {

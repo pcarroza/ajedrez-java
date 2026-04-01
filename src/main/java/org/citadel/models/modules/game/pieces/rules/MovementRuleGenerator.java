@@ -5,7 +5,7 @@ import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public abstract class MovementRuler {
+public abstract class MovementRuleGenerator {
 
     public abstract List<Coordinate> generate(Piece piece);
 }

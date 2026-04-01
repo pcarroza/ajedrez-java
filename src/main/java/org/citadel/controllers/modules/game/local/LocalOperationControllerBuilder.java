@@ -20,7 +20,6 @@ public class LocalOperationControllerBuilder {
 
     public void build() {
         localStartController = new LocalStartController(game, this);
-        localGameController = new LocalGameController(game);
         builders = new LocalPlacementControllerBuilder[Game.NUMBER_PLAYERS];
         localContinueController = new LocalContinueController(game);
     }

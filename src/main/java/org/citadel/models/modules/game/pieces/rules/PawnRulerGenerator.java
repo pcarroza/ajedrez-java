@@ -8,16 +8,16 @@ import org.citadel.models.modules.game.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PawnRuler extends MovementRuler {
+public class PawnRulerGenerator extends MovementRuleGenerator {
 
-    private static PawnRuler instance;
+    private static PawnRulerGenerator instance;
 
-    private PawnRuler() {
+    private PawnRulerGenerator() {
     }
 
-    public static PawnRuler getInstance() {
+    public static PawnRulerGenerator getInstance() {
         if (instance == null) {
-            instance = new PawnRuler();
+            instance = new PawnRulerGenerator();
         }
         return instance;
     }

@@ -6,17 +6,16 @@ import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.King;
 import org.citadel.models.modules.game.pieces.enums.CastlingSide;
 
-public class CastlingMoveRuler extends SpecialMovesRuler {
+public class CastlingMoveRulerGenerator extends SpecialRulesGenerator {
 
     private final King king;
 
-    public CastlingMoveRuler(King king) {
-        super(king);
+    public CastlingMoveRulerGenerator(King king) {
         this.king = king;
     }
 
     @Override
-    public void generateMovements() {
+    public void generate() {
         movements = new ArrayList<>();
 
         if (king.isMoved())

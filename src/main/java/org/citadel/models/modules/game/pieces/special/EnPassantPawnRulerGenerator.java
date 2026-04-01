@@ -8,7 +8,7 @@ import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Pawn;
 import org.citadel.models.modules.game.pieces.enums.Player;
 
-public class EnPassantPawnSpecialRuler extends SpecialMovesRuler {
+public class EnPassantPawnRulerGenerator extends SpecialRulesGenerator {
 
     private static final int EN_PASSANT_ROW_WHITE = 5;
 
@@ -16,13 +16,12 @@ public class EnPassantPawnSpecialRuler extends SpecialMovesRuler {
 
     private final Pawn pawn;
 
-    public EnPassantPawnSpecialRuler(Pawn pawn) {
-        super(pawn);
+    public EnPassantPawnRulerGenerator(Pawn pawn) {
         this.pawn = pawn;
     }
 
     @Override
-    public void generateMovements() {
+    public void generate() {
         movements = new ArrayList<>();
 
         if (!isOnEnPassantRow())
@@ -42,6 +41,6 @@ public class EnPassantPawnSpecialRuler extends SpecialMovesRuler {
 
     private boolean hasVulnerableRivalPawnBeside(Coordinate diagonal) {
         Coordinate rivalCoordinate = new Coordinate(pawn.getCoordinate().row(), diagonal.column());
-        return pawn.isVulnerablePawnAt(rivalCoordinate)
+        return pawn.isVulnerablePawnAt(rivalCoordinate);
     }
 }

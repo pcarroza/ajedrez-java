@@ -1,6 +1,9 @@
 package org.citadel.models.modules.game;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
+import org.citadel.controllers.modules.game.local.LocalGameController;
+import org.citadel.controllers.modules.game.local.LocalInputController;
+import org.citadel.controllers.modules.game.local.LocalMoveController;
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
@@ -8,6 +11,7 @@ import org.citadel.models.modules.game.pieces.SelectedPiece;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
+import org.citadel.views.console.BoardView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -150,7 +154,6 @@ public class Board extends SubjectBoard implements BoardObserver {
         Player player = getCurrentPlayer();
         Piece newPiece = PromotionType.fromString(pieceType).create(coordinate, player);
         newPiece.subscribe(this);
-        removeCurrentPlayerPiece(coordinate);
         piecesMap.get(player).remove((Piece) selectedPiece);
         piecesMap.get(player).add(newPiece);
         selectedPiece = newPiece;
@@ -288,6 +291,11 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public static void main(String[] args) {
         Board board = new Board();
+        BoardView boardView = new BoardView(board);
+        LocalInputController inputController = new LocalInputController();
+        LocalMoveController moveController = new LocalMoveController(board, boardView);
+        new LocalGameController(board, boardView, inputController, moveController).start();
+
         writeln("--- INICIO DE PARTIDA DE AJEDREZ ---");
 
         do {
@@ -327,14 +335,14 @@ public class Board extends SubjectBoard implements BoardObserver {
             do {
                 writeln("\nIndique el destino para " + board.getPieceSymbol(origin) + " en " + origin
                         + " (o '0' en fila para cancelar):");
-                int col = getValidColumnInput("Columna destino (a-h): ");
+                int column = getValidColumnInput("Columna destino (a-h): ");
                 write("Fila destino (1-8): ");
                 int row = input(Integer.class);
                 if (row == 0) {
                     board.resetSelectedPiece();
                     break;
                 }
-                Coordinate target = new Coordinate(row, col);
+                Coordinate target = new Coordinate(row, column);
 
                 if (board.isMovementValid(target)) {
                     if (board.isEnemy(target)) {

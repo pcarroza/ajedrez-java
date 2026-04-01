@@ -24,7 +24,6 @@ public class LocalLogic implements GameController {
         builder.build();
         controllers.put(GameState.INITIAL, builder.getStartController());
         controllers.put(GameState.IN_GAME, builder.getPlacementController());
-        controllers.put(GameState.MENU, builder.getGameController());
         controllers.put(GameState.EXIT, builder.getContinueController());
         gameState = GameState.INITIAL;
     }

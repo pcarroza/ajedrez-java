@@ -1,18 +1,14 @@
 package org.citadel.models.modules.game.pieces.special;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public abstract class SpecialMovesRuler {
-
-    protected Piece piece;
+public abstract class SpecialRulesGenerator {
 
     protected List<Coordinate> movements;
 
-    SpecialMovesRuler(Piece piece) {
-        this.piece = piece;
+    SpecialRulesGenerator() {
     }
 
     public boolean isMovementValid(Coordinate target) {
@@ -23,5 +19,5 @@ public abstract class SpecialMovesRuler {
         return movements;
     }
 
-    public abstract void generateMovements();
+    public abstract void generate();
 }
