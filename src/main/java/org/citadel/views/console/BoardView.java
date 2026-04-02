@@ -18,7 +18,21 @@ public class BoardView {
 
     public void render() {
         clear();
-        board.printBoard();
+        printBoard();
+    }
+
+    public void printBoard() {
+        writeln("\n    a b c d e f g h");
+        writeln("  +-----------------+");
+        for (int row = 8; row >= 1; row--) {
+            write(row + " | ");
+            for (int col = 1; col <= 8; col++) {
+                write(board.getPieceSymbol(new Coordinate(row, col)) + " ");
+            }
+            writeln("| " + row);
+        }
+        writeln("  +-----------------+");
+        writeln("    a b c d e f g h\n");
     }
 
     public void showTurn(Player player) {

@@ -1,7 +1,6 @@
 package org.citadel;
 
 import org.citadel.controllers.modules.game.GameController;
-import org.citadel.controllers.modules.game.local.logic.GameState;
 
 public abstract class Chess {
 
@@ -19,8 +18,5 @@ public abstract class Chess {
     public abstract View getView();
 
     public void run() {
-        do {
-            view.interact(logic);
-        } while (logic.getGameState() != GameState.EXIT);
     }
 }

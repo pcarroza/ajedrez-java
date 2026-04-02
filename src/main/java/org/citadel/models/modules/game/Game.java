@@ -1,6 +1,9 @@
 package org.citadel.models.modules.game;
 
 import org.citadel.models.modules.game.pieces.enums.Player;
+
+import java.util.List;
+
 import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class Game {
@@ -94,6 +97,30 @@ public class Game {
         return board.isTheBlackPieceSelected(coordinate);
     }
 
+    public boolean isThePawnPromoted() {
+        return board.isThePawnPromoted();
+    }
+
+    public void promotePawn(String pieceType) {
+        board.promotePawn(pieceType);
+    }
+
+    public void resetSelectedPiece() {
+        board.resetSelectedPiece();
+    }
+
+    public boolean finished() {
+        return board.finished();
+    }
+
+    public boolean isWithinBoardLimits(Coordinate coordinate) {
+        return board.isWithinBoardLimits(coordinate);
+    }
+
+    public boolean isJaque() {
+        return board.isJaque();
+    }
+
     public void initialize() {
         board.initialize();
     }
@@ -110,11 +137,15 @@ public class Game {
         board.exit();
     }
 
-    public boolean isThePawnPromoted() {
-        return board.isThePawnPromoted();
+    public List<Coordinate> getSelectedPieceMovements() {
+        return board.getSelectedPieceMovements();
     }
 
-    public void promotePawn(String pieceType) {
-        board.promotePawn(pieceType);
+    public boolean isPieceSelected(Coordinate coordinate) {
+        return board.isPieceSelected(coordinate);
+    }
+
+    public boolean isEnemy(Coordinate coordinate) {
+        return board.isEnemy(coordinate);
     }
 }

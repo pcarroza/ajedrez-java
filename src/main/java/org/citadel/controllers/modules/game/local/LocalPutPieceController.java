@@ -1,6 +1,5 @@
 package org.citadel.controllers.modules.game.local;
 
-import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.controllers.modules.game.OperationControllerVisitor;
 import org.citadel.controllers.modules.game.PlacementControllerVisitor;
 import org.citadel.controllers.modules.game.PutPieceController;
@@ -9,29 +8,31 @@ import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class LocalPutPieceController extends LocalPlacementController implements PutPieceController {
 
-    public LocalPutPieceController(Game game) {
+    LocalPutPieceController(Game game) {
         super(game);
     }
 
     @Override
-    public void put(Coordinate coordinate) {
-        assert coordinate != null;
-        assert ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
-        super.put(coordinate);
-    }
-
-    @Override
-    public boolean isMovementValid(Coordinate coordinate) {
-        return super.isMovementValid(coordinate);
-    }
-
-    @Override
     public void accept(PlacementControllerVisitor placementControllerVisitor) {
-        placementControllerVisitor.visit(this);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+    }
+
+    @Override
+    public String getPieceSimbol(Coordinate coordinate) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPieceSimbol'");
+    }
+
+    @Override
+    public void put(Coordinate target) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'put'");
     }
 
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
-        operationControllerVisitor.visit(this);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
 }

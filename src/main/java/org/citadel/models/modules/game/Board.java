@@ -1,8 +1,6 @@
 package org.citadel.models.modules.game;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
-import org.citadel.controllers.modules.game.local.LocalGameController;
-import org.citadel.controllers.modules.game.local.LocalInputController;
 import org.citadel.controllers.modules.game.local.LocalMoveController;
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
@@ -12,6 +10,7 @@ import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 import org.citadel.views.console.BoardView;
+import org.citadel.views.console.InputView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,10 +19,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import static org.citadel.common.tools.Terminal.clear;
-import static org.citadel.common.tools.Terminal.input;
-import static org.citadel.common.tools.Terminal.write;
-import static org.citadel.common.tools.Terminal.writeln;
 import static org.citadel.models.modules.game.pieces.PiecesMapBuilder.createPiecesMap;
 import static org.citadel.models.modules.game.pieces.enums.Player.BLACK;
 import static org.citadel.models.modules.game.pieces.enums.Player.WHITE;
@@ -194,6 +189,12 @@ public class Board extends SubjectBoard implements BoardObserver {
         return piecesMap.values().stream().flatMap(List::stream).anyMatch(piece -> piece.isAt(coordinate));
     }
 
+    @Override
+    public boolean isEnemy(Coordinate coordinate) {
+        assert coordinate != null;
+        return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+    }
+
     public boolean isWithinBoardLimits(Coordinate coordinate) {
         assert coordinate != null;
         return ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
@@ -212,12 +213,6 @@ public class Board extends SubjectBoard implements BoardObserver {
     public boolean isTheBlackPieceSelected(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(BLACK).anyMatch(piece -> piece.isAt(coordinate));
-    }
-
-    @Override
-    public boolean isEnemy(Coordinate coordinate) {
-        assert coordinate != null;
-        return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
     @Override
@@ -275,169 +270,10 @@ public class Board extends SubjectBoard implements BoardObserver {
         return false;
     }
 
-    public void printBoard() {
-        writeln("\n    a b c d e f g h");
-        writeln("  +-----------------+");
-        for (int row = 8; row >= 1; row--) {
-            write(row + " | ");
-            for (int col = 1; col <= 8; col++) {
-                write(getPieceSymbol(new Coordinate(row, col)) + " ");
-            }
-            writeln("| " + row);
-        }
-        writeln("  +-----------------+");
-        writeln("    a b c d e f g h\n");
-    }
-
     public static void main(String[] args) {
         Board board = new Board();
         BoardView boardView = new BoardView(board);
-        LocalInputController inputController = new LocalInputController();
-        LocalMoveController moveController = new LocalMoveController(board, boardView);
-        new LocalGameController(board, boardView, inputController, moveController).start();
-
-        writeln("--- INICIO DE PARTIDA DE AJEDREZ ---");
-
-        do {
-            clear();
-            board.printBoard();
-            // --- FASE 1: SELECCIÓN DE ORIGEN ---
-            Coordinate origin = null;
-            boolean canSelect = false;
-            do {
-                writeln("\nTURNO DE: " + board.getCurrentPlayer());
-                writeln("Seleccione la pieza que desea mover (ej: a2):");
-
-                int col = getValidColumnInput("Columna (a-h): ");
-                int row = getValidInput("Fila (1-8): ");
-                origin = new Coordinate(row, col);
-
-                if (!board.isWithinBoardLimits(origin)) {
-                    writeln("Error: Coordenada fuera de los límites del tablero.");
-                } else if (!board.isSquareOccupied(origin)) {
-                    writeln("Error: No hay ninguna pieza en esa posición.");
-                } else if (!board.isPieceSelected(origin)) {
-                    writeln("Error: Esa pieza no te pertenece.");
-                } else {
-                    board.selectPiece(origin);
-                    if (board.getSelectedPieceMovements().isEmpty()) {
-                        writeln("Error: La pieza seleccionada no tiene movimientos legales.");
-                    } else {
-                        canSelect = true;
-                        writeln("Pieza seleccionada: " + board.getPieceSymbol(origin));
-                        writeln("Movimientos posibles: " + board.getSelectedPieceMovements());
-                    }
-                }
-            } while (!canSelect);
-
-            // --- FASE 2 Y 3: SELECCIÓN DE DESTINO Y EJECUCIÓN ---
-            boolean moveExecuted = false;
-            do {
-                writeln("\nIndique el destino para " + board.getPieceSymbol(origin) + " en " + origin
-                        + " (o '0' en fila para cancelar):");
-                int column = getValidColumnInput("Columna destino (a-h): ");
-                write("Fila destino (1-8): ");
-                int row = input(Integer.class);
-                if (row == 0) {
-                    board.resetSelectedPiece();
-                    break;
-                }
-                Coordinate target = new Coordinate(row, column);
-
-                if (board.isMovementValid(target)) {
-                    if (board.isEnemy(target)) {
-                        writeln("¡Captura! Has comido la pieza " + board.getPieceSymbol(target));
-                        board.removeRivalPlayerPiece(target);
-                    } else if (board.isPawnSelected() && !board.isSquareOccupied(target)
-                            && board.getSelectedPieceEnPassantDiagonals().contains(target)) {
-                        Coordinate rivalPawnCoord = new Coordinate(board.getSelectedPieceCoordinate().row(),
-                                target.column());
-                        if (board.isVulnerablePawnAt(rivalPawnCoord)) {
-                            writeln("¡Captura al paso!");
-                            board.removeRivalPlayerPiece(rivalPawnCoord);
-                        }
-                    } else if (board.isKingSelected()) {
-                        Coordinate oldCoordinate = board.getSelectedPieceCoordinate();
-                        if (Math.abs(oldCoordinate.column() - target.column()) > 1) {
-                            int rookOldColumn = (target.column() < oldCoordinate.column()) ? 1 : 8;
-                            int rookNewColumn = (target.column() < oldCoordinate.column()) ? target.column() + 1
-                                    : target.column() - 1;
-                            int row1 = target.row();
-                            board.movePiece(new Coordinate(row1, rookOldColumn), new Coordinate(row1, rookNewColumn));
-                            writeln("¡Enroque!");
-                        }
-                    }
-
-                    board.putPiece(target);
-                    moveExecuted = true;
-                    writeln("Movimiento completado a " + target);
-
-                    if (board.isThePawnPromoted()) {
-                        writeln("¡PROMOCIÓN! El peón ha alcanzado el final.");
-                        String pieceType = getValidPromotionInput(
-                                "Elija pieza (Q: Reina, T: Torre, B: Alfil, C: Caballo): ");
-                        board.promotePawn(pieceType);
-                    }
-                } else {
-                    writeln("Error: Movimiento no permitido. Intente otro destino.");
-                }
-            } while (!moveExecuted);
-
-            if (!moveExecuted)
-                continue; // Si canceló selección, vuelve arriba
-
-            // --- FASE 4: EVALUACIÓN POST-JUGADA ---
-            if (board.isJaque()) {
-                writeln("¡ATENCIÓN! El Rey del jugador " + board.getRivalPlayer() + " está en JAQUE.");
-            }
-
-            board.switchTurn();
-            board.resetSelectedPiece();
-
-        } while (!board.finished());
-    }
-
-    private static int getValidInput(String message) {
-        int val;
-        do {
-            write(message);
-            val = input(Integer.class);
-            if (val < 1 || val > 8) {
-                writeln("Valor inválido. Por favor, introduzca un número entre 1 y 8.");
-            }
-        } while (val < 1 || val > 8);
-        return val;
-    }
-
-    private static int getValidColumnInput(String message) {
-        int col = -1;
-        do {
-            write(message);
-            String inputStr = input(String.class).trim().toLowerCase();
-            if (inputStr.length() == 1) {
-                char c = inputStr.charAt(0);
-                if (c >= 'a' && c <= 'h') {
-                    col = c - 'a' + 1;
-                } else if (c >= '1' && c <= '8') {
-                    col = c - '1' + 1;
-                }
-            }
-            if (col == -1) {
-                writeln("Valor inválido. Use letras de 'a' a 'h' o números del 1 al 8.");
-            }
-        } while (col == -1);
-        return col;
-    }
-
-    private static String getValidPromotionInput(String message) {
-        String inputStr;
-        do {
-            write(message);
-            inputStr = input(String.class).trim().toUpperCase();
-            if (inputStr.matches("[QTBC]")) {
-                return inputStr;
-            }
-            writeln("Opción inválida. Use Q, T, B o C.");
-        } while (true);
+        InputView inputView = new InputView();
+        LocalMoveController move = new LocalMoveController(board, boardView);
     }
 }
