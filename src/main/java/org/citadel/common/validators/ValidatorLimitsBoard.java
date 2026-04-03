@@ -22,6 +22,6 @@ public class ValidatorLimitsBoard {
     }
 
     public boolean isPieceEndBoardAt(Coordinate coordinate) {
-        return LIMITS.isEqualToMin(coordinate.row()) || LIMITS.isEqualToMax(coordinate.column());
+        return LIMITS.isEqualToMin(coordinate.row()) || LIMITS.isEqualToMax(coordinate.row());
     }
 }

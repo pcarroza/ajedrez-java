@@ -1,60 +1,59 @@
 package org.citadel.controllers.modules.game.local;
 
-import org.citadel.models.modules.game.Board;
+import org.citadel.controllers.modules.game.GameController;
+import org.citadel.controllers.modules.game.MoveController;
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.views.console.BoardView;
 
-public class LocalMoveController {
+public class LocalMoveController implements MoveController {
 
-    private final Board board;
+    private GameController gameController;
 
-    private final BoardView view;
-
-    public LocalMoveController(Board board, BoardView view) {
-        this.board = board;
-        this.view = view;
+    public LocalMoveController(GameController gameController) {
+        this.gameController = gameController;
     }
 
     public void executeMove(Coordinate target) {
         handleCapture(target);
         handleEnPassant(target);
         handleCastling(target);
-        board.putPiece(target);
+        gameController.putPiece(target);
+    }
+
+    @Override
+    public boolean isThePawnPromoted() {
+        return gameController.isThePawnPromoted();
+    }
+
+    @Override
+    public void promotePawn(String p) {
+        gameController.promotePawn(p);
     }
 
     private void handleCapture(Coordinate target) {
-        if (board.isEnemy(target)) {
-            view.showCapture(board.getPieceSymbol(target));
-            board.removeRivalPlayerPiece(target);
-        }
+        if (gameController.isEnemy(target))
+            gameController.removeRivalPlayerPiece(target);
     }
 
     private void handleEnPassant(Coordinate target) {
-        if (!board.isPawnSelected())
+        if (!gameController.isPawnSelected())
             return;
-        if (board.isSquareOccupied(target))
+        if (!gameController.isEmpty(target))
             return;
-        if (!board.getSelectedPieceEnPassantDiagonals().contains(target))
+        if (!gameController.getSelectedPieceEnPassantDiagonals().contains(target))
             return;
-
-        Coordinate rivalPawnCoordinate = new Coordinate(board.getSelectedPieceCoordinate().row(), target.column());
-        if (board.isVulnerablePawnAt(rivalPawnCoordinate)) {
-            view.showEnPassant();
-            board.removeRivalPlayerPiece(rivalPawnCoordinate);
-        }
+        Coordinate rivalPawn = new Coordinate(gameController.getSelectedPieceCoordinate().row(), target.column());
+        if (gameController.isVulnerablePawnAt(rivalPawn))
+            gameController.removeRivalPlayerPiece(rivalPawn);
     }
 
     private void handleCastling(Coordinate target) {
-        if (!board.isKingSelected())
+        if (!gameController.isKingSelected())
             return;
-
-        Coordinate origin = board.getSelectedPieceCoordinate();
+        Coordinate origin = gameController.getSelectedPieceCoordinate();
         if (Math.abs(origin.column() - target.column()) <= 1)
             return;
-
-        int rookOldColumn = (target.column() < origin.column()) ? 1 : 8;
-        int rookNewColumn = (target.column() < origin.column()) ? target.column() + 1 : target.column() - 1;
-        board.movePiece(new Coordinate(target.row(), rookOldColumn), new Coordinate(target.row(), rookNewColumn));
-        view.showCastling();
+        int rookOldCol = (target.column() < origin.column()) ? 1 : 8;
+        int rookNewCol = (target.column() < origin.column()) ? target.column() + 1 : target.column() - 1;
+        gameController.movePiece(new Coordinate(target.row(), rookOldCol), new Coordinate(target.row(), rookNewCol));
     }
 }

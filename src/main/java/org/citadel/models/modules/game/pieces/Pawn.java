@@ -66,11 +66,13 @@ public class Pawn extends Piece {
 
     private boolean inStep(Coordinate target) {
         final int doubleStep = 2;
-        return getDisplacedBy(new Coordinate(doubleStep, 0)).equals(target);
+        int direction = doubleStep * player.getPlayer();
+        return getDisplacedBy(new Coordinate(direction, 0)).equals(target);
     }
 
     private boolean isThePawnPromoted(Coordinate coordinate) {
-        return ValidatorLimitsBoard.getInstance().isPieceEndBoardAt(coordinate);
+        int targetRow = player == Player.WHITE ? 8 : 1;
+        return coordinate.row() == targetRow;
     }
 
     private void changeToPromoted() {

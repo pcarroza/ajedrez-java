@@ -5,7 +5,7 @@ import java.util.List;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.Player;
 
-public interface GameController extends OperationController {
+public interface GameController {
     // Turno
     void switchTurn();
 

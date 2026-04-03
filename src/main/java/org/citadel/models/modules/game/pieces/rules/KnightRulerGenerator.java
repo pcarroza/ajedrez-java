@@ -35,7 +35,7 @@ public class KnightRulerGenerator extends MovementRuleGenerator {
                 piece.getDisplacedBy(new Coordinate(-doubleStep, -simpleStep)),
                 piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
                 piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
-                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)))
+                piece.getDisplacedBy(new Coordinate(-doubleStep, simpleStep)))
                 .filter(it -> ValidatorLimitsBoard.getInstance().isWithinLimits(it))
                 .filter(it -> !piece.isPieceSamePlayerAt(it))
                 .collect(Collectors.toList());

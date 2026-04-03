@@ -1,7 +1,6 @@
 package org.citadel.models.modules.game;
 
 import org.citadel.common.validators.ValidatorLimitsBoard;
-import org.citadel.controllers.modules.game.local.LocalMoveController;
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
@@ -9,8 +8,6 @@ import org.citadel.models.modules.game.pieces.SelectedPiece;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
-import org.citadel.views.console.BoardView;
-import org.citadel.views.console.InputView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -268,12 +265,5 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public boolean finished() {
         return false;
-    }
-
-    public static void main(String[] args) {
-        Board board = new Board();
-        BoardView boardView = new BoardView(board);
-        InputView inputView = new InputView();
-        LocalMoveController move = new LocalMoveController(board, boardView);
     }
 }

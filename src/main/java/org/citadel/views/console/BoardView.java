@@ -2,7 +2,7 @@ package org.citadel.views.console;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.Board;
+import org.citadel.controllers.modules.game.GameController;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import static org.citadel.common.tools.Terminal.*;
 
 public class BoardView {
 
-    private final Board board;
+    private final GameController gameController;
 
-    public BoardView(Board board) {
-        this.board = board;
+    public BoardView(GameController gameController) {
+        this.gameController = gameController;
     }
 
     public void render() {
@@ -27,7 +27,7 @@ public class BoardView {
         for (int row = 8; row >= 1; row--) {
             write(row + " | ");
             for (int col = 1; col <= 8; col++) {
-                write(board.getPieceSymbol(new Coordinate(row, col)) + " ");
+                write(gameController.getPieceSymbol(new Coordinate(row, col)) + " ");
             }
             writeln("| " + row);
         }

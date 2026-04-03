@@ -1,9 +1,14 @@
 package org.citadel.models.modules.game;
 
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.views.console.GameView;
 
 import java.util.List;
 
+import org.citadel.controllers.modules.game.GameController;
+import org.citadel.controllers.modules.game.MoveController;
+import org.citadel.controllers.modules.game.local.LocalGameController;
+import org.citadel.controllers.modules.game.local.LocalMoveController;
 import org.citadel.models.modules.game.pieces.Coordinate;
 
 public class Game {
@@ -147,5 +152,12 @@ public class Game {
 
     public boolean isEnemy(Coordinate coordinate) {
         return board.isEnemy(coordinate);
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game(null);
+        GameController controller = new LocalGameController(game);
+        MoveController move = new LocalMoveController(controller);
+        new GameView(controller, move).start();
     }
 }

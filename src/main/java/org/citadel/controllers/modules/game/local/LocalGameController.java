@@ -2,11 +2,12 @@ package org.citadel.controllers.modules.game.local;
 
 import java.util.List;
 
+import org.citadel.controllers.modules.game.GameController;
 import org.citadel.models.modules.game.Game;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.Player;
 
-public class LocalGameController {
+public class LocalGameController implements GameController {
 
     private final Game game;
 
