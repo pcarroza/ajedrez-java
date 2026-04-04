@@ -8,63 +8,110 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static org.citadel.models.modules.game.pieces.enums.Player.BLACK;
+import static org.citadel.models.modules.game.pieces.enums.Player.WHITE;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class KnightEdgeMovesTest {
 
-    private final Coordinate origin;
+    private final String position;
 
     private final Player player;
 
-    private final List<Coordinate> expectedMoves;
+    private final List<String> expectedMoves;
 
-    public KnightEdgeMovesTest(Coordinate origin, Player player, List<Coordinate> expectedMoves) {
-        this.origin = origin;
+    public KnightEdgeMovesTest(String position, Player player, List<String> expectedMoves) {
+        this.position = position;
         this.player = player;
         this.expectedMoves = expectedMoves;
     }
 
-    @Parameterized.Parameters(name = "Knight at {0} as {1}")
+    @Parameterized.Parameters(name = "{index}: Knight at {0} as {1}")
     public static Collection<Object[]> cases() {
         return Arrays.asList(new Object[][] {
-                {
-                        new Coordinate(1, 4), Player.WHITE,
-                        List.of(new Coordinate(2, 2), new Coordinate(2, 6),
-                                new Coordinate(3, 3), new Coordinate(3, 5))
-                },
-                {
-                        new Coordinate(4, 8), Player.BLACK,
-                        List.of(new Coordinate(6, 7), new Coordinate(2, 7),
-                                new Coordinate(5, 6), new Coordinate(3, 6))
-                },
-                {
-                        new Coordinate(2, 2), Player.WHITE,
-                        List.of(new Coordinate(4, 1), new Coordinate(4, 3),
-                                new Coordinate(1, 4), new Coordinate(3, 4))
-                },
-                {
-                        new Coordinate(7, 7), Player.BLACK,
-                        List.of(new Coordinate(5, 8), new Coordinate(8, 5),
-                                new Coordinate(6, 5), new Coordinate(5, 6))
-                }
+                { "A4", WHITE, List.of("B2", "B6", "C3", "C5") },
+                { "D8", BLACK, List.of("F7", "B7", "E6", "C6") },
+                { "B2", WHITE, List.of("D1", "D3", "A4", "C4") },
+                { "G7", BLACK, List.of("E8", "H5", "F5", "E6") }
         });
     }
 
     @Test
-    public void givenKnightAtEdge_thenCorrectNumberOfMovements() {
-        List<Coordinate> movements = getMovements(origin, player);
-        expectedMoves.forEach(expected -> assertTrue(movements.contains(expected)));
+    public void knight_edge_movement_is_correct() {
+        aKnight().at(position).as(player).shouldReachOnly(expectedMoves);
     }
 
-    private List<Coordinate> getMovements(Coordinate coordinate, Player player) {
-        Knight knight = new Knight(coordinate, player);
-        knight.subscribe(new BoardStub());
-        knight.generateMovements();
-        return knight.getMovements();
+    // =========================
+    // 🧠 ENTRY POINT DSL
+    // =========================
+
+    private KnightDsl aKnight() {
+        return new KnightDsl();
+    }
+
+    // =========================
+    // ⚔️ DSL COMPLETO
+    // =========================
+
+    private static class KnightDsl {
+
+        private String position;
+
+        private Player player;
+
+        KnightDsl at(String position) {
+            this.position = position;
+            return this;
+        }
+
+        KnightDsl as(Player player) {
+            this.player = player;
+            return this;
+        }
+
+        void shouldReachOnly(List<String> expectedMoves) {
+            List<String> actualMoves = movements();
+            expectedMoves.forEach(move -> assertTrue("Missing move: " + move, actualMoves.contains(move)));
+        }
+
+        // =========================
+        // ⚙️ Infra encapsulada
+        // =========================
+
+        private List<String> movements() {
+            Knight knight = buildKnight();
+            return knight.getMovements()
+                    .stream()
+                    .map(KnightEdgeMovesTest::toPosition)
+                    .collect(Collectors.toList());
+        }
+
+        private Knight buildKnight() {
+            Coordinate coordinate = toCoordinate(position);
+            Knight knight = new Knight(coordinate, player);
+            knight.subscribe(new BoardStub());
+            knight.generateMovements();
+            return knight;
+        }
+    }
+
+    // =========================
+    // 🔄 MAPPERS (aislados)
+    // =========================
+
+    private static Coordinate toCoordinate(String position) {
+        int column = position.charAt(0) - 'A' + 1;
+        int row = Character.getNumericValue(position.charAt(1));
+        return new Coordinate(column, row);
+    }
+
+    private static String toPosition(Coordinate coordinate) {
+        char column = (char) ('A' + coordinate.column() - 1);
+        int row = coordinate.row();
+        return "" + column + row;
     }
 }

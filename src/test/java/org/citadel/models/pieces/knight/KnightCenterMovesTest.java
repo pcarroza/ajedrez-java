@@ -20,7 +20,7 @@ public class KnightCenterMovesTest {
     private final Coordinate origin;
 
     private final Player player;
-    
+
     private final List<Coordinate> expectedMoves;
 
     public KnightCenterMovesTest(Coordinate origin, Player player, List<Coordinate> expectedMoves) {

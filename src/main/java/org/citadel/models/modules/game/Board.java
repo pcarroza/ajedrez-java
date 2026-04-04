@@ -26,7 +26,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     private final Map<Player, List<Piece>> removedPieces;
 
-    private final Map<Player, List<Piece>> enPassantPawnsMap;
+    private final Map<Player, List<Piece>> pawnMapInStep;
 
     private List<Coordinate> selectedPieceMovements;
 
@@ -37,7 +37,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     public Board() {
         piecesMap = createPiecesMap(this);
         removedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
-        enPassantPawnsMap = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
+        pawnMapInStep = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
         selectedPieceMovements = Collections.emptyList();
         turn = new Turn();
     }
@@ -48,15 +48,15 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public void add(Piece enPassantPawn) {
-        assert enPassantPawn != null;
-        enPassantPawnsMap.get(getCurrentPlayer()).add(enPassantPawn);
+    public void add(Piece inStepPawn) {
+        assert inStepPawn != null;
+        pawnMapInStep.get(getCurrentPlayer()).add(inStepPawn);
     }
 
     @Override
-    public void remove(Piece enPassantPawn) {
-        assert enPassantPawn != null;
-        enPassantPawnsMap.get(getCurrentPlayer()).remove(enPassantPawn);
+    public void remove(Piece inStepPawn) {
+        assert inStepPawn != null;
+        pawnMapInStep.get(getCurrentPlayer()).remove(inStepPawn);
     }
 
     public List<Coordinate> getSelectedPieceMovements() {
@@ -142,7 +142,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     public void promotePawn(String pieceType) {
         assert selectedPiece != null;
         assert PieceInspector.isPawn((Piece) selectedPiece);
-        Coordinate coordinate = ((Piece) selectedPiece).getCoordinate();
+        Coordinate coordinate = selectedPiece.getCoordinate();
         Player player = getCurrentPlayer();
         Piece newPiece = PromotionType.fromString(pieceType).create(coordinate, player);
         newPiece.subscribe(this);
@@ -220,7 +220,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     @Override
     public boolean isVulnerablePawnAt(Coordinate coordinate) {
-        return enPassantPawnsMap.get(getRivalPlayer()).stream().anyMatch(p -> p.isAt(coordinate));
+        return pawnMapInStep.get(getRivalPlayer()).stream().anyMatch(p -> p.isAt(coordinate));
     }
 
     public boolean isJaque() {
@@ -260,7 +260,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void switchTurn() {
         turn.switchTurn();
-        enPassantPawnsMap.get(getCurrentPlayer()).clear();
+        pawnMapInStep.get(getCurrentPlayer()).clear();
     }
 
     public boolean finished() {

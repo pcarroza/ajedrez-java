@@ -65,10 +65,6 @@ public class KnightInitialPositionMovesTest {
                 new Coordinate(7, 8));
     }
 
-    // =========================
-    // Helpers (clave del refactor)
-    // =========================
-
     private void assertValidMoves(Coordinate origin, Player player, Coordinate... expected) {
         List<Coordinate> moves = getMoves(origin, player);
         Arrays.stream(expected).forEach(move -> assertTrue("Expected move not found: " + move, moves.contains(move)));

@@ -12,7 +12,7 @@ import org.citadel.models.modules.game.pieces.enums.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnPassantTargetVisitor implements PieceVisitor {
+public class InStepPawnTargetVisitor implements PieceVisitor {
 
     private final List<Coordinate> diagonals = new ArrayList<>();
 

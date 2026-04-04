@@ -8,15 +8,15 @@ import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Pawn;
 import org.citadel.models.modules.game.pieces.enums.Player;
 
-public class EnPassantPawnRulerGenerator extends SpecialRulesGenerator {
+public class InStepPawnRulerGenerator extends SpecialRulesGenerator {
 
-    private static final int EN_PASSANT_ROW_WHITE = 5;
+    private static final int IN_STEP_ROW_WHITE = 5;
 
-    private static final int EN_PASSANT_ROW_BLACK = 4;
+    private static final int IN_STEP_ROW_BLACK = 4;
 
     private final Pawn pawn;
 
-    public EnPassantPawnRulerGenerator(Pawn pawn) {
+    public InStepPawnRulerGenerator(Pawn pawn) {
         this.pawn = pawn;
     }
 
@@ -35,7 +35,7 @@ public class EnPassantPawnRulerGenerator extends SpecialRulesGenerator {
     }
 
     private boolean isOnEnPassantRow() {
-        int expectedRow = pawn.getPlayer() == Player.WHITE ? EN_PASSANT_ROW_WHITE : EN_PASSANT_ROW_BLACK;
+        int expectedRow = pawn.getPlayer() == Player.WHITE ? IN_STEP_ROW_WHITE : IN_STEP_ROW_BLACK;
         return pawn.getCoordinate().row() == expectedRow;
     }
 

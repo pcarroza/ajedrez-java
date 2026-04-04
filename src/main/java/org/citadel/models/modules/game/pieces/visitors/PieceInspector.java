@@ -26,7 +26,7 @@ public final class PieceInspector {
 
     public static List<Coordinate> getEnPassantDiagonals(Piece piece) {
         assert piece != null;
-        EnPassantTargetVisitor visitor = new EnPassantTargetVisitor();
+        InStepPawnTargetVisitor visitor = new InStepPawnTargetVisitor();
         piece.accept(visitor);
         return visitor.getDiagonals();
     }

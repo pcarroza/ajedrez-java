@@ -1,10 +1,9 @@
 package org.citadel.models.modules.game.pieces;
 
-import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.modules.game.pieces.special.SpecialRulesGenerator;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.special.EnPassantPawnRulerGenerator;
+import org.citadel.models.modules.game.pieces.special.InStepPawnRulerGenerator;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
@@ -23,7 +22,7 @@ public class Pawn extends Piece {
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getPawnMoveRulesBuilder();
-        specialRulesGenerator = new EnPassantPawnRulerGenerator(this);
+        specialRulesGenerator = new InStepPawnRulerGenerator(this);
     }
 
     public Player getPlayer() {
@@ -65,9 +64,7 @@ public class Pawn extends Piece {
     }
 
     private boolean inStep(Coordinate target) {
-        final int doubleStep = 2;
-        int direction = doubleStep * player.getPlayer();
-        return getDisplacedBy(new Coordinate(direction, 0)).equals(target);
+        return getForwardTwo().equals(target);
     }
 
     private boolean isThePawnPromoted(Coordinate coordinate) {
