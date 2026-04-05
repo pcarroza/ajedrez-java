@@ -1,0 +1,27 @@
+package org.citadel.models.modules.game.pieces.rules.strategies;
+
+import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Piece;
+
+import java.util.stream.Stream;
+
+public class DiagonalMovementStrategy extends MovementStrategy {
+
+    public DiagonalMovementStrategy(Piece piece) {
+        super(piece);
+    }
+
+    @Override
+    public Stream<Coordinate> generate() {
+        Stream<Coordinate> upRightCoordinates = generate(new Coordinate(1, 1));
+        Stream<Coordinate> downRightCoordinates = generate(new Coordinate(-1, -1));
+        return Stream.concat(upRightCoordinates, downRightCoordinates);
+    }
+
+    @Override
+    protected Coordinate getDisplacedCoordinateBy(int increment, Coordinate vector) {
+        assert vector != null;
+        assert increment >= 1;
+        return piece.getDisplacedBy(new Coordinate(increment, increment), vector);
+    }
+}
