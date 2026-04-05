@@ -22,13 +22,13 @@ public enum PromotionType {
         this.factory = factory;
     }
 
-    public Piece create(Coordinate coordinate, Player player) {
+    public Piece createPromotedPiece(Coordinate coordinate, Player player) {
         return factory.apply(coordinate, player);
     }
 
     public static PromotionType fromString(String key) {
         return Arrays.stream(values())
-                .filter(p -> p.name().equals(key.toUpperCase()))
+                .filter(it -> it.name().equals(key.toUpperCase()))
                 .findFirst()
                 .orElse(Q);
     }

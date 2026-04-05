@@ -8,7 +8,6 @@ import org.citadel.models.modules.game.pieces.Queen;
 import org.citadel.models.modules.game.pieces.Rook;
 
 public interface PieceVisitor {
-
     void visit(King king);
 
     void visit(Queen queen);

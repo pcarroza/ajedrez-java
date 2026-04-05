@@ -47,18 +47,6 @@ public class Board extends SubjectBoard implements BoardObserver {
         this.selectedPieceMovements = selectedPieceMovements;
     }
 
-    @Override
-    public void add(Piece inStepPawn) {
-        assert inStepPawn != null;
-        pawnMapInStep.get(getCurrentPlayer()).add(inStepPawn);
-    }
-
-    @Override
-    public void remove(Piece inStepPawn) {
-        assert inStepPawn != null;
-        pawnMapInStep.get(getCurrentPlayer()).remove(inStepPawn);
-    }
-
     public List<Coordinate> getSelectedPieceMovements() {
         assert selectedPieceMovements != null;
         return List.copyOf(selectedPieceMovements);
@@ -70,7 +58,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
                 .map(PieceInspector::getPieceSymbol)
-                .orElse(" ");
+                .orElse("");
     }
 
     public void selectPiece(Coordinate coordinate) {
@@ -96,24 +84,6 @@ public class Board extends SubjectBoard implements BoardObserver {
         selectedPiece.put(coordinate);
     }
 
-    public boolean isKingSelected() {
-        return selectedPiece != null && PieceInspector.isKing((Piece) selectedPiece);
-    }
-
-    public boolean isPawnSelected() {
-        return selectedPiece != null && PieceInspector.isPawn((Piece) selectedPiece);
-    }
-
-    public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
-        assert selectedPiece != null;
-        return PieceInspector.getEnPassantDiagonals((Piece) selectedPiece);
-    }
-
-    public Coordinate getSelectedPieceCoordinate() {
-        assert selectedPiece != null;
-        return selectedPiece.getCoordinate();
-    }
-
     public void movePiece(Coordinate origin, Coordinate target) {
         assert origin != null;
         assert target != null;
@@ -127,35 +97,28 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .ifPresent(piece -> piece.put(target));
     }
 
-    public boolean isSelectedPiece() {
-        return selectedPiece != null;
-    }
-
-    public void resetSelectedPiece() {
-        selectedPiece = null;
-    }
-
-    public boolean isThePawnPromoted() {
-        return PieceInspector.isPawnPromoted((Piece) selectedPiece);
-    }
-
     public void promotePawn(String pieceType) {
         assert selectedPiece != null;
         assert PieceInspector.isPawn((Piece) selectedPiece);
         Coordinate coordinate = selectedPiece.getCoordinate();
         Player player = getCurrentPlayer();
-        Piece newPiece = PromotionType.fromString(pieceType).create(coordinate, player);
+        Piece newPiece = PromotionType.fromString(pieceType).createPromotedPiece(coordinate, player);
         newPiece.subscribe(this);
         piecesMap.get(player).remove((Piece) selectedPiece);
         piecesMap.get(player).add(newPiece);
         selectedPiece = newPiece;
     }
 
-    public boolean isMovementValid(Coordinate coordinate) {
-        assert coordinate != null;
-        assert selectedPiece != null;
-        assert isWithinBoardLimits(coordinate);
-        return selectedPiece.isMovementValid(coordinate);
+    @Override
+    public void add(Piece inStepPawn) {
+        assert inStepPawn != null;
+        pawnMapInStep.get(getCurrentPlayer()).add(inStepPawn);
+    }
+
+    @Override
+    public void remove(Piece inStepPawn) {
+        assert inStepPawn != null;
+        pawnMapInStep.get(getCurrentPlayer()).remove(inStepPawn);
     }
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
@@ -179,6 +142,43 @@ public class Board extends SubjectBoard implements BoardObserver {
             }
             return false;
         });
+    }
+
+    public boolean isKingSelected() {
+        return selectedPiece != null && PieceInspector.isKing((Piece) selectedPiece);
+    }
+
+    public boolean isPawnSelected() {
+        return selectedPiece != null && PieceInspector.isPawn((Piece) selectedPiece);
+    }
+
+    public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
+        assert selectedPiece != null;
+        return PieceInspector.getEnPassantDiagonals((Piece) selectedPiece);
+    }
+
+    public Coordinate getSelectedPieceCoordinate() {
+        assert selectedPiece != null;
+        return selectedPiece.getCoordinate();
+    }
+
+    public boolean isSelectedPiece() {
+        return selectedPiece != null;
+    }
+
+    public void resetSelectedPiece() {
+        selectedPiece = null;
+    }
+
+    public boolean isThePawnPromoted() {
+        return PieceInspector.isPawnPromoted((Piece) selectedPiece);
+    }
+
+    public boolean isMovementValid(Coordinate coordinate) {
+        assert coordinate != null;
+        assert selectedPiece != null;
+        assert isWithinBoardLimits(coordinate);
+        return selectedPiece.isMovementValid(coordinate);
     }
 
     public boolean isSquareOccupied(Coordinate coordinate) {
