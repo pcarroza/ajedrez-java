@@ -18,4 +18,3 @@ public enum PieceSimbol {
         return value;
     }
 }
-

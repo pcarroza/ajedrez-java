@@ -22,14 +22,14 @@ public enum PromotionType {
         this.factory = factory;
     }
 
-    public Piece createPromotedPiece(Coordinate coordinate, Player player) {
-        return factory.apply(coordinate, player);
-    }
-
     public static PromotionType fromString(String key) {
         return Arrays.stream(values())
-                .filter(it -> it.name().equals(key.toUpperCase()))
+                .filter(pieceType -> pieceType.name().equals(key.toUpperCase()))
                 .findFirst()
                 .orElse(Q);
+    }
+
+    public Piece createPromotedPiece(Coordinate coordinate, Player player) {
+        return factory.apply(coordinate, player);
     }
 }
