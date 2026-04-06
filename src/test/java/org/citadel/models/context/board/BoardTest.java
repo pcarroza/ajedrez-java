@@ -1,4 +1,4 @@
-package org.citadel.models.board;
+package org.citadel.models.context.board;
 
 import org.citadel.models.modules.game.Board;
 import org.junit.Before;

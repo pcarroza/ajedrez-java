@@ -1,4 +1,4 @@
-package org.citadel.models.pieces.knight.stubs;
+package org.citadel.models.context.pieces.knight.stubs;
 
 import java.util.List;
 

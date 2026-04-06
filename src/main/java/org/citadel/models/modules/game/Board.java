@@ -73,7 +73,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                     set(piece.getMovements());
                     selectedPiece = piece;
                 }, () -> {
-                    assert false;
+                    assert false : "Selected piece not found";
                 });
     }
 
