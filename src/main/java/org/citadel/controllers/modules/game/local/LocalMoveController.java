@@ -3,6 +3,7 @@ package org.citadel.controllers.modules.game.local;
 import org.citadel.controllers.modules.game.GameController;
 import org.citadel.controllers.modules.game.MoveController;
 import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
 public class LocalMoveController implements MoveController {
 
@@ -25,12 +26,12 @@ public class LocalMoveController implements MoveController {
     }
 
     @Override
-    public void promotePawn(String p) {
-        gameController.promotePawn(p);
+    public void promote(PromotionType promotionType) {
+        gameController.promote(promotionType);
     }
 
     private void handleCapture(Coordinate target) {
-        if (gameController.isEnemy(target))
+        if (gameController.isRival(target))
             gameController.removeRivalPlayerPiece(target);
     }
 

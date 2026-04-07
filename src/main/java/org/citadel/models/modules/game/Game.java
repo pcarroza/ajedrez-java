@@ -1,6 +1,7 @@
 package org.citadel.models.modules.game;
 
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.enums.PromotionType;
 import org.citadel.views.console.GameView;
 
 import java.util.List;
@@ -35,11 +36,11 @@ public class Game {
     }
 
     public boolean isKingSelected() {
-        return board.isKingSelected();
+        return board.isKingClaimed();
     }
 
     public boolean isPawnSelected() {
-        return board.isPawnSelected();
+        return board.isPawnClaimed();
     }
 
     public java.util.List<Coordinate> getSelectedPieceEnPassantDiagonals() {
@@ -51,23 +52,23 @@ public class Game {
     }
 
     public void movePiece(Coordinate origin, Coordinate target) {
-        board.movePiece(origin, target);
+        board.relocate(origin, target);
     }
 
     public boolean isVulnerablePawnAt(Coordinate coordinate) {
         return board.isVulnerablePawnAt(coordinate);
     }
 
-    public boolean isSquareOccupied(Coordinate coordinate) {
-        return board.isSquareOccupied(coordinate);
+    public boolean isOccupied(Coordinate coordinate) {
+        return board.isOccupied(coordinate);
     }
 
     public boolean isEmpty(Coordinate coordinate) {
-        return !board.isSquareOccupied(coordinate);
+        return !board.isOccupied(coordinate);
     }
 
-    public boolean isMovementValid(Coordinate coordinate) {
-        return board.isMovementValid(coordinate);
+    public boolean canReach(Coordinate coordinate) {
+        return board.canReach(coordinate);
     }
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
@@ -90,8 +91,8 @@ public class Game {
         return board.getRivalPlayer();
     }
 
-    public void switchTurn() {
-        board.switchTurn();
+    public void endTurn() {
+        board.endTurn();
     }
 
     public boolean isTheWhitePieceSelected(Coordinate coordinate) {
@@ -106,8 +107,8 @@ public class Game {
         return board.isThePawnPromoted();
     }
 
-    public void promotePawn(String pieceType) {
-        board.promotePawn(pieceType);
+    public void promote(PromotionType promotionType) {
+        board.promote(promotionType);
     }
 
     public void resetSelectedPiece() {
@@ -122,8 +123,8 @@ public class Game {
         return board.isWithinBoardLimits(coordinate);
     }
 
-    public boolean isJaque() {
-        return board.isJaque();
+    public boolean isCheck() {
+        return board.isCheck();
     }
 
     public void initialize() {
@@ -146,12 +147,12 @@ public class Game {
         return board.getSelectedPieceMovements();
     }
 
-    public boolean isPieceSelected(Coordinate coordinate) {
-        return board.isPieceSelected(coordinate);
+    public boolean hasClaimed(Coordinate coordinate) {
+        return board.hasClaimed(coordinate);
     }
 
-    public boolean isEnemy(Coordinate coordinate) {
-        return board.isEnemy(coordinate);
+    public boolean isRival(Coordinate coordinate) {
+        return board.isRival(coordinate);
     }
 
     public static void main(String[] args) {

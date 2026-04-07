@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.citadel.models.context.pieces.knight.stubs.BoardStub;
 import org.citadel.models.modules.game.Board;
@@ -49,10 +48,7 @@ public class KnightDsl {
 
     private List<String> movements() {
         Knight knight = buildKnight();
-        return knight.getMovements()
-                .stream()
-                .map(it -> Square.from(it).toString())
-                .collect(Collectors.toList());
+        return knight.getMovements().stream().map(it -> Square.from(it).toString()).toList();
     }
 
     private Knight buildKnight() {

@@ -23,7 +23,7 @@ public class BoardDsl {
         this.square = square;
         Board board = new Board();
         if (turn == Player.WHITE) {
-            board.switchTurn();
+            board.endTurn();
         }
         board.selectPiece(Square.from(this.square).toCoordinate());
         var movements = board.getSelectedPieceMovements()

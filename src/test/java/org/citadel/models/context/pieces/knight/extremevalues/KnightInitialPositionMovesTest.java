@@ -33,26 +33,10 @@ public class KnightInitialPositionMovesTest {
     @Parameterized.Parameters(name = "Knight {1} at {0}")
     public static Collection<Object[]> cases() {
         return Arrays.asList(new Object[][] {
-                {
-                        "B1", WHITE,
-                        new String[] { "A3", "C3" },
-                        new String[] { "A2", "C2" }
-                },
-                {
-                        "G1", WHITE,
-                        new String[] { "F3", "H3" },
-                        new String[] { "F2", "H2" }
-                },
-                {
-                        "B8", BLACK,
-                        new String[] { "A6", "C6" },
-                        new String[] { "A7", "C7" }
-                },
-                {
-                        "G8", BLACK,
-                        new String[] { "F6", "H6" },
-                        new String[] { "F7", "H7" }
-                }
+                { "B1", WHITE, new String[] { "A3", "C3" }, new String[] { "A2", "C2" } },
+                { "G1", WHITE, new String[] { "F3", "H3" }, new String[] { "F2", "H2" } },
+                { "B8", BLACK, new String[] { "A6", "C6" }, new String[] { "A7", "C7" } },
+                { "G8", BLACK, new String[] { "F6", "H6" }, new String[] { "F7", "H7" } }
         });
     }
 

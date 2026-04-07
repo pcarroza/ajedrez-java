@@ -32,7 +32,7 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
             if (game.isVulnerablePawnAt(rivalPawnCoord)) {
                 game.removeRivalPlayerPiece(rivalPawnCoord);
                 game.putPiece(diagonal);
-                game.switchTurn();
+                game.endTurn();
                 return;
             }
         }

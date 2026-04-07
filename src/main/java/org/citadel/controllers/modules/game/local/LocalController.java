@@ -20,7 +20,7 @@ public class LocalController {
     }
 
     public void switchTurn() {
-        game.switchTurn();
+        game.endTurn();
     }
 
     public void resetSelectedPiece() {
@@ -40,7 +40,7 @@ public class LocalController {
     }
 
     public boolean isSquareOccupied(Coordinate coordinate) {
-        return game.isSquareOccupied(coordinate);
+        return game.isOccupied(coordinate);
     }
 
     public boolean isPieceSelected(Coordinate coordinate) {
@@ -48,11 +48,11 @@ public class LocalController {
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return game.isMovementValid(target);
+        return game.canReach(target);
     }
 
     public boolean isJaque() {
-        return game.isJaque();
+        return game.isCheck();
     }
 
     public Player getRivalPlayer() {

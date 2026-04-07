@@ -6,6 +6,7 @@ import org.citadel.controllers.modules.game.GameController;
 import org.citadel.models.modules.game.Game;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
 public class LocalGameController implements GameController {
 
@@ -15,24 +16,8 @@ public class LocalGameController implements GameController {
         this.game = game;
     }
 
-    public void initialize() {
-        game.initialize();
-    }
-
-    public void begin() {
-        game.begin();
-    }
-
-    public void end() {
-        game.end();
-    }
-
-    public void exit() {
-        game.exit();
-    }
-
-    public void switchTurn() {
-        game.switchTurn();
+    public void endTurn() {
+        game.endTurn();
     }
 
     public void resetSelectedPiece() {
@@ -67,8 +52,8 @@ public class LocalGameController implements GameController {
         game.movePiece(origin, target);
     }
 
-    public boolean isMovementValid(Coordinate target) {
-        return game.isMovementValid(target);
+    public boolean canReach(Coordinate target) {
+        return game.canReach(target);
     }
 
     public List<Coordinate> getSelectedPieceMovements() {
@@ -79,24 +64,24 @@ public class LocalGameController implements GameController {
         return game.isWithinBoardLimits(coordinate);
     }
 
-    public boolean isSquareOccupied(Coordinate coordinate) {
-        return game.isSquareOccupied(coordinate);
+    public boolean isOccupied(Coordinate square) {
+        return game.isOccupied(square);
     }
 
     public boolean isEmpty(Coordinate coordinate) {
         return game.isEmpty(coordinate);
     }
 
-    public boolean isPieceSelected(Coordinate coordinate) {
-        return game.isPieceSelected(coordinate);
+    public boolean hasClaimed(Coordinate coordinate) {
+        return game.hasClaimed(coordinate);
     }
 
-    public boolean isEnemy(Coordinate coordinate) {
-        return game.isEnemy(coordinate);
+    public boolean isRival(Coordinate coordinate) {
+        return game.isRival(coordinate);
     }
 
-    public boolean isJaque() {
-        return game.isJaque();
+    public boolean isCheck() {
+        return game.isCheck();
     }
 
     public String getPieceSymbol(Coordinate coordinate) {
@@ -143,7 +128,23 @@ public class LocalGameController implements GameController {
         return game.isThePawnPromoted();
     }
 
-    public void promotePawn(String pieceType) {
-        game.promotePawn(pieceType);
+    public void promote(PromotionType promotionType) {
+        game.promote(promotionType);
+    }
+
+    public void initialize() {
+        game.initialize();
+    }
+
+    public void begin() {
+        game.begin();
+    }
+
+    public void end() {
+        game.end();
+    }
+
+    public void exit() {
+        game.exit();
     }
 }

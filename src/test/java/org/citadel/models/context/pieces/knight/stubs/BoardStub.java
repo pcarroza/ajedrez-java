@@ -26,7 +26,7 @@ public class BoardStub implements BoardObserver {
     }
 
     @Override
-    public boolean isEnemy(Coordinate coordinate) {
+    public boolean isRival(Coordinate coordinate) {
         assert coordinate != null;
         return false;
     }
@@ -49,7 +49,7 @@ public class BoardStub implements BoardObserver {
     }
 
     @Override
-    public boolean isSquareOccupied(Coordinate coordinate) {
+    public boolean isOccupied(Coordinate coordinate) {
         return false;
     }
 }

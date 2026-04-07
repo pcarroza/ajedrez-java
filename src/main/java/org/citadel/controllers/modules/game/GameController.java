@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
 public interface GameController {
     // Turno
-    void switchTurn();
+    void endTurn();
 
     void resetSelectedPiece();
 
@@ -26,22 +27,22 @@ public interface GameController {
 
     void movePiece(Coordinate origin, Coordinate target);
 
-    boolean isMovementValid(Coordinate target);
+    boolean canReach(Coordinate target);
 
     List<Coordinate> getSelectedPieceMovements();
 
     // Consultas del tablero
     boolean isWithinBoardLimits(Coordinate coordinate);
 
-    boolean isSquareOccupied(Coordinate coordinate);
+    boolean isOccupied(Coordinate coordinate);
 
     boolean isEmpty(Coordinate coordinate);
 
-    boolean isPieceSelected(Coordinate coordinate);
+    boolean hasClaimed(Coordinate coordinate);
 
-    boolean isEnemy(Coordinate coordinate);
+    boolean isRival(Coordinate coordinate);
 
-    boolean isJaque();
+    boolean isCheck();
 
     String getPieceSymbol(Coordinate coordinate);
 
@@ -68,7 +69,7 @@ public interface GameController {
     // Promoción
     boolean isThePawnPromoted();
 
-    void promotePawn(String pieceType);
+    void promote(PromotionType promotionType);
 
     void initialize();
 

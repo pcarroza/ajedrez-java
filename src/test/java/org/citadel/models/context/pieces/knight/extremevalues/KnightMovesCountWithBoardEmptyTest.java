@@ -53,6 +53,5 @@ public class KnightMovesCountWithBoardEmptyTest {
                 .at(square)
                 .as(player)
                 .shouldReachExactly(expectedCount);
-
     }
 }

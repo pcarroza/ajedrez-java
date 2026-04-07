@@ -9,7 +9,7 @@ public abstract class SubjectPiece {
     }
 
     public boolean isEnemy(Coordinate coordinate) {
-        return boardObserver.isEnemy(coordinate);
+        return boardObserver.isRival(coordinate);
     }
 
     public boolean isPieceSamePlayerAt(Coordinate coordinate) {
@@ -21,7 +21,7 @@ public abstract class SubjectPiece {
     }
 
     public boolean isSquareOccupied(Coordinate coordinate) {
-        return boardObserver.isSquareOccupied(coordinate);
+        return boardObserver.isOccupied(coordinate);
     }
 
     public boolean isVulnerablePawnAt(Coordinate coordinate) {

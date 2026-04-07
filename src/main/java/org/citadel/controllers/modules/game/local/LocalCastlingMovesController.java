@@ -38,7 +38,7 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
 
         game.movePiece(rookCoordinate, new Coordinate(row, rookNewCol));
         game.putPiece(new Coordinate(row, kingNewCol));
-        game.switchTurn();
+        game.endTurn();
     }
 
     @Override

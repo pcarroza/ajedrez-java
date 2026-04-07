@@ -8,13 +8,13 @@ public interface BoardObserver {
 
     void set(List<Coordinate> coordinates);
 
-    boolean isEnemy(Coordinate coordinate);
+    boolean isRival(Coordinate coordinate);
 
     boolean isRookAvailableForCastling(Coordinate coordinate);
 
     boolean isVulnerablePawnAt(Coordinate coordinate);
 
-    boolean isSquareOccupied(Coordinate coordinate);
+    boolean isOccupied(Coordinate coordinate);
 
     boolean isPieceSamePlayerAt(Coordinate coordinate);
 

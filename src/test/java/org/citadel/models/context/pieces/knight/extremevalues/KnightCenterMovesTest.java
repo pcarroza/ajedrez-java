@@ -31,14 +31,8 @@ public class KnightCenterMovesTest {
     @Parameterized.Parameters(name = "Knight at {0} as {1}")
     public static Collection<Object[]> cases() {
         return Arrays.asList(new Object[][] {
-                {
-                        "D4", WHITE,
-                        List.of("C2", "E2", "B3", "F3", "B5", "F5", "C6", "E6")
-                },
-                {
-                        "E5", BLACK,
-                        List.of("D3", "F3", "C4", "G4", "C6", "G6", "D7", "F7")
-                }
+                { "D4", WHITE, List.of("C2", "E2", "B3", "F3", "B5", "F5", "C6", "E6") },
+                { "E5", BLACK, List.of("D3", "F3", "C4", "G4", "C6", "G6", "D7", "F7") }
         });
     }
 

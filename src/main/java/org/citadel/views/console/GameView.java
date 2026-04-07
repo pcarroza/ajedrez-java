@@ -3,6 +3,7 @@ package org.citadel.views.console;
 import org.citadel.controllers.modules.game.GameController;
 import org.citadel.controllers.modules.game.MoveController;
 import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
 public class GameView {
 
@@ -28,7 +29,7 @@ public class GameView {
             if (!tryMove(origin))
                 continue;
             handlePostMove();
-            gameController.switchTurn();
+            gameController.endTurn();
             gameController.resetSelectedPiece();
         } while (!gameController.isFinished());
     }
@@ -42,11 +43,11 @@ public class GameView {
                 boardView.showError("Coordenada fuera de los límites.");
                 continue;
             }
-            if (!gameController.isSquareOccupied(origin)) {
+            if (!gameController.isOccupied(origin)) {
                 boardView.showError("No hay ninguna pieza en esa posición.");
                 continue;
             }
-            if (!gameController.isPieceSelected(origin)) {
+            if (!gameController.hasClaimed(origin)) {
                 boardView.showError("Esa pieza no te pertenece.");
                 continue;
             }
@@ -67,12 +68,11 @@ public class GameView {
     private boolean tryMove(Coordinate origin) {
         while (true) {
             Coordinate target = inputView.askDestinationOrCancel("Columna destino (a-h): ");
-
             if (target == null) {
                 gameController.resetSelectedPiece();
                 return false;
             }
-            if (!gameController.isMovementValid(target)) {
+            if (!gameController.canReach(target)) {
                 boardView.showError("Movimiento no permitido.");
                 continue;
             }
@@ -85,7 +85,7 @@ public class GameView {
     }
 
     private void handleMoveEffects(Coordinate target) {
-        if (gameController.isEnemy(target))
+        if (gameController.isRival(target))
             boardView.showCapture(gameController.getPieceSymbol(target));
     }
 
@@ -93,11 +93,12 @@ public class GameView {
         if (!moveController.isThePawnPromoted())
             return;
         boardView.showPromotion();
-        moveController.promotePawn(inputView.askPromotionChoice());
+        PromotionType type = PromotionType.fromString(inputView.askPromotionChoice());
+        moveController.promote(type);
     }
 
     private void handlePostMove() {
-        if (gameController.isJaque())
+        if (gameController.isCheck())
             boardView.showCheck(gameController.getRivalPlayer());
     }
 }

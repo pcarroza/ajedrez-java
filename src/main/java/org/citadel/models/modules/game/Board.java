@@ -53,6 +53,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     public String getPieceSymbol(Coordinate coordinate) {
+        assert coordinate != null : "Board: 56: Coordinate cannot be null";
         return piecesMap.values().stream()
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(coordinate))
@@ -64,7 +65,8 @@ public class Board extends SubjectBoard implements BoardObserver {
     public void selectPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isWithinBoardLimits(coordinate);
-        assert isSquareOccupied(coordinate);
+        assert isOccupied(coordinate);
+        assert belongsToCurrentPlayer(coordinate);
         getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
@@ -73,7 +75,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                     set(piece.getMovements());
                     selectedPiece = piece;
                 }, () -> {
-                    assert false : "Selected piece not found";
+                    assert false : "Board: 77: Selected piece not found";
                 });
     }
 
@@ -81,15 +83,21 @@ public class Board extends SubjectBoard implements BoardObserver {
         assert coordinate != null;
         assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
+        assert !belongsToCurrentPlayer(coordinate);
         selectedPiece.put(coordinate);
     }
 
-    public void movePiece(Coordinate origin, Coordinate target) {
+    public boolean belongsToCurrentPlayer(Coordinate coordinate) {
+        assert coordinate != null;
+        return isOccupied(coordinate) && isPieceSamePlayerAt(coordinate);
+    }
+
+    public void relocate(Coordinate origin, Coordinate target) {
         assert origin != null;
         assert target != null;
         assert isWithinBoardLimits(origin);
         assert isWithinBoardLimits(target);
-        assert isSquareOccupied(origin);
+        assert isOccupied(origin);
         piecesMap.values().stream()
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(origin))
@@ -97,12 +105,12 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .ifPresent(piece -> piece.put(target));
     }
 
-    public void promotePawn(String pieceType) {
+    public void promote(PromotionType promotionType) {
         assert selectedPiece != null;
         assert PieceInspector.isPawn((Piece) selectedPiece);
         Coordinate coordinate = selectedPiece.getCoordinate();
         Player player = getCurrentPlayer();
-        Piece newPiece = PromotionType.fromString(pieceType).createPromotedPiece(coordinate, player);
+        Piece newPiece = promotionType.createPromotedPiece(coordinate, player);
         newPiece.subscribe(this);
         piecesMap.get(player).remove((Piece) selectedPiece);
         piecesMap.get(player).add(newPiece);
@@ -123,14 +131,14 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void removeCurrentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert isSquareOccupied(coordinate);
+        assert isOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getCurrentPlayer, coordinate);
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
-        assert isSquareOccupied(coordinate);
+        assert isOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
         remove(this::getRivalPlayer, coordinate);
     }
@@ -144,11 +152,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         });
     }
 
-    public boolean isKingSelected() {
+    public boolean isKingClaimed() {
         return selectedPiece != null && PieceInspector.isKing((Piece) selectedPiece);
     }
 
-    public boolean isPawnSelected() {
+    public boolean isPawnClaimed() {
         return selectedPiece != null && PieceInspector.isPawn((Piece) selectedPiece);
     }
 
@@ -162,7 +170,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return selectedPiece.getCoordinate();
     }
 
-    public boolean isSelectedPiece() {
+    public boolean hasPieceClaimed() {
         return selectedPiece != null;
     }
 
@@ -174,20 +182,20 @@ public class Board extends SubjectBoard implements BoardObserver {
         return PieceInspector.isPawnPromoted((Piece) selectedPiece);
     }
 
-    public boolean isMovementValid(Coordinate coordinate) {
+    public boolean canReach(Coordinate coordinate) {
         assert coordinate != null;
         assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
         return selectedPiece.isMovementValid(coordinate);
     }
 
-    public boolean isSquareOccupied(Coordinate coordinate) {
+    public boolean isOccupied(Coordinate coordinate) {
         assert coordinate != null;
         return piecesMap.values().stream().flatMap(List::stream).anyMatch(piece -> piece.isAt(coordinate));
     }
 
     @Override
-    public boolean isEnemy(Coordinate coordinate) {
+    public boolean isRival(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
@@ -197,7 +205,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate);
     }
 
-    public boolean isPieceSelected(Coordinate coordinate) {
+    public boolean hasClaimed(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getCurrentPlayer()).anyMatch(piece -> piece.isAt(coordinate));
     }
@@ -223,7 +231,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return pawnMapInStep.get(getRivalPlayer()).stream().anyMatch(p -> p.isAt(coordinate));
     }
 
-    public boolean isJaque() {
+    public boolean isCheck() {
         return getPiecesBy(getRivalPlayer()).anyMatch(this::isTheKingInValidMoves);
     }
 
@@ -258,7 +266,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return turn.getRivalPlayer();
     }
 
-    public void switchTurn() {
+    public void endTurn() {
         turn.switchTurn();
         pawnMapInStep.get(getCurrentPlayer()).clear();
     }
