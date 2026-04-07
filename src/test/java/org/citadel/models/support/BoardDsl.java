@@ -1,5 +1,6 @@
 package org.citadel.models.support;
 
+import org.citadel.models.assertions.Assertions;
 import org.citadel.models.modules.game.Board;
 import org.citadel.models.modules.game.pieces.enums.Player;
 

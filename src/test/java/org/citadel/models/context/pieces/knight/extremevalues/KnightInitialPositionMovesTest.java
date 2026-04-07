@@ -23,8 +23,7 @@ public class KnightInitialPositionMovesTest {
 
     private final String[] blocked;
 
-    public KnightInitialPositionMovesTest(String square, Player turn,
-            String[] reachable, String[] blocked) {
+    public KnightInitialPositionMovesTest(String square, Player turn, String[] reachable, String[] blocked) {
         this.square = square;
         this.turn = turn;
         this.reachable = reachable;

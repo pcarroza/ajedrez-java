@@ -1,4 +1,4 @@
-package org.citadel.models.support;
+package org.citadel.models.assertions;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -10,7 +10,7 @@ public class Assertions {
 
     private final List<String> actual;
 
-    Assertions(List<String> actual) {
+    public Assertions(List<String> actual) {
         this.actual = actual;
     }
 

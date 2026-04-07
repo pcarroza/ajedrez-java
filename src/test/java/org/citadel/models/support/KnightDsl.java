@@ -47,18 +47,6 @@ public class KnightDsl {
         return this;
     }
 
-    public void shouldReachOnly(List<String> expectedMoves) {
-        List<String> actualMoves = movements();
-        expectedMoves.forEach(move -> assertTrue("Missing move: " + move, actualMoves.contains(move)));
-    }
-
-    public void shouldReachExactly(int expectedCount) {
-        List<String> actual = movements();
-        assertEquals("Expected " + expectedCount + " moves but got " + actual.size() + ": " + actual,
-                expectedCount,
-                actual.size());
-    }
-
     private List<String> movements() {
         Knight knight = buildKnight();
         return knight.getMovements()
@@ -75,4 +63,15 @@ public class KnightDsl {
         return knight;
     }
 
+    public void shouldReachOnly(List<String> expectedMoves) {
+        List<String> actualMoves = movements();
+        expectedMoves.forEach(move -> assertTrue("Missing move: " + move, actualMoves.contains(move)));
+    }
+
+    public void shouldReachExactly(int expectedCount) {
+        List<String> actual = movements();
+        assertEquals("Expected " + expectedCount + " moves but got " + actual.size() + ": " + actual,
+                expectedCount,
+                actual.size());
+    }
 }
