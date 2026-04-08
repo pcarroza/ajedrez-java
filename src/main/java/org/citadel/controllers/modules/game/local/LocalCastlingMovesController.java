@@ -36,7 +36,7 @@ public class LocalCastlingMovesController extends LocalSpecialMovementsControlle
         int kingNewCol = (rookCoordinate.column() == 1) ? 2 : 7;
         int rookNewCol = (rookCoordinate.column() == 1) ? 3 : 6;
 
-        game.movePiece(rookCoordinate, new Coordinate(row, rookNewCol));
+        game.relocate(rookCoordinate, new Coordinate(row, rookNewCol));
         game.putPiece(new Coordinate(row, kingNewCol));
         game.endTurn();
     }

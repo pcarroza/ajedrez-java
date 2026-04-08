@@ -102,19 +102,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return false;
     }
 
-    public boolean isQueen() {
-        return false;
-    }
-
     public boolean isRook() {
-        return false;
-    }
-
-    public boolean isBishop() {
-        return false;
-    }
-
-    public boolean isKnight() {
         return false;
     }
 

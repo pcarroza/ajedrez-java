@@ -49,7 +49,7 @@ public class LocalGameController implements GameController {
     }
 
     public void movePiece(Coordinate origin, Coordinate target) {
-        game.movePiece(origin, target);
+        game.relocate(origin, target);
     }
 
     public boolean canReach(Coordinate target) {

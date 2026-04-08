@@ -43,7 +43,7 @@ public class Game {
         return board.isPawnClaimed();
     }
 
-    public java.util.List<Coordinate> getSelectedPieceEnPassantDiagonals() {
+    public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
         return board.getSelectedPieceEnPassantDiagonals();
     }
 
@@ -51,7 +51,7 @@ public class Game {
         return board.getSelectedPieceCoordinate();
     }
 
-    public void movePiece(Coordinate origin, Coordinate target) {
+    public void relocate(Coordinate origin, Coordinate target) {
         board.relocate(origin, target);
     }
 
@@ -127,6 +127,18 @@ public class Game {
         return board.isCheck();
     }
 
+    public List<Coordinate> getSelectedPieceMovements() {
+        return board.getSelectedPieceMovements();
+    }
+
+    public boolean hasClaimed(Coordinate coordinate) {
+        return board.hasClaimed(coordinate);
+    }
+
+    public boolean isRival(Coordinate coordinate) {
+        return board.isRival(coordinate);
+    }
+
     public void initialize() {
         board.initialize();
     }
@@ -141,18 +153,6 @@ public class Game {
 
     public void exit() {
         board.exit();
-    }
-
-    public List<Coordinate> getSelectedPieceMovements() {
-        return board.getSelectedPieceMovements();
-    }
-
-    public boolean hasClaimed(Coordinate coordinate) {
-        return board.hasClaimed(coordinate);
-    }
-
-    public boolean isRival(Coordinate coordinate) {
-        return board.isRival(coordinate);
     }
 
     public static void main(String[] args) {
