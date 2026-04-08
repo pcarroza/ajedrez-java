@@ -26,13 +26,11 @@ public class InStepMoveGenerator extends SpecialMoveGenerator<Pawn> {
         if (!pawn.isOnEnPassantRow()) {
             return movements;
         }
-
         List.of(pawn.getDiagonalLeft(), pawn.getDiagonalRight())
                 .stream()
                 .filter(ValidatorLimitsBoard.getInstance()::isWithinLimits)
                 .filter(pawn::hasVulnerableRivalPawnBeside)
                 .forEach(movements::add);
-
         return movements;
     }
 }

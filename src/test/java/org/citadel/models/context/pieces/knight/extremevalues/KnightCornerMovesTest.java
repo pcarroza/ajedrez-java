@@ -44,4 +44,4 @@ public class KnightCornerMovesTest {
                 .as(player)
                 .shouldReachOnly(expectedMoves);
     }
-}
+} 
