@@ -29,6 +29,8 @@ public abstract class MovementStrategy {
     }
 
     private void generateCoordinateRecursive(List<Coordinate> coordinates, Coordinate vector, int step) {
+        assert vector != null;
+        assert coordinates != null;
         Coordinate coordinate = getDisplacedCoordinateBy(step, vector);
         if (!ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate)) {
             return;

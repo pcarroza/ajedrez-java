@@ -2,8 +2,8 @@ package org.citadel.models.modules.game.pieces;
 
 import org.citadel.models.modules.game.pieces.special.SpecialRulesGenerator;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
+import org.citadel.models.modules.game.pieces.visitors.SpecialMovesVisitor;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.special.InStepPawnRulerGenerator;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
@@ -17,12 +17,9 @@ public class Pawn extends Piece {
 
     private boolean vulnerablePawn = false;
 
-    private final SpecialRulesGenerator specialRulesGenerator;
-
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getPawnMoveRulesBuilder();
-        specialRulesGenerator = new InStepPawnRulerGenerator();
     }
 
     public Player getPlayer() {
@@ -95,8 +92,10 @@ public class Pawn extends Piece {
 
     @Override
     public void generateMovements() {
+        SpecialMovesVisitor specialMovesVisitor = new SpecialMovesVisitor();
+        this.accept(specialMovesVisitor);
         this.movements = Stream
-                .concat(specialRulesGenerator.generate(this).stream(), movementBaseGenerator.generate(this).stream())
+                .concat(specialMovesVisitor.getMovements().stream(), movementBaseGenerator.generate(this).stream())
                 .toList();
     }
 

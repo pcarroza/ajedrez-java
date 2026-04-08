@@ -15,7 +15,7 @@ public class CastlingMoveRulerGenerator extends SpecialRulesGenerator {
         King king = (King) piece;
         assert !king.isMoved();
 
-        List<Coordinate> movements = new ArrayList<>();
+        movements = new ArrayList<>();
 
         for (CastlingSide side : CastlingSide.values()) {
             if (king.isCastlingAvailable(side)) {
