@@ -2,8 +2,8 @@ package org.citadel.models.modules.game.pieces;
 
 import org.citadel.models.modules.game.pieces.enums.CastlingSide;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
-import org.citadel.models.modules.game.pieces.visitors.SpecialMovesVisitor;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getKingMoveRulesBuilder;
 
@@ -32,10 +32,10 @@ public class King extends Piece {
 
     @Override
     public void generateMovements() {
-        SpecialMovesVisitor specialMovesVisitor = new SpecialMovesVisitor();
-        this.accept(specialMovesVisitor);
         this.movements = Stream
-                .concat(specialMovesVisitor.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+                .concat(
+                        PieceInspector.getSpecialMovements(this).stream(),
+                        movementBaseGenerator.generate(this).stream())
                 .toList();
     }
 

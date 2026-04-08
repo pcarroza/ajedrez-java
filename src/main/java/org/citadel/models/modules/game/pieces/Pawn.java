@@ -1,6 +1,6 @@
 package org.citadel.models.modules.game.pieces;
 
-import org.citadel.models.modules.game.pieces.special.SpecialRulesGenerator;
+import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 import org.citadel.models.modules.game.pieces.visitors.SpecialMovesVisitor;
 import org.citadel.models.modules.game.pieces.enums.Player;
@@ -92,10 +92,10 @@ public class Pawn extends Piece {
 
     @Override
     public void generateMovements() {
-        SpecialMovesVisitor specialMovesVisitor = new SpecialMovesVisitor();
-        this.accept(specialMovesVisitor);
         this.movements = Stream
-                .concat(specialMovesVisitor.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+                .concat(
+                        PieceInspector.getSpecialMovements(this).stream(),
+                        movementBaseGenerator.generate(this).stream())
                 .toList();
     }
 

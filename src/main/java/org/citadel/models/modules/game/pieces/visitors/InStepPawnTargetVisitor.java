@@ -7,7 +7,6 @@ import org.citadel.models.modules.game.pieces.Knight;
 import org.citadel.models.modules.game.pieces.Pawn;
 import org.citadel.models.modules.game.pieces.Queen;
 import org.citadel.models.modules.game.pieces.Rook;
-import org.citadel.models.modules.game.pieces.enums.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +21,7 @@ public class InStepPawnTargetVisitor implements PieceVisitor {
 
     @Override
     public void visit(Pawn pawn) {
-        int row = pawn.getCoordinate().row();
-        int expectedRow = (pawn.getPlayer() == Player.WHITE) ? 5 : 4;
-        if (row == expectedRow) {
+        if (pawn.isOnEnPassantRow()) {
             diagonals.add(pawn.getDiagonalLeft());
             diagonals.add(pawn.getDiagonalRight());
         }

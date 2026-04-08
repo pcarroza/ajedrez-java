@@ -65,4 +65,11 @@ public final class PieceInspector {
         piece.accept(visitor);
         return visitor.getSimbol();
     }
+
+    public static List<Coordinate> getSpecialMovements(Piece piece) {
+        assert piece != null;
+        SpecialMovesVisitor visitor = new SpecialMovesVisitor();
+        piece.accept(visitor);
+        return visitor.getMovements();
+    }
 }
