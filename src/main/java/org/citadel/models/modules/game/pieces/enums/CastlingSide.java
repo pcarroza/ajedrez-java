@@ -22,6 +22,6 @@ public enum CastlingSide {
     }
 
     public boolean areSquaresClear(int row, King king) {
-        return squaresToClear.stream().noneMatch(column -> king.isSquareOccupied(new Coordinate(row, column)));
+        return squaresToClear.stream().noneMatch(column -> king.isOccupied(new Coordinate(row, column)));
     }
 }

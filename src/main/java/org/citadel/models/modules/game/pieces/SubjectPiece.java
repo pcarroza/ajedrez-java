@@ -8,7 +8,7 @@ public abstract class SubjectPiece {
         this.boardObserver = boardObserver;
     }
 
-    public boolean isEnemy(Coordinate coordinate) {
+    public boolean isRival(Coordinate coordinate) {
         return boardObserver.isRival(coordinate);
     }
 
@@ -20,7 +20,7 @@ public abstract class SubjectPiece {
         return boardObserver.isRookAvailableForCastling(coordinate);
     }
 
-    public boolean isSquareOccupied(Coordinate coordinate) {
+    public boolean isOccupied(Coordinate coordinate) {
         return boardObserver.isOccupied(coordinate);
     }
 

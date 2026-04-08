@@ -63,6 +63,13 @@ public class Pawn extends Piece {
         initialState = false;
     }
 
+    public boolean isOnEnPassantRow() {
+        final int IN_STEP_ROW_WHITE = 5;
+        final int IN_STEP_ROW_BLACK = 4;
+        int expectedRow = getPlayer() == Player.WHITE ? IN_STEP_ROW_WHITE : IN_STEP_ROW_BLACK;
+        return getCoordinate().row() == expectedRow;
+    }
+
     private boolean inStep(Coordinate target) {
         return getForwardTwo().equals(target);
     }
@@ -90,19 +97,19 @@ public class Pawn extends Piece {
     }
 
     public boolean canAdvanceOne() {
-        return !isSquareOccupied(getForwardOne());
+        return !isOccupied(getForwardOne());
     }
 
     public boolean canAdvanceTwo() {
-        return isInitialState() && !isSquareOccupied(getForwardOne()) && !isSquareOccupied(getForwardTwo());
+        return isInitialState() && !isOccupied(getForwardOne()) && !isOccupied(getForwardTwo());
     }
 
     public boolean canCaptureLeft() {
-        return isEnemy(getDiagonalLeft());
+        return isRival(getDiagonalLeft());
     }
 
     public boolean canCaptureRight() {
-        return isEnemy(getDiagonalRight());
+        return isRival(getDiagonalRight());
     }
 
     public Coordinate getForwardOne() {

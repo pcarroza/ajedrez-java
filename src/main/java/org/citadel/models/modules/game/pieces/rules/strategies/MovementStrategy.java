@@ -36,7 +36,7 @@ public abstract class MovementStrategy {
         if (piece.isPieceSamePlayerAt(coordinate)) {
             return;
         }
-        if (piece.isEnemy(coordinate)) {
+        if (piece.isRival(coordinate)) {
             coordinates.add(coordinate);
             return;
         }

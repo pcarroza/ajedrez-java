@@ -1,12 +1,11 @@
 package org.citadel.models.modules.game.pieces.rules;
 
-import org.citadel.common.validators.ValidatorLimitsBoard;
+import static org.citadel.models.modules.game.pieces.rules.GeneratorLegalMoves.generateLegalMoves;
+
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class KnightRulerGenerator extends MovementRuleGenerator {
 
@@ -27,17 +26,16 @@ public class KnightRulerGenerator extends MovementRuleGenerator {
         final int doubleStep = 2;
         final int simpleStep = 1;
 
-        return Stream.of(
-                piece.getDisplacedBy(new Coordinate(doubleStep, -simpleStep)),
-                piece.getDisplacedBy(new Coordinate(doubleStep, simpleStep)),
-                piece.getDisplacedBy(new Coordinate(simpleStep, doubleStep)),
-                piece.getDisplacedBy(new Coordinate(-simpleStep, doubleStep)),
-                piece.getDisplacedBy(new Coordinate(-doubleStep, -simpleStep)),
-                piece.getDisplacedBy(new Coordinate(-simpleStep, -doubleStep)),
-                piece.getDisplacedBy(new Coordinate(simpleStep, -doubleStep)),
-                piece.getDisplacedBy(new Coordinate(-doubleStep, simpleStep)))
-                .filter(it -> ValidatorLimitsBoard.getInstance().isWithinLimits(it))
-                .filter(it -> !piece.isPieceSamePlayerAt(it))
-                .collect(Collectors.toList());
+        var offsets = List.of(
+                new Coordinate(doubleStep, simpleStep),
+                new Coordinate(simpleStep, doubleStep),
+                new Coordinate(-simpleStep, doubleStep),
+                new Coordinate(-doubleStep, -simpleStep),
+                new Coordinate(-simpleStep, -doubleStep),
+                new Coordinate(simpleStep, -doubleStep),
+                new Coordinate(doubleStep, -simpleStep),
+                new Coordinate(-doubleStep, simpleStep));
+
+        return generateLegalMoves(piece, offsets);
     }
 }
