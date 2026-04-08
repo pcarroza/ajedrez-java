@@ -1,22 +1,15 @@
 package org.citadel.models.modules.game.pieces.visitors;
 
-import org.citadel.models.modules.game.pieces.Bishop;
-import org.citadel.models.modules.game.pieces.King;
-import org.citadel.models.modules.game.pieces.Knight;
-import org.citadel.models.modules.game.pieces.Pawn;
-import org.citadel.models.modules.game.pieces.Queen;
-import org.citadel.models.modules.game.pieces.Rook;
-
 public interface PieceVisitor {
-    void visit(King king);
+    void visit(org.citadel.models.modules.game.pieces.King king);
 
-    void visit(Queen queen);
+    void visit(org.citadel.models.modules.game.pieces.Pawn pawn);
 
-    void visit(Rook rook);
+    void visit(org.citadel.models.modules.game.pieces.Queen queen);
 
-    void visit(Bishop bishop);
+    void visit(org.citadel.models.modules.game.pieces.Rook rook);
 
-    void visit(Knight knight);
+    void visit(org.citadel.models.modules.game.pieces.Bishop bishop);
 
-    void visit(Pawn pawn);
+    void visit(org.citadel.models.modules.game.pieces.Knight knight);
 }

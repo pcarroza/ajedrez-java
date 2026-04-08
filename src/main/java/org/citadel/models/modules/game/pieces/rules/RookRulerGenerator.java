@@ -7,7 +7,7 @@ import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public class RookRulerGenerator extends MovementRuleGenerator {
+public class RookRulerGenerator implements MovementRuleGenerator {
 
     private static RookRulerGenerator instance;
 

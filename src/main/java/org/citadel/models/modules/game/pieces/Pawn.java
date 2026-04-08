@@ -2,11 +2,13 @@ package org.citadel.models.modules.game.pieces;
 
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
-import org.citadel.models.modules.game.pieces.visitors.SpecialMovesVisitor;
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class Pawn extends Piece {
@@ -22,8 +24,37 @@ public class Pawn extends Piece {
         movementBaseGenerator = getPawnMoveRulesBuilder();
     }
 
+    @Override
+    public boolean isPawn() {
+        return true;
+    }
+
+    @Override
+    public boolean isPromoted() {
+        return isItPromoted;
+    }
+
+    @Override
+    public boolean isPawnPromoted() {
+        return isItPromoted;
+    }
+
+    @Override
+    public List<Coordinate> getEnPassantDiagonals() {
+        List<Coordinate> diagonals = new ArrayList<>();
+        if (isOnEnPassantRow()) {
+            diagonals.add(getDiagonalLeft());
+            diagonals.add(getDiagonalRight());
+        }
+        return diagonals;
+    }
+
     public Player getPlayer() {
         return player;
+    }
+
+    public boolean isVulnerable() {
+        return vulnerablePawn;
     }
 
     @Override
@@ -42,14 +73,6 @@ public class Pawn extends Piece {
             changeToPromoted();
         }
         super.put(target.copy());
-    }
-
-    public boolean isPromoted() {
-        return isItPromoted;
-    }
-
-    public boolean isVulnerable() {
-        return vulnerablePawn;
     }
 
     public boolean isInitialState() {
@@ -135,6 +158,11 @@ public class Pawn extends Piece {
     public Coordinate getDiagonalRight() {
         int rightDiagonalOffset = 1;
         return getDisplacedBy(new Coordinate(player.getPlayer(), rightDiagonalOffset));
+    }
+
+    @Override
+    public String getSymbol() {
+        return PieceSimbol.PAWN.getValue();
     }
 
     @Override

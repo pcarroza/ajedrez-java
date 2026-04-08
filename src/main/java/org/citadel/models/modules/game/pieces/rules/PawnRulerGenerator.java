@@ -8,7 +8,7 @@ import org.citadel.models.modules.game.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PawnRulerGenerator extends MovementRuleGenerator {
+public class PawnRulerGenerator implements MovementRuleGenerator {
 
     private static PawnRulerGenerator instance;
 

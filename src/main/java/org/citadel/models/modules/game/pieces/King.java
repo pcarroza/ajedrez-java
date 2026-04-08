@@ -1,6 +1,7 @@
 package org.citadel.models.modules.game.pieces;
 
 import org.citadel.models.modules.game.pieces.enums.CastlingSide;
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
@@ -50,6 +51,16 @@ public class King extends Piece {
 
     public Coordinate getCastingCoordinate(CastlingSide side) {
         return new Coordinate(getCoordinate().row(), side.kingTargetColumn);
+    }
+
+    @Override
+    public boolean isKing() {
+        return true;
+    }
+
+    @Override
+    public String getSymbol() {
+        return PieceSimbol.KING.getValue();
     }
 
     @Override

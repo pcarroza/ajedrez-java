@@ -1,5 +1,7 @@
 package org.citadel.models.modules.game.pieces;
 
+import java.util.List;
+
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
 public interface SelectedPiece {
@@ -10,7 +12,25 @@ public interface SelectedPiece {
 
     void generateMovements();
 
-    void accept(PieceVisitor visitor);
-
     Coordinate getCoordinate();
+
+    List<Coordinate> getMovements();
+
+    boolean isKing();
+
+    boolean isPawn();
+
+    boolean isRook();
+
+    boolean isRookAvailableForCastling();
+
+    boolean isPromoted();
+
+    boolean isPawnPromoted();
+
+    List<Coordinate> getEnPassantDiagonals();
+
+    String getSymbol();
+
+    void accept(PieceVisitor visitor);
 }

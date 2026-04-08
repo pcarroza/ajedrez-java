@@ -7,7 +7,7 @@ import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public class BishopRulerGenerator extends MovementRuleGenerator {
+public class BishopRulerGenerator implements MovementRuleGenerator {
 
     private static BishopRulerGenerator instance;
 

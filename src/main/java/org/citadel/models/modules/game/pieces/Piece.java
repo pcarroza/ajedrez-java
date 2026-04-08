@@ -20,13 +20,14 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     protected Piece(Coordinate position, Player player) {
         this.coordinate = position;
         this.player = player;
-        movements = new ArrayList<>();
+        this.movements = new ArrayList<>();
     }
 
     protected void set(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
 
+    @Override
     public void put(Coordinate target) {
         set(target.copy());
     }
@@ -39,33 +40,89 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return movements;
     }
 
+    @Override
     public boolean isMovementValid(Coordinate target) {
         return movements.contains(target.copy());
     }
 
+    @Override
     public void generateMovements() {
         this.movements = movementBaseGenerator.generate(this);
     }
 
     public Coordinate getDisplacedBy(int displacement) {
-        return getCoordinate().getDisplacedBy(displacement);
+        return coordinate.getDisplacedBy(displacement);
     }
 
     public Coordinate getDisplacedBy(Coordinate displacement) {
-        return getCoordinate().getDisplacedBy(displacement);
+        return coordinate.getDisplacedBy(displacement);
     }
 
     public Coordinate getDisplacedBy(Coordinate displacement, Coordinate vector) {
-        return getCoordinate().getDisplacedBy(displacement, vector);
+        return coordinate.getDisplacedBy(displacement, vector);
     }
 
     public boolean isAt(Coordinate coordinate) {
-        return getCoordinate().equals(coordinate);
+        return this.coordinate.equals(coordinate);
     }
 
+    @Override
     public Coordinate getCoordinate() {
         return coordinate;
     }
 
+    public boolean isRookAvailableForCastling() {
+        return false;
+    }
+
+    public boolean isPromoted() {
+        return false;
+    }
+
+    public boolean isVulnerableToEnPassant() {
+        return false;
+    }
+
+    public List<Coordinate> getEnPassantDiagonals() {
+        return List.of();
+    }
+
+    public List<Coordinate> getSpecialMovements() {
+        return List.of();
+    }
+
+    public String getSymbol() {
+        return "";
+    }
+
+    public boolean isPawnPromoted() {
+        return false;
+    }
+
+    public boolean isKing() {
+        return false;
+    }
+
+    public boolean isQueen() {
+        return false;
+    }
+
+    public boolean isRook() {
+        return false;
+    }
+
+    public boolean isBishop() {
+        return false;
+    }
+
+    public boolean isKnight() {
+        return false;
+    }
+
+    public boolean isPawn() {
+        return false;
+    }
+
+    @Override
     public abstract void accept(PieceVisitor visitor);
 }

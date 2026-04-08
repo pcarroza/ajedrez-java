@@ -7,7 +7,7 @@ import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public class KingRulesGenerator extends MovementRuleGenerator {
+public class KingRulesGenerator implements MovementRuleGenerator {
 
     private static KingRulesGenerator instance;
 

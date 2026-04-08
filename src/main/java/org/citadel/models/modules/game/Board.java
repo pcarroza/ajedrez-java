@@ -7,7 +7,6 @@ import org.citadel.models.modules.game.pieces.Piece;
 import org.citadel.models.modules.game.pieces.SelectedPiece;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
-import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +57,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
-                .map(PieceInspector::getPieceSymbol)
+                .map(piece -> piece.getSymbol())
                 .orElse("");
     }
 
@@ -107,12 +106,12 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     public void promote(PromotionType promotionType) {
         assert selectedPiece != null;
-        assert PieceInspector.isPawn((Piece) selectedPiece);
+        assert selectedPiece.isPawn();
         Coordinate coordinate = selectedPiece.getCoordinate();
         Player player = getCurrentPlayer();
         Piece newPiece = promotionType.createPromotedPiece(coordinate, player);
         newPiece.subscribe(this);
-        piecesMap.get(player).remove((Piece) selectedPiece);
+        piecesMap.get(player).remove(selectedPiece);
         piecesMap.get(player).add(newPiece);
         selectedPiece = newPiece;
     }
@@ -153,16 +152,16 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     public boolean isKingClaimed() {
-        return selectedPiece != null && PieceInspector.isKing((Piece) selectedPiece);
+        return selectedPiece != null && selectedPiece.isKing();
     }
 
     public boolean isPawnClaimed() {
-        return selectedPiece != null && PieceInspector.isPawn((Piece) selectedPiece);
+        return selectedPiece != null && selectedPiece.isPawn();
     }
 
     public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
         assert selectedPiece != null;
-        return PieceInspector.getEnPassantDiagonals((Piece) selectedPiece);
+        return selectedPiece.getEnPassantDiagonals();
     }
 
     public Coordinate getSelectedPieceCoordinate() {
@@ -179,7 +178,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     public boolean isThePawnPromoted() {
-        return PieceInspector.isPawnPromoted((Piece) selectedPiece);
+        return selectedPiece != null && selectedPiece.isPawnPromoted();
     }
 
     public boolean canReach(Coordinate coordinate) {
@@ -237,7 +236,7 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     private boolean isTheKingInValidMoves(Piece piece) {
         assert piece != null;
-        return selectedPieceMovements.contains(piece.getCoordinate()) && PieceInspector.isKing(piece);
+        return selectedPieceMovements.contains(piece.getCoordinate()) && piece.isKing();
     }
 
     @Override
@@ -246,7 +245,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return getPiecesBy(getCurrentPlayer())
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
-                .map(PieceInspector::isRookAvailableForCastling)
+                .map(piece -> piece.isRookAvailableForCastling())
                 .orElse(false);
     }
 

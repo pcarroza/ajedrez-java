@@ -2,6 +2,7 @@ package org.citadel.models.modules.game.pieces;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getRookMoveRulesBuilder;
 
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
@@ -19,6 +20,16 @@ public class Rook extends Piece {
     }
 
     @Override
+    public boolean isRook() {
+        return true;
+    }
+
+    @Override
+    public boolean isRookAvailableForCastling() {
+        return !isMoved;
+    }
+
+    @Override
     public void put(Coordinate target) {
         if (!isMoved) {
             close();
@@ -28,6 +39,11 @@ public class Rook extends Piece {
 
     private void close() {
         isMoved = !isMoved;
+    }
+
+    @Override
+    public String getSymbol() {
+        return PieceSimbol.ROOK.getValue();
     }
 
     @Override

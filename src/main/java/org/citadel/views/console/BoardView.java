@@ -24,13 +24,19 @@ public class BoardView {
     public void printBoard() {
         writeln("\n    a b c d e f g h");
         writeln("  +-----------------+");
+
         for (int row = 8; row >= 1; row--) {
             write(row + " | ");
+
             for (int col = 1; col <= 8; col++) {
-                write(gameController.getPieceSymbol(new Coordinate(row, col)) + " ");
+                String symbol = gameController.getPieceSymbol(new Coordinate(row, col));
+                symbol = symbol.isEmpty() ? "." : symbol;
+                write(symbol + " ");
             }
+
             writeln("| " + row);
         }
+
         writeln("  +-----------------+");
         writeln("    a b c d e f g h\n");
     }
