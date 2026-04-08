@@ -1,9 +1,8 @@
 package org.citadel.models.modules.game.pieces;
 
-import org.citadel.models.modules.game.pieces.visitors.PieceInspector;
-import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.special.InStepMoveGenerator;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
@@ -117,7 +116,7 @@ public class Pawn extends Piece {
     public void generateMovements() {
         this.movements = Stream
                 .concat(
-                        PieceInspector.getSpecialMovements(this).stream(),
+                        InStepMoveGenerator.getInstance().generator(this).stream(),
                         movementBaseGenerator.generate(this).stream())
                 .toList();
     }
@@ -163,10 +162,5 @@ public class Pawn extends Piece {
     @Override
     public String getSymbol() {
         return PieceSimbol.PAWN.getValue();
-    }
-
-    @Override
-    public void accept(PieceVisitor pieceVisitor) {
-        pieceVisitor.visit(this);
     }
 }

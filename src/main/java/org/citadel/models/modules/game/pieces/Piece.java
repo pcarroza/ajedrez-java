@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.rules.MovementRuleGenerator;
-import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
@@ -122,7 +121,4 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     public boolean isPawn() {
         return false;
     }
-
-    @Override
-    public abstract void accept(PieceVisitor visitor);
 }

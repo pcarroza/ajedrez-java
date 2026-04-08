@@ -4,7 +4,6 @@ import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.g
 
 import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
 public class Bishop extends Piece {
 
@@ -16,10 +15,5 @@ public class Bishop extends Piece {
     @Override
     public String getSymbol() {
         return PieceSimbol.BISHOP.getValue();
-    }
-
-    @Override
-    public void accept(PieceVisitor pieceVisitor) {
-        pieceVisitor.visit(this);
     }
 }

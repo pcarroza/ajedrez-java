@@ -4,7 +4,6 @@ import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.g
 
 import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
 
 public class Rook extends Piece {
 
@@ -44,10 +43,5 @@ public class Rook extends Piece {
     @Override
     public String getSymbol() {
         return PieceSimbol.ROOK.getValue();
-    }
-
-    @Override
-    public void accept(PieceVisitor pieceVisitor) {
-        pieceVisitor.visit(this);
     }
 }

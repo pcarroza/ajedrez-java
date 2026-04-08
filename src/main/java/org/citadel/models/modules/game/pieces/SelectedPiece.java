@@ -2,8 +2,6 @@ package org.citadel.models.modules.game.pieces;
 
 import java.util.List;
 
-import org.citadel.models.modules.game.pieces.visitors.PieceVisitor;
-
 public interface SelectedPiece {
 
     void put(Coordinate coordinate);
@@ -31,6 +29,4 @@ public interface SelectedPiece {
     List<Coordinate> getEnPassantDiagonals();
 
     String getSymbol();
-
-    void accept(PieceVisitor visitor);
 }
