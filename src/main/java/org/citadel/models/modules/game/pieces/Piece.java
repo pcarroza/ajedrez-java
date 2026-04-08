@@ -15,12 +15,12 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     protected final Player player;
 
-    protected List<Coordinate> validMovements;
+    protected List<Coordinate> movements;
 
     protected Piece(Coordinate position, Player player) {
         this.coordinate = position;
         this.player = player;
-        validMovements = new ArrayList<>();
+        movements = new ArrayList<>();
     }
 
     protected void set(Coordinate coordinate) {
@@ -36,15 +36,15 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     public List<Coordinate> getMovements() {
-        return validMovements;
+        return movements;
     }
 
     public boolean isMovementValid(Coordinate target) {
-        return validMovements.contains(target.copy());
+        return movements.contains(target.copy());
     }
 
     public void generateMovements() {
-        this.validMovements = movementBaseGenerator.generate(this);
+        this.movements = movementBaseGenerator.generate(this);
     }
 
     public Coordinate getDisplacedBy(int displacement) {

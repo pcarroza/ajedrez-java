@@ -22,7 +22,7 @@ public class Pawn extends Piece {
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getPawnMoveRulesBuilder();
-        specialRulesGenerator = new InStepPawnRulerGenerator(this);
+        specialRulesGenerator = new InStepPawnRulerGenerator();
     }
 
     public Player getPlayer() {
@@ -70,6 +70,11 @@ public class Pawn extends Piece {
         return getCoordinate().row() == expectedRow;
     }
 
+    public boolean hasVulnerableRivalPawnBeside(Coordinate diagonal) {
+        Coordinate rivalCoordinate = new Coordinate(getCoordinate().row(), diagonal.column());
+        return isVulnerablePawnAt(rivalCoordinate);
+    }
+
     private boolean inStep(Coordinate target) {
         return getForwardTwo().equals(target);
     }
@@ -85,14 +90,13 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isMovementValid(Coordinate target) {
-        return validMovements.contains(target.copy());
+        return movements.contains(target.copy());
     }
 
     @Override
     public void generateMovements() {
-        specialRulesGenerator.generate();
-        this.validMovements = Stream
-                .concat(specialRulesGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+        this.movements = Stream
+                .concat(specialRulesGenerator.generate(this).stream(), movementBaseGenerator.generate(this).stream())
                 .toList();
     }
 

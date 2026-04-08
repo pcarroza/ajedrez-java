@@ -6,31 +6,23 @@ import java.util.List;
 import org.citadel.common.validators.ValidatorLimitsBoard;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Pawn;
+import org.citadel.models.modules.game.pieces.Piece;
 
 public class InStepPawnRulerGenerator extends SpecialRulesGenerator {
 
-    private final Pawn pawn;
-
-    public InStepPawnRulerGenerator(Pawn pawn) {
-        this.pawn = pawn;
-    }
-
     @Override
-    public void generate() {
-        movements = new ArrayList<>();
+    public List<Coordinate> generate(Piece piece) {
+        Pawn pawn = (Pawn) piece;
+        assert !pawn.isOnEnPassantRow();
 
-        if (!pawn.isOnEnPassantRow())
-            return;
+        List<Coordinate> movements = new ArrayList<>();
 
         List.of(pawn.getDiagonalLeft(), pawn.getDiagonalRight())
                 .stream()
-                .filter(diagonal -> ValidatorLimitsBoard.getInstance().isWithinLimits(diagonal))
-                .filter(this::hasVulnerableRivalPawnBeside)
+                .filter((it) -> ValidatorLimitsBoard.getInstance().isWithinLimits(it))
+                .filter((it) -> pawn.hasVulnerableRivalPawnBeside(it))
                 .forEach(movements::add);
-    }
 
-    private boolean hasVulnerableRivalPawnBeside(Coordinate diagonal) {
-        Coordinate rivalCoordinate = new Coordinate(pawn.getCoordinate().row(), diagonal.column());
-        return pawn.isVulnerablePawnAt(rivalCoordinate);
+        return movements;
     }
 }

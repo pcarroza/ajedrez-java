@@ -1,6 +1,7 @@
 package org.citadel.models.modules.game.pieces.special;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public abstract class SpecialRulesGenerator {
         return movements;
     }
 
-    public abstract void generate();
+    public abstract List<Coordinate> generate(Piece piece);
 }

@@ -1,5 +1,6 @@
 package org.citadel.models.modules.game.pieces;
 
+import org.citadel.models.modules.game.pieces.enums.CastlingSide;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.special.SpecialRulesGenerator;
 import org.citadel.models.modules.game.pieces.special.CastlingMoveRulerGenerator;
@@ -22,7 +23,7 @@ public class King extends Piece {
     public King(Coordinate coordinate, Player player) {
         super(coordinate, player);
         movementBaseGenerator = getKingMoveRulesBuilder();
-        specialRulesGenerator = new CastlingMoveRulerGenerator(this);
+        specialRulesGenerator = new CastlingMoveRulerGenerator();
     }
 
     @Override
@@ -35,14 +36,22 @@ public class King extends Piece {
 
     @Override
     public void generateMovements() {
-        specialRulesGenerator.generate();
-        this.validMovements = Stream
-                .concat(specialRulesGenerator.getMovements().stream(), movementBaseGenerator.generate(this).stream())
+        this.movements = Stream
+                .concat(specialRulesGenerator.generate(this).stream(), movementBaseGenerator.generate(this).stream())
                 .toList();
     }
 
     private void close() {
         isMoved = true;
+    }
+
+    public boolean isCastlingAvailable(CastlingSide side) {
+        Coordinate target = new Coordinate(getCoordinate().row(), side.rookColumn);
+        return isRookAvailableForCastling(target) && side.areSquaresClear(getCoordinate().row(), this);
+    }
+
+    public Coordinate getCastingCoordinate(CastlingSide side) {
+        return new Coordinate(getCoordinate().row(), side.kingTargetColumn);
     }
 
     @Override
