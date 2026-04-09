@@ -1,7 +1,7 @@
 package org.citadel.models.modules.game.pieces;
 
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.special.CastingMoveGenerator;
 import org.citadel.models.modules.game.pieces.special.InStepMoveGenerator;
 
 import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
@@ -41,6 +41,11 @@ public class Pawn extends Piece {
             changeToPromoted();
         }
         super.put(target.copy());
+    }
+
+    @Override
+    public PieceSimbol getSymbol() {
+        return PieceSimbol.PAWN;
     }
 
     public boolean isPromoted() {

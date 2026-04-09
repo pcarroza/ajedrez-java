@@ -1,5 +1,6 @@
 package org.citadel.models.modules.game;
 
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 import org.citadel.views.console.GameView;
@@ -23,7 +24,7 @@ public class Game {
         board.subscribe(observer);
     }
 
-    public String getPieceSimbol(Coordinate coordinate) {
+    public PieceSimbol getPieceSimbol(Coordinate coordinate) {
         return board.getPieceSymbol(coordinate);
     }
 

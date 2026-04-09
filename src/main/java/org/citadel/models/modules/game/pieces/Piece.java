@@ -3,6 +3,7 @@ package org.citadel.models.modules.game.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.rules.MovementRuleGenerator;
 
@@ -90,8 +91,8 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return List.of();
     }
 
-    public String getSymbol() {
-        return "";
+    public PieceSimbol getSymbol() {
+        return null;
     }
 
     public boolean isPawnPromoted() {

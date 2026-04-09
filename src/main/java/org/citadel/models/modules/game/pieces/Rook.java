@@ -37,11 +37,11 @@ public class Rook extends Piece {
     }
 
     private void close() {
-        isMoved = !isMoved;
+        isMoved = true;
     }
 
     @Override
-    public String getSymbol() {
-        return PieceSimbol.ROOK.getValue();
+    public PieceSimbol getSymbol() {
+        return PieceSimbol.ROOK;
     }
 }

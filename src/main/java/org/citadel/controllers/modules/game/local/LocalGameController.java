@@ -5,6 +5,7 @@ import java.util.List;
 import org.citadel.controllers.modules.game.GameController;
 import org.citadel.models.modules.game.Game;
 import org.citadel.models.modules.game.pieces.Coordinate;
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
@@ -84,7 +85,7 @@ public class LocalGameController implements GameController {
         return game.isCheck();
     }
 
-    public String getPieceSymbol(Coordinate coordinate) {
+    public PieceSimbol getPieceSymbol(Coordinate coordinate) {
         return game.getPieceSimbol(coordinate);
     }
 

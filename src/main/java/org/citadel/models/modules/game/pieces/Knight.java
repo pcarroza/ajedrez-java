@@ -13,7 +13,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public String getSymbol() {
-        return PieceSimbol.KNIGHT.getValue();
+    public PieceSimbol getSymbol() {
+        return PieceSimbol.KNIGHT;
     }
 }

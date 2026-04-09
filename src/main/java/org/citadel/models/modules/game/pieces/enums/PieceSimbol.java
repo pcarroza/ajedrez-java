@@ -6,7 +6,8 @@ public enum PieceSimbol {
     KNIGHT("C"),
     BISHOP("B"),
     QUEEN("Q"),
-    KING("K");
+    KING("K"),
+    EMPTY(".");
 
     private final String value;
 

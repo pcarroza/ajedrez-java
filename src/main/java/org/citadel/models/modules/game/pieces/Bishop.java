@@ -13,7 +13,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public String getSymbol() {
-        return PieceSimbol.BISHOP.getValue();
+    public PieceSimbol getSymbol() {
+        return PieceSimbol.BISHOP;
     }
 }

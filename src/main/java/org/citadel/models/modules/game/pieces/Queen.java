@@ -13,7 +13,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public String getSymbol() {
-        return PieceSimbol.QUEEN.getValue();
+    public PieceSimbol getSymbol() {
+        return PieceSimbol.QUEEN;
     }
 }

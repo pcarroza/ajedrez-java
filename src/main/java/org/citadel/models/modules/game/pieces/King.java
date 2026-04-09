@@ -58,7 +58,7 @@ public class King extends Piece {
     }
 
     @Override
-    public String getSymbol() {
-        return PieceSimbol.KING.getValue();
+    public PieceSimbol getSymbol() {
+        return PieceSimbol.KING;
     }
 }

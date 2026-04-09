@@ -2,17 +2,25 @@ package org.citadel.models.modules.game.pieces;
 
 import java.util.List;
 
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+
 public interface SelectedPiece {
 
     void put(Coordinate coordinate);
 
-    boolean isMovementValid(Coordinate coordinate);
-
     void generateMovements();
+
+    PieceSimbol getSymbol();
 
     Coordinate getCoordinate();
 
     List<Coordinate> getMovements();
+
+    List<Coordinate> getEnPassantDiagonals();
+
+    boolean isMovementValid(Coordinate coordinate);
+
+    boolean isRookAvailableForCastling();
 
     boolean isKing();
 
@@ -20,13 +28,8 @@ public interface SelectedPiece {
 
     boolean isRook();
 
-    boolean isRookAvailableForCastling();
-
     boolean isPromoted();
 
     boolean isPawnPromoted();
 
-    List<Coordinate> getEnPassantDiagonals();
-
-    String getSymbol();
 }

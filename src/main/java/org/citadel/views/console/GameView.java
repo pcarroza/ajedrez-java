@@ -86,7 +86,7 @@ public class GameView {
 
     private void handleMoveEffects(Coordinate target) {
         if (gameController.isRival(target))
-            boardView.showCapture(gameController.getPieceSymbol(target));
+            boardView.showCapture(gameController.getPieceSymbol(target).getValue());
     }
 
     private void handlePromotion() {

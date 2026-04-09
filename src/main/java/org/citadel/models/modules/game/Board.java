@@ -5,6 +5,7 @@ import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
 import org.citadel.models.modules.game.pieces.SelectedPiece;
+import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
@@ -51,14 +52,14 @@ public class Board extends SubjectBoard implements BoardObserver {
         return List.copyOf(selectedPieceMovements);
     }
 
-    public String getPieceSymbol(Coordinate coordinate) {
+    public PieceSimbol getPieceSymbol(Coordinate coordinate) {
         assert coordinate != null : "Board: 56: Coordinate cannot be null";
         return piecesMap.values().stream()
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
                 .map(piece -> piece.getSymbol())
-                .orElse("");
+                .orElse(PieceSimbol.EMPTY);
     }
 
     public void selectPiece(Coordinate coordinate) {
@@ -227,7 +228,8 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     @Override
     public boolean isVulnerablePawnAt(Coordinate coordinate) {
-        return pawnMapInStep.get(getRivalPlayer()).stream().anyMatch(p -> p.isAt(coordinate));
+        assert coordinate != null;
+        return pawnMapInStep.get(getRivalPlayer()).stream().anyMatch(piece -> piece.isAt(coordinate));
     }
 
     public boolean isCheck() {
@@ -250,6 +252,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     private Stream<Piece> getPiecesBy(Player player) {
+        assert player != null;
         return piecesMap.get(player).stream();
     }
 
