@@ -67,6 +67,14 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return coordinate;
     }
 
+    public List<Coordinate> getEnPassantDiagonals() {
+        return List.of();
+    }
+
+    public List<Coordinate> getSpecialMovements() {
+        return List.of();
+    }
+
     public boolean isRookAvailableForCastling() {
         return false;
     }
@@ -77,18 +85,6 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     public boolean isVulnerableToEnPassant() {
         return false;
-    }
-
-    public List<Coordinate> getEnPassantDiagonals() {
-        return List.of();
-    }
-
-    public List<Coordinate> getSpecialMovements() {
-        return List.of();
-    }
-
-    public PieceSymbol getSymbol() {
-        return null;
     }
 
     public boolean isPawnPromoted() {
@@ -105,6 +101,11 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     public boolean isPawn() {
         return false;
+
+    }
+
+    public PieceSymbol getSymbol() {
+        return null;
     }
 
     public abstract void accept(GeneratorMoveVisitor visitor);

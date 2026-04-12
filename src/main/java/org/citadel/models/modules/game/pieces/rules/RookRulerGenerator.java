@@ -7,7 +7,6 @@ import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.King;
 import org.citadel.models.modules.game.pieces.Knight;
 import org.citadel.models.modules.game.pieces.Pawn;
-import org.citadel.models.modules.game.pieces.Piece;
 import org.citadel.models.modules.game.pieces.Queen;
 import org.citadel.models.modules.game.pieces.Rook;
 
