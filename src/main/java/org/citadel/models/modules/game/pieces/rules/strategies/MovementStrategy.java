@@ -43,7 +43,8 @@ public abstract class MovementStrategy {
             return;
         }
         coordinates.add(coordinate);
-        generateCoordinateRecursive(coordinates, vector, step + INCREASE);
+        int nextStep = step + INCREASE;
+        generateCoordinateRecursive(coordinates, vector, nextStep);
     }
 
     protected abstract Coordinate getDisplacedCoordinateBy(int increment, Coordinate vector);

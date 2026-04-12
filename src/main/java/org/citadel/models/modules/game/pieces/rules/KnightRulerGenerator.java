@@ -3,11 +3,11 @@ package org.citadel.models.modules.game.pieces.rules;
 import static org.citadel.models.modules.game.pieces.rules.GeneratorLegalMoves.generateLegalMoves;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
+import org.citadel.models.modules.game.pieces.Knight;
 
 import java.util.List;
 
-public class KnightRulerGenerator implements MovementRuleGenerator {
+public class KnightRulerGenerator implements MovementRuleGenerator<Knight> {
 
     private static KnightRulerGenerator instance;
 
@@ -22,7 +22,7 @@ public class KnightRulerGenerator implements MovementRuleGenerator {
     }
 
     @Override
-    public List<Coordinate> generate(Piece piece) {
+    public List<Coordinate> generate(Knight piece) {
         final int doubleStep = 2;
         final int simpleStep = 1;
 

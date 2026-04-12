@@ -8,7 +8,7 @@ import org.citadel.models.modules.game.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PawnRulerGenerator implements MovementRuleGenerator {
+public class PawnRulerGenerator implements MovementRuleGenerator<Pawn> {
 
     private static PawnRulerGenerator instance;
 
@@ -23,23 +23,28 @@ public class PawnRulerGenerator implements MovementRuleGenerator {
     }
 
     @Override
-    public List<Coordinate> generate(Piece piece) {
-        Pawn pawn = (Pawn) piece;
+    public List<Coordinate> generate(Pawn pawn) {
         List<Coordinate> possibleMoves = new ArrayList<>();
 
         if (pawn.canAdvanceOne())
-            possibleMoves.add(pawn.getForwardOne());
+            addCoordinateIfWithinLimits(pawn, possibleMoves);
 
         if (pawn.canAdvanceTwo())
-            possibleMoves.add(pawn.getForwardTwo());
+            addCoordinateIfWithinLimits(pawn, possibleMoves);
 
         if (pawn.canCaptureLeft())
-            possibleMoves.add(pawn.getDiagonalLeft());
+            addCoordinateIfWithinLimits(pawn, possibleMoves);
 
         if (pawn.canCaptureRight())
-            possibleMoves.add(pawn.getDiagonalRight());
+            addCoordinateIfWithinLimits(pawn, possibleMoves);
 
-        possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
         return possibleMoves;
+    }
+
+    public void addCoordinateIfWithinLimits(Pawn pawn, List<Coordinate> opponentPieces) {
+        Coordinate coordinate = pawn.getCoordinate();
+        if (ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate)) {
+            opponentPieces.add(coordinate);
+        }
     }
 }

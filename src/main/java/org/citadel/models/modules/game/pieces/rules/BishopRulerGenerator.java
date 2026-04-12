@@ -2,12 +2,12 @@ package org.citadel.models.modules.game.pieces.rules;
 
 import static org.citadel.models.modules.game.pieces.rules.strategies.BuilderMovementStrategy.buildBishopMovements;
 
+import org.citadel.models.modules.game.pieces.Bishop;
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
 
 import java.util.List;
 
-public class BishopRulerGenerator implements MovementRuleGenerator {
+public class BishopRulerGenerator implements MovementRuleGenerator<Bishop> {
 
     private static BishopRulerGenerator instance;
 
@@ -22,7 +22,7 @@ public class BishopRulerGenerator implements MovementRuleGenerator {
     }
 
     @Override
-    public List<Coordinate> generate(Piece piece) {
+    public List<Coordinate> generate(Bishop piece) {
         return buildBishopMovements(piece);
     }
 }

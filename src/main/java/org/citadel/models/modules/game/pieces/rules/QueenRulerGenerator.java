@@ -3,11 +3,11 @@ package org.citadel.models.modules.game.pieces.rules;
 import static org.citadel.models.modules.game.pieces.rules.strategies.BuilderMovementStrategy.buildQueenMovements;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
+import org.citadel.models.modules.game.pieces.Queen;
 
 import java.util.List;
 
-public class QueenRulerGenerator implements MovementRuleGenerator {
+public class QueenRulerGenerator implements MovementRuleGenerator<Queen> {
 
     private static QueenRulerGenerator instance;
 
@@ -22,7 +22,7 @@ public class QueenRulerGenerator implements MovementRuleGenerator {
     }
 
     @Override
-    public List<Coordinate> generate(Piece piece) {
+    public List<Coordinate> generate(Queen piece) {
         return buildQueenMovements(piece);
     }
 }

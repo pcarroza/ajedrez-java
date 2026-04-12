@@ -3,11 +3,11 @@ package org.citadel.models.modules.game.pieces.rules;
 import static org.citadel.models.modules.game.pieces.rules.strategies.BuilderMovementStrategy.buildRookMovements;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
+import org.citadel.models.modules.game.pieces.Rook;
 
 import java.util.List;
 
-public class RookRulerGenerator implements MovementRuleGenerator {
+public class RookRulerGenerator implements MovementRuleGenerator<Rook> {
 
     private static RookRulerGenerator instance;
 
@@ -22,7 +22,7 @@ public class RookRulerGenerator implements MovementRuleGenerator {
     }
 
     @Override
-    public List<Coordinate> generate(Piece piece) {
+    public List<Coordinate> generate(Rook piece) {
         return buildRookMovements(piece);
     }
 }
