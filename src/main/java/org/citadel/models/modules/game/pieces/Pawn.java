@@ -1,10 +1,10 @@
 package org.citadel.models.modules.game.pieces;
 
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.rules.GeneratorInspector;
+import org.citadel.models.modules.game.pieces.rules.GeneratorMoveVisitor;
 import org.citadel.models.modules.game.pieces.special.InStepMoveGenerator;
-
-import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getPawnMoveRulesBuilder;
 
 import java.util.stream.Stream;
 
@@ -18,7 +18,6 @@ public class Pawn extends Piece {
 
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        movementBaseGenerator = getPawnMoveRulesBuilder();
     }
 
     public Player getPlayer() {
@@ -43,9 +42,42 @@ public class Pawn extends Piece {
         super.put(target.copy());
     }
 
-    @Override
-    public PieceSimbol getSymbol() {
-        return PieceSimbol.PAWN;
+    public boolean canAdvanceOne() {
+        return !isOccupied(getForwardOne());
+    }
+
+    public boolean canAdvanceTwo() {
+        return isInitialState() && !isOccupied(getForwardOne()) && !isOccupied(getForwardTwo());
+    }
+
+    public boolean canCaptureLeft() {
+        return isRival(getDiagonalLeft());
+    }
+
+    public boolean canCaptureRight() {
+        return isRival(getDiagonalRight());
+    }
+
+    public Coordinate getForwardOne() {
+        int singleStep = 1;
+        int direction = singleStep * player.getPlayer();
+        return getDisplacedBy(new Coordinate(direction, 0));
+    }
+
+    public Coordinate getForwardTwo() {
+        int doubleStep = 2;
+        int direction = doubleStep * player.getPlayer();
+        return getDisplacedBy(new Coordinate(direction, 0));
+    }
+
+    public Coordinate getDiagonalLeft() {
+        int leftDiagonalOffset = -1;
+        return getDisplacedBy(new Coordinate(player.getPlayer(), leftDiagonalOffset));
+    }
+
+    public Coordinate getDiagonalRight() {
+        int rightDiagonalOffset = 1;
+        return getDisplacedBy(new Coordinate(player.getPlayer(), rightDiagonalOffset));
     }
 
     public boolean isPromoted() {
@@ -102,44 +134,16 @@ public class Pawn extends Piece {
     @Override
     public void generateMovements() {
         this.movements = Stream.concat(InStepMoveGenerator.getInstance().generator(this).stream(),
-                movementBaseGenerator.generate(this).stream()).toList();
+                GeneratorInspector.generatorMovements(this).stream()).toList();
     }
 
-    public boolean canAdvanceOne() {
-        return !isOccupied(getForwardOne());
+    @Override
+    public PieceSymbol getSymbol() {
+        return PieceSymbol.PAWN;
     }
 
-    public boolean canAdvanceTwo() {
-        return isInitialState() && !isOccupied(getForwardOne()) && !isOccupied(getForwardTwo());
-    }
-
-    public boolean canCaptureLeft() {
-        return isRival(getDiagonalLeft());
-    }
-
-    public boolean canCaptureRight() {
-        return isRival(getDiagonalRight());
-    }
-
-    public Coordinate getForwardOne() {
-        int singleStep = 1;
-        int direction = singleStep * player.getPlayer();
-        return getDisplacedBy(new Coordinate(direction, 0));
-    }
-
-    public Coordinate getForwardTwo() {
-        int doubleStep = 2;
-        int direction = doubleStep * player.getPlayer();
-        return getDisplacedBy(new Coordinate(direction, 0));
-    }
-
-    public Coordinate getDiagonalLeft() {
-        int leftDiagonalOffset = -1;
-        return getDisplacedBy(new Coordinate(player.getPlayer(), leftDiagonalOffset));
-    }
-
-    public Coordinate getDiagonalRight() {
-        int rightDiagonalOffset = 1;
-        return getDisplacedBy(new Coordinate(player.getPlayer(), rightDiagonalOffset));
+    @Override
+    public void accept(GeneratorMoveVisitor visitor) {
+        visitor.visit(this);
     }
 }

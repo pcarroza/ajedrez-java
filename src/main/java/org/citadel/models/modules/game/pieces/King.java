@@ -1,11 +1,11 @@
 package org.citadel.models.modules.game.pieces;
 
 import org.citadel.models.modules.game.pieces.enums.CastlingSide;
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.rules.GeneratorInspector;
+import org.citadel.models.modules.game.pieces.rules.GeneratorMoveVisitor;
 import org.citadel.models.modules.game.pieces.special.CastingMoveGenerator;
-
-import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getKingMoveRulesBuilder;
 
 import java.util.stream.Stream;
 
@@ -19,7 +19,6 @@ public class King extends Piece {
 
     public King(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        movementBaseGenerator = getKingMoveRulesBuilder();
     }
 
     @Override
@@ -35,7 +34,7 @@ public class King extends Piece {
         this.movements = Stream
                 .concat(
                         CastingMoveGenerator.getInstance().generator(this).stream(),
-                        movementBaseGenerator.generate(this).stream())
+                        GeneratorInspector.generatorMovements(this).stream())
                 .toList();
     }
 
@@ -58,7 +57,12 @@ public class King extends Piece {
     }
 
     @Override
-    public PieceSimbol getSymbol() {
-        return PieceSimbol.KING;
+    public PieceSymbol getSymbol() {
+        return PieceSymbol.KING;
+    }
+
+    @Override
+    public void accept(GeneratorMoveVisitor visitor) {
+        visitor.visit(this);
     }
 }

@@ -1,7 +1,7 @@
 package org.citadel.controllers.modules.game.local;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 
 import java.util.List;
@@ -64,7 +64,7 @@ public class LocalController {
         return game.getSelectedPieceEnPassantDiagonals();
     }
 
-    public PieceSimbol getPieceSymbol(Coordinate coordinate) {
+    public PieceSymbol getPieceSymbol(Coordinate coordinate) {
         return game.getPieceSimbol(coordinate);
     }
 }

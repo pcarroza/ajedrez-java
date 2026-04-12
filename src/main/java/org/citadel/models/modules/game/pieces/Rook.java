@@ -1,9 +1,9 @@
 package org.citadel.models.modules.game.pieces;
 
-import static org.citadel.models.modules.game.pieces.rules.MovementRulerFacade.getRookMoveRulesBuilder;
-
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
+import org.citadel.models.modules.game.pieces.rules.GeneratorInspector;
+import org.citadel.models.modules.game.pieces.rules.GeneratorMoveVisitor;
 
 public class Rook extends Piece {
 
@@ -15,7 +15,11 @@ public class Rook extends Piece {
 
     public Rook(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        movementBaseGenerator = getRookMoveRulesBuilder();
+    }
+
+    @Override
+    public void generateMovements() {
+        this.movements = GeneratorInspector.generatorMovements(this);
     }
 
     @Override
@@ -41,7 +45,12 @@ public class Rook extends Piece {
     }
 
     @Override
-    public PieceSimbol getSymbol() {
-        return PieceSimbol.ROOK;
+    public PieceSymbol getSymbol() {
+        return PieceSymbol.ROOK;
+    }
+
+    @Override
+    public void accept(GeneratorMoveVisitor visitor) {
+        visitor.visit(this);
     }
 }

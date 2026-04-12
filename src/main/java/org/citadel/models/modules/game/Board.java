@@ -5,7 +5,7 @@ import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
 import org.citadel.models.modules.game.pieces.SelectedPiece;
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
@@ -52,14 +52,14 @@ public class Board extends SubjectBoard implements BoardObserver {
         return List.copyOf(selectedPieceMovements);
     }
 
-    public PieceSimbol getPieceSymbol(Coordinate coordinate) {
+    public PieceSymbol getPieceSymbol(Coordinate coordinate) {
         assert coordinate != null : "Board: 56: Coordinate cannot be null";
         return piecesMap.values().stream()
                 .flatMap(List::stream)
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
                 .map(piece -> piece.getSymbol())
-                .orElse(PieceSimbol.EMPTY);
+                .orElse(PieceSymbol.EMPTY);
     }
 
     public void selectPiece(Coordinate coordinate) {

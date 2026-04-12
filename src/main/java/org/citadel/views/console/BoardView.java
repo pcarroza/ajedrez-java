@@ -1,7 +1,7 @@
 package org.citadel.views.console;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.controllers.modules.game.GameController;
 
@@ -30,8 +30,8 @@ public class BoardView {
             write(row + " | ");
 
             for (int col = 1; col <= 8; col++) {
-                PieceSimbol symbol = gameController.getPieceSymbol(new Coordinate(row, col));
-                String symbolText = symbol == PieceSimbol.EMPTY ? "." : symbol.getValue();
+                PieceSymbol symbol = gameController.getPieceSymbol(new Coordinate(row, col));
+                String symbolText = symbol == PieceSymbol.EMPTY ? "." : symbol.getValue();
                 write(symbolText + " ");
             }
 
@@ -46,7 +46,7 @@ public class BoardView {
         writeln("\nTURNO DE: " + player);
     }
 
-    public void showSelectedPiece(PieceSimbol symbol, List<Coordinate> moves) {
+    public void showSelectedPiece(PieceSymbol symbol, List<Coordinate> moves) {
         writeln("Pieza seleccionada: " + symbol);
         writeln("Movimientos posibles: " + moves);
     }

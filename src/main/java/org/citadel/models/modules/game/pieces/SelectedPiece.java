@@ -2,7 +2,7 @@ package org.citadel.models.modules.game.pieces;
 
 import java.util.List;
 
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 
 public interface SelectedPiece {
 
@@ -10,7 +10,7 @@ public interface SelectedPiece {
 
     void generateMovements();
 
-    PieceSimbol getSymbol();
+    PieceSymbol getSymbol();
 
     Coordinate getCoordinate();
 
@@ -31,5 +31,4 @@ public interface SelectedPiece {
     boolean isPromoted();
 
     boolean isPawnPromoted();
-
 }

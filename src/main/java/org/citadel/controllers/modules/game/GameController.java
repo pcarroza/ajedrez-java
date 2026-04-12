@@ -3,7 +3,7 @@ package org.citadel.controllers.modules.game;
 import java.util.List;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.enums.PromotionType;
 
@@ -45,7 +45,7 @@ public interface GameController {
 
     boolean isCheck();
 
-    PieceSimbol getPieceSymbol(Coordinate coordinate);
+    PieceSymbol getPieceSymbol(Coordinate coordinate);
 
     boolean isKingSelected();
 

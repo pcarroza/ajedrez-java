@@ -1,6 +1,6 @@
 package org.citadel.models.modules.game.pieces.enums;
 
-public enum PieceSimbol {
+public enum PieceSymbol {
     PAWN("P"),
     ROOK("T"),
     KNIGHT("C"),
@@ -11,7 +11,7 @@ public enum PieceSimbol {
 
     private final String value;
 
-    PieceSimbol(String value) {
+    PieceSymbol(String value) {
         this.value = value;
     }
 

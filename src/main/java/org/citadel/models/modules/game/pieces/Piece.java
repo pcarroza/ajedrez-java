@@ -3,13 +3,11 @@ package org.citadel.models.modules.game.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.citadel.models.modules.game.pieces.enums.PieceSimbol;
+import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
-import org.citadel.models.modules.game.pieces.rules.MovementRuleGenerator;
+import org.citadel.models.modules.game.pieces.rules.GeneratorMoveVisitor;
 
 public abstract class Piece extends SubjectPiece implements SelectedPiece {
-
-    protected MovementRuleGenerator movementBaseGenerator;
 
     private Coordinate coordinate;
 
@@ -46,9 +44,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     @Override
-    public void generateMovements() {
-        this.movements = movementBaseGenerator.generate(this);
-    }
+    public abstract void generateMovements();
 
     public Coordinate getDisplacedBy(int displacement) {
         return coordinate.getDisplacedBy(displacement);
@@ -91,7 +87,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return List.of();
     }
 
-    public PieceSimbol getSymbol() {
+    public PieceSymbol getSymbol() {
         return null;
     }
 
@@ -110,4 +106,6 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     public boolean isPawn() {
         return false;
     }
+
+    public abstract void accept(GeneratorMoveVisitor visitor);
 }
