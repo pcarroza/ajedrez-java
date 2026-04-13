@@ -36,19 +36,24 @@ public class PawnRulerGenerator implements GeneratorMoveVisitor {
         List<Coordinate> possibleMoves = new ArrayList<>();
 
         if (pawn.canAdvanceOne())
-            possibleMoves.add(pawn.getForwardOne());
+            addIfWithinLimits(possibleMoves, pawn.getForwardOne());
 
         if (pawn.canAdvanceTwo())
-            possibleMoves.add(pawn.getForwardTwo());
+            addIfWithinLimits(possibleMoves, pawn.getForwardTwo());
 
         if (pawn.canCaptureLeft())
-            possibleMoves.add(pawn.getDiagonalLeft());
+            addIfWithinLimits(possibleMoves, pawn.getDiagonalLeft());
 
         if (pawn.canCaptureRight())
-            possibleMoves.add(pawn.getDiagonalRight());
+            addIfWithinLimits(possibleMoves, pawn.getDiagonalRight());
 
-        possibleMoves.removeIf(it -> !ValidatorLimitsBoard.getInstance().isWithinLimits(it));
         return possibleMoves;
+    }
+
+    private void addIfWithinLimits(List<Coordinate> possibleMoves, Coordinate coordinate) {
+        if (ValidatorLimitsBoard.getInstance().isWithinLimits(coordinate)) {
+            possibleMoves.add(coordinate);
+        }
     }
 
     @Override

@@ -75,7 +75,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                     set(piece.getMovements());
                     selectedPiece = piece;
                 }, () -> {
-                    assert false : "Board: 77: Selected piece not found";
+                    assert false : "Board: Selected piece not found";
                 });
     }
 
@@ -160,7 +160,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return selectedPiece != null && selectedPiece.isPawn();
     }
 
-    public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
+    public List<Coordinate> getSelectedPieceInStepDiagonals() {
         assert selectedPiece != null;
         return selectedPiece.getEnPassantDiagonals();
     }

@@ -44,8 +44,8 @@ public class Game {
         return board.isPawnClaimed();
     }
 
-    public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
-        return board.getSelectedPieceEnPassantDiagonals();
+    public List<Coordinate> getSelectedPieceInStepDiagonals() {
+        return board.getSelectedPieceInStepDiagonals();
     }
 
     public Coordinate getSelectedPieceCoordinate() {

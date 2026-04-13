@@ -61,7 +61,7 @@ public class LocalController {
     }
 
     public List<Coordinate> getSelectedPieceMovements() {
-        return game.getSelectedPieceEnPassantDiagonals();
+        return game.getSelectedPieceInStepDiagonals();
     }
 
     public PieceSymbol getPieceSymbol(Coordinate coordinate) {

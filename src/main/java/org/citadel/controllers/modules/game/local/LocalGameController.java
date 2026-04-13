@@ -102,7 +102,7 @@ public class LocalGameController implements GameController {
     }
 
     public List<Coordinate> getSelectedPieceEnPassantDiagonals() {
-        return game.getSelectedPieceEnPassantDiagonals();
+        return game.getSelectedPieceInStepDiagonals();
     }
 
     public boolean isVulnerablePawnAt(Coordinate coordinate) {

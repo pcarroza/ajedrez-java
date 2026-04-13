@@ -16,7 +16,7 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
         if (!game.isPawnSelected()) {
             return false;
         }
-        for (Coordinate diagonal : game.getSelectedPieceEnPassantDiagonals()) {
+        for (Coordinate diagonal : game.getSelectedPieceInStepDiagonals()) {
             Coordinate rivalPawnCoord = new Coordinate(game.getSelectedPieceCoordinate().row(), diagonal.column());
             if (game.isVulnerablePawnAt(rivalPawnCoord)) {
                 return true;
@@ -27,7 +27,7 @@ public class LocalEnPassantPawnController extends LocalSpecialMovementsControlle
 
     @Override
     public void capture() {
-        for (Coordinate diagonal : game.getSelectedPieceEnPassantDiagonals()) {
+        for (Coordinate diagonal : game.getSelectedPieceInStepDiagonals()) {
             Coordinate rivalPawnCoord = new Coordinate(game.getSelectedPieceCoordinate().row(), diagonal.column());
             if (game.isVulnerablePawnAt(rivalPawnCoord)) {
                 game.removeRivalPlayerPiece(rivalPawnCoord);
