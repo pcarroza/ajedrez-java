@@ -101,7 +101,6 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
 
     public boolean isPawn() {
         return false;
-
     }
 
     public PieceSymbol getSymbol() {

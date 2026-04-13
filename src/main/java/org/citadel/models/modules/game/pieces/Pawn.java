@@ -18,7 +18,6 @@ public class Pawn extends Piece {
 
     public Pawn(Coordinate coordinate, Player player) {
         super(coordinate, player);
-        movementBaseGenerator = getPawnMoveRulesBuilder();
     }
 
     @Override
@@ -77,6 +76,19 @@ public class Pawn extends Piece {
         return getDisplacedBy(new Coordinate(player.getPlayer(), rightDiagonalOffset));
     }
 
+    private boolean inStep(Coordinate target) {
+        return getForwardTwo().equals(target);
+    }
+
+    private boolean isThePawnPromoted(Coordinate coordinate) {
+        int targetRow = player == Player.WHITE ? 8 : 1;
+        return coordinate.row() == targetRow;
+    }
+
+    private void changeToPromoted() {
+        isItPromoted = true;
+    }
+
     public boolean isPromoted() {
         return isItPromoted;
     }
@@ -103,19 +115,6 @@ public class Pawn extends Piece {
     public boolean hasVulnerableRivalPawnBeside(Coordinate diagonal) {
         Coordinate rivalCoordinate = new Coordinate(getCoordinate().row(), diagonal.column());
         return isVulnerablePawnAt(rivalCoordinate);
-    }
-
-    private boolean inStep(Coordinate target) {
-        return getForwardTwo().equals(target);
-    }
-
-    private boolean isThePawnPromoted(Coordinate coordinate) {
-        int targetRow = player == Player.WHITE ? 8 : 1;
-        return coordinate.row() == targetRow;
-    }
-
-    private void changeToPromoted() {
-        isItPromoted = true;
     }
 
     @Override
@@ -142,54 +141,5 @@ public class Pawn extends Piece {
     @Override
     public void accept(GeneratorMoveVisitor visitor) {
         visitor.visit(this);
-    }
-
-    public boolean isPromoted() {
-        return isItPromoted;
-    }
-
-    public boolean isVulnerable() {
-        return vulnerablePawn;
-    }
-
-    public boolean isInitialState() {
-        return initialState;
-    }
-
-    private void close() {
-        initialState = false;
-    }
-
-    public boolean isOnEnPassantRow() {
-        final int IN_STEP_ROW_WHITE = 5;
-        final int IN_STEP_ROW_BLACK = 4;
-        int expectedRow = getPlayer() == Player.WHITE ? IN_STEP_ROW_WHITE : IN_STEP_ROW_BLACK;
-        return getCoordinate().row() == expectedRow;
-    }
-
-    public boolean hasVulnerableRivalPawnBeside(Coordinate diagonal) {
-        Coordinate rivalCoordinate = new Coordinate(getCoordinate().row(), diagonal.column());
-        return isVulnerablePawnAt(rivalCoordinate);
-    }
-
-    @Override
-    public boolean isPawn() {
-        return true;
-    }
-
-    @Override
-    public boolean isMovementValid(Coordinate target) {
-        return movements.contains(target.copy());
-    }
-
-    @Override
-    public void generateMovements() {
-        this.movements = Stream.concat(InStepMoveGenerator.getInstance().generator(this).stream(),
-                movementBaseGenerator.generate(this).stream()).toList();
-    }
-
-    @Override
-    public PieceSimbol getSymbol() {
-        return PieceSimbol.PAWN;
     }
 }

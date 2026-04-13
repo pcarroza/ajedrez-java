@@ -13,7 +13,7 @@ import org.citadel.models.modules.game.pieces.Rook;
 
 import java.util.List;
 
-public class KingRulesGenerator implements MovementRuleGenerator {
+public class KingRulesGenerator implements GeneratorMoveVisitor {
 
     private static KingRulesGenerator instance;
 
