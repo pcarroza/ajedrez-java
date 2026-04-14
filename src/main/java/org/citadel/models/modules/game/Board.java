@@ -71,8 +71,8 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
                 .ifPresentOrElse(piece -> {
-                    piece.generateMovements();
-                    set(piece.getMovements());
+                    List<Coordinate> generatedMovements = piece.generateMovements();
+                    set(generatedMovements);
                     selectedPiece = piece;
                 }, () -> {
                     assert false : "Board: Selected piece not found";
@@ -115,6 +115,35 @@ public class Board extends SubjectBoard implements BoardObserver {
         piecesMap.get(player).remove(selectedPiece);
         piecesMap.get(player).add(newPiece);
         selectedPiece = newPiece;
+    }
+
+    @Override
+    public boolean isKingInCheck(Player kingPlayer) {
+        Coordinate kingCoordinate = getKingCoordinate(kingPlayer);
+        return isSquareAttackedBy(kingCoordinate, kingPlayer.getOpponent());
+    }
+
+    @Override
+    public boolean isSquareAttackedBy(Coordinate coordinate, Player attackingPlayer) {
+        return getAttackedSquares(attackingPlayer).contains(coordinate);
+    }
+
+    private List<Coordinate> getAttackedSquares(Player attackingPlayer) {
+        List<Coordinate> attackedSquares = new ArrayList<>();
+        for (Piece piece : piecesMap.get(attackingPlayer)) {
+            attackedSquares.addAll(piece.generateMovements());
+        }
+        return attackedSquares.stream().distinct().toList();
+    }
+
+    private Coordinate getKingCoordinate(Player player) {
+        Coordinate coordinate = piecesMap.get(player).stream()
+                .filter(Piece::isKing)
+                .findFirst()
+                .map(Piece::getCoordinate)
+                .orElse(null);
+        assert coordinate != null : "King not found for player: " + player;
+        return coordinate;
     }
 
     @Override
@@ -186,7 +215,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         assert coordinate != null;
         assert selectedPiece != null;
         assert isWithinBoardLimits(coordinate);
-        return selectedPiece.isMovementValid(coordinate);
+        return selectedPiece.canReach(coordinate);
     }
 
     public boolean isOccupied(Coordinate coordinate) {
@@ -276,4 +305,5 @@ public class Board extends SubjectBoard implements BoardObserver {
     public boolean finished() {
         return false;
     }
+
 }

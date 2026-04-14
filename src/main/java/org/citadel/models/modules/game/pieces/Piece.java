@@ -39,12 +39,12 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
     }
 
     @Override
-    public boolean isMovementValid(Coordinate target) {
+    public boolean canReach(Coordinate target) {
         return movements.contains(target.copy());
     }
 
     @Override
-    public abstract void generateMovements();
+    public abstract List<Coordinate> generateMovements();
 
     public Coordinate getDisplacedBy(int displacement) {
         return coordinate.getDisplacedBy(displacement);
@@ -107,5 +107,5 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return null;
     }
 
-    public abstract void accept(GeneratorMoveVisitor visitor);
+    public abstract void accept(GeneratorMoveVisitor generatorMoveVisitor);
 }

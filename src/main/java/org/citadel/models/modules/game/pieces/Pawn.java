@@ -1,12 +1,13 @@
 package org.citadel.models.modules.game.pieces;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.rules.GeneratorInspector;
 import org.citadel.models.modules.game.pieces.rules.GeneratorMoveVisitor;
 import org.citadel.models.modules.game.pieces.special.InStepMoveGenerator;
-
-import java.util.stream.Stream;
 
 public class Pawn extends Piece {
 
@@ -123,14 +124,16 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean isMovementValid(Coordinate target) {
+    public boolean canReach(Coordinate target) {
         return movements.contains(target.copy());
     }
 
     @Override
-    public void generateMovements() {
-        this.movements = Stream.concat(InStepMoveGenerator.getInstance().generator(this).stream(),
-                GeneratorInspector.generatorMovements(this).stream()).toList();
+    public List<Coordinate> generateMovements() {
+        var castingMoves = InStepMoveGenerator.getInstance().generator(this).stream();
+        var inspectedMoves = GeneratorInspector.generatorMovements(this).stream();
+        this.movements = Stream.concat(castingMoves, inspectedMoves).toList();
+        return this.movements;
     }
 
     @Override
@@ -139,7 +142,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void accept(GeneratorMoveVisitor visitor) {
-        visitor.visit(this);
+    public void accept(GeneratorMoveVisitor generatorMoveVisitor) {
+        generatorMoveVisitor.visit(this);
     }
 }

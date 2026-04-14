@@ -1,13 +1,15 @@
 package org.citadel.models.modules.game.pieces;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.citadel.models.modules.game.pieces.enums.CastlingSide;
 import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.rules.GeneratorInspector;
 import org.citadel.models.modules.game.pieces.rules.GeneratorMoveVisitor;
 import org.citadel.models.modules.game.pieces.special.CastingMoveGenerator;
-
-import java.util.stream.Stream;
 
 public class King extends Piece {
 
@@ -30,21 +32,31 @@ public class King extends Piece {
     }
 
     @Override
-    public void generateMovements() {
-        this.movements = Stream
-                .concat(
-                        CastingMoveGenerator.getInstance().generator(this).stream(),
-                        GeneratorInspector.generatorMovements(this).stream())
-                .toList();
+    public List<Coordinate> generateMovements() {
+        var castingMoves = CastingMoveGenerator.getInstance().generator(this).stream();
+        var inspectedMoves = GeneratorInspector.generatorMovements(this).stream();
+        this.movements = Stream.concat(castingMoves, inspectedMoves).toList();
+        return this.movements;
     }
 
     private void close() {
         isMoved = true;
     }
 
-    public boolean isCastlingAvailable(CastlingSide side) {
-        Coordinate target = new Coordinate(getCoordinate().row(), side.rookColumn);
-        return isRookAvailableForCastling(target) && side.areSquaresClear(getCoordinate().row(), this);
+    public boolean isDynamicallyValid(CastlingSide side) {
+        if (isKingInCheck(player))
+            return false;
+        Coordinate kingTarget = getCastingCoordinate(side);
+        List<Coordinate> squaresToVerify = new ArrayList<>(side.getSquaresKingPassesThrough(getCoordinate()));
+        squaresToVerify.add(0, getCoordinate());
+        squaresToVerify.add(kingTarget);
+        return squaresToVerify.stream().noneMatch(sq -> isSquareAttackedBy(sq, player.getOpponent()));
+    }
+
+    public boolean isStructurallyValid(CastlingSide side) {
+        int row = getCoordinate().row();
+        Coordinate rookCoordinate = new Coordinate(row, side.rookColumn);
+        return isRookAvailableForCastling(rookCoordinate) && side.areSquaresClear(row, this);
     }
 
     public Coordinate getCastingCoordinate(CastlingSide side) {
@@ -62,7 +74,7 @@ public class King extends Piece {
     }
 
     @Override
-    public void accept(GeneratorMoveVisitor visitor) {
-        visitor.visit(this);
+    public void accept(GeneratorMoveVisitor generatorMoveVisitor) {
+        generatorMoveVisitor.visit(this);
     }
 }

@@ -14,4 +14,13 @@ public enum Player {
     public int getPlayer() {
         return player;
     }
+
+    public Player getOpponent() {
+        if (this == WHITE) {
+            return BLACK;
+        } else if (this == BLACK) {
+            return WHITE;
+        }
+        return NONE;
+    }
 }

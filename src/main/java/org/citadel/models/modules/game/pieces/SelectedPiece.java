@@ -8,7 +8,7 @@ public interface SelectedPiece {
 
     void put(Coordinate coordinate);
 
-    void generateMovements();
+    List<Coordinate> generateMovements();
 
     PieceSymbol getSymbol();
 
@@ -18,7 +18,7 @@ public interface SelectedPiece {
 
     List<Coordinate> getEnPassantDiagonals();
 
-    boolean isMovementValid(Coordinate coordinate);
+    boolean canReach(Coordinate coordinate);
 
     boolean isRookAvailableForCastling();
 

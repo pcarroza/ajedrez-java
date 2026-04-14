@@ -1,13 +1,14 @@
 package org.citadel.models.modules.game.pieces.enums;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.King;
 
 public enum CastlingSide {
-    SHORT(8, 7, List.of(5, 6, 7)),
-    LONG(1, 2, List.of(2, 3));
+    SHORT(8, 7, List.of(6, 7)), // Squares F and G
+    LONG(1, 3, List.of(2, 3, 4)); // Squares B, C, and D
 
     public final int rookColumn;
 
@@ -23,5 +24,16 @@ public enum CastlingSide {
 
     public boolean areSquaresClear(int row, King king) {
         return squaresToClear.stream().noneMatch(column -> king.isOccupied(new Coordinate(row, column)));
+    }
+
+    public List<Coordinate> getSquaresKingPassesThrough(Coordinate kingCurrentCoordinate) {
+        List<Coordinate> squares = new ArrayList<>();
+        int row = kingCurrentCoordinate.row();
+        if (this == SHORT) { // Short Castling (King moves from E to G)
+            squares.add(new Coordinate(row, kingCurrentCoordinate.column() + 1)); // F file
+        } else { // Long Castling (King moves from E to C)
+            squares.add(new Coordinate(row, kingCurrentCoordinate.column() - 1)); // D file
+        }
+        return squares;
     }
 }

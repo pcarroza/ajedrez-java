@@ -1,5 +1,6 @@
 package org.citadel.models.modules.game.pieces;
 
+import java.util.List;
 import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.rules.GeneratorInspector;
@@ -18,8 +19,9 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void generateMovements() {
+    public List<Coordinate> generateMovements() {
         this.movements = GeneratorInspector.generatorMovements(this);
+        return this.movements;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void accept(GeneratorMoveVisitor visitor) {
-        visitor.visit(this);
+    public void accept(GeneratorMoveVisitor generatorMoveVisitor) {
+        generatorMoveVisitor.visit(this);
     }
 }

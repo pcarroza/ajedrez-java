@@ -1,6 +1,6 @@
 package org.citadel.models.modules.game.pieces.special;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
@@ -23,15 +23,13 @@ public class CastingMoveGenerator extends SpecialMoveGenerator<King> {
 
     @Override
     public List<Coordinate> generator(King king) {
-        List<Coordinate> movements = new ArrayList<>();
         if (king.isMoved())
-            return new ArrayList<>();
+            return List.of();
 
-        for (CastlingSide side : CastlingSide.values()) {
-            if (king.isCastlingAvailable(side)) {
-                movements.add(king.getCastingCoordinate(side));
-            }
-        }
-        return movements;
+        return Arrays.stream(CastlingSide.values())
+                .filter(side -> king.isStructurallyValid(side))
+                .filter(side -> king.isDynamicallyValid(side))
+                .map(king::getCastingCoordinate)
+                .toList();
     }
 }
