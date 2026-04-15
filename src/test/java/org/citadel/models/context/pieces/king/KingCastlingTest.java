@@ -1,11 +1,12 @@
 package org.citadel.models.context.pieces.king;
 
 import org.citadel.models.modules.game.pieces.King;
+import org.citadel.models.context.pieces.king.stubs.BoardKingStub;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.enums.CastlingSide;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.citadel.models.modules.game.pieces.special.CastingMoveGenerator;
-import org.citadel.models.support.Square; // Import Square
+import org.citadel.models.support.Square;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -21,19 +22,25 @@ import static org.junit.Assert.assertFalse;
 public class KingCastlingTest {
 
     private final String kingPosition;
+
     private final Player kingPlayer;
+
     private final boolean kingMoved;
+
     private final CastlingSide side;
+
     private final Coordinate expectedTargetCoordinate;
+
     private final boolean expectedResult;
-    private final TestBoardObserver boardObserver;
+
+    private final BoardKingStub boardObserver;
 
     @Parameterized.Parameters(name = "{index}: King at {0} ({1}), Side {3}, Expected: {5}")
     public static Collection<Object[]> cases() {
         List<Object[]> testCases = new ArrayList<>();
 
         // Helper to create a TestBoardObserver with default clean state
-        TestBoardObserver defaultObserver = new TestBoardObserver();
+        BoardKingStub defaultObserver = new BoardKingStub();
         defaultObserver
             .setRookAvailableForCastling(1, 1, true) // White Long Rook
             .setRookAvailableForCastling(1, 8, true) // White Short Rook
@@ -43,7 +50,7 @@ public class KingCastlingTest {
         // --- Valid Castling Scenarios ---
         // White King, Short Castling, all conditions met
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.SHORT, new Coordinate(1, 7), true,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(1,6, false) // F1 empty
                         .setOccupied(1,7, false) // G1 empty
@@ -53,7 +60,7 @@ public class KingCastlingTest {
         });
         // White King, Long Castling, all conditions met
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.LONG, new Coordinate(1, 3), true,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(1,2, false) // B1 empty
                         .setOccupied(1,3, false) // C1 empty
@@ -65,7 +72,7 @@ public class KingCastlingTest {
         });
         // Black King, Short Castling, all conditions met
         testCases.add(new Object[]{"E8", Player.BLACK, false, CastlingSide.SHORT, new Coordinate(8, 7), true,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(8,6, false) // F8 empty
                         .setOccupied(8,7, false) // G8 empty
@@ -75,7 +82,7 @@ public class KingCastlingTest {
         });
         // Black King, Long Castling, all conditions met
         testCases.add(new Object[]{"E8", Player.BLACK, false, CastlingSide.LONG, new Coordinate(8, 3), true,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(8,2, false) // B8 empty
                         .setOccupied(8,3, false) // C8 empty
@@ -94,20 +101,20 @@ public class KingCastlingTest {
 
         // Rook has moved
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.SHORT, null, false,
-                new TestBoardObserver().setRookAvailableForCastling(1,8, false)
+                new BoardKingStub().setRookAvailableForCastling(1,8, false)
         });
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.LONG, null, false,
-                new TestBoardObserver().setRookAvailableForCastling(1,1, false)
+                new BoardKingStub().setRookAvailableForCastling(1,1, false)
         });
 
         // King is in check
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.SHORT, null, false,
-                new TestBoardObserver().setKingInCheck(true)
+                new BoardKingStub().setKingInCheck(true)
         });
 
         // Squares between King and Rook are occupied
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.SHORT, null, false,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(1,6, true) // F1 occupied
                         .setRookAvailableForCastling(1,8, true)
@@ -117,7 +124,7 @@ public class KingCastlingTest {
 
         // Square king passes through is attacked
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.SHORT, null, false,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(1,6, false)
                         .setOccupied(1,7, false)
@@ -128,7 +135,7 @@ public class KingCastlingTest {
 
         // Square king lands on is attacked
         testCases.add(new Object[]{"E1", Player.WHITE, false, CastlingSide.SHORT, null, false,
-                new TestBoardObserver()
+                new BoardKingStub()
                         .setKingInCheck(false)
                         .setOccupied(1,6, false)
                         .setOccupied(1,7, false)
@@ -140,7 +147,7 @@ public class KingCastlingTest {
         return testCases;
     }
 
-    public KingCastlingTest(String kingPosition, Player kingPlayer, boolean kingMoved, CastlingSide side, Coordinate expectedTargetCoordinate, boolean expectedResult, TestBoardObserver boardObserver) {
+    public KingCastlingTest(String kingPosition, Player kingPlayer, boolean kingMoved, CastlingSide side, Coordinate expectedTargetCoordinate, boolean expectedResult, BoardKingStub boardObserver) {
         this.kingPosition = kingPosition;
         this.kingPlayer = kingPlayer;
         this.kingMoved = kingMoved;

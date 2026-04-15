@@ -5,7 +5,6 @@ import java.util.List;
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.Piece;
-import org.citadel.models.modules.game.pieces.enums.Player;
 
 public class BoardStub implements BoardObserver {
 
@@ -55,12 +54,12 @@ public class BoardStub implements BoardObserver {
     }
 
     @Override
-    public boolean isKingInCheck(Player kingPlayer) {
+    public boolean isKingInCheck() {
         return false;
     }
 
     @Override
-    public boolean isSquareAttackedBy(Coordinate coordinate, Player attackingPlayer) {
+    public boolean isSquareAttackedBy(Coordinate coordinate) {
         return false;
     }
 }

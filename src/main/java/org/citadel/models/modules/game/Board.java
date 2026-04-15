@@ -71,8 +71,7 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .filter(piece -> piece.isAt(coordinate))
                 .findFirst()
                 .ifPresentOrElse(piece -> {
-                    List<Coordinate> generatedMovements = piece.generateMovements();
-                    set(generatedMovements);
+                    set(piece.generateMovements());
                     selectedPiece = piece;
                 }, () -> {
                     assert false : "Board: Selected piece not found";
@@ -118,22 +117,21 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public boolean isKingInCheck(Player kingPlayer) {
-        Coordinate kingCoordinate = getKingCoordinate(kingPlayer);
-        return isSquareAttackedBy(kingCoordinate, kingPlayer.getOpponent());
+    public boolean isKingInCheck() {
+        Coordinate kingCoordinate = getKingCoordinate(getCurrentPlayer());
+        return isSquareAttackedBy(kingCoordinate);
     }
 
     @Override
-    public boolean isSquareAttackedBy(Coordinate coordinate, Player attackingPlayer) {
-        return getAttackedSquares(attackingPlayer).contains(coordinate);
+    public boolean isSquareAttackedBy(Coordinate coordinate) {
+        return getAttackedSquares(getOpponentPlayer()).contains(coordinate);
     }
 
     private List<Coordinate> getAttackedSquares(Player attackingPlayer) {
-        List<Coordinate> attackedSquares = new ArrayList<>();
-        for (Piece piece : piecesMap.get(attackingPlayer)) {
-            attackedSquares.addAll(piece.generateMovements());
-        }
-        return attackedSquares.stream().distinct().toList();
+        return piecesMap.get(attackingPlayer).stream()
+                .flatMap(piece -> piece.generateMovements().stream())
+                .distinct()
+                .toList();
     }
 
     private Coordinate getKingCoordinate(Player player) {
@@ -169,7 +167,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         assert coordinate != null;
         assert isOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);
-        remove(this::getRivalPlayer, coordinate);
+        remove(this::getOpponentPlayer, coordinate);
     }
 
     private void remove(Supplier<Player> color, Coordinate coordinate) {
@@ -226,7 +224,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     @Override
     public boolean isRival(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(getRivalPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getOpponentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
     }
 
     public boolean isWithinBoardLimits(Coordinate coordinate) {
@@ -258,11 +256,11 @@ public class Board extends SubjectBoard implements BoardObserver {
     @Override
     public boolean isVulnerablePawnAt(Coordinate coordinate) {
         assert coordinate != null;
-        return pawnMapInStep.get(getRivalPlayer()).stream().anyMatch(piece -> piece.isAt(coordinate));
+        return pawnMapInStep.get(getOpponentPlayer()).stream().anyMatch(piece -> piece.isAt(coordinate));
     }
 
     public boolean isCheck() {
-        return getPiecesBy(getRivalPlayer()).anyMatch(this::isTheKingInValidMoves);
+        return getPiecesBy(getOpponentPlayer()).anyMatch(this::isTheKingInValidMoves);
     }
 
     private boolean isTheKingInValidMoves(Piece piece) {
@@ -293,7 +291,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         return turn.getCurrentPlayer();
     }
 
-    public Player getRivalPlayer() {
+    public Player getOpponentPlayer() {
         return turn.getRivalPlayer();
     }
 

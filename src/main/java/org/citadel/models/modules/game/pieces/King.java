@@ -44,13 +44,13 @@ public class King extends Piece {
     }
 
     public boolean isDynamicallyValid(CastlingSide side) {
-        if (isKingInCheck(player))
+        if (isKingInCheck())
             return false;
         Coordinate kingTarget = getCastingCoordinate(side);
         List<Coordinate> squaresToVerify = new ArrayList<>(side.getSquaresKingPassesThrough(getCoordinate()));
         squaresToVerify.add(0, getCoordinate());
         squaresToVerify.add(kingTarget);
-        return squaresToVerify.stream().noneMatch(sq -> isSquareAttackedBy(sq, player.getOpponent()));
+        return squaresToVerify.stream().noneMatch(it -> isSquareAttackedBy(it));
     }
 
     public boolean isStructurallyValid(CastlingSide side) {

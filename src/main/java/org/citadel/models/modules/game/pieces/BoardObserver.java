@@ -2,8 +2,6 @@ package org.citadel.models.modules.game.pieces;
 
 import java.util.List;
 
-import org.citadel.models.modules.game.pieces.enums.Player;
-
 public interface BoardObserver {
 
     void add(Piece piece);
@@ -22,8 +20,7 @@ public interface BoardObserver {
 
     boolean isPieceSamePlayerAt(Coordinate coordinate);
 
-    boolean isKingInCheck(Player kingPlayer);
+    boolean isKingInCheck();
 
-    boolean isSquareAttackedBy(Coordinate coordinate, Player attackingPlayer);
-
+    boolean isSquareAttackedBy(Coordinate coordinate);
 }

@@ -1,4 +1,4 @@
-package org.citadel.models.context.pieces.king;
+package org.citadel.models.context.pieces.king.stubs;
 
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
@@ -9,44 +9,50 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-// A test double for BoardObserver to simulate different board states for castling tests.
-class TestBoardObserver implements BoardObserver {
+public class BoardKingStub implements BoardObserver {
+
     private boolean isKingInCheck = false;
+
     private Map<Coordinate, Boolean> attackedSquares = new HashMap<>();
+
     private Map<Coordinate, Boolean> occupiedSquares = new HashMap<>();
+
     private Map<Coordinate, Boolean> rookAvailableForCastling = new HashMap<>();
+
     private Map<Coordinate, Player> pieceSamePlayerAt = new HashMap<>();
 
-    public TestBoardObserver setKingInCheck(boolean value) {
+    public BoardKingStub setKingInCheck(boolean value) {
         this.isKingInCheck = value;
         return this;
     }
 
-    public TestBoardObserver setSquareAttackedBy(int row, int col, boolean value) {
+    public BoardKingStub setSquareAttackedBy(int row, int col, boolean value) {
         this.attackedSquares.put(new Coordinate(row, col), value);
         return this;
     }
 
-    public TestBoardObserver setOccupied(int row, int col, boolean value) {
+    public BoardKingStub setOccupied(int row, int col, boolean value) {
         this.occupiedSquares.put(new Coordinate(row, col), value);
         return this;
     }
 
-    public TestBoardObserver setRookAvailableForCastling(int row, int col, boolean value) {
+    public BoardKingStub setRookAvailableForCastling(int row, int col, boolean value) {
         this.rookAvailableForCastling.put(new Coordinate(row, col), value);
         return this;
     }
 
-    public TestBoardObserver setPieceSamePlayerAt(int row, int col, Player player) {
+    public BoardKingStub setPieceSamePlayerAt(int row, int col, Player player) {
         this.pieceSamePlayerAt.put(new Coordinate(row, col), player);
         return this;
     }
 
     @Override
-    public void add(Piece piece) { }
+    public void add(Piece piece) {
+    }
 
     @Override
-    public void set(List<Coordinate> coordinates) { }
+    public void set(List<Coordinate> coordinates) {
+    }
 
     @Override
     public boolean isRival(Coordinate coordinate) {
@@ -74,15 +80,16 @@ class TestBoardObserver implements BoardObserver {
     }
 
     @Override
-    public void remove(Piece piece) { }
+    public void remove(Piece piece) {
+    }
 
     @Override
-    public boolean isKingInCheck(Player kingPlayer) {
+    public boolean isKingInCheck() {
         return this.isKingInCheck;
     }
 
     @Override
-    public boolean isSquareAttackedBy(Coordinate coordinate, Player attackingPlayer) {
+    public boolean isSquareAttackedBy(Coordinate coordinate) {
         return this.attackedSquares.getOrDefault(coordinate, false);
     }
 }

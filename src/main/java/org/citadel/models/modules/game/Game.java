@@ -89,7 +89,7 @@ public class Game {
     }
 
     public Player getRivalPlayer() {
-        return board.getRivalPlayer();
+        return board.getOpponentPlayer();
     }
 
     public void endTurn() {

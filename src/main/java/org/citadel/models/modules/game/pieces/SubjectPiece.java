@@ -1,7 +1,5 @@
 package org.citadel.models.modules.game.pieces;
 
-import org.citadel.models.modules.game.pieces.enums.Player;
-
 public abstract class SubjectPiece {
 
     protected BoardObserver boardObserver;
@@ -34,12 +32,12 @@ public abstract class SubjectPiece {
         boardObserver.add(piece);
     }
 
-    public boolean isKingInCheck(Player kingPlayer) {
-        return boardObserver.isKingInCheck(kingPlayer);
+    public boolean isKingInCheck() {
+        return boardObserver.isKingInCheck();
     }
 
-    public boolean isSquareAttackedBy(Coordinate coordinate, Player attackingPlayer) {
-        return boardObserver.isSquareAttackedBy(coordinate, attackingPlayer);
+    public boolean isSquareAttackedBy(Coordinate coordinate) {
+        return boardObserver.isSquareAttackedBy(coordinate);
     }
 
     public void notifyDeleteEnPassantPawn(Piece piece) {
