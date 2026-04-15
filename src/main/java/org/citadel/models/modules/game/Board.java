@@ -163,7 +163,7 @@ public class Board extends SubjectBoard implements BoardObserver {
         remove(this::getCurrentPlayer, coordinate);
     }
 
-    public void removeRivalPlayerPiece(Coordinate coordinate) {
+    public void removeOpponentPlayerPiece(Coordinate coordinate) {
         assert coordinate != null;
         assert isOccupied(coordinate);
         assert isWithinBoardLimits(coordinate);

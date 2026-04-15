@@ -12,44 +12,22 @@ public class BoardStub implements BoardObserver {
     }
 
     @Override
-    public void set(List<Coordinate> selectedPieceMovements) {
-    }
-
-    @Override
-    public void add(Piece enPassantPawn) {
-        assert enPassantPawn != null;
-    }
-
-    @Override
-    public void remove(Piece enPassantPawn) {
-        assert enPassantPawn != null;
-    }
-
-    @Override
-    public boolean isRival(Coordinate coordinate) {
-        assert coordinate != null;
+    public boolean isOccupied(Coordinate coordinate) {
         return false;
     }
 
     @Override
     public boolean isPieceSamePlayerAt(Coordinate coordinate) {
-        assert coordinate != null;
         return false;
     }
 
     @Override
-    public boolean isVulnerablePawnAt(Coordinate coordinate) {
+    public boolean isRival(Coordinate coordinate) {
         return false;
     }
 
     @Override
-    public boolean isRookAvailableForCastling(Coordinate coordinate) {
-        assert coordinate != null;
-        return false;
-    }
-
-    @Override
-    public boolean isOccupied(Coordinate coordinate) {
+    public boolean isSquareAttackedBy(Coordinate coordinate) {
         return false;
     }
 
@@ -59,7 +37,24 @@ public class BoardStub implements BoardObserver {
     }
 
     @Override
-    public boolean isSquareAttackedBy(Coordinate coordinate) {
+    public boolean isRookAvailableForCastling(Coordinate coordinate) {
         return false;
+    }
+
+    @Override
+    public boolean isVulnerablePawnAt(Coordinate coord) {
+        return false;
+    }
+
+    @Override
+    public void add(Piece piece) {
+    }
+
+    @Override
+    public void remove(Piece piece) {
+    }
+
+    @Override
+    public void set(List<Coordinate> coordinates) {
     }
 }

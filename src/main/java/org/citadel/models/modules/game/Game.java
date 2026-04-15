@@ -77,7 +77,7 @@ public class Game {
     }
 
     public void removeRivalPlayerPiece(Coordinate coordinate) {
-        board.removeRivalPlayerPiece(coordinate);
+        board.removeOpponentPlayerPiece(coordinate);
     }
 
     public int getIndexCurrentPlayer() {
