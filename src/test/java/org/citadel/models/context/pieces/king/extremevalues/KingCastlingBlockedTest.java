@@ -36,10 +36,6 @@ public class KingCastlingBlockedTest {
                 .cannotCastle();
     }
 
-    // -----------------------------------------------------------------------
-    // Rook is not available
-    // -----------------------------------------------------------------------
-
     @Test
     public void givenRookHasMoved_thenShortCastlingIsBlocked() {
         aKing().at("E1").as(WHITE).fresh()
@@ -68,10 +64,6 @@ public class KingCastlingBlockedTest {
                 .cannotCastle();
     }
 
-    // -----------------------------------------------------------------------
-    // King is in check
-    // -----------------------------------------------------------------------
-
     @Test
     public void givenKingIsInCheck_thenShortCastlingIsBlocked() {
         aKing().at("E1").as(WHITE).fresh()
@@ -84,10 +76,6 @@ public class KingCastlingBlockedTest {
                         .withSafeSquare("G1"))
                 .cannotCastle();
     }
-
-    // -----------------------------------------------------------------------
-    // Squares between king and rook are occupied
-    // -----------------------------------------------------------------------
 
     @Test
     public void givenTransitSquareIsOccupied_thenShortCastlingIsBlocked() {
@@ -117,10 +105,6 @@ public class KingCastlingBlockedTest {
                 .cannotCastle();
     }
 
-    // -----------------------------------------------------------------------
-    // Square king passes through is under attack
-    // -----------------------------------------------------------------------
-
     @Test
     public void givenTransitSquareIsAttacked_thenShortCastlingIsBlocked() {
         aKing().at("E1").as(WHITE).fresh()
@@ -133,10 +117,6 @@ public class KingCastlingBlockedTest {
                         .withSafeSquare("G1"))
                 .cannotCastle();
     }
-
-    // -----------------------------------------------------------------------
-    // Square king lands on is under attack
-    // -----------------------------------------------------------------------
 
     @Test
     public void givenLandingSquareIsAttacked_thenShortCastlingIsBlocked() {

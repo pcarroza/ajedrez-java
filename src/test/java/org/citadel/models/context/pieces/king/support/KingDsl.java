@@ -13,14 +13,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Fluent DSL for King castling assertions.
- *
- * Usage:
- * aKing().at("E1").as(WHITE).fresh().canCastleTo("G1");
- * aKing().at("E1").as(WHITE).thatMoved().cannotCastle();
- * aKing().at("E1").as(WHITE).fresh().withBoard(board).canCastleTo("C1");
- */
 public class KingDsl {
 
     private String square;
