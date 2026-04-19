@@ -12,9 +12,9 @@ import org.citadel.models.modules.game.pieces.Rook;
 
 public enum PromotionType {
     T(Rook::new),
+    Q(Queen::new),
     C(Knight::new),
-    B(Bishop::new),
-    Q(Queen::new);
+    B(Bishop::new);
 
     private final BiFunction<Coordinate, Player, Piece> factory;
 

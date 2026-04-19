@@ -7,8 +7,8 @@ import org.citadel.models.modules.game.pieces.Coordinate;
 import org.citadel.models.modules.game.pieces.King;
 
 public enum CastlingSide {
-    SHORT(8, 7, List.of(6, 7)), // Squares F and G
-    LONG(1, 3, List.of(2, 3, 4)); // Squares B, C, and D
+    SHORT(8, 7, List.of(6, 7)),
+    LONG(1, 3, List.of(2, 3, 4));
 
     public final int rookColumn;
 
@@ -29,10 +29,10 @@ public enum CastlingSide {
     public List<Coordinate> getSquaresKingPassesThrough(Coordinate kingCurrentCoordinate) {
         List<Coordinate> squares = new ArrayList<>();
         int row = kingCurrentCoordinate.row();
-        if (this == SHORT) { // Short Castling (King moves from E to G)
-            squares.add(new Coordinate(row, kingCurrentCoordinate.column() + 1)); // F file
-        } else { // Long Castling (King moves from E to C)
-            squares.add(new Coordinate(row, kingCurrentCoordinate.column() - 1)); // D file
+        if (this == SHORT) {
+            squares.add(new Coordinate(row, kingCurrentCoordinate.column() + 1));
+        } else {
+            squares.add(new Coordinate(row, kingCurrentCoordinate.column() - 1));
         }
         return squares;
     }

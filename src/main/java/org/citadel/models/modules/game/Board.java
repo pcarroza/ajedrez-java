@@ -140,7 +140,9 @@ public class Board extends SubjectBoard implements BoardObserver {
                 .findFirst()
                 .map(Piece::getCoordinate)
                 .orElse(null);
+
         assert coordinate != null : "King not found for player: " + player;
+
         return coordinate;
     }
 
@@ -292,7 +294,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     public Player getOpponentPlayer() {
-        return turn.getRivalPlayer();
+        return turn.getOpponentPlayer();
     }
 
     public void endTurn() {

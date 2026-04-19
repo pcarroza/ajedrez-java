@@ -10,7 +10,7 @@ public class Turn {
         return Player.values()[value];
     }
 
-    public Player getRivalPlayer() {
+    public Player getOpponentPlayer() {
         Turn clone = this.copy();
         clone.switchTurn();
         return clone.getCurrentPlayer();
