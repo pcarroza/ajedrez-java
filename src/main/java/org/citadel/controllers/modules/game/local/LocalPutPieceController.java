@@ -14,25 +14,21 @@ public class LocalPutPieceController extends LocalPlacementController implements
 
     @Override
     public void accept(PlacementControllerVisitor placementControllerVisitor) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
 
     @Override
     public String getPieceSimbol(Coordinate coordinate) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getPieceSimbol'");
     }
 
     @Override
     public void put(Coordinate target) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'put'");
     }
 
     @Override
     public void accept(OperationControllerVisitor operationControllerVisitor) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
 }

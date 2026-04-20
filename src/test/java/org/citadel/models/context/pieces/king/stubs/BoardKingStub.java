@@ -2,11 +2,10 @@ package org.citadel.models.context.pieces.king.stubs;
 
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
+import org.citadel.models.modules.game.pieces.SelectedPiece;
 import org.citadel.models.support.Square;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BoardKingStub implements BoardObserver {
@@ -82,14 +81,10 @@ public class BoardKingStub implements BoardObserver {
     }
 
     @Override
-    public void add(Piece piece) {
+    public void add(SelectedPiece selectedPiece) {
     }
 
     @Override
-    public void set(List<Coordinate> coordinates) {
-    }
-
-    @Override
-    public void remove(Piece piece) {
+    public void remove(SelectedPiece selectedPiece) {
     }
 }

@@ -4,12 +4,9 @@ import org.citadel.controllers.modules.game.GameController;
 
 public abstract class Chess {
 
-    private final GameController logic;
-
     protected final View view;
 
     Chess() {
-        this.logic = getGameController();
         this.view = getView();
     }
 

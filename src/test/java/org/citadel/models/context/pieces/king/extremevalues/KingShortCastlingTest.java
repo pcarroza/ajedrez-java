@@ -1,6 +1,5 @@
 package org.citadel.models.context.pieces.king.extremevalues;
 
-import org.citadel.models.context.pieces.king.support.KingDsl;
 import org.citadel.models.context.pieces.king.support.builders.BoardKingStubBuilder;
 import org.citadel.models.modules.game.pieces.enums.Player;
 import org.junit.Test;

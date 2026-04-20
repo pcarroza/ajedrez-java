@@ -15,28 +15,28 @@ public class PiecesMapBuilder {
     private PiecesMapBuilder() {
     }
 
-    public static Map<Player, List<Piece>> createPiecesMap(BoardObserver boardObserver) {
-        Map<Player, List<Piece>> piecesMap = Map.of(BLACK, createPiecesBlack(), WHITE, createPiecesWhite());
-        for (List<Piece> pieces : piecesMap.values()) {
+    public static Map<Player, List<SelectedPiece>> createPiecesMap(BoardObserver boardObserver) {
+        Map<Player, List<SelectedPiece>> piecesMap = Map.of(BLACK, createPiecesBlack(), WHITE, createPiecesWhite());
+        for (List<SelectedPiece> pieces : piecesMap.values()) {
             pieces.forEach(piece -> piece.subscribe(boardObserver));
         }
         return piecesMap;
     }
 
-    private static List<Piece> createPiecesWhite() {
+    private static List<SelectedPiece> createPiecesWhite() {
         final int rowForWhitePawns = 2;
         final int rowOfWhitePieces = 1;
         return createPieces(rowForWhitePawns, rowOfWhitePieces, Player.WHITE);
     }
 
-    private static List<Piece> createPiecesBlack() {
+    private static List<SelectedPiece> createPiecesBlack() {
         final int rowForBlackPawns = 7;
         final int rowOfBlackPieces = 8;
         return createPieces(rowForBlackPawns, rowOfBlackPieces, Player.BLACK);
     }
 
-    private static List<Piece> createPieces(int rowForPawnsByColor, int rowForPiecesByColor, Player player) {
-        List<Piece> pieces = new ArrayList<>();
+    private static List<SelectedPiece> createPieces(int rowForPawnsByColor, int rowForPiecesByColor, Player player) {
+        List<SelectedPiece> pieces = new ArrayList<>();
         for (int i = 1; i <= MAX_LIMIT; i++) {
             pieces.add(new Pawn(new Coordinate(rowForPawnsByColor, i), player));
         }

@@ -124,11 +124,6 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean canReach(Coordinate target) {
-        return movements.contains(target.copy());
-    }
-
-    @Override
     public List<Coordinate> generateMovements() {
         var castingMoves = InStepMoveGenerator.getInstance().generator(this).stream();
         var inspectedMoves = GeneratorInspector.generatorMovements(this).stream();

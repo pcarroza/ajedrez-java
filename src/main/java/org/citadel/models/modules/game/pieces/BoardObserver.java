@@ -1,14 +1,10 @@
 package org.citadel.models.modules.game.pieces;
 
-import java.util.List;
-
 public interface BoardObserver {
 
-    void add(Piece piece);
+    void add(SelectedPiece selectedPiece);
 
-    void set(List<Coordinate> coordinates);
-
-    void remove(Piece piece);
+    void remove(SelectedPiece selectedPiece);
 
     boolean isRival(Coordinate coordinate);
 

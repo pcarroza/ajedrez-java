@@ -1,6 +1,5 @@
 package org.citadel.models.modules.game.pieces;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -46,11 +45,13 @@ public class King extends Piece {
     public boolean isDynamicallyValid(CastlingSide side) {
         if (isKingInCheck())
             return false;
-        Coordinate kingTarget = getCastingCoordinate(side);
-        List<Coordinate> squaresToVerify = new ArrayList<>(side.getSquaresKingPassesThrough(getCoordinate()));
-        squaresToVerify.add(0, getCoordinate());
-        squaresToVerify.add(kingTarget);
-        return squaresToVerify.stream().noneMatch(it -> isSquareAttackedBy(it));
+
+        List<Coordinate> squaresToVerify = List.of(
+                getCoordinate(),
+                side.getSquaresKingPassesThrough(getCoordinate()),
+                getCastingCoordinate(side));
+
+        return squaresToVerify.stream().noneMatch(sq -> isSquareAttackedBy(sq));
     }
 
     public boolean isStructurallyValid(CastlingSide side) {

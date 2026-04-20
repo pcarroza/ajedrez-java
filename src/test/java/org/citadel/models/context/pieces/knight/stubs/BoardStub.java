@@ -1,10 +1,8 @@
 package org.citadel.models.context.pieces.knight.stubs;
 
-import java.util.List;
-
 import org.citadel.models.modules.game.pieces.BoardObserver;
 import org.citadel.models.modules.game.pieces.Coordinate;
-import org.citadel.models.modules.game.pieces.Piece;
+import org.citadel.models.modules.game.pieces.SelectedPiece;
 
 public class BoardStub implements BoardObserver {
 
@@ -47,14 +45,10 @@ public class BoardStub implements BoardObserver {
     }
 
     @Override
-    public void add(Piece piece) {
+    public void add(SelectedPiece selectedPiece) {
     }
 
     @Override
-    public void remove(Piece piece) {
-    }
-
-    @Override
-    public void set(List<Coordinate> coordinates) {
+    public void remove(SelectedPiece selectedPiece) {
     }
 }

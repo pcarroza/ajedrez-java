@@ -6,6 +6,8 @@ import org.citadel.models.modules.game.pieces.enums.PieceSymbol;
 
 public interface SelectedPiece {
 
+    void subscribe(BoardObserver boardObserver);
+
     void put(Coordinate coordinate);
 
     List<Coordinate> generateMovements();
@@ -17,6 +19,8 @@ public interface SelectedPiece {
     List<Coordinate> getMovements();
 
     List<Coordinate> getEnPassantDiagonals();
+
+    boolean isAt(Coordinate coordinate);
 
     boolean canReach(Coordinate coordinate);
 

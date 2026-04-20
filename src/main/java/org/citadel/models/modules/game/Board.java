@@ -22,13 +22,11 @@ import static org.citadel.models.modules.game.pieces.enums.Player.WHITE;
 
 public class Board extends SubjectBoard implements BoardObserver {
 
-    private final Map<Player, List<Piece>> piecesMap;
+    private final Map<Player, List<SelectedPiece>> piecesMap;
 
-    private final Map<Player, List<Piece>> removedPieces;
+    private final Map<Player, List<SelectedPiece>> removedPieces;
 
-    private final Map<Player, List<Piece>> pawnMapInStep;
-
-    private List<Coordinate> selectedPieceMovements;
+    private final Map<Player, List<SelectedPiece>> pawnMapInStep;
 
     private SelectedPiece selectedPiece;
 
@@ -38,18 +36,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         piecesMap = createPiecesMap(this);
         removedPieces = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
         pawnMapInStep = Map.of(BLACK, new ArrayList<>(), WHITE, new ArrayList<>());
-        selectedPieceMovements = Collections.emptyList();
         turn = new Turn();
     }
 
-    @Override
-    public void set(List<Coordinate> selectedPieceMovements) {
-        this.selectedPieceMovements = selectedPieceMovements;
-    }
-
     public List<Coordinate> getSelectedPieceMovements() {
-        assert selectedPieceMovements != null;
-        return List.copyOf(selectedPieceMovements);
+        return selectedPiece != null ? selectedPiece.getMovements() : Collections.emptyList();
     }
 
     public PieceSymbol getPieceSymbol(Coordinate coordinate) {
@@ -68,11 +59,11 @@ public class Board extends SubjectBoard implements BoardObserver {
         assert isOccupied(coordinate);
         assert belongsToCurrentPlayer(coordinate);
         getPiecesBy(getCurrentPlayer())
-                .filter(piece -> piece.isAt(coordinate))
+                .filter(selectedPiece -> selectedPiece.isAt(coordinate))
                 .findFirst()
-                .ifPresentOrElse(piece -> {
-                    set(piece.generateMovements());
-                    selectedPiece = piece;
+                .ifPresentOrElse(selectedPiece -> {
+                    selectedPiece.generateMovements();
+                    this.selectedPiece = selectedPiece;
                 }, () -> {
                     assert false : "Board: Selected piece not found";
                 });
@@ -99,9 +90,9 @@ public class Board extends SubjectBoard implements BoardObserver {
         assert isOccupied(origin);
         piecesMap.values().stream()
                 .flatMap(List::stream)
-                .filter(piece -> piece.isAt(origin))
+                .filter(selectedPiece -> selectedPiece.isAt(origin))
                 .findFirst()
-                .ifPresent(piece -> piece.put(target));
+                .ifPresent(selectedPiece -> selectedPiece.put(target));
     }
 
     public void promote(PromotionType promotionType) {
@@ -136,9 +127,9 @@ public class Board extends SubjectBoard implements BoardObserver {
 
     private Coordinate getKingCoordinate(Player player) {
         Coordinate coordinate = piecesMap.get(player).stream()
-                .filter(Piece::isKing)
+                .filter(SelectedPiece::isKing)
                 .findFirst()
-                .map(Piece::getCoordinate)
+                .map(SelectedPiece::getCoordinate)
                 .orElse(null);
 
         assert coordinate != null : "King not found for player: " + player;
@@ -147,13 +138,13 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     @Override
-    public void add(Piece inStepPawn) {
+    public void add(SelectedPiece inStepPawn) {
         assert inStepPawn != null;
         pawnMapInStep.get(getCurrentPlayer()).add(inStepPawn);
     }
 
     @Override
-    public void remove(Piece inStepPawn) {
+    public void remove(SelectedPiece inStepPawn) {
         assert inStepPawn != null;
         pawnMapInStep.get(getCurrentPlayer()).remove(inStepPawn);
     }
@@ -173,9 +164,9 @@ public class Board extends SubjectBoard implements BoardObserver {
     }
 
     private void remove(Supplier<Player> color, Coordinate coordinate) {
-        piecesMap.get(color.get()).removeIf(piece -> {
-            if (piece.isAt(coordinate)) {
-                return removedPieces.get(color.get()).add(piece);
+        piecesMap.get(color.get()).removeIf(selectedPiece -> {
+            if (selectedPiece.isAt(coordinate)) {
+                return removedPieces.get(color.get()).add(selectedPiece);
             }
             return false;
         });
@@ -211,13 +202,6 @@ public class Board extends SubjectBoard implements BoardObserver {
         return selectedPiece != null && selectedPiece.isPawnPromoted();
     }
 
-    public boolean canReach(Coordinate coordinate) {
-        assert coordinate != null;
-        assert selectedPiece != null;
-        assert isWithinBoardLimits(coordinate);
-        return selectedPiece.canReach(coordinate);
-    }
-
     public boolean isOccupied(Coordinate coordinate) {
         assert coordinate != null;
         return piecesMap.values().stream().flatMap(List::stream).anyMatch(piece -> piece.isAt(coordinate));
@@ -226,7 +210,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     @Override
     public boolean isRival(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(getOpponentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getOpponentPlayer()).map(SelectedPiece::getCoordinate).toList().contains(coordinate);
     }
 
     public boolean isWithinBoardLimits(Coordinate coordinate) {
@@ -252,7 +236,7 @@ public class Board extends SubjectBoard implements BoardObserver {
     @Override
     public boolean isPieceSamePlayerAt(Coordinate coordinate) {
         assert coordinate != null;
-        return getPiecesBy(getCurrentPlayer()).map(Piece::getCoordinate).toList().contains(coordinate);
+        return getPiecesBy(getCurrentPlayer()).map(SelectedPiece::getCoordinate).toList().contains(coordinate);
     }
 
     @Override
@@ -265,22 +249,29 @@ public class Board extends SubjectBoard implements BoardObserver {
         return getPiecesBy(getOpponentPlayer()).anyMatch(this::isTheKingInValidMoves);
     }
 
-    private boolean isTheKingInValidMoves(Piece piece) {
+    private boolean isTheKingInValidMoves(SelectedPiece piece) {
         assert piece != null;
-        return selectedPieceMovements.contains(piece.getCoordinate()) && piece.isKing();
+        return canReach(piece.getCoordinate()) && piece.isKing();
+    }
+
+    public boolean canReach(Coordinate coordinate) {
+        assert coordinate != null;
+        assert selectedPiece != null;
+        assert isWithinBoardLimits(coordinate);
+        return selectedPiece.canReach(coordinate);
     }
 
     @Override
     public boolean isRookAvailableForCastling(Coordinate coordinate) {
         assert coordinate != null;
         return getPiecesBy(getCurrentPlayer())
-                .filter(piece -> piece.isAt(coordinate))
+                .filter(selectedPiece -> selectedPiece.isAt(coordinate))
                 .findFirst()
-                .map(piece -> piece.isRookAvailableForCastling())
+                .map(selectedPiece -> selectedPiece.isRookAvailableForCastling())
                 .orElse(false);
     }
 
-    private Stream<Piece> getPiecesBy(Player player) {
+    private Stream<SelectedPiece> getPiecesBy(Player player) {
         assert player != null;
         return piecesMap.get(player).stream();
     }

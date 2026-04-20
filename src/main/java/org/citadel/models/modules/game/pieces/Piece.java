@@ -58,6 +58,7 @@ public abstract class Piece extends SubjectPiece implements SelectedPiece {
         return coordinate.getDisplacedBy(displacement, vector);
     }
 
+    @Override
     public boolean isAt(Coordinate coordinate) {
         return this.coordinate.equals(coordinate);
     }

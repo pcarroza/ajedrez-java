@@ -1,6 +1,5 @@
 package org.citadel.models.modules.game.pieces.enums;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.citadel.models.modules.game.pieces.Coordinate;
@@ -26,14 +25,12 @@ public enum CastlingSide {
         return squaresToClear.stream().noneMatch(column -> king.isOccupied(new Coordinate(row, column)));
     }
 
-    public List<Coordinate> getSquaresKingPassesThrough(Coordinate kingCurrentCoordinate) {
-        List<Coordinate> squares = new ArrayList<>();
+    public Coordinate getSquaresKingPassesThrough(Coordinate kingCurrentCoordinate) {
         int row = kingCurrentCoordinate.row();
         if (this == SHORT) {
-            squares.add(new Coordinate(row, kingCurrentCoordinate.column() + 1));
+            return new Coordinate(row, kingCurrentCoordinate.column() + 1);
         } else {
-            squares.add(new Coordinate(row, kingCurrentCoordinate.column() - 1));
+            return new Coordinate(row, kingCurrentCoordinate.column() - 1);
         }
-        return squares;
     }
 }
